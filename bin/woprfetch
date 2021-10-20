@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+hostnamectl="$(hostnamectl)"
+OS="$(echo "$hostnamectl" | awk 'BEGIN{ FS=": "; ORS=" "} /Operating System|Architecture/{print $2} END{ ORS=""; print "\n"}')"
+HOST="$(echo "$hostnamectl" | awk -F ": " '/Hardware Model/{print $2}')"
+KERNEL="$(echo "$hostnamectl" | awk '/Kernel/{print $3}')"
+UPTIME="$(uptime -p | cut -c4-)"
+PKG="$(printf "%s (pacman)\n" $(pacman -Q | wc -l))"
+SHELL="${SHELL##*/}"
+wmctrl="$(wmctrl -m 2>/dev/null)"
+[[ -z "$wmctrl" ]] && WM="(console)" || WM="$(echo "$wmctrl" | awk 'BEGIN{ FS=": "} /Name/{print $2}')"
+lscpu="$(lscpu)"
+CPU="$(printf "%s (%s) @ %sGHz\n" "$(echo "$lscpu" | grep -Po '^Model name:\ +\K.*(?= CPU)')" "$(echo "$lscpu" | grep -Po '^CPU\(s\):\ +\K.*')" "$(printf '%.3f\n' $(echo "$lscpu" | awk -F: '/^CPU max/ { gsub(/ /, ""); print $2 / 1000 }'))")"
+lspci="$(lspci)"
+GPU1="$(echo "$lspci" | sed -En 's/^.+3D controller: (NVIDIA ).+\[(.+)\].+/\1\2/p')"
+GPU2="$(echo "$lspci" | grep -Po '^.+VGA compatible controller: \K.*(?= \(.+\).+)')"
+DISK="$(df -H /dev/nvme0n1p3 | awk '{print $3"iB / "$2"iB ("$5")"}' | tail -1)"
+MEM="$(free -m | awk '/Mem:/ {print $3 "MiB / " $2 "MiB"}')"
+
+cc='\e[0m'
+cb='\e[1m'
+ci='\e[38;5;06m' # icon color
+ct='\e[38;5;04m' # title color
+clist1="$(echo -e "$(for i in {0..7}; do tput setab $i && printf "   "; done)")"
+[[ $(tput colors) -eq 8 ]] && clist2="$clist1" || clist2="$(echo -e "$(for i in {8..15}; do tput setab $i && printf "   "; done)")"
+
+echo -e '  '$ci$cb'               ,               '$cc'   '$ct$cb'OS:'$cc' '$OS
+echo -e '  '$ci$cb'              ;c,              '$cc'   '$ct$cb'Host:'$cc' '$HOST
+echo -e '  '$ci$cb'             ,ccl'\''             '$cc'   '$ct$cb'Kernel:'$cc' '$KERNEL
+echo -e '  '$ci$cb'            '\''lcccl'\''            '$cc'   '$ct$cb'Uptime:'$cc' '$UPTIME
+echo -e '  '$ci$cb'            llllllo'\''           '$cc'   '$ct$cb'Packages:'$cc' '$PKG
+echo -e '  '$ci$cb'          ,lc,,olllo'\''          '$cc'   '$ct$cb'Shell:'$cc' '$SHELL
+echo -e '  '$ci$cb'         ;dddoooooolo;         '$cc'   '$ct$cb'WM:'$cc' '$WM
+echo -e '  '$ci$cb'        cddddoollllllo:        '$cc'   '$ct$cb'CPU:'$cc' '$CPU
+echo -e '  '$ci$cb'       ldolcccccccccccc:       '$cc'   '$ct$cb'GPU:'$cc' '$GPU1
+echo -e '  '$ci$cb'      cccccc;     cccccc:      '$cc'   '$ct$cb'GPU:'$cc' '$GPU2
+echo -e '  '$ci$cb'    .ccccccc       cccccc:     '$cc'   '$ct$cb'Disk:'$cc' '$DISK
+echo -e '  '$ci$cb'   .ccccccc:       :ccccc:     '$cc'   '$ct$cb'Memory:'$cc' '$MEM
+echo -e '  '$ci$cb'  ,ccccccc.         .cccccc:.  '$cc
+echo -e '  '$ci$cb' ;cc;                     ccc, '$cc'   '"$clist1"$cc
+echo -e '  '$ci$cb''\''                             ,'$cc'   '"$clist2"$cc'\n'
+
+# NICE REGEX
+# lscpu | grep -Po '^Model name:\ +\K.*(?= CPU)'
+# lscpu | sed -En 's/^ *Model name: *(.*) CPU/\1/p'

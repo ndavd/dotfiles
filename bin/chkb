@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [[ "$(setxkbmap -print -verbose 7 | awk '/layout/ {print $2}')" == "pt" ]]; then
+  setxkbmap us
+  notify-send -t 1000 -i $HOME/.config/dunst/icons/keeb.png "US"
+else
+  setxkbmap pt
+  notify-send -t 1000 -i $HOME/.config/dunst/icons/keeb.png "PT"
+fi
