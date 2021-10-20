@@ -1,0 +1,168 @@
+[colors]
+background = #2a373e
+background-alt = #dd0f0f0f
+foreground = #fff
+foreground-alt = #fff
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+; THESE COLORS ARE CHANGED WITH chtheme
+COLOR1 = #aa0000
+COLOR2 = #161616
+COLOR3 = #000000
+; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Made to look like i3status while keeping the costumization that polybar offers
+[bar/bspwm_version]
+width = 100%
+height = 14
+radius = 0.0
+fixed-center = false
+
+background = ${colors.COLOR3}
+foreground = #fff
+
+line-size = 2
+line-color = #f00
+
+border-size = 0
+border-color = #000
+
+padding-left = 0
+padding-right = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = Monospace:size=8.3;2
+font-1 = WeatherIcons:size=9;1
+font-2 = MaterialIcons:size=10;1
+font-3 = NotoColorEmoji:fontformat=truetype:scale=14;0
+
+modules-left = bspwm xwindow
+modules-center =
+modules-right = update sep disk sep memory sep battery_level sep date
+
+tray-position = right
+tray-padding = 1
+wm-restack = bspwm
+override-redirect = true
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/b]
+width = 18%
+height = 30
+offset-x = 41%
+offset-y = 90%
+radius = 1.0
+fixed-center = true
+background = #222
+foreground = ${colors.foreground}
+font-0 = UbuntuMono Nerd Font Mono:style=Regular:size=18;3
+font-1 = Hack Nerd Font Mono:style=Regular:size=15;2
+font-2 = NotoColorEmoji:scale=8;2
+modules-center = get_bright
+override-redirect = true
+[bar/v]
+width = 18%
+height = 30
+offset-x = 41%
+offset-y = 90%
+radius = 1.0
+fixed-center = true
+background = #222
+foreground = ${colors.foreground}
+font-0 = UbuntuMono Nerd Font Mono:style=Regular:size=18;3
+font-1 = Hack Nerd Font Mono:style=Regular:size=15;2
+font-2 = NotoColorEmoji:scale=8;2
+modules-center = get_vol
+override-redirect = true
+
+;;;; MODULES
+
+[module/get_vol]
+type = custom/script 
+exec = $HOME/bin/media_viewer.sh v
+[module/get_bright]
+type = custom/script 
+exec = $HOME/bin/media_viewer.sh b
+
+[module/xwindow]
+type = internal/xwindow
+label = " %title:0:120:...%"
+format-underline = ${background}
+format-background = $background}
+format-padding =
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = " %name% "
+label-focused-background = ${colors.COLOR1}
+label-focused-padding = 0
+
+label-occupied = " %name% "
+label-occupied-background = ${colors.COLOR2}
+label-occupied-foreground = #888
+label-occupied-padding = 0
+
+label-urgent = " %name% "
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 0
+
+label-empty =
+label-empty-foreground = #888
+label-empty-padding = 1
+
+[module/brightness]
+type = custom/script
+exec = echo "$(($(brightnessctl g) * 100 / $(brightnessctl m)))"
+label = %output%
+format = BL <label>
+
+[module/date]
+type = internal/date
+interval = 10
+date = "%A, %b %d"
+time = "%H:%M"
+label = "%date% %time%"
+
+[module/update]
+type = custom/script
+exec = (checkupdates; paru -Qua) | wc -l
+label = "👻 %output%"
+interval = 60
+
+[module/battery_level]
+type = custom/script
+exec = $HOME/.config/polybar/get_battery.sh minimal
+label = "%output%"
+interval = 10
+
+[module/disk]
+type = custom/script
+exec = printf "%siB" $(df -H /dev/nvme0n1p3 --output=avail | sed -n '2p' | cut -c 2-)
+label = "%output%"
+interval = 300
+
+[module/memory]
+type = custom/script
+exec = free -h | awk '/Mem:/ {print $3 "B/" $2 "B"}'
+label = "%output%"
+interval = 30
+
+[module/sep]
+type = custom/script
+exec = echo -n " | "
+format-foreground = #888
+interval = 1000000
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
