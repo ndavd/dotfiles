@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# BSPWM MOVE/RESIZE FLOATING/TILED WINDOW
+
+[[ "$(bspc query --tree --node | jq -r '.client.state')" == "floating" ]] && float=1
+
+case $1 in
+  mv)
+    if [[ $float -eq "1" ]]; then
+      case $2 in
+        1) _a="-20 0" ;;
+        2) _a="0 20" ;;
+        3) _a="0 -20" ;;
+        4) _a="20 0" ;;
+      esac
+      bspc node -v $_a
+    else
+      case $2 in
+        1) _a="west" ;;
+        2) _a="south" ;;
+        3) _a="north" ;;
+        4) _a="east" ;;
+      esac
+      bspc node -s $_a
+    fi
+    ;;
+  rs)
+    if [[ $float -eq "1" ]]; then
+      case $2 in
+        1) _a="right -20 0" ;;
+        2) _a="bottom 0 20" ;;
+        3) _a="bottom 0 -20" ;;
+        4) _a="right 20 0" ;;
+      esac
+      bspc node -z $_a
+    else
+      case $2 in
+        1) _a="$(bspc node -z left -20 0 || bspc node -z right -20 0)" ;;
+        2) _a="$(bspc node -z bottom 0 20 || bspc node -z top 0 20)" ;;
+        3) _a="$(bspc node -z top 0 -20) || bspc node -z bottom 0 -20)" ;;
+        4) _a="$(bspc node -z right 20 0 || bspc node -z left 20 0)" ;;
+      esac
+      $_a
+    fi
+    ;;
+esac
