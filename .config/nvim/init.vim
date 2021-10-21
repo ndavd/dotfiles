@@ -286,8 +286,8 @@ lua require('lspconfig_config')
 " Lsp formatting
 nnoremap <silent><leader><leader>f :lua vim.lsp.buf.formatting()<CR>
 " Change signs
-let s:lsp_signs=['LspDiagnosticsSignError', 'LspDiagnosticsSignWarning',
-      \ 'LspDiagnosticsSignInformation', 'LspDiagnosticsSignHint']
+let s:lsp_signs=['DiagnosticSignError', 'DiagnosticSignWarn',
+      \ 'DiagnosticSignInfo', 'DiagnosticSignHint']
 for i in s:lsp_signs
   execute 'sign define '.i.' text= texthl= linehl= numhl='.i
 endfor
