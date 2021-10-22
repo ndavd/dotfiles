@@ -8,15 +8,16 @@ lua require('webdevicons_config').my_setup()
 
 " let s:bg=synIDattr(synIDtrans(hlID('StatusLine')),'bg')
 let s:bg='NONE'
+let s:nbsc=' '
 
 function s:active_stl()
   if s:make_stl()
-    let stl =' %#StatusLineMode#%{ndavid#stl#mode_symbol()} %{ndavid#stl#mode_name()}%* '
+    let stl =' %#StatusLineMode#%-11{ndavid#stl#mode()}%*'
     let icon = luaeval("require'webdevicons_config'.get_icon"
           \ ."{do_hl={true,'StatusLine','StatusLineIcon'}}")
-    let stl .= icon.' %f%{ndavid#stl#modified()} %<'.'%#StatusLineBranch#'
-          \ .'%{ndavid#stl#branch(1)}%*%{ndavid#stl#sy_stats_wrapper()}'
-    if s:show_ln==1 | let stl .= '%=%l(%02p%%):%-1c' | endif
+    let stl .= icon.s:nbsc.'%f%{ndavid#stl#modified()}%<'.'%#StatusLineBranch#'
+          \ .'%{ndavid#stl#branch(1)}%*%{ndavid#stl#sy_stats_wrapper()} '
+    if s:show_ln==1 | let stl .= '%= %l(%02p%%):%-1c' | endif
     let &l:stl = stl
   endif
 endfunction
@@ -24,16 +25,18 @@ endfunction
 function s:innactive_stl()
   if s:make_stl()
     let icon = luaeval("require'webdevicons_config'.get_icon{}")
-    let stl = ' >> %-6{" "} '
-          \.icon.' %f%{ndavid#stl#modified()} %<%{ndavid#stl#branch(0)}'
-          \.'%{ndavid#stl#sy_stats_wrapper()}'
+    let stl = ' >>         '
+          \.icon.s:nbsc.'%f%{ndavid#stl#modified()}%<%{ndavid#stl#branch(0)}'
+          \.'%{ndavid#stl#sy_stats_wrapper()} '
     let &l:stl = stl
   endif
 endfunction
 
 function ndavid#stl#modified()
   if &modifiable
-    if &modified | return '[+]' | else | return '' | endif
+    if &modified
+      return '[+]'
+    else | return '' | endif
   else | return '[-]' | endif
 endfunction
 
@@ -41,10 +44,14 @@ function ndavid#stl#branch(active)
   let branch = FugitiveHead(8)
   if a:active
     if branch=~#'master\|main'
-      execute 'hi StatusLineBranch guifg=	#00ff5f guibg='.s:bg
+      execute 'hi StatusLineBranch guifg=#58ca73 guibg='.s:bg
     else | execute 'hi! link StatusLineBranch StatusLine' | endif
   endif
-  return branch == '' ? ' ' : '['.branch.']'
+  return branch == '' ? s:nbsc : s:nbsc.'['.branch.']'
+endfunction
+
+function s:make_stl()
+  return &ft!~'NvimTree\|vista_kind\|startify\|packer\|startuptime'
 endfunction
 
 function! ndavid#stl#sy_stats_wrapper()
@@ -54,7 +61,7 @@ function! ndavid#stl#sy_stats_wrapper()
   let statline = ''
   for i in range(3)
     if stats[i] > 0
-      let statline .= printf('%s%s,', symbols[i], stats[i])
+      let statline .= printf('%s%s,', symbols[i], stats[i],)
     endif
   endfor
   if !empty(statline)
@@ -63,11 +70,7 @@ function! ndavid#stl#sy_stats_wrapper()
   return statline
 endfunction
 
-function s:make_stl()
-  return &ft!~'NvimTree\|vista_kind\|startify\|packer\|startuptime'
-endfunction
-
-function ndavid#stl#mode_symbol()
+function ndavid#stl#mode()
   let mode = mode()
   if match(['n','c'], mode)!=-1 | let fg='#949494'
   elseif match(['i','ix','s','S',"\<C-s>"], mode())!=-1
@@ -77,25 +80,22 @@ function ndavid#stl#mode_symbol()
   elseif match(['v','V',"\<C-v>"], mode)!=-1
     let fg='#a9e861'
   endif
-  if mode=~'n\|c'
+  let mode_map = {
+        \ 'n': 'NORMAL  ', 'i': 'INSERT  ', 'R': 'REPLACE ',
+        \ 'v': 'VISUAL  ', 'V': 'V·LINE  ', "\<C-v>": 'V·BLOCK ',
+        \ 'c': 'COMMAND ', 's': 'SELECT  ', 'S': 'S·LINE  ',
+        \ "\<C-s>": 'S·BLOCK '
+        \ }
+  let mode = get(mode_map, mode, '')
+  if mode=~'NORMAL\|COMMAND'
     execute 'hi StatusLineMode guifg='.fg.' gui=NONE'
   else
     execute 'hi StatusLineMode guifg='.fg.' gui=bold'
   endif
-  if mode=='i' | let mode = 'ʌʌ'
-  elseif mode=='R' | let mode = 'vv'
-  else | let mode = '>>' | endif
+  if mode=='INSERT' | let mode = 'ʌʌ'.s:nbsc.mode
+  elseif mode=='REPLACE' | let mode = 'vv'.s:nbsc.mode
+  else | let mode = '>>'.s:nbsc.mode | endif
   return mode
-endfunction
-function ndavid#stl#mode_name()
-  let mode = mode()
-  let mode_map = {
-        \ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'RPLACE',
-        \ 'v': 'VISUAL', 'V': 'V·LINE', "\<C-v>": 'V·BLOC',
-        \ 'c': 'COMMND', 's': 'SELECT', 'S': 'S·LINE',
-        \ "\<C-s>": 'S·BLOCK'
-        \ }
-  return get(mode_map, mode, '')
 endfunction
 
 " Show line info
