@@ -47,7 +47,7 @@ function ndavid#stl#branch(active)
       execute 'hi StatusLineBranch guifg=#58ca73 guibg='.s:bg
     else | execute 'hi! link StatusLineBranch StatusLine' | endif
   endif
-  return branch == '' ? s:nbsc : s:nbsc.'['.branch.']'
+  return branch == '' ? '' : s:nbsc.'['.branch.']'
 endfunction
 
 function s:make_stl()
