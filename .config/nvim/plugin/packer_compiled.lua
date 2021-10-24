@@ -151,6 +151,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ndavid/.local/share/nvim/site/pack/packer/start/nvim-luapad"
   },
+  ["nvim-nonicons"] = {
+    loaded = true,
+    path = "/home/ndavid/.local/share/nvim/site/pack/packer/start/nvim-nonicons"
+  },
   ["nvim-scrollview"] = {
     loaded = true,
     path = "/home/ndavid/.local/share/nvim/site/pack/packer/start/nvim-scrollview"
@@ -166,10 +170,6 @@ _G.packer_plugins = {
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/ndavid/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
-  },
-  ["nvim-web-nonicons"] = {
-    loaded = true,
-    path = "/home/ndavid/.local/share/nvim/site/pack/packer/start/nvim-web-nonicons"
   },
   ["packer.nvim"] = {
     loaded = true,
