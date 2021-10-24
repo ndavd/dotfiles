@@ -81,6 +81,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ndavid/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
   },
+  ["cmp-nvim-lua"] = {
+    loaded = true,
+    path = "/home/ndavid/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua"
+  },
   ["cmp-path"] = {
     loaded = true,
     path = "/home/ndavid/.local/share/nvim/site/pack/packer/start/cmp-path"

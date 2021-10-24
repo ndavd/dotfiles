@@ -15,6 +15,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
+    { name = 'nvim_lua' },
     -- { name = 'buffer' },
     { name = 'path' },
     { name = 'treesitter' },
