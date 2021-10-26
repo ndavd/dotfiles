@@ -1,5 +1,5 @@
 # :space_invader: ndavid's dotfiles :space_invader:
-This repository contains the dotfiles for the setup that I use everyday.
+## This repository contains the dotfiles for the setup that I use everyday.
 ~~**Warning: dark and minimal setup ahead!**~~
 ![Screenshot](https://raw.githubusercontent.com/ndav1d/dotfiles/main/bg.png)
 
