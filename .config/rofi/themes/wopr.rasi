@@ -1,0 +1,59 @@
+/***
+* ROFI Color theme
+* NAME: wopr.rasi
+* AUTHOR: ndavid
+***/
+
+* {
+  /* THESE COLORS ARE CHANGED WITH chtheme */
+  COLOR1:              #aa0000;
+  COLOR2:              #161616;
+  COLOR3:              #000000;
+
+  font:                "Monospace 8.8";
+  height:              14px;
+  text-color:          #fff;
+  background-color:    @COLOR3;
+  element-background:  @COLOR2;
+  selected-background: @COLOR1;
+}
+window {
+  anchor: north;
+  location: north;
+  width: 100%;
+  padding: 0px;
+  children: [ horibox ];
+}
+horibox {
+  orientation: horizontal;
+  children: [ prompt, entry, listview ];
+}
+prompt {
+  padding: 0 1ch;
+  background-color: @selected-background;
+}
+listview {
+  layout: horizontal;
+  lines: 100;
+}
+entry {
+  expand: false;
+  padding: 0 2px;
+  width: 10em;
+  blink: false;
+}
+element {
+  padding: 0 1ch;
+  background-color: @element-background;
+}
+element.selected {
+  background-color: @selected-background;
+}
+element-text {
+  background-color: inherit;
+  text-color: inherit;
+}
+element-icon {
+  size: @height;
+  background-color: inherit;
+}
