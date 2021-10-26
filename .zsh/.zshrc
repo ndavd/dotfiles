@@ -95,7 +95,7 @@ preexec() {
 
 ### aliases
 alias g='git'
-alias ls='ls --color=auto -Nv'
+alias ls='ls --color=auto -N'
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
