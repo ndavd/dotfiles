@@ -1,3 +1,4 @@
+![Lines of code](https://img.shields.io/tokei/lines/github/ndav1d/dotfiles)
 # :space_invader: ndavid's dotfiles :space_invader:
 ## This repository contains the dotfiles for the setup that I use everyday.
 ~~**Warning: dark and minimal setup ahead!**~~
