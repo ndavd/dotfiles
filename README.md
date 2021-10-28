@@ -8,7 +8,8 @@
 I like to customize everything until it fits my needs and style and I'm
 constantly changing things.
 
-***Text editor:***           [nvim](https://github.com/ndav1d/dotfiles/tree/main/.config/nvim)
+***IDE:***                   [neovim](https://github.com/ndav1d/dotfiles/tree/main/.config/nvim)
+***Text editor:***           [vim](https://github.com/ndav1d/dotfiles/tree/main/.vim)
 ***Shell:***                 [zsh](https://github.com/ndav1d/dotfiles/tree/main/.zsh)
 ***Terminal emulator:***     [kitty](https://github.com/ndav1d/dotfiles/tree/main/.config/kitty)
 ***Window manager:***        [bspwm](https://github.com/ndav1d/dotfiles/tree/main/.config/bspwm)

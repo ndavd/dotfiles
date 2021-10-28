@@ -1,0 +1,191 @@
+" -------------
+" --- VIMRC ---
+" -------------
+
+" --- Plugins
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
+Plug 'andymass/vim-matchup'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+call plug#end()
+
+" --- Settings
+
+let mapleader = ' '
+syntax off
+set ttimeout ttimeoutlen=50
+set clipboard=unnamedplus
+set completeopt+=noselect
+set wildmenu
+" set wildmode=list:longest,full
+set showcmd
+set nowrap
+set noerrorbells
+set incsearch
+set laststatus=2
+set tabstop=2 softtabstop=2
+set shiftwidth=2
+set expandtab
+set smartindent
+set cul nu rnu
+set ignorecase
+set noswapfile
+set nobackup
+set updatetime=100
+set undofile
+set textwidth=80
+set shortmess+=c
+set foldmethod=marker
+set title
+set titlestring=%t\ %m\ -\ VIM
+let &fcs='stl:-,stlnc:-'
+set mouse=a
+behave xterm
+au FileType C,Cpp,Cs setl commentstring=//\ %s
+let g:matchup_matchparen_offscreen = {}
+
+" --- Highlights
+
+hi EndOfBuffer ctermbg=NONE ctermfg=12 term=bold
+hi IncSearch cterm=reverse
+hi SignColumn ctermbg=NONE
+hi MatchParen cterm=underline ctermbg=NONE
+hi Search cterm=reverse
+hi StatusLine cterm=NONE ctermbg=NONE ctermfg=white
+hi StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
+hi LineNr ctermbg=NONE ctermfg=darkgrey
+hi CursorLine cterm=NONE ctermbg=NONE
+hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=white
+hi ColorColumn ctermbg=darkgrey
+hi Cursor ctermbg=white
+hi VertSplit ctermfg=grey ctermbg=NONE
+hi WildMenu ctermbg=red
+
+" --- Statusline
+
+" let s:bg=synIDattr(synIDtrans(hlID('StatusLine')),'bg')
+let s:nbsc=' '
+
+function s:active_stl()
+  if s:make_stl()
+    let stl = ' %f%{STL_modified()}%<'.'%#StatusLineBranch#'
+          \ .'%{STL_branch(1)}%*%{STL_sy_stats_wrapper()} '
+    if s:show_ln==1 | let stl .= '%= %l(%02p%%):%-1c' | endif
+    let &l:stl = stl
+  endif
+endfunction
+
+function s:innactive_stl()
+  if s:make_stl()
+    let stl = ' %f%{STL_modified()}%<%{STL_branch(0)}'
+          \.'%{STL_sy_stats_wrapper()} '
+    let &l:stl = stl
+  endif
+endfunction
+
+function STL_modified()
+  if &modifiable
+    if &modified
+      return '[+]'
+    else | return '' | endif
+  else | return '[-]' | endif
+endfunction
+
+function STL_branch(active)
+  let branch = FugitiveHead(8)
+  if a:active
+    if branch=~#'master\|main'
+      execute 'hi StatusLineBranch ctermfg=lightgreen'
+    else | execute 'hi! link StatusLineBranch StatusLine' | endif
+  endif
+  return branch == '' ? '' : s:nbsc.'['.branch.']'
+endfunction
+
+function s:make_stl()
+  return &ft!~'NvimTree\|vista_kind\|startify\|packer\|startuptime'
+endfunction
+
+function! STL_sy_stats_wrapper()
+  let [added, modified, removed] = sy#repo#get_stats()
+  let symbols = ['+', '-', '~']
+  let stats = [added, removed, modified]  " reorder
+  let statline = ''
+  for i in range(3)
+    if stats[i] > 0
+      let statline .= printf('%s%s,', symbols[i], stats[i],)
+    endif
+  endfor
+  if !empty(statline)
+    let statline = printf('[%s]', statline[:-2])
+  endif
+  return statline
+endfunction
+
+function STL_mode()
+  let mode = mode()
+  if match(['n','c'], mode)!=-1 | let fg='Grey'
+  elseif match(['i','ix','s','S',"\<C-s>"], mode())!=-1
+    let fg='blue'
+  elseif match(['R'], mode)!=-1
+    let fg='red'
+  elseif match(['v','V',"\<C-v>"], mode)!=-1
+    let fg='green'
+  endif
+  let mode_map = {
+        \ 'n': 'NORMAL  ', 'i': 'INSERT  ', 'R': 'REPLACE ',
+        \ 'v': 'VISUAL  ', 'V': 'V·LINE  ', "\<C-v>": 'V·BLOCK ',
+        \ 'c': 'COMMAND ', 's': 'SELECT  ', 'S': 'S·LINE  ',
+        \ "\<C-s>": 'S·BLOCK '
+        \ }
+  let mode = get(mode_map, mode, '')
+  if mode=~'NORMAL\|COMMAND'
+    execute 'hi StatusLineMode ctermfg='.fg.' cterm=NONE'
+  else
+    execute 'hi StatusLineMode ctermfg='.fg.' cterm=bold'
+  endif
+  if mode=='INSERT' | let mode = 'ʌʌ'.s:nbsc.mode
+  elseif mode=='REPLACE' | let mode = 'vv'.s:nbsc.mode
+  else | let mode = '>>'.s:nbsc.mode | endif
+  return mode
+endfunction
+
+" Show line info
+let s:show_ln = 0
+function STL_toggle_ln()
+  if s:show_ln == 0
+    let s:show_ln=1
+    call s:active_stl()
+  else
+    let s:show_ln=0
+    call s:active_stl()
+  endif
+endfunction
+nnoremap <silent><expr><leader>sl STL_toggle_ln()
+
+" Update Statusline when entering/leaving
+au WinEnter,BufEnter,BufWrite * call s:active_stl()
+au WinLeave,BufLeave * call s:innactive_stl()
+
+" --- Keymaps
+
+nnoremap <C-h> 3zh
+nnoremap <C-l> 3zl
+nnoremap <silent><A-s> :m .+1<CR>==
+nnoremap <silent><A-w> :m .-2<CR>==
+inoremap <silent><A-s> <Esc>:m .+1<CR>==gi
+inoremap <silent><A-w> <Esc>:m .-2<CR>==gi
+vnoremap <silent><A-s> :m '>+1<CR>gv=gv
+vnoremap <silent><A-w> :m '<-2<CR>gv=gv
+
+finish
