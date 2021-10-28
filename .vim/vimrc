@@ -49,7 +49,7 @@ set shortmess+=c
 set foldmethod=marker
 set title
 set titlestring=%t\ %m\ -\ VIM
-let &fcs='stl:-,stlnc:-'
+let &fcs='stl:-,stlnc:-,vert:│'
 set mouse=a
 behave xterm
 au FileType C,Cpp,Cs setl commentstring=//\ %s
@@ -69,7 +69,7 @@ hi CursorLine cterm=NONE ctermbg=NONE
 hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=white
 hi ColorColumn ctermbg=darkgrey
 hi Cursor ctermbg=white
-hi VertSplit ctermfg=grey ctermbg=NONE
+hi VertSplit ctermfg=white ctermbg=NONE cterm=NONE
 hi WildMenu ctermbg=red
 
 " --- Statusline
