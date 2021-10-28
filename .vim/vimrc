@@ -52,6 +52,9 @@ set titlestring=%t\ %m\ -\ VIM
 let &fcs='stl:-,stlnc:-,vert:│'
 set mouse=a
 behave xterm
+let &t_SI = "\e[3 q"
+let &t_EI = "\e[2 q"
+set guicursor=a:block-Cursor,i-r:hor20-Cursor
 au FileType C,Cpp,Cs setl commentstring=//\ %s
 let g:matchup_matchparen_offscreen = {}
 
