@@ -58,8 +58,29 @@ set guicursor=a:block-Cursor,i-r:hor20-Cursor
 au FileType C,Cpp,Cs setl commentstring=//\ %s
 let g:matchup_matchparen_offscreen = {}
 
+set list
+if &list
+  let g:listchar_index = 0
+  let g:listchar_options = [
+        \ 'trail:·',
+        \ 'trail:·,multispace:│\ ',
+        \ '',
+        \ ]
+  function CycleListchars() abort
+    execute 'set listchars='.g:listchar_options[
+          \ float2nr(
+          \ fmod(g:listchar_index, len(g:listchar_options))
+          \ )]
+    let g:listchar_index += 1
+  endfunction
+  " Cycle listchars
+  nnoremap <silent><leader>cl :call CycleListchars()<CR>
+  call CycleListchars()
+endif
+
 " --- Highlights
 
+hi SpecialKey ctermfg=darkgrey
 hi EndOfBuffer ctermbg=NONE ctermfg=12 term=bold
 hi IncSearch cterm=reverse
 hi SignColumn ctermbg=NONE
