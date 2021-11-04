@@ -117,9 +117,7 @@ f() {
 }
 
 ### motd
-[[ $- =~ l ]] && [[ $TERM = linux ]] && . $HOME/bin/motd
-
-. /home/ndavid/bin/woprfetch
+[[ $- =~ l ]] && [[ $TERM = linux ]] && . $HOME/bin/motd && . $HOME/bin/woprfetch
 
 ### plugins
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh 2>/dev/null
