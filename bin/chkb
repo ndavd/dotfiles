@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+pidfile=/tmp/kb_notification.pid
+[[ -f $pidfile ]] && dunstify -C $(cat $pidfile) && rm $pidfile
+
 if [[ "$(setxkbmap -print -verbose 7 | awk '/layout/ {print $2}')" == "pt" ]]; then
   setxkbmap us
-  notify-send -t 1000 -i $HOME/.config/dunst/icons/keeb.png "US"
+  dunstify -t 1000 -i $HOME/.config/dunst/icons/keeb.png "US" -p > $pidfile
 else
   setxkbmap pt
-  notify-send -t 1000 -i $HOME/.config/dunst/icons/keeb.png "PT"
+  dunstify -t 1000 -i $HOME/.config/dunst/icons/keeb.png "PT" -p > $pidfile
 fi
