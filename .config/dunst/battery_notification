@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-pidfile=/tmp/notification.pid
-trap 'rm -f /tmp/notification.pid' EXIT TERM QUIT KILL ABRT INT
+pidfile=/tmp/battery_notification.pid
+trap 'rm -f /tmp/battery_notification.pid' EXIT TERM QUIT KILL ABRT INT
 if [[ -f $pidfile ]]; then
   printf 'the script is running already: %d\n' "$(cat "$pidfile")" 1>&2
   exit 1
