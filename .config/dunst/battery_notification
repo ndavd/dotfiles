@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 pidfile=/tmp/battery_notification.pid
-trap 'rm -f /tmp/battery_notification.pid' EXIT TERM QUIT KILL ABRT INT
 if [[ -f $pidfile ]]; then
   printf 'the script is running already: %d\n' "$(cat "$pidfile")" 1>&2
   exit 1
 fi
-echo "$$" >$pidfile
+trap 'rm -f /tmp/battery_notification.pid' EXIT TERM QUIT KILL ABRT INT
+echo "$$" > $pidfile
 
 get_battery_capacity() {
   cat /sys/class/power_supply/BAT1/capacity
