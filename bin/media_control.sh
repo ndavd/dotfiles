@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+pkill -fx "polybar (v||b)"
 case $1 in
   b)
     case $2 in
