@@ -333,7 +333,7 @@
   foreground = "#fff"
   # frame_color = "#f00"
   highlight = "#e05e5e"
-  timeout = 60
+  timeout = 0
   # Icon for notifications with critical urgency, uncomment to enable
   icon = ~/.config/dunst/icons/critical.png
 
