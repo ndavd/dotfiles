@@ -6,8 +6,7 @@ xrdb -load ~/.Xresources
 udiskie &
 nm-applet &
 $HOME/local/dunst/bin/dunst &
-$HOME/.config/dunst/battery_notification.sh &
-# unclutter &
+$HOME/.config/dunst/battery_notification &
 picom &
 nitrogen --restore &
 $HOME/.config/polybar/launch.sh &
