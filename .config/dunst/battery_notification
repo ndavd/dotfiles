@@ -17,6 +17,9 @@ get_battery_status() {
 }
 
 send_notification() {
+  if [ $(get_battery_status) == "Charging" ] && [ $notificationpid != '' ]; then
+    dunstify -C $notificationpid
+  fi
   if [ $(get_battery_capacity) -le 15 ] && [ $(get_battery_status) == "Discharging" ]; then
     if [[ $notificationpid == '' ]]; then
       notificationpid=$(dunstify -u critical -i $HOME/.config/dunst/icons/battery_low.png \
