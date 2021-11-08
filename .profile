@@ -23,3 +23,6 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
 # lf
 . $HOME/bin/lf_icons
 export PATH=$HOME/local/lfimg:$PATH
+
+# Go
+export PATH=$HOME/go/bin:$PATH
