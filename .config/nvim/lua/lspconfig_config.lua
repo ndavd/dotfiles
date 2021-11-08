@@ -44,8 +44,8 @@ require'lspconfig'.gopls.setup{
   capabilities = capabilities,
 }
 
--- sql
-require'lspconfig'.sqlls.setup{
+-- Sql
+require'lspconfig'.sqls.setup{
   capabilities = capabilities,
 }
 
