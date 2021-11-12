@@ -1,14 +1,11 @@
 export LC_ALL=en_US.UTF-8
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/local/nvim/bin:$PATH
 
 export XDG_CONFIG_HOME=$HOME/.config
 export BROWSER=/usr/bin/brave
 export EDITOR=$HOME/local/nvim/bin/nvim
 export VISUAL=$HOME/local/nvim/bin/nvim
-
-# npm - Allow user-wide installations
-PATH="$HOME/.local/bin:$PATH"
-export npm_config_prefix="$HOME/.local"
 
 export MANPAGER="nvim +Man!"
 export MANWIDTH=100
