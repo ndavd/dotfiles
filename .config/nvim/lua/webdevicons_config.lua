@@ -35,8 +35,8 @@ out.get_icon = function(opts)
     file_extension = vim.fn.split(vim.fn.expand('%:t'), '\\.')
     file_extension = file_extension[#file_extension]
   end
-  local icon, hl_group = require'nvim-web-devicons'.get_icon('foo',
-    file_extension)
+  local icon, hl_group = require'nvim-web-devicons'.get_icon('foo', file_extension)
+  icon = icon..' '
   if do_hl[1] then
     local guifg =
       vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(hl_group)), "fg")
@@ -46,7 +46,7 @@ out.get_icon = function(opts)
     if guibg=='' then guibg='' else guibg=' guibg='..guibg end
     STORE_HL = 'hi '..do_hl[3]..guibg..guifg
     vim.cmd(STORE_HL)
-    output = '%#'..do_hl[3]..'#'..icon ..'%#'..do_hl[2]..'#'
+    output = '%#'..do_hl[3]..'#'..icon..'%#'..do_hl[2]..'#'
   else
     output = icon
   end
