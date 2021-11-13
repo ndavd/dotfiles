@@ -114,6 +114,10 @@ f() {
 ### motd
 [[ $- =~ l ]] && [[ $TERM = linux ]] && . $HOME/bin/motd && . $HOME/bin/woprfetch
 
+### nvm
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 ### plugins
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh 2>/dev/null
 # zsh-syntax-highlighting must be at the end of `.zshrc`
