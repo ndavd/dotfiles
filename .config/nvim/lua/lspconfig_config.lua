@@ -115,6 +115,11 @@ require'lspconfig'.cssls.setup{
   capabilities = capabilities,
 }
 
+-- Tailwindcss
+require'lspconfig'.tailwindcss.setup{
+  capabilities = capabilities,
+}
+
 -- Json
 require'lspconfig'.jsonls.setup{
   capabilities = capabilities,
