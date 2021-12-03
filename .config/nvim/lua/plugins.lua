@@ -46,7 +46,7 @@ return require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'
 
   -- Auto comment --
-  use 'tpope/vim-commentary'
+  use 'numToStr/Comment.nvim'
 
   -- Easy Align --
   use {'junegunn/vim-easy-align', keys = {{'x', '<plug>(LiveEasyAlign)'}}}

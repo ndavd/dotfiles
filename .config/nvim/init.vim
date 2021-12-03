@@ -233,8 +233,8 @@ let g:signify_sign_delete = s:signify_symbol
 " --- For Luapad --------------------------------------------------------"
 lua require('luapad_config')
 
-" --- For vim-commentary ------------------------------------------------"
-au FileType C,Cpp,Cs setl commentstring=//\ %s
+" --- For commentary.nvim -----------------------------------------------"
+lua require('Comment').setup()
 
 " --- For indent-blankline ----------------------------------------------"
 lua require('indentblankline_config')
