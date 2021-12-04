@@ -234,7 +234,7 @@ let g:signify_sign_delete = s:signify_symbol
 lua require('luapad_config')
 
 " --- For commentary.nvim -----------------------------------------------"
-lua require('Comment').setup()
+lua require('commentary_config')
 
 " --- For indent-blankline ----------------------------------------------"
 lua require('indentblankline_config')
