@@ -4,8 +4,6 @@ cmp.setup {
     expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
   },
   mapping = {
-    ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-    ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<C-e>'] = cmp.mapping.close(),
