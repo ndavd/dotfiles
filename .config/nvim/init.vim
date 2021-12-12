@@ -276,7 +276,7 @@ nnoremap ,s         :lua require('telescope.builtin').grep_string()<CR>
 nnoremap ,a         :lua require('telescope.builtin').lsp_code_actions()<CR>
 nnoremap ,h         :lua require('telescope.builtin').help_tags()<CR>
 nnoremap ,c         :lua require('telescope_config').search_config()<CR>
-nnoremap <leader>gt :lua require('telescope.builtin').treesitter()<CR>
+nnoremap ,t         :lua require('telescope.builtin').treesitter()<CR>
 nnoremap <leader>gb :lua require('telescope_config').git_branches()<CR>
 nnoremap z=         :lua require('telescope.builtin').spell_suggest()<CR>
 
