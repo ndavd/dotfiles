@@ -292,10 +292,8 @@ for i in s:lsp_signs
   execute 'sign define '.i.' text= texthl= linehl= numhl='.i
 endfor
 " Keymaps
-nnoremap <silent><C-n> :lua vim.lsp.diagnostic.goto_next{enable_popup=false}<CR>
-nnoremap <silent><C-p> :lua vim.lsp.diagnostic.goto_prev{enable_popup=false}<CR>
-nnoremap <silent>gi    :lua vim.lsp.diagnostic.show_line_diagnostics(
-      \ {show_header = false, border = "single"})<CR>
+nnoremap <silent><C-n> :lua vim.diagnostic.goto_next{enable_popup=false}<CR>
+nnoremap <silent><C-p> :lua vim.diagnostic.goto_prev{enable_popup=false}<CR>
 nnoremap <silent>gk    :lua vim.lsp.buf.hover()<CR>
 nnoremap <silent>gd    :lua vim.lsp.buf.definition()<CR>
 nnoremap <silent>gD    :lua vim.lsp.buf.declaration()<CR>
