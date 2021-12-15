@@ -44,11 +44,6 @@ require'lspconfig'.gopls.setup{
   capabilities = capabilities,
 }
 
--- Sql
-require'lspconfig'.sqls.setup{
-  capabilities = capabilities,
-}
-
 -- LaTeX
 require'lspconfig'.texlab.setup{
   settings = {
