@@ -36,9 +36,9 @@ function s:make_hls() abort
   hi StartifyHeader gui=NONE guifg=#d4d4d4
   hi StartifyFooter gui=NONE guifg=#d4d4d4
   " Signify
-  highlight SignifySignAdd guifg=#b8cb26 guibg=NONE
-  highlight SignifySignDelete guifg=#f44747 guibg=NONE
-  highlight SignifySignChange guifg=#599cd6 guibg=NONE
+  hi SignifySignAdd guifg=#b8cb26 guibg=NONE
+  hi SignifySignDelete guifg=#f44747 guibg=NONE
+  hi SignifySignChange guifg=#599cd6 guibg=NONE
   " Statusline
   hi StatusLine gui=NONE guibg=NONE guifg=#ffffff
   hi StatusLineNC gui=NONE guibg=NONE guifg=#444444
