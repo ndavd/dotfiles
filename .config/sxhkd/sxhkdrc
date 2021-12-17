@@ -1,0 +1,137 @@
+#
+# WM INDEPENDENT HOTKEYS
+#
+
+# make sxhkd reload its configuration files:
+super + Escape
+  pkill -USR1 -x sxhkd
+
+# Print
+Print
+  maim --hidecursor --select | xclip -selection clipboard -t image/png
+shift + Print
+  maim --hidecursor -u --select ~/data/pictures/$(date +%s).png
+
+# Volume Control
+XF86AudioLowerVolume
+  $HOME/bin/media_control.sh v down
+XF86AudioRaiseVolume
+  $HOME/bin/media_control.sh v up
+XF86AudioMute
+  $HOME/bin/media_control.sh v mute
+
+# Brightness Control
+XF86MonBrightnessDown
+  $HOME/bin/media_control.sh b down
+XF86MonBrightnessUp
+  $HOME/bin/media_control.sh b up
+
+# Change keyboard layout
+ctrl + super + s
+  $HOME/bin/chkb
+
+#
+# BSPWM HOTKEYS
+#
+
+# terminal emulator
+super + Return
+  kitty ~
+
+# browser
+super + b
+  firefox
+
+# file manager
+super + g
+  kitty lf
+
+# program launcher
+super + r
+  rofi -show drun
+
+# restart bspwm
+ctrl + super + r
+  bspc wm -r
+
+# close window
+super + w
+  bspc node -c
+
+# alternate between the tiled and monocle layout
+super + m
+  bspc desktop -l next
+
+# toggle floating mode
+super + o
+  bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
+
+# toggle fullscreen mode
+super + f
+  bspc node focused.tiled -t fullscreen || bspc node focused.fullscreen -t tiled
+
+#
+# FOCUS/SWAP
+#
+
+# cycle node focus
+super + space
+	bspc node -f next.local.!hidden.window
+
+# swap the node in the given direction
+super + {h,j,k,l}
+  bspc node -f {west,south,north,east}
+
+# focus to the given desktop
+super + {1-9,0}
+  bspc desktop -f '^{1-9,10}'
+
+# send node to the given desktop
+super + shift + {1-9,0}
+  bspc node -d '^{1-9,10}'
+
+# rotate the tree from the current nodes parent
+shift + super + r
+	bspc node @parent --rotate 90
+
+#
+# PRESELECTIONS/RECEPTACLES
+#
+
+# Create presel
+ctrl + super + {h,j,k,l}
+  bspc node --presel-dir {west,south,north,east}
+
+# Remove all presels
+ctrl + super + c
+  bspc node --presel-dir cancel
+
+# Insert receptacle
+super + i; {h,j,k,l}
+  bspc node --presel-dir {west,south,north,east} -i
+
+# Move to rectacle
+super + i; m
+  bspc node $(bspc query -N -n focused) -n $(bspc query -N -n .leaf.\!window)
+
+# Close all receptacles
+super + i; c
+  for win in `bspc query -N -n .leaf.\!window`; do bspc node $win -k ; done;
+
+#
+# MOVE/RESIZE
+#
+
+# increase/decrease window gap
+super + alt + p
+  bspc config window_gap $(($(bspc config window_gap)+1))
+super + alt + m
+  bspc config window_gap $(($(bspc config window_gap)-1))
+
+# Swap on tiled | Move on floating
+shift + super + {h,j,k,l}
+  $HOME/bin/bspwm_mv_rs mv {1,2,3,4}
+
+# Resize on tiled | Resize on floating
+super + alt + {h,j,k,l}
+  $HOME/bin/bspwm_mv_rs rs {1,2,3,4}
