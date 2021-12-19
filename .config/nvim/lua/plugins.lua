@@ -130,11 +130,7 @@ return require('packer').startup(function(use)
   }
 
   -- Colorschemes --
-  use 'rktjmp/lush.nvim'
-  use 'sainnhe/gruvbox-material'
-  use 'npxbr/gruvbox.nvim'
-  use 'adisen99/codeschool.nvim'
-  use 'glepnir/zephyr-nvim'
+  use 'gruvbox-community/gruvbox'
   use 'Mofiqul/vscode.nvim'
 
 end)
