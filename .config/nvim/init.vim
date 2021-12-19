@@ -68,14 +68,14 @@ if &list && $TERM!="linux"
   " Nice chars ﲒ ﮊ ⌴ ⍽   ▷▻⊳►▶▚‽⊛ψψδ…﬋↲↵┊
   " ﴣ             ➜
   function CycleListchars() abort
-    execute 'set listchars='.g:listchar_options[
+    exe 'set listchars='.g:listchar_options[
           \ float2nr(
           \ fmod(g:listchar_index, len(g:listchar_options))
           \ )]
     let g:listchar_index += 1
   endfunction
   " Cycle listchars
-  nnoremap <silent><leader><leader>cl :call CycleListchars()<CR>
+  nn <silent><leader><leader>cl :call CycleListchars()<CR>
   call CycleListchars()
 endif
 
@@ -93,11 +93,11 @@ behave xterm
 let g:vimsyn_noerror = 1
 
 " --- Highlight when yanking --------------------------------------------"
-augroup LuaHighlight
+aug LuaHighlight
   au!
   au TextYankPost *
         \ silent! lua require('vim.highlight').on_yank({on_visual=false})
-augroup END
+aug END
 
 " --- Rasi highlighting (rofi theme file) -------------------------------"
 au BufNewFile,BufRead *.rasi set syntax=css
@@ -112,11 +112,11 @@ lua require('webdevicons_config').my_setup()
 lua require('webdevicons_config').make_hl()
 
 " --- For Colorizer -----------------------------------------------------"
-nnoremap <silent><leader>co :ColorizerToggle<CR>
+nn <silent><leader>co :ColorizerToggle<CR>
 
 " --- For Hop.nvim ------------------------------------------------------"
-noremap <silent>,w <cmd>HopWord<CR>
-noremap <silent>,q <cmd>HopChar2<CR>
+no <silent>,w <cmd>HopWord<CR>
+no <silent>,q <cmd>HopChar2<CR>
 
 " --- For ScrollView ----------------------------------------------------"
 let g:scrollview_on_startup = 0
@@ -128,19 +128,19 @@ let g:active_scrollview = 0
 function ToggleSrollView()
   if g:active_scrollview == 0
     let g:active_scrollview = 1
-    execute 'ScrollViewEnable'
+    exe 'ScrollViewEnable'
   elseif g:active_scrollview == 1
     let g:active_scrollview = 0
-    execute 'ScrollViewDisable'
+    exe 'ScrollViewDisable'
   endif
 endfunction
-nnoremap <silent><leader>sb :call ToggleSrollView()<CR>
+nn <silent><leader>sb :call ToggleSrollView()<CR>
 
 " --- For vim-smoothie --------------------------------------------------"
 let g:smoothie_no_default_mappings = 1
 " Keymaps
-nnoremap <silent><A-k> :call smoothie#upwards()<CR>
-nnoremap <silent><A-j> :call smoothie#downwards()<CR>
+nn <silent><A-k> :call smoothie#upwards()<CR>
+nn <silent><A-j> :call smoothie#downwards()<CR>
 
 " --- For vim-startify --------------------------------------------------"
 function! StartifyEntryFormat()
@@ -198,9 +198,9 @@ function StartifyUpdateCentering()
         \ '']) + startify#pad(s:get_quote) +
         \ startify#pad(s:ascii_darth_vader)
 endfunction
-autocmd VimEnter * call StartifyUpdateQuote()
+au VimEnter * call StartifyUpdateQuote()
       \| call StartifyUpdateCentering()
-autocmd VimResized * if &ft=='startify' && winwidth(0)>=64
+au VimResized * if &ft=='startify' && winwidth(0)>=64
       \| call StartifyUpdateCentering()
       \| call startify#insane_in_the_membrane(0)
       \| endif
@@ -209,19 +209,19 @@ function StartifyReLaunch()
   call StartifyUpdateCentering()
   Startify
 endfunction
-nnoremap <silent><leader><leader>s :call StartifyReLaunch()<CR>
+nn <silent><leader><leader>s :call StartifyReLaunch()<CR>
 
 " --- For Vista.vim -----------------------------------------------------"
 let g:vista_default_executive = 'nvim_lsp'
 let g:vista_icon_indent = ["└─ ", "├─ "]
-autocmd VimResized * let g:vista_sidebar_width =
+au VimResized * let g:vista_sidebar_width =
       \ string(nvim_win_get_width(0)*0.3)
 let g:vista_update_on_text_changed = 1
 let g:vista_cursor_delay = 10
 if exists('g:scrollview_on_startup')
-  nnoremap <silent><leader>v :Vista!!<CR>:ScrollViewRefresh<CR>
+  nn <silent><leader>v :Vista!!<CR>:ScrollViewRefresh<CR>
 else
-  nnoremap <silent><leader>v :Vista!!<CR>
+  nn <silent><leader>v :Vista!!<CR>
 endif
 
 " --- For signify -------------------------------------------------------"
@@ -238,7 +238,7 @@ lua require('comment_config')
 
 " --- For indent-blankline ----------------------------------------------"
 lua require('indentblankline_config')
-nnoremap <silent><leader>i :IndentBlanklineToggle<CR>
+nn <silent><leader>i :IndentBlanklineToggle<CR>
 
 " --- For matchup -------------------------------------------------------"
 let g:matchup_matchparen_offscreen = {}
@@ -247,13 +247,13 @@ let g:matchup_matchparen_offscreen = {}
 xmap <cr> <plug>(LiveEasyAlign)
 
 " --- For creating presentations in vim ---------------------------------"
-autocmd BufNewFile,BufRead *.vpm call SetVimPresentationMode()
+au BufNewFile,BufRead *.vpm call SetVimPresentationMode()
 function SetVimPresentationMode()
   set laststatus=0
   hi NonText guifg=bg ctermfg=bg
   set nonu
-  nnoremap <buffer> <Right> :n<CR>
-  nnoremap <buffer> <Left> :N<CR>
+  nn <buffer> <Right> :n<CR>
+  nn <buffer> <Left> :N<CR>
 endfunction
 
 " --- For vim-sleuth ----------------------------------------------------"
@@ -269,36 +269,36 @@ lua require('treesitter_config')
 " Load config file
 lua require('telescope_config')
 " Keymaps
-nnoremap ,,         :lua require('telescope.builtin').find_files()<CR>
-nnoremap ,f         :lua require('telescope').extensions.frecency.frecency()<CR>
-nnoremap ,g         :lua require('telescope.builtin').live_grep()<CR>
-nnoremap ,s         :lua require('telescope.builtin').grep_string()<CR>
-nnoremap ,a         :lua require('telescope.builtin').lsp_code_actions()<CR>
-nnoremap ,h         :lua require('telescope.builtin').help_tags()<CR>
-nnoremap ,c         :lua require('telescope_config').search_config()<CR>
-nnoremap ,t         :lua require('telescope.builtin').treesitter()<CR>
-nnoremap <leader>gb :lua require('telescope_config').git_branches()<CR>
-nnoremap z=         :lua require('telescope.builtin').spell_suggest()<CR>
+nn ,,         :lua require('telescope.builtin').find_files()<CR>
+nn ,f         :lua require('telescope').extensions.frecency.frecency()<CR>
+nn ,g         :lua require('telescope.builtin').live_grep()<CR>
+nn ,s         :lua require('telescope.builtin').grep_string()<CR>
+nn ,a         :lua require('telescope.builtin').lsp_code_actions()<CR>
+nn ,h         :lua require('telescope.builtin').help_tags()<CR>
+nn ,c         :lua require('telescope_config').search_config()<CR>
+nn ,t         :lua require('telescope.builtin').treesitter()<CR>
+nn <leader>gb :lua require('telescope_config').git_branches()<CR>
+nn z=         :lua require('telescope.builtin').spell_suggest()<CR>
 
 " --- For lsp -----------------------------------------------------------"
 " Load config file
 lua require('lspconfig_config')
 " Lsp formatting
-nnoremap <silent><leader><leader>f :lua vim.lsp.buf.formatting()<CR>
+nn <silent><leader><leader>f :lua vim.lsp.buf.formatting()<CR>
 " Change signs
 let s:lsp_signs=['DiagnosticSignError', 'DiagnosticSignWarn',
       \ 'DiagnosticSignInfo', 'DiagnosticSignHint']
 for i in s:lsp_signs
-  execute 'sign define '.i.' text= texthl= linehl= numhl='.i
+  exe 'sign define '.i.' text= texthl= linehl= numhl='.i
 endfor
 " Keymaps
-nnoremap <silent><C-n> :lua vim.diagnostic.goto_next{enable_popup=false}<CR>
-nnoremap <silent><C-p> :lua vim.diagnostic.goto_prev{enable_popup=false}<CR>
-nnoremap <silent>gk    :lua vim.lsp.buf.hover()<CR>
-nnoremap <silent>gd    :lua vim.lsp.buf.definition()<CR>
-nnoremap <silent>gD    :lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent>gr    :lua vim.lsp.buf.rename()<CR>
-nnoremap <silent>gR    :lua vim.lsp.buf.references()<CR>
+nn <silent><C-n> :lua vim.diagnostic.goto_next{enable_popup=false}<CR>
+nn <silent><C-p> :lua vim.diagnostic.goto_prev{enable_popup=false}<CR>
+nn <silent>gk    :lua vim.lsp.buf.hover()<CR>
+nn <silent>gd    :lua vim.lsp.buf.definition()<CR>
+nn <silent>gD    :lua vim.lsp.buf.declaration()<CR>
+nn <silent>gr    :lua vim.lsp.buf.rename()<CR>
+nn <silent>gR    :lua vim.lsp.buf.references()<CR>
 
 " --- For vim-vsnip -----------------------------------------------------"
 imap <expr><C-k> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-k>'

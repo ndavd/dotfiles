@@ -79,10 +79,10 @@ function s:make_hls() abort
   " Folded
   hi Folded guisp=#636369
 endfunction
-augroup make_custom_hls
+aug make_custom_hls
   au!
   au ColorScheme * call s:make_hls()
-augroup END
+aug END
 
 " For vscode
 function s:custom_vscode_hls()
@@ -93,10 +93,10 @@ function s:custom_vscode_hls()
   " hi TabLineSel guifg=#111111 guibg=#6b9956
   " hi TabLineFill guifg=#949494 guibg=NONE
 endfunction
-augroup VscodeCustom
+aug VscodeCustom
   au!
   au ColorScheme vscode call s:custom_vscode_hls()
-augroup END
+aug END
 
 " --- Set colorscheme ---------------------------------------------------"
 

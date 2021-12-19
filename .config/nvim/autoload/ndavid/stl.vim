@@ -44,8 +44,8 @@ function ndavid#stl#branch(active)
   let branch = FugitiveHead(8)
   if a:active
     if branch=~#'master\|main'
-      execute 'hi StatusLineBranch guifg=#58ca73 guibg='.s:bg
-    else | execute 'hi! link StatusLineBranch StatusLine' | endif
+      exe 'hi StatusLineBranch guifg=#58ca73 guibg='.s:bg
+    else | exe 'hi! link StatusLineBranch StatusLine' | endif
   endif
   return branch == '' ? '' : s:nbsc.'['.branch.']'
 endfunction
@@ -88,9 +88,9 @@ function ndavid#stl#mode()
         \ }
   let mode = get(mode_map, mode, '')
   if mode=~'NORMAL\|COMMAND'
-    execute 'hi StatusLineMode guifg='.fg.' gui=NONE'
+    exe 'hi StatusLineMode guifg='.fg.' gui=NONE'
   else
-    execute 'hi StatusLineMode guifg='.fg.' gui=bold'
+    exe 'hi StatusLineMode guifg='.fg.' gui=bold'
   endif
   if mode=='INSERT' | let mode = 'ʌʌ'.s:nbsc.mode
   elseif mode=='REPLACE' | let mode = 'vv'.s:nbsc.mode
@@ -109,7 +109,7 @@ function ndavid#stl#toggle_ln()
     call s:active_stl()
   endif
 endfunction
-nnoremap <silent><expr><leader>sl ndavid#stl#toggle_ln()
+nn <silent><expr><leader>sl ndavid#stl#toggle_ln()
 
 " Update Statusline when entering/leaving
 au WinEnter,BufEnter,BufWrite * call s:active_stl()
