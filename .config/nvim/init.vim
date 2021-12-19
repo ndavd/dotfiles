@@ -269,16 +269,16 @@ lua require('treesitter_config')
 " Load config file
 lua require('telescope_config')
 " Keymaps
-nn ,,         :lua require('telescope.builtin').find_files()<CR>
-nn ,f         :lua require('telescope').extensions.frecency.frecency()<CR>
-nn ,g         :lua require('telescope.builtin').live_grep()<CR>
-nn ,s         :lua require('telescope.builtin').grep_string()<CR>
-nn ,a         :lua require('telescope.builtin').lsp_code_actions()<CR>
-nn ,h         :lua require('telescope.builtin').help_tags()<CR>
-nn ,c         :lua require('telescope_config').search_config()<CR>
-nn ,t         :lua require('telescope.builtin').treesitter()<CR>
+nn ,, :lua require('telescope.builtin').find_files()<CR>
+nn ,f :lua require('telescope').extensions.frecency.frecency()<CR>
+nn ,g :lua require('telescope.builtin').live_grep()<CR>
+nn ,s :lua require('telescope.builtin').grep_string()<CR>
+nn ,a :lua require('telescope.builtin').lsp_code_actions()<CR>
+nn ,h :lua require('telescope.builtin').help_tags()<CR>
+nn ,c :lua require('telescope_config').search_config()<CR>
+nn ,t :lua require('telescope.builtin').treesitter()<CR>
+nn z= :lua require('telescope.builtin').spell_suggest()<CR>
 nn <leader>gb :lua require('telescope_config').git_branches()<CR>
-nn z=         :lua require('telescope.builtin').spell_suggest()<CR>
 
 " --- For lsp -----------------------------------------------------------"
 " Load config file
