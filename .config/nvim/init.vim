@@ -169,6 +169,7 @@ let g:startify_commands = [
 let g:startify_files_number = 5
 let g:startify_fortune_use_unicode = 0
 let g:startify_enable_special = 0
+let g:startify_padding_left = 2
 let g:startify_custom_header_quotes =
       \ startify#fortune#predefined_quotes() +
       \ [[
