@@ -23,7 +23,6 @@ function s:make_hls() abort
   hi CursorLine guibg=NONE
   hi CursorLineNr guibg=bg guifg=white
   hi ColorColumn ctermbg=darkgrey guibg=#111111
-  hi Cursor ctermbg=white guibg=white
   hi VertSplit guifg=grey
   " IncSearch
   hi IncSearch gui=reverse

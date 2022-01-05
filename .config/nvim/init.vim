@@ -83,7 +83,7 @@ endif
 let &fcs='stl:-,stlnc:-'
 
 " --- Change guicursor --------------------------------------------------"
-set guicursor=a:block-Cursor,i-r:hor20-Cursor
+set guicursor=i-r:hor20-Cursor
 
 " --- Mouse options -----------------------------------------------------"
 set mouse=a
