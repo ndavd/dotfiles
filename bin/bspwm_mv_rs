@@ -37,7 +37,7 @@ case $1 in
       case $2 in
         1) _a="$(bspc node -z left -20 0 || bspc node -z right -20 0)" ;;
         2) _a="$(bspc node -z bottom 0 20 || bspc node -z top 0 20)" ;;
-        3) _a="$(bspc node -z top 0 -20) || bspc node -z bottom 0 -20)" ;;
+        3) _a="$(bspc node -z top 0 -20 || bspc node -z bottom 0 -20)" ;;
         4) _a="$(bspc node -z right 20 0 || bspc node -z left 20 0)" ;;
       esac
       $_a
