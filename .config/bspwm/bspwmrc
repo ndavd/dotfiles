@@ -30,6 +30,7 @@ bspc config normal_border_color    "#161616"
 
 # use Xprop to get the window class
 bspc config external_rules_command "$HOME/bin/bspwm-external-rules"
+bspc config ignore_ewmh_focus on
 bspc rule -a Screenkey manage=off
 bspc rule -a Sxiv state='floating'
 bspc rule -a Element desktop='^4'
