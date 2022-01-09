@@ -18,5 +18,6 @@ cmp.setup {
     { name = 'path' },
     { name = 'treesitter' },
     { name = 'spell' },
+    { name = 'neorg' },
   }
 }
