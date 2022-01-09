@@ -22,4 +22,3 @@ xsetroot -cursor_name left_ptr &
 setxkbmap -option caps:escape &
 
 exec bspwm
-# exec xfce4-session
