@@ -3,10 +3,6 @@ endfunction
 
 " --- Keymaps -----------------------------------------------------------"
 
-" --- Write files and source --------------------------------------------"
-nn <leader>w :w<CR>
-nn <leader>ss :so $MYVIMRC<CR>
-
 " --- Window handling ---------------------------------------------------"
 nn <silent><leader>h :wincmd h<CR>
 nn <silent><leader>j :wincmd j<CR>
