@@ -21,4 +21,10 @@ xinput set-prop 'ELAN0709:00 04F3:30A0 Touchpad' 'libinput Disable While Typing 
 xsetroot -cursor_name left_ptr &
 setxkbmap -option caps:escape &
 
-exec bspwm
+### Session
+session=${1:-bspwm}
+case $session in
+  xfce|xfce4     ) exec xfce4-session ;;
+  bspwm          ) exec bspwm ;;
+  *              ) exec $1 ;;
+esac
