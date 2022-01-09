@@ -247,24 +247,14 @@ let g:matchup_matchparen_offscreen = {}
 " --- For vim-easy-align ------------------------------------------------"
 xmap <cr> <plug>(LiveEasyAlign)
 
-" --- For creating presentations in vim ---------------------------------"
-au BufNewFile,BufRead *.vpm call SetVimPresentationMode()
-function SetVimPresentationMode()
-  set laststatus=0
-  hi NonText guifg=bg ctermfg=bg
-  set nonu
-  nn <buffer> <Right> :n<CR>
-  nn <buffer> <Left> :N<CR>
-endfunction
+" --- For Neorg ---------------------------------------------------------"
+lua require('neorg_config')
 
 " --- For vim-sleuth ----------------------------------------------------"
 let g:sleuth_automatic = 0
 
 " --- For nvim-treesitter -----------------------------------------------"
 lua require('treesitter_config')
-
-" --- For sql.nvim ------------------------------------------------------"
-" let g:sql_clib_path = '/usr/bin/lib/sqlite3.so'
 
 " --- For nvim-telescope ------------------------------------------------"
 " Load config file
