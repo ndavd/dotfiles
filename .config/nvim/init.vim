@@ -247,8 +247,8 @@ let g:matchup_matchparen_offscreen = {}
 " --- For vim-easy-align ------------------------------------------------"
 xmap <cr> <plug>(LiveEasyAlign)
 
-" --- For Neorg ---------------------------------------------------------"
-lua require('neorg_config')
+" --- For zk-nvim -------------------------------------------------------"
+lua require('zk_config')
 
 " --- For vim-sleuth ----------------------------------------------------"
 let g:sleuth_automatic = 0
