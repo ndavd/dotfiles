@@ -75,6 +75,9 @@ return require('packer').startup(function(use)
   -- Cheat.sh --
   use 'dbeniamine/cheat.sh-vim'
 
+  -- zk --
+  use 'mickael-menu/zk-nvim'
+
   -- Md previewer --
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
 
