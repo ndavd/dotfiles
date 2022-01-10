@@ -36,7 +36,7 @@ require('telescope').setup{
       }
     },
     file_sorter =  require'telescope.sorters'.get_fzy_sorter,
-    file_ignore_patterns = {'misc/*'},
+    file_ignore_patterns = {'misc/*', 'notes/*'},
     generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
     winblend = 0,
     border = {},
