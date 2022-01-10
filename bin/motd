@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 last_log() {
-  last --time-format full -2 $USER | sed -n 2p | awk 'BEGIN{FS=" "} {print "  Welcome back! Last login:",$3,$4,$5,$6,"on",$2}'
+  last --time-format full -2 $USER | sed -n 2p | awk 'BEGIN{FS=" "} {print "\033[31m  Welcome back Nuno! Last login:",$3,$4,$5,$6,"on",$2}'
 }
 
 C='\e[0m' #clear
