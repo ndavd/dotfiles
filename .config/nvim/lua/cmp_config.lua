@@ -14,10 +14,8 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
     { name = 'nvim_lua' },
-    -- { name = 'buffer' },
     { name = 'path' },
     { name = 'treesitter' },
     { name = 'spell' },
-    { name = 'neorg' },
   }
 }

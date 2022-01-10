@@ -247,14 +247,6 @@ let g:matchup_matchparen_offscreen = {}
 " --- For vim-easy-align ------------------------------------------------"
 xmap <cr> <plug>(LiveEasyAlign)
 
-" --- For zk-nvim -------------------------------------------------------"
-lua require('zk_config')
-autocmd Filetype markdown syn region markdownWikiLink
-      \ matchgroup=markdownLinkDelimiter
-      \ start="\[\[" end="\]\]"
-      \ contains=markdownUrl
-      \ keepend oneline concealends
-
 " --- For vim-sleuth ----------------------------------------------------"
 let g:sleuth_automatic = 0
 
