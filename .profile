@@ -25,4 +25,4 @@ export PATH=$HOME/local/lfimg:$PATH
 export PATH=$HOME/go/bin:$PATH
 
 # zk
-export ZK_NOTEBOOK_DIR=$HOME/data/.notes
+export ZK_NOTEBOOK_DIR=$HOME/data/notes

@@ -154,7 +154,7 @@ function GetNvimVersion()
   redir END
   return 'NVIM v'.matchstr(s, 'NVIM v\zs[^\n]*')
 endfunction
-let g:startify_skiplist = [ '/misc/', '/.notes/' ]
+let g:startify_skiplist = [ '/misc/', '/notes/' ]
 let g:startify_lists = [
       \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
