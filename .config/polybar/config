@@ -41,7 +41,7 @@ font-3 = NotoColorEmoji:fontformat=truetype:scale=14;0
 
 modules-left = bspwm xwindow
 modules-center =
-modules-right = update sep disk sep memory sep battery_level sep date
+modules-right = update sep disk sep cpu sep memory sep battery_level sep date
 
 tray-position = right
 tray-padding = 1
@@ -145,6 +145,12 @@ type = custom/script
 exec = printf "%siB" $(df -H /dev/nvme0n1p3 --output=avail | sed -n '2p' | cut -c 2-)
 label = "%output%"
 interval = 300
+
+[module/cpu]
+type = custom/script
+exec = top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{printf "%2i%%\n", 100 - $1}'
+label = %output%
+interval = 5
 
 [module/memory]
 type = custom/script
