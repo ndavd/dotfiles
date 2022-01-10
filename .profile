@@ -10,8 +10,7 @@ export VISUAL=$HOME/local/nvim/bin/nvim
 export MANPAGER="nvim +Man!"
 export MANWIDTH=100
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-export PAGER="nvim"
+export PAGER=$MANPAGER
 
 # change theme
 export PATH=$HOME/local/chtheme:$PATH
