@@ -36,7 +36,7 @@ ctrl + super + s
 
 # terminal emulator
 super + Return
-  kitty -d ~ tmux
+  kitty -d ~
 
 # browser
 super + b
