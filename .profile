@@ -32,6 +32,6 @@ tm() {
   if (( $# )); then
     tmux has-session -t "$*" && tmux attach -t "$*" || tmux new-session -s "$*"
   else
-    tmux attach || tmux new-session -s default
+    tmux attach || tmux new-session
   fi
 }
