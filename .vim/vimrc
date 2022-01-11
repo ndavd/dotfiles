@@ -130,7 +130,7 @@ function STL_branch(active)
   let branch = FugitiveHead(8)
   if a:active
     if branch=~#'master\|main'
-      execute 'hi StatusLineBranch ctermfg=lightgreen'
+      execute 'hi StatusLineBranch ctermfg=darkgreen'
     else | execute 'hi! link StatusLineBranch StatusLine' | endif
   endif
   return branch == '' ? '' : s:nbsc.'['.branch.']'
