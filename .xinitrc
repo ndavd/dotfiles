@@ -25,6 +25,7 @@ setxkbmap -option caps:escape &
 session=${1:-bspwm}
 case $session in
   xfce|xfce4     ) exec xfce4-session ;;
+  lxqt           ) exec startlxqt ;;
   bspwm          ) exec bspwm ;;
   *              ) exec $1 ;;
 esac
