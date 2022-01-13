@@ -77,8 +77,11 @@ _p() {
     p+="$_p_clear]"
   fi
 
-  # p+=$'\n'
-  [[ $UID -eq 0 ]] && p+='#' || p+='$'
+  if [[ $TERM == linux ]]; then
+    [[ $UID -eq 0 ]] && p+='#' || p+='$'
+  else
+    [[ $UID -eq 0 ]] && p+="%F{red}₿$_p_clear" || p+="%F{yellow}₿$_p_clear"
+  fi
   PROMPT="${p} "
 }
 
