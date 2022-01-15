@@ -4,6 +4,7 @@ endfunction
 " --- Highlights --------------------------------------------------------"
 
 function s:make_hls() abort
+  hi Comment ctermfg=DarkBlue
   " Transparent background color for Nvim
   hi Normal guibg=NONE
   hi NonText guibg=NONE
@@ -13,43 +14,43 @@ function s:make_hls() abort
   hi ErrorMsg guibg=NONE
   hi Error guibg=NONE
   hi Directory guibg=NONE
-  hi VertSplit guibg=NONE
+  hi VertSplit guibg=NONE ctermbg=NONE
   hi SignColumn guibg=NONE
   hi EndOfBuffer guibg=NONE guifg=#5a5a5a
   hi NormalFloat guibg=NONE
   hi Folded guibg=NONE
   " Number, CC, Cursor and Normal
-  hi LineNr guibg=bg guifg=darkgrey
-  hi CursorLine guibg=NONE
-  hi CursorLineNr guibg=bg guifg=white
-  hi ColorColumn ctermbg=darkgrey guibg=#111111
-  hi VertSplit guifg=grey
+  hi LineNr guibg=bg guifg=darkgrey ctermbg=NONE ctermfg=DarkGrey
+  hi CursorLine guibg=NONE ctermbg=NONE cterm=NONE
+  hi CursorLineNr guibg=bg guifg=White cterm=NONE ctermbg=NONE ctermfg=White
+  hi ColorColumn guibg=#111111 ctermbg=0*
+  hi VertSplit guifg=Grey cterm=NONE ctermfg=Grey
   " IncSearch
   hi IncSearch gui=reverse
   " Pmenu
   hi PmenuSel blend=0
   " Visual and Search
-  hi Visual gui=NONE guibg=#0E1F2F guifg=fg
-  hi Search gui=reverse
+  hi Visual gui=NONE guibg=#0E1F2F guifg=fg ctermbg=DarkBlue ctermfg=White
+  hi Search gui=reverse cterm=reverse
   " Startify
   hi StartifyHeader gui=NONE guifg=#d4d4d4
   hi StartifyFooter gui=NONE guifg=#d4d4d4
   " Signify
-  hi SignifySignAdd guifg=#b8cb26 guibg=NONE
-  hi SignifySignDelete guifg=#f44747 guibg=NONE
-  hi SignifySignChange guifg=#599cd6 guibg=NONE
+  hi SignifySignAdd guifg=#b8cb26 guibg=NONE ctermfg=DarkGreen ctermbg=NONE
+  hi SignifySignDelete guifg=#f44747 guibg=NONE ctermfg=DarkRed ctermbg=NONE
+  hi SignifySignChange guifg=#599cd6 guibg=NONE ctermfg=DarkBlue ctermbg=NONE
   " Statusline
-  hi StatusLine gui=NONE guibg=NONE guifg=#ffffff
-  hi StatusLineNC gui=NONE guibg=NONE guifg=#444444
+  hi StatusLine gui=NONE guibg=NONE guifg=#ffffff cterm=NONE ctermbg=NONE ctermfg=White
+  hi StatusLineNC gui=NONE guibg=NONE guifg=#444444 cterm=NONE ctermbg=NONE ctermfg=DarkGrey
   " Listchars
   hi NonText guifg=#3a3a3a
   hi Whitespace guifg=#3a3a3a
   " Indent Blankline
-  hi IndentBlankline1 guibg=#101010
-  hi IndentBlankline2 guibg=NONE
+  hi IndentBlankline1 guibg=#101010 ctermbg=DarkGrey
+  hi IndentBlankline2 guibg=NONE ctermbg=NONE
   " Match
-  hi MatchWord gui=underline guisp=#bbbbbb
-  hi MatchWordCur gui=underline guisp=#bbbbbb
+  hi MatchWord gui=underline guisp=#bbbbbb ctermbg=DarkRed
+  hi MatchWordCur gui=underline guisp=#bbbbbb ctermbg=DarkRed
   " Packer
   hi packerWorking guibg=NONE guifg=#599cd6 gui=NONE
   hi packerSuccess guibg=NONE guifg=#b8cb26 gui=bold
@@ -100,5 +101,9 @@ aug END
 " --- Set colorscheme ---------------------------------------------------"
 
 set background=dark
-let g:vscode_style="dark"
-colorscheme vscode
+if $TERM=~'linux\|screen'
+  colorscheme default
+else
+  let g:vscode_style="dark"
+  colorscheme vscode
+endif

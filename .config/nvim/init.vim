@@ -18,8 +18,12 @@ lua require('plugins')
 " --- Define mapleader for keymaps --------------------------------------"
 let mapleader = ' '
 
+" --- Check if it's a console -------------------------------------------"
+if $TERM =~ 'linux\|screen' | let g:isConsole = v:true
+else | let g:isConsole = v:false | endif
+
 " --- Enable 256 color support ------------------------------------------"
-set termguicolors
+if !g:isConsole | set termguicolors | endif
 
 " --- Disable recommended styles ----------------------------------------"
 " Be a round peg in a square hole
@@ -57,7 +61,7 @@ set title
 set titlestring=%t\ %m\ -\ NVIM
 
 " --- Listchars ---------------------------------------------------------"
-if &list && $TERM!="linux"
+if &list && !g:isConsole
   let g:listchar_index = 0
   let g:listchar_options = [
         \ 'tab:>\ ,conceal:┊,nbsp:⍽,extends:>,precedes:<,trail:·'.
@@ -106,10 +110,12 @@ au BufNewFile,BufRead *.rasi set syntax=css
 " ---------------- PLUGIN SETTINGS --------------------------------------"
 " -----------------------------------------------------------------------"
 " --- For WebDevicons ---------------------------------------------------"
-" Load webdevicons config
-lua require('webdevicons_config').my_setup()
-" Update filetype icon highlight
-lua require('webdevicons_config').make_hl()
+if !g:isConsole
+  " Load webdevicons config
+  lua require('webdevicons_config').my_setup()
+  " Update filetype icon highlight
+  lua require('webdevicons_config').make_hl()
+endif
 
 " --- For Colorizer -----------------------------------------------------"
 nn <silent><leader>co :ColorizerToggle<CR>
@@ -144,6 +150,7 @@ nn <silent><A-j> :call smoothie#downwards()<CR>
 
 " --- For vim-startify --------------------------------------------------"
 function! StartifyEntryFormat()
+  if !g:isConsole | return "entry_path" | endif
   return "luaeval(\"require'webdevicons_config'.get_icon{"
         \."filepath=_A}\", absolute_path)"
         \." .\" \". entry_path"
@@ -196,8 +203,10 @@ function StartifyUpdateCentering()
         \ startify#pad(['',
         \ 'Welcome to the Dark Side of text editing',
         \ 'Nvim is open source and freely distributable',
-        \ '']) + startify#pad(s:get_quote) +
-        \ startify#pad(s:ascii_darth_vader)
+        \ '']) + startify#pad(s:get_quote)
+  if !g:isConsole
+    let g:startify_custom_header += startify#pad(s:ascii_darth_vader)
+  endif
 endfunction
 au VimEnter * call StartifyUpdateQuote()
       \| call StartifyUpdateCentering()

@@ -13,8 +13,12 @@ let s:nbsc=' '
 function s:active_stl()
   if s:make_stl()
     let stl =' %#StatusLineMode#%-11{ndavid#stl#mode()}%*'
-    let icon = luaeval("require'webdevicons_config'.get_icon"
-          \ ."{do_hl={true,'StatusLine','StatusLineIcon'}}")
+    if g:isConsole
+      let icon = ""
+    else
+      let icon = luaeval("require'webdevicons_config'.get_icon"
+            \ ."{do_hl={true,'StatusLine','StatusLineIcon'}}")
+    endif
     let stl .= icon.'%f%{ndavid#stl#modified()}%<'.'%#StatusLineBranch#'
           \ .'%{ndavid#stl#branch(1)}%*%{ndavid#stl#sy_stats_wrapper()} '
     if s:show_ln==1 | let stl .= '%= %l(%02p%%):%-1c' | endif
@@ -24,7 +28,11 @@ endfunction
 
 function s:innactive_stl()
   if s:make_stl()
-    let icon = luaeval("require'webdevicons_config'.get_icon{}")
+    if g:isConsole
+      let icon = ""
+    else
+      let icon = luaeval("require'webdevicons_config'.get_icon{}")
+    endif
     let stl = ' >>         '
           \.icon.'%f%{ndavid#stl#modified()}%<%{ndavid#stl#branch(0)}'
           \.'%{ndavid#stl#sy_stats_wrapper()} '
@@ -44,7 +52,7 @@ function ndavid#stl#branch(active)
   let branch = FugitiveHead(8)
   if a:active
     if branch=~#'master\|main'
-      exe 'hi StatusLineBranch guifg=#58ca73 guibg='.s:bg
+      exe 'hi StatusLineBranch guifg=#58ca73 ctermfg=Green guibg='.s:bg.' ctermbg='.s:bg
     else | exe 'hi! link StatusLineBranch StatusLine' | endif
   endif
   return branch == '' ? '' : s:nbsc.'['.branch.']'
@@ -72,13 +80,18 @@ endfunction
 
 function ndavid#stl#mode()
   let mode = mode()
-  if match(['n','c'], mode)!=-1 | let fg='#949494'
+  if match(['n','c'], mode)!=-1
+    let guifg='#949494'
+    let ctermfg='DarkGrey'
   elseif match(['i','ix','s','S',"\<C-s>"], mode())!=-1
-    let fg='#57b0b2'
+    let guifg='#57b0b2'
+    let ctermfg='LightBlue'
   elseif match(['R'], mode)!=-1
-    let fg='#ea6962'
+    let guifg='#ea6962'
+    let ctermfg='Red'
   elseif match(['v','V',"\<C-v>"], mode)!=-1
-    let fg='#a9e861'
+    let guifg='#a9e861'
+    let ctermfg='Green'
   endif
   let mode_map = {
         \ 'n': 'NORMAL  ', 'i': 'INSERT  ', 'R': 'REPLACE ',
@@ -88,9 +101,9 @@ function ndavid#stl#mode()
         \ }
   let mode = get(mode_map, mode, '')
   if mode=~'NORMAL\|COMMAND'
-    exe 'hi StatusLineMode guifg='.fg.' gui=NONE'
+    exe 'hi StatusLineMode guifg='.guifg.' gui=NONE cterm=NONE ctermfg='.ctermfg
   else
-    exe 'hi StatusLineMode guifg='.fg.' gui=bold'
+    exe 'hi StatusLineMode guifg='.guifg.' gui=bold cterm=bold ctermfg='.ctermfg
   endif
   if mode=='INSERT' | let mode = 'ʌʌ'.s:nbsc.mode
   elseif mode=='REPLACE' | let mode = 'vv'.s:nbsc.mode

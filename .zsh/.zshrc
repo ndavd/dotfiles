@@ -44,6 +44,11 @@ ZVM_CURSOR_STYLE_ENABLED=false
 # bindkey '^e' edit-command-line
 # bindkey '^?' backward-delete-char # make backspace erase chars when switching modes
 
+### check if console
+_isConsole() {
+  [[ $TERM =~ "linux|screen" ]] && return 0 || return 1
+}
+
 ### Prompt
 autoload -U colors && colors
 
@@ -51,7 +56,7 @@ autoload -U colors && colors
 _p_bold='%B'
 _p_underline='%U'
 _p_clear='%f%k%b%u'
-if [[ $TERM = linux ]]; then
+if _isConsole; then
   _p_blue="$_p_bold%F{blue}"
   _p_git="$_p_bold%F{cyan}"
 else
@@ -59,7 +64,7 @@ else
   _p_git='%F{47}'
 fi
 [[ $UID -eq 0 ]] && _p_pwd="$_p_bold%F{red}" || _p_pwd="$_p_blue"
-[[ $TERM = linux ]] && dirty="*" staged="+" || dirty="" staged="✔"
+_isConsole && dirty="*" staged="+" || dirty="" staged="✔"
 
 _p() {
   p="$_p_pwd%~$_p_clear"
@@ -77,8 +82,8 @@ _p() {
     p+="$_p_clear]"
   fi
 
-  if [[ $TERM == linux ]]; then
-    [[ $UID -eq 0 ]] && p+='#' || p+='$'
+  if _isConsole; then
+    [[ $UID -eq 0 ]] && p+="%F{red}#$_p_clear" || p+="$_p_bold%F{yellow}\$$_p_clear"
   else
     [[ $UID -eq 0 ]] && p+="%F{red}₿$_p_clear" || p+="%F{yellow}₿$_p_clear"
   fi
@@ -115,7 +120,7 @@ f() {
 }
 
 ### motd
-[[ $- =~ l ]] && [[ $TERM = linux ]] && . $HOME/bin/motd && . $HOME/bin/woprfetch
+[[ $- =~ l ]] && [[ $TERM == linux ]] && . $HOME/bin/motd && . $HOME/bin/woprfetch
 
 ### nvm
 export NVM_DIR="$HOME/.config/nvm"
