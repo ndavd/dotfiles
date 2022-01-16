@@ -1,5 +1,4 @@
-![Lines of code](https://img.shields.io/tokei/lines/github/ndav1d/dotfiles)
-# :space_invader: ndavd's dotfiles :space_invader:
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ndavd/dotfiles?style=flat-square)
 ## This repository contains the dotfiles for the setup that I use everyday.
 ~~**Warning: dark and minimal setup ahead!**~~
 
