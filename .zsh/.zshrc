@@ -44,6 +44,15 @@ ZVM_CURSOR_STYLE_ENABLED=false
 # bindkey '^e' edit-command-line
 # bindkey '^?' backward-delete-char # make backspace erase chars when switching modes
 
+# tmux
+tm() {
+  if (( $# )); then
+    tmux has-session -t "$*" && tmux attach -t "$*" || tmux new-session -s "$*"
+  else
+    tmux attach || tmux new-session
+  fi
+}
+
 ### check if console
 _isConsole() {
   [[ $TERM =~ "linux|screen" ]] && return 0 || return 1
