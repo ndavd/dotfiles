@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+### chtheme - Globally change theme ###
+
+[[ ! -v _MASTERCLR_focused ]] && _MASTERCLR_focused="#285577" || _1=
+[[ ! -v _MASTERCLR_unfocused ]] && _MASTERCLR_unfocused="#161616" || _2=
+[[ ! -v _MASTERCLR_background ]] && _MASTERCLR_background="#000000" || _3=
+
+if [[ -v _1 || -v _2 || -v _3 ]]; then
+printf "The following colors are going to be changed: %s %s %s\n" \
+  $([[ -v _1 ]] && echo -n "focused" || echo -n "") \
+  $([[ -v _2 ]] && echo -n "unfocused" || echo -n "") \
+  $([[ -v _3 ]] && echo -n "background" || echo -n "")
+else
+  echo "No colors specified. Fallback colors selected."
+  echo "Focused: $_MASTERCLR_focused  Unfocused: $_MASTERCLR_unfocused  Background: $_MASTERCLR_background"
+fi
+
+_title="$(echo -e '\e[38;5;06m')"
+_rem="$(echo -e '\e[38;5;01m')"
+_add="$(echo -e '\e[38;5;02m')"
+
+if [[ -v _1 ]]; then
+  printf "\nFOCUSED COLOR:\n"
+  sed -En 's/(^.+focused_border_color\ +")(.+)(")/\ \ '$_title'BSPWM (~\/.config\/bspwm\/bspwmrc):\n\t'$_rem'\1\2\3\n\t'$_add'\1'$_MASTERCLR_focused'\3/p' $HOME/.config/bspwm/bspwmrc
+  sed -En 's/(^.+presel_feedback_color\ +")(.+)(")/\t'$_rem'\1\2\3\n\t'$_add'\1'$_MASTERCLR_focused'\3/p' $HOME/.config/bspwm/bspwmrc
+  sed -En 's/(^COLOR1 = )(.+)/\ \ '$_title'POLYBAR (~\/.config\/polybar\/config):\n\t'$_rem'\1\2\n\t'$_add'\1'$_MASTERCLR_focused'/p' $HOME/.config/polybar/config
+  sed -En 's/(^\ +COLOR1:\ +)(.+)(;)/\ \ '$_title'ROFI (~\/.config\/rofi\/themes\/wopr.rasi):\n\t'$_rem'\1\2\3\n\t'$_add'\1'$_MASTERCLR_focused'\3/p' $HOME/.config/rofi/themes/wopr.rasi
+  echo -en '\e[0m'
+fi
+if [[ -v _2 ]]; then
+  printf "\nUNFOCUSED COLOR:\n"
+  sed -En 's/(^.+normal_border_color\ +")(.+)(")/\ \ '$_title'BSPWM (~\/.config\/bspwm\/bspwmrc):\n\t'$_rem'\1\2\3\n\t'$_add'\1'$_MASTERCLR_unfocused'\3/p' $HOME/.config/bspwm/bspwmrc
+  sed -En 's/(^COLOR2 = )(.+)/\ \ '$_title'POLYBAR (~\/.config\/polybar\/config):\n\t'$_rem'\1\2\n\t'$_add'\1'$_MASTERCLR_unfocused'/p' $HOME/.config/polybar/config
+  sed -En 's/(^\ +COLOR2:\ +)(.+)(;)/\ \ '$_title'ROFI (~\/.config\/rofi\/themes\/wopr.rasi):\n\t'$_rem'\1\2\3\n\t'$_add'\1'$_MASTERCLR_unfocused'\3/p' $HOME/.config/rofi/themes/wopr.rasi
+  echo -en '\e[0m'
+fi
+if [[ -v _3 ]]; then
+  printf "\nBACKGROUND COLOR:\n"
+  sed -En 's/(^COLOR3 = )(.+)/\ \ '$_title'POLYBAR (~\/.config\/polybar\/config):\n\t'$_rem'\1\2\n\t'$_add'\1'$_MASTERCLR_background'/p' $HOME/.config/polybar/config
+  sed -En 's/(^\ +COLOR3:\ +)(.+)(;)/\ \ '$_title'ROFI (~\/.config\/rofi\/themes\/wopr.rasi):\n\t'$_rem'\1\2\3\n\t'$_add'\1'$_MASTERCLR_background'\3/p' $HOME/.config/rofi/themes/wopr.rasi
+  echo -en '\e[0m'
+fi
+
+do_subst() {
+  sed -Ei 's/(^.+focused_border_color\ +")(.+)(")/\1'$_MASTERCLR_focused'\3/' $HOME/.config/bspwm/bspwmrc
+  sed -Ei 's/(^.+presel_feedback_color\ +")(.+)(")/\1'$_MASTERCLR_focused'\3/' $HOME/.config/bspwm/bspwmrc
+  sed -Ei 's/(^COLOR1 = )(.+)/\1'$_MASTERCLR_focused'/' $HOME/.config/polybar/config
+  sed -Ei 's/(^\ +COLOR1:\ +)(.+)(;)/\1'$_MASTERCLR_focused'\3/' $HOME/.config/rofi/themes/wopr.rasi
+
+  sed -Ei 's/(^.+normal_border_color\ +")(.+)(")/\1'$_MASTERCLR_unfocused'\3/' $HOME/.config/bspwm/bspwmrc
+  sed -Ei 's/(^COLOR2 = )(.+)/\1'$_MASTERCLR_unfocused'/' $HOME/.config/polybar/config
+  sed -Ei 's/(^\ +COLOR2:\ +)(.+)(;)/\1'$_MASTERCLR_unfocused'\3/' $HOME/.config/rofi/themes/wopr.rasi
+
+  sed -Ei 's/(^COLOR3 = )(.+)/\1'$_MASTERCLR_background'/' $HOME/.config/polybar/config
+  sed -Ei 's/(^\ +COLOR3:\ +)(.+)(;)/\1'$_MASTERCLR_background'\3/' $HOME/.config/rofi/themes/wopr.rasi
+}
+
+echo ""
+read -p "Are you sure you want to continue? [y/N]: " yn
+case $yn in
+  [Yy]*) do_subst; bspc wm -r ;;
+  *) echo -e "\nAborting..." ;;
+esac

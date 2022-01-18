@@ -11,9 +11,6 @@ export MANPAGER="nvim +Man!"
 export MANWIDTH=100
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-# change theme
-export PATH=$HOME/local/chtheme:$PATH
-
 # FZF
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
 
