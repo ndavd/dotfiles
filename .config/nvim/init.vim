@@ -150,7 +150,7 @@ nn <silent><A-j> :call smoothie#downwards()<CR>
 
 " --- For vim-startify --------------------------------------------------"
 function! StartifyEntryFormat()
-  if !g:isConsole | return "entry_path" | endif
+  if g:isConsole | return "entry_path" | endif
   return "luaeval(\"require'webdevicons_config'.get_icon{"
         \."filepath=_A}\", absolute_path)"
         \." .\" \". entry_path"

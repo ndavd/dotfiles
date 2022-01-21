@@ -20,10 +20,10 @@ function s:make_hls() abort
   hi NormalFloat guibg=NONE
   hi Folded guibg=NONE
   " Number, CC, Cursor and Normal
-  hi LineNr guibg=bg guifg=darkgrey ctermbg=NONE ctermfg=DarkGrey
+  hi LineNr guibg=bg guifg=DarkGrey ctermbg=NONE ctermfg=DarkGrey
   hi CursorLine guibg=NONE ctermbg=NONE cterm=NONE
   hi CursorLineNr guibg=bg guifg=White cterm=NONE ctermbg=NONE ctermfg=White
-  hi ColorColumn guibg=#111111 ctermbg=0*
+  hi ColorColumn guibg=#111111 ctermbg=DarkGrey
   hi VertSplit guifg=Grey cterm=NONE ctermfg=Grey
   " IncSearch
   hi IncSearch gui=reverse

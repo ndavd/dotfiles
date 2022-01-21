@@ -122,7 +122,6 @@ map gl cd ~/local
 map gs cd ~/src
 map gp cd ~/projects
 map gm cd /run/media
-map gB cd /usr/share/backgrounds
 
 # mkdir
 cmd mkdir %mkdir "$@"
