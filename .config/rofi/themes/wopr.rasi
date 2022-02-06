@@ -10,7 +10,7 @@
   COLOR2:              #161616;
   COLOR3:              #000000;
 
-  font:                "Monospace 8.8";
+  font:                "Monospace 7.6";
   height:              14px;
   text-color:          #fff;
   background-color:    @COLOR3;
