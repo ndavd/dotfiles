@@ -73,6 +73,11 @@ require'lspconfig'.rust_analyzer.setup{
   capabilities = capabilities,
 }
 
+-- Solidity
+require'lspconfig'.solc.setup{
+  capabilities = capabilities,
+}
+
 -- Vimscript
 require'lspconfig'.vimls.setup{
   capabilities = capabilities,
