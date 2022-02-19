@@ -74,8 +74,22 @@ require'lspconfig'.rust_analyzer.setup{
 }
 
 -- Solidity
-require'lspconfig'.solc.setup{
+require'lspconfig'.solidity_ls.setup{
   capabilities = capabilities,
+  settings = {
+    solidity = {
+      nodemodulespackage = "solc",
+      compileUsingRemoteVersion = "latest",
+      compilerOptimization = 200,
+      compileUsingLocalVersion = "",
+      defaultCompiler = "remote", -- remote | localFile | localNodeModule | embedded
+      linter = "solhint", -- solhint | solium
+      enabledAsYouTypeCompilationErrorCheck = true,
+      validationDelay = 1500,
+      packageDefaultDependenciesDirectory = "node_modules",
+      packageDefaultDependenciesContractsDirectory = "",
+    }
+  }
 }
 
 -- Vimscript
