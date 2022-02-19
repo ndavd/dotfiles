@@ -21,5 +21,8 @@ export PATH=$HOME/local/lfimg:$PATH
 # Go
 export PATH=$HOME/go/bin:$PATH
 
+# Rust
+export PATH=$HOME/.cargo/bin:$PATH
+
 # zk
 export ZK_NOTEBOOK_DIR=$HOME/data/notes

@@ -74,7 +74,7 @@ require'lspconfig'.rust_analyzer.setup{
 }
 
 -- Solidity
-require'lspconfig'.solc.setup{
+require'lspconfig'.solang.setup{
   capabilities = capabilities,
 }
 

@@ -94,6 +94,9 @@ return require('packer').startup(function(use)
   -- Lua Scratchpad --
   use 'rafcamlet/nvim-luapad'
 
+  -- Solidity --
+  use 'tomlion/vim-solidity'
+
   -- View tags --
   use 'liuchengxu/vista.vim'
 
