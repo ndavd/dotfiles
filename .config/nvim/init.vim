@@ -106,6 +106,41 @@ aug END
 " --- Rasi highlighting (rofi theme file) -------------------------------"
 au BufNewFile,BufRead *.rasi set syntax=css
 
+" --- Stick figures (🯅🯆🯇🯈🯉) ---------------------------------------------"
+let g:runner = ["🯆", "🯇", "🯅", "🯈"]
+function PrintRunner(msg)
+  let msg_l = len(a:msg)
+  let pad_right = 13
+  let n = 0
+  let forwards = v:true
+  while 1
+    if n == &columns-msg_l-pad_right
+      let forwards = v:false
+    elseif n == 0
+      let forwards = v:true
+    endif
+    echo repeat(" ", n)
+      \. g:runner[n % len(g:runner)]
+      \. repeat(" ", &columns-n-msg_l-pad_right)
+      \. a:msg
+    let n = forwards?n+1:n-1
+    sleep 200m
+    redraw
+    if getchar(1) != 0
+      break
+    endif
+  endwhile
+endfunction
+function StartRunner(timer)
+  echo PrintRunner("..fixing your code")
+endfunction
+au CursorHold * let s:timer = timer_start(300000, 'StartRunner')
+au CursorMoved,WinLeave,ModeChanged * if has_key(s:, 'timer')
+  \| call timer_stop(s:timer)
+  \| unlet s:timer
+  \| echo ""
+  \| endif
+
 " -----------------------------------------------------------------------"
 " ---------------- PLUGIN SETTINGS --------------------------------------"
 " -----------------------------------------------------------------------"
