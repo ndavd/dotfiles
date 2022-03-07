@@ -119,9 +119,9 @@ function PrintRunner(msg)
     elseif n == 0
       let forwards = v:true
     endif
-    echo repeat(" ", n)
+    echo repeat(forwards?".":" ", n)
           \. g:runner[n % len(g:runner)]
-          \. repeat(" ", &columns-n-msg_l-pad_right)
+          \. repeat(forwards?" ":".", &columns-n-msg_l-pad_right)
           \. a:msg
     let n = forwards?n+1:n-1
     sleep 200m
@@ -132,9 +132,9 @@ function PrintRunner(msg)
   endwhile
 endfunction
 function StartRunner(timer)
-  echo PrintRunner("..fixing your code")
+  echo PrintRunner("fixing your code")
 endfunction
-au CursorHold * let s:timer = timer_start(300000, 'StartRunner')
+au CursorHold * let s:timer = timer_start(5000, 'StartRunner')
 au CursorMoved,WinLeave,ModeChanged * if has_key(s:, 'timer')
       \| call timer_stop(s:timer)
       \| unlet s:timer
