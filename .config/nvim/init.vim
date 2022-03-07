@@ -120,9 +120,9 @@ function PrintRunner(msg)
       let forwards = v:true
     endif
     echo repeat(" ", n)
-      \. g:runner[n % len(g:runner)]
-      \. repeat(" ", &columns-n-msg_l-pad_right)
-      \. a:msg
+          \. g:runner[n % len(g:runner)]
+          \. repeat(" ", &columns-n-msg_l-pad_right)
+          \. a:msg
     let n = forwards?n+1:n-1
     sleep 200m
     redraw
@@ -136,10 +136,10 @@ function StartRunner(timer)
 endfunction
 au CursorHold * let s:timer = timer_start(300000, 'StartRunner')
 au CursorMoved,WinLeave,ModeChanged * if has_key(s:, 'timer')
-  \| call timer_stop(s:timer)
-  \| unlet s:timer
-  \| echo ""
-  \| endif
+      \| call timer_stop(s:timer)
+      \| unlet s:timer
+      \| echo ""
+      \| endif
 
 " -----------------------------------------------------------------------"
 " ---------------- PLUGIN SETTINGS --------------------------------------"
