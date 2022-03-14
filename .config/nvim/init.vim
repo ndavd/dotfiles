@@ -134,12 +134,12 @@ endfunction
 function StartRunner(timer)
   echo PrintRunner("fixing your code")
 endfunction
-au CursorHold * let s:timer = timer_start(300000, 'StartRunner')
-au CursorMoved,WinLeave,ModeChanged * if has_key(s:, 'timer')
-      \| call timer_stop(s:timer)
-      \| unlet s:timer
-      \| echo ""
-      \| endif
+" au CursorHold * let s:timer = timer_start(300000, 'StartRunner')
+" au CursorMoved,WinLeave,ModeChanged * if has_key(s:, 'timer')
+"       \| call timer_stop(s:timer)
+"       \| unlet s:timer
+"       \| echo ""
+"       \| endif
 
 " -----------------------------------------------------------------------"
 " ---------------- PLUGIN SETTINGS --------------------------------------"
