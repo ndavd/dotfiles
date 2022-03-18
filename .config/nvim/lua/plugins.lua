@@ -27,9 +27,6 @@ return require('packer').startup(function(use)
     requires = {'kyazdani42/nvim-web-devicons'}
   }
 
-  -- Smooth Scrolling --
-  use 'psliwka/vim-smoothie'
-
   -- Scrollbar --
   use 'dstein64/nvim-scrollview'
 

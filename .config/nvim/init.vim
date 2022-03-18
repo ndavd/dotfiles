@@ -178,12 +178,6 @@ function ToggleSrollView()
 endfunction
 nn <silent><leader>sb :call ToggleSrollView()<CR>
 
-" --- For vim-smoothie --------------------------------------------------"
-let g:smoothie_no_default_mappings = 1
-" Keymaps
-nn <silent><A-k> :call smoothie#upwards()<CR>
-nn <silent><A-j> :call smoothie#downwards()<CR>
-
 " --- For vim-startify --------------------------------------------------"
 function! StartifyEntryFormat()
   if g:isConsole | return "entry_path" | endif
