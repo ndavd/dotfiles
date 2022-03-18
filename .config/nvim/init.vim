@@ -55,6 +55,7 @@ set completeopt=menuone,noselect
 set shortmess+=c
 set inccommand=split
 set foldmethod=marker
+set laststatus=3
 
 " --- Title -------------------------------------------------------------"
 set title

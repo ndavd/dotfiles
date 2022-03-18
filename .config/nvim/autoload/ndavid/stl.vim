@@ -6,11 +6,10 @@ endfunction
 " Load webdevicons config
 lua require('webdevicons_config').my_setup()
 
-" let s:bg=synIDattr(synIDtrans(hlID('StatusLine')),'bg')
 let s:bg='NONE'
 let s:nbsc=' '
 
-function s:active_stl()
+function s:stl()
   if s:make_stl()
     let stl =' %#StatusLineMode#%-11{ndavid#stl#mode()}%*'
     if g:isConsole
@@ -20,22 +19,8 @@ function s:active_stl()
             \ ."{do_hl={true,'StatusLine','StatusLineIcon'}}")
     endif
     let stl .= icon.'%f%{ndavid#stl#modified()}%<'.'%#StatusLineBranch#'
-          \ .'%{ndavid#stl#branch(1)}%*%{ndavid#stl#sy_stats_wrapper()} '
+          \ .'%{ndavid#stl#branch()}%*%{ndavid#stl#sy_stats_wrapper()} '
     if s:show_ln==1 | let stl .= '%= %l(%02p%%):%-1c' | endif
-    let &l:stl = stl
-  endif
-endfunction
-
-function s:innactive_stl()
-  if s:make_stl()
-    if g:isConsole
-      let icon = ""
-    else
-      let icon = luaeval("require'webdevicons_config'.get_icon{}")
-    endif
-    let stl = ' >>         '
-          \.icon.'%f%{ndavid#stl#modified()}%<%{ndavid#stl#branch(0)}'
-          \.'%{ndavid#stl#sy_stats_wrapper()} '
     let &l:stl = stl
   endif
 endfunction
@@ -48,13 +33,11 @@ function ndavid#stl#modified()
   else | return '[-]' | endif
 endfunction
 
-function ndavid#stl#branch(active)
+function ndavid#stl#branch()
   let branch = FugitiveHead(8)
-  if a:active
-    if branch=~#'master\|main'
-      exe 'hi StatusLineBranch guifg=#58ca73 ctermfg=Green guibg='.s:bg.' ctermbg='.s:bg
-    else | exe 'hi! link StatusLineBranch StatusLine' | endif
-  endif
+  if branch=~#'master\|main'
+    exe 'hi StatusLineBranch guifg=#58ca73 ctermfg=Green guibg='.s:bg.' ctermbg='.s:bg
+  else | exe 'hi! link StatusLineBranch StatusLine' | endif
   return branch == '' ? '' : s:nbsc.'['.branch.']'
 endfunction
 
@@ -116,17 +99,16 @@ let s:show_ln = 0
 function ndavid#stl#toggle_ln()
   if s:show_ln == 0
     let s:show_ln=1
-    call s:active_stl()
+    call s:stl()
   else
     let s:show_ln=0
-    call s:active_stl()
+    call s:stl()
   endif
 endfunction
 nn <silent><expr><leader>sl ndavid#stl#toggle_ln()
 
-" Update Statusline when entering/leaving
-au WinEnter,BufEnter,BufWrite * call s:active_stl()
-au WinLeave,BufLeave * call s:innactive_stl()
+" Update Statusline when entering
+au WinEnter,BufEnter,BufWrite * call s:stl()
 
 " Packer statusline
 au FileType packer let &l:stl='%=  Packer %='

@@ -41,7 +41,6 @@ function s:make_hls() abort
   hi SignifySignChange guifg=#599cd6 guibg=NONE ctermfg=DarkBlue ctermbg=NONE
   " Statusline
   hi StatusLine gui=NONE guibg=NONE guifg=#ffffff cterm=NONE ctermbg=NONE ctermfg=White
-  hi StatusLineNC gui=NONE guibg=NONE guifg=#444444 cterm=NONE ctermbg=NONE ctermfg=DarkGrey
   " Listchars
   hi NonText guifg=#3a3a3a
   hi Whitespace guifg=#3a3a3a
