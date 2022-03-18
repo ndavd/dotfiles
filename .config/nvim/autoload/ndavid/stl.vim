@@ -108,7 +108,7 @@ endfunction
 nn <silent><expr><leader>sl ndavid#stl#toggle_ln()
 
 " Update Statusline when entering
-au WinEnter,BufEnter,BufWrite * call s:stl()
+au BufEnter * call s:stl()
 
 " Packer statusline
 au FileType packer let &l:stl='%=  Packer %='
