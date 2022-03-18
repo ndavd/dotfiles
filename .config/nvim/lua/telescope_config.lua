@@ -27,7 +27,7 @@ require('telescope').setup{
         flip_columns = 150,
       },
       prompt_position = "top",
-      width = 0.8,
+      width = 0.9,
       horizontal = {
         preview_width = 0.45,
       },
