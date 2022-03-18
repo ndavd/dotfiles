@@ -36,7 +36,7 @@ endfunction
 function ndavid#stl#branch()
   let branch = FugitiveHead(8)
   if branch=~#'master\|main'
-    exe 'hi StatusLineBranch guifg=#58ca73 ctermfg=Green guibg='.s:bg.' ctermbg='.s:bg
+    exe 'hi StatusLineBranch guifg=#2ef25d ctermfg=Green guibg='.s:bg.' ctermbg='.s:bg
   else | exe 'hi! link StatusLineBranch StatusLine' | endif
   return branch == '' ? '' : s:nbsc.'['.branch.']'
 endfunction
