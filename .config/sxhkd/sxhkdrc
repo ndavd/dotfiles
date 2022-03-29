@@ -40,7 +40,7 @@ super + Return
 
 # browser
 super + b
-  firefox
+  $BROWSER
 
 # file manager
 super + g
