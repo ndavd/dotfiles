@@ -19,7 +19,7 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
 export PATH=$HOME/local/lfimg:$PATH
 
 # Go
-export PATH=$HOME/go/bin:$PATH
+export PATH=$(go env GOPATH)/bin:$PATH
 
 # Rust
 export PATH=$HOME/.cargo/bin:$PATH
