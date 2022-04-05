@@ -1,2 +1,7 @@
+[user]
+  email = email@ndavd.com
+  name  = Nuno David
+[init]
+  defaultBranch = main
 [status]
   showUntrackedFiles = no
