@@ -1,6 +1,13 @@
 [user]
-  email = email@ndavd.com
-  name  = Nuno David
+  email      = email@ndavd.com
+  name       = Nuno David
+  signingKey = ~/.ssh/sig_commits
+[commit]
+  gpgsign = true
+[gpg]
+  format = ssh
+[gpg.ssh]
+  allowedSignersFile = ~/.config/git/allowed_signers
 [init]
   defaultBranch = main
 [status]
