@@ -121,6 +121,7 @@ alias wh='wormhole send -c 8'
 alias torifyme='systemctl status tor; . torsocks'
 alias veracrypt='veracrypt -t'
 alias ffprobe='ffprobe -hide_banner'
+alias news='newsboat'
 
 ### fzf
 f() {
