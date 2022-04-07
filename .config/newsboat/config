@@ -6,7 +6,22 @@ unbind-key L
 unbind-key c
 unbind-key g
 
+# Startup
+prepopulate-query-feeds yes
 refresh-on-startup yes
+
+# Open in mpv
+macro o set browser "mpv --really-quiet --no-terminal" ; open-in-browser-and-mark-read ; set browser "$BROWSER"
+macro 1 set browser "mpv --really-quiet --no-terminal" ; goto-url 1                    ; set browser "$BROWSER"
+macro 2 set browser "mpv --really-quiet --no-terminal" ; goto-url 2                    ; set browser "$BROWSER"
+macro 3 set browser "mpv --really-quiet --no-terminal" ; goto-url 3                    ; set browser "$BROWSER"
+macro 4 set browser "mpv --really-quiet --no-terminal" ; goto-url 4                    ; set browser "$BROWSER"
+macro 5 set browser "mpv --really-quiet --no-terminal" ; goto-url 5                    ; set browser "$BROWSER"
+macro 6 set browser "mpv --really-quiet --no-terminal" ; goto-url 6                    ; set browser "$BROWSER"
+macro 7 set browser "mpv --really-quiet --no-terminal" ; goto-url 7                    ; set browser "$BROWSER"
+macro 8 set browser "mpv --really-quiet --no-terminal" ; goto-url 8                    ; set browser "$BROWSER"
+macro 9 set browser "mpv --really-quiet --no-terminal" ; goto-url 9                    ; set browser "$BROWSER"
+macro 0 set browser "mpv --really-quiet --no-terminal" ; goto-url 10                   ; set browser "$BROWSER"
 
 bind-key h quit
 bind-key BACKSPACE quit
@@ -18,6 +33,8 @@ bind-key l open
 bind-key H prev-feed
 bind-key L next-feed
 bind-key c toggle-show-read-feeds
+
+## Theme
 
 color background color8 default
 color listnormal default default
