@@ -12,12 +12,8 @@ let s:nbsc=' '
 function s:stl()
   if s:make_stl()
     let stl =' %#StatusLineMode#%-11{ndavid#stl#mode()}%*'
-    if g:isConsole
-      let icon = ""
-    else
-      let icon = luaeval("require'webdevicons_config'.get_icon"
-            \ ."{do_hl={true,'StatusLine','StatusLineIcon'}}")
-    endif
+    let icon = luaeval("require'webdevicons_config'.get_icon"
+          \ ."{do_hl={true,'StatusLine','StatusLineIcon'}}")
     let stl .= icon.'%f%{ndavid#stl#modified()}%<'.'%#StatusLineBranch#'
           \ .'%{ndavid#stl#branch()}%*%{ndavid#stl#sy_stats_wrapper()} '
     if s:show_ln==1 | let stl .= '%= %l(%02p%%):%-1c' | endif

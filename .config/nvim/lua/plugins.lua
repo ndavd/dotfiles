@@ -72,9 +72,6 @@ return require('packer').startup(function(use)
   -- Cheat.sh --
   use 'dbeniamine/cheat.sh-vim'
 
-  -- zk --
-  use 'mickael-menu/zk-nvim'
-
   -- Md previewer --
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
 
@@ -87,9 +84,6 @@ return require('packer').startup(function(use)
 
   -- Sql.nvim --
   use 'tami5/sql.nvim'
-
-  -- Lua Scratchpad --
-  use 'rafcamlet/nvim-luapad'
 
   -- Solidity --
   use 'tomlion/vim-solidity'

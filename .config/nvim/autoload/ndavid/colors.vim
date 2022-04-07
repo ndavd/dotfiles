@@ -100,9 +100,5 @@ aug END
 " --- Set colorscheme ---------------------------------------------------"
 
 set background=dark
-if $TERM=~'linux\|screen'
-  colorscheme default
-else
-  let g:vscode_style="dark"
-  colorscheme vscode
-endif
+let g:vscode_style="dark"
+colorscheme vscode

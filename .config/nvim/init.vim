@@ -18,12 +18,8 @@ lua require('plugins')
 " --- Define mapleader for keymaps --------------------------------------"
 let mapleader = ' '
 
-" --- Check if it's a console -------------------------------------------"
-if $TERM =~ 'linux\|screen' | let g:isConsole = v:true
-else | let g:isConsole = v:false | endif
-
 " --- Enable 256 color support ------------------------------------------"
-if !g:isConsole | set termguicolors | endif
+set termguicolors
 
 " --- Disable recommended styles ----------------------------------------"
 " Be a round peg in a square hole
@@ -62,7 +58,7 @@ set title
 set titlestring=%t\ %m\ -\ NVIM
 
 " --- Listchars ---------------------------------------------------------"
-if &list && !g:isConsole
+if &list
   let g:listchar_index = 0
   let g:listchar_options = [
         \ 'tab:>\ ,conceal:┊,nbsp:⍽,extends:>,precedes:<,trail:·'.
@@ -70,8 +66,6 @@ if &list && !g:isConsole
         \ 'tab:>\ ,conceal:┊,nbsp:⍽,extends:>,precedes:<,trail:·',
         \ '',
         \ ]
-  " Nice chars ﲒ ﮊ ⌴ ⍽   ▷▻⊳►▶▚‽⊛ψψδ…﬋↲↵┊
-  " ﴣ             ➜
   function CycleListchars() abort
     exe 'set listchars='.g:listchar_options[
           \ float2nr(
@@ -107,51 +101,14 @@ aug END
 " --- Rasi highlighting (rofi theme file) -------------------------------"
 au BufNewFile,BufRead *.rasi set syntax=css
 
-" --- Stick figures (🯅🯆🯇🯈🯉) ---------------------------------------------"
-let g:runner = ["🯆", "🯇", "🯅", "🯈"]
-function PrintRunner(msg)
-  let msg_l = len(a:msg)
-  let pad_right = 13
-  let n = 0
-  let forwards = v:true
-  while 1
-    if n == &columns-msg_l-pad_right
-      let forwards = v:false
-    elseif n == 0
-      let forwards = v:true
-    endif
-    echo repeat(forwards?".":" ", n)
-          \. g:runner[n % len(g:runner)]
-          \. repeat(forwards?" ":".", &columns-n-msg_l-pad_right)
-          \. a:msg
-    let n = forwards?n+1:n-1
-    sleep 200m
-    redraw
-    if getchar(1) != 0
-      break
-    endif
-  endwhile
-endfunction
-function StartRunner(timer)
-  echo PrintRunner("fixing your code")
-endfunction
-" au CursorHold * let s:timer = timer_start(300000, 'StartRunner')
-" au CursorMoved,WinLeave,ModeChanged * if has_key(s:, 'timer')
-"       \| call timer_stop(s:timer)
-"       \| unlet s:timer
-"       \| echo ""
-"       \| endif
-
 " -----------------------------------------------------------------------"
 " ---------------- PLUGIN SETTINGS --------------------------------------"
 " -----------------------------------------------------------------------"
 " --- For WebDevicons ---------------------------------------------------"
-if !g:isConsole
-  " Load webdevicons config
-  lua require('webdevicons_config').my_setup()
-  " Update filetype icon highlight
-  lua require('webdevicons_config').make_hl()
-endif
+" Load webdevicons config
+lua require('webdevicons_config').my_setup()
+" Update filetype icon highlight
+lua require('webdevicons_config').make_hl()
 
 " --- For Colorizer -----------------------------------------------------"
 nn <silent><leader>co :ColorizerToggle<CR>
@@ -180,7 +137,6 @@ nn <silent><leader>sb :call ToggleSrollView()<CR>
 
 " --- For vim-startify --------------------------------------------------"
 function! StartifyEntryFormat()
-  if g:isConsole | return "entry_path" | endif
   return "luaeval(\"require'webdevicons_config'.get_icon{"
         \."filepath=_A}\", absolute_path)"
         \." .\" \". entry_path"
@@ -234,9 +190,7 @@ function StartifyUpdateCentering()
         \ 'Welcome to the Dark Side of text editing',
         \ 'Nvim is open source and freely distributable',
         \ '']) + startify#pad(s:get_quote)
-  if !g:isConsole
-    let g:startify_custom_header += startify#pad(s:ascii_darth_vader)
-  endif
+  let g:startify_custom_header += startify#pad(s:ascii_darth_vader)
 endfunction
 au VimEnter * call StartifyUpdateQuote()
       \| call StartifyUpdateCentering()
@@ -270,9 +224,6 @@ let g:signify_sign_add    = s:signify_symbol
 let g:signify_sign_change = s:signify_symbol
 let g:signify_sign_delete = s:signify_symbol
 
-" --- For Luapad --------------------------------------------------------"
-lua require('luapad_config')
-
 " --- For comment.nvim --------------------------------------------------"
 lua require('comment_config')
 
@@ -285,14 +236,6 @@ let g:matchup_matchparen_offscreen = {}
 
 " --- For vim-easy-align ------------------------------------------------"
 xmap <cr> <plug>(LiveEasyAlign)
-
-" --- For zk-nvim -------------------------------------------------------"
-lua require('zk_config')
-autocmd Filetype markdown syn region markdownWikiLink
-      \ matchgroup=markdownLinkDelimiter
-      \ start="\[\[" end="\]\]"
-      \ contains=markdownUrl
-      \ keepend oneline concealends
 
 " --- For vim-sleuth ----------------------------------------------------"
 let g:sleuth_automatic = 0
