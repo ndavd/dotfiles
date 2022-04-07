@@ -117,23 +117,23 @@ nn <silent><leader>co :ColorizerToggle<CR>
 no <silent>,w <cmd>HopWord<CR>
 no <silent>,q <cmd>HopChar2<CR>
 
-" --- For ScrollView ----------------------------------------------------"
-let g:scrollview_on_startup = 0
-let g:scrollview_column = 1
-let g:scrollview_excluded_filetypes =
-      \ ['startify', 'vista_kind', 'packer']
-let g:scrollview_mode = 'flexible'
-let g:active_scrollview = 0
-function ToggleSrollView()
-  if g:active_scrollview == 0
-    let g:active_scrollview = 1
-    exe 'ScrollViewEnable'
-  elseif g:active_scrollview == 1
-    let g:active_scrollview = 0
-    exe 'ScrollViewDisable'
-  endif
-endfunction
-nn <silent><leader>sb :call ToggleSrollView()<CR>
+" " --- For ScrollView ----------------------------------------------------"
+" let g:scrollview_on_startup = 0
+" let g:scrollview_column = 1
+" let g:scrollview_excluded_filetypes =
+"       \ ['startify', 'vista_kind', 'packer']
+" let g:scrollview_mode = 'flexible'
+" let g:active_scrollview = 0
+" function ToggleSrollView()
+"   if g:active_scrollview == 0
+"     let g:active_scrollview = 1
+"     exe 'ScrollViewEnable'
+"   elseif g:active_scrollview == 1
+"     let g:active_scrollview = 0
+"     exe 'ScrollViewDisable'
+"   endif
+" endfunction
+" nn <silent><leader>sb :call ToggleSrollView()<CR>
 
 " --- For vim-startify --------------------------------------------------"
 function! StartifyEntryFormat()
@@ -227,9 +227,9 @@ let g:signify_sign_delete = s:signify_symbol
 " --- For comment.nvim --------------------------------------------------"
 lua require('comment_config')
 
-" --- For indent-blankline ----------------------------------------------"
-lua require('indentblankline_config')
-nn <silent><leader>i :IndentBlanklineToggle<CR>
+" " --- For indent-blankline ----------------------------------------------"
+" lua require('indentblankline_config')
+" nn <silent><leader>i :IndentBlanklineToggle<CR>
 
 " --- For matchup -------------------------------------------------------"
 let g:matchup_matchparen_offscreen = {}

@@ -27,8 +27,8 @@ return require('packer').startup(function(use)
     requires = {'kyazdani42/nvim-web-devicons'}
   }
 
-  -- Scrollbar --
-  use 'dstein64/nvim-scrollview'
+  -- -- Scrollbar --
+  -- use 'dstein64/nvim-scrollview'
 
   -- Better start screen --
   use {'mhinz/vim-startify'}
@@ -39,8 +39,8 @@ return require('packer').startup(function(use)
   -- Indentation --
   use 'tpope/vim-sleuth'
 
-  -- Indend guides --
-  use 'lukas-reineke/indent-blankline.nvim'
+  -- -- Indend guides --
+  -- use 'lukas-reineke/indent-blankline.nvim'
 
   -- Auto comment --
   use 'numToStr/Comment.nvim'
