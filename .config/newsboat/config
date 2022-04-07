@@ -1,3 +1,4 @@
+# Keymaps
 unbind-key j
 unbind-key k
 unbind-key h
@@ -6,48 +7,51 @@ unbind-key L
 unbind-key c
 unbind-key g
 
+bind-key h         quit
+bind-key BACKSPACE quit
+bind-key j         down
+bind-key k         up
+bind-key g         home
+bind-key G         end
+bind-key l         open
+bind-key H         prev-feed
+bind-key L         next-feed
+bind-key c         toggle-show-read-feeds
+
 # Startup
 prepopulate-query-feeds yes
-refresh-on-startup yes
+refresh-on-startup      yes
 
 # Open with multiple programs
 macro , set browser "$BROWSER"
 macro m set browser "mpv --really-quiet --no-terminal"
 
-bind-key h quit
-bind-key BACKSPACE quit
-bind-key j down
-bind-key k up
-bind-key g home
-bind-key G end
-bind-key l open
-bind-key H prev-feed
-bind-key L next-feed
-bind-key c toggle-show-read-feeds
+# Format feedlist
+feedlist-format "%?l?%4i %n %11u %t &-\ %-17t..................................................?"
 
-## Theme
+# Theme
+color background                                      color7  default
+color listnormal                                      default default
+color listnormal_unread                               default default
+color listfocus                                       black   blue    bold
+color listfocus_unread                                black   blue    bold
+color info                                            default default bold
+color article                                         default default
 
-color background color7 default
-color listnormal default default
-color listnormal_unread default default
-color listfocus black blue bold
-color listfocus_unread black blue bold
-color info default default bold
-color article default default
+# Article highlights
+highlight article "(^Feed:.*|^Title:.*)"              blue    default bold
+highlight article "(^Link:.*|^Date:.*)"               default default
+highlight article "https?://[^ ]+"                    green   default bold
+highlight article "^(Title):.*$"                      cyan    default
 
-highlight article "(^Feed:.*|^Title:.*)" blue default bold
-highlight article "(^Link:.*|^Date:.*)" default default
-highlight article "https?://[^ ]+" green default bold
-highlight article "^(Title):.*$" cyan default
+highlight article "\\[[0-9][0-9]*\\]"                 green   default bold
+highlight article "\\[image\\ [0-9]+.*\\]"            yellow  default bold
+highlight article "\\[video\\ [0-9]+.*\\]"            yellow  default bold
+highlight article "\\[iframe\\ [0-9]+.*\\]"           magenta default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" red     default bold
 
-highlight article "\\[[0-9][0-9]*\\]" green default bold
-highlight article "\\[image\\ [0-9]+.*\\]" yellow default bold
-highlight article "\\[video\\ [0-9]+.*\\]" yellow default bold
-highlight article "\\[iframe\\ [0-9]+.*\\]" magenta default bold
-highlight article "\\[embedded flash: [0-9][0-9]*\\]" red default bold
-
-highlight article ":.*\\(link\\)$" default default
-highlight article ":.*\\(image\\)$" yellow default
-highlight article ":.*\\(video\\)$" yellow default
-highlight article ":.*\\(iframe\\)$" magenta default
-highlight article ":.*\\(embedded flash\\)$" red default
+highlight article ":.*\\(link\\)$"                    default default
+highlight article ":.*\\(image\\)$"                   yellow  default
+highlight article ":.*\\(video\\)$"                   yellow  default
+highlight article ":.*\\(iframe\\)$"                  magenta default
+highlight article ":.*\\(embedded flash\\)$"          red     default
