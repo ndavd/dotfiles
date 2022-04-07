@@ -22,6 +22,9 @@ bind-key c         toggle-show-read-feeds
 prepopulate-query-feeds yes
 refresh-on-startup      yes
 
+# Parallel reload
+reload-threads          100
+
 # Open with multiple programs
 macro , set browser "$BROWSER"
 macro m set browser "mpv --really-quiet --no-terminal"
