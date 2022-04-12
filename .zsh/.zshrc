@@ -128,6 +128,14 @@ f() {
   local file="$(fzf-tmux -1 --tac --tiebreak=index)"
   [[ -n $file ]] && cd "$(dirname "$file")"
 }
+book() {
+  local file="$(rg --files $HOME/data/books | fzf)"
+  [[ -n $file ]] && zathura "$file"
+}
+video() {
+  local file="$(rg --files --glob '*.{mp4,mkv,mpeg,webm,avi,h264,mov,wmv}' 2>/dev/null | fzf)"
+  [[ -n $file ]] && mpv "$file"
+}
 
 ### motd
 [[ $- =~ l ]] && [[ $TERM == linux ]] && . $HOME/bin/motd && . $HOME/bin/woprfetch
