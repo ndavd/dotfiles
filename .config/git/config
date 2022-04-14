@@ -12,3 +12,5 @@
   defaultBranch = main
 [status]
   showUntrackedFiles = no
+[rebase]
+  autosquash = true
