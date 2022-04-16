@@ -270,8 +270,8 @@ for i in s:lsp_signs
   exe 'sign define '.i.' text= texthl= linehl= numhl='.i
 endfor
 " Keymaps
-nn <silent><C-n> :lua vim.diagnostic.goto_next{enable_popup=false}<CR>
-nn <silent><C-p> :lua vim.diagnostic.goto_prev{enable_popup=false}<CR>
+nn <silent><C-n> :lua vim.diagnostic.goto_next{popup=false}<CR>
+nn <silent><C-p> :lua vim.diagnostic.goto_prev{popup=false}<CR>
 nn <silent>gk    :lua vim.lsp.buf.hover()<CR>
 nn <silent>gd    :lua vim.lsp.buf.definition()<CR>
 nn <silent>gD    :lua vim.lsp.buf.declaration()<CR>
