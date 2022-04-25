@@ -103,7 +103,7 @@ let s:nbsc=' '
 
 function s:active_stl()
   if s:make_stl()
-    let stl = ' %f%{STL_modified()}%<'.'%#StatusLineBranch#'
+    let stl = '%f%{STL_modified()}%<'.'%#StatusLineBranch#'
           \ .'%{STL_branch(1)}%*%{STL_sy_stats_wrapper()} '
     if s:show_ln==1 | let stl .= '%= %l(%02p%%):%-1c' | endif
     let &l:stl = stl
@@ -112,7 +112,7 @@ endfunction
 
 function s:innactive_stl()
   if s:make_stl()
-    let stl = ' %f%{STL_modified()}%<%{STL_branch(0)}'
+    let stl = '%f{STL_modified()}%<%{STL_branch(0)}'
           \.'%{STL_sy_stats_wrapper()} '
     let &l:stl = stl
   endif
