@@ -89,7 +89,7 @@ return require('packer').startup(function(use)
   use 'tomlion/vim-solidity'
 
   -- View tags --
-  use 'liuchengxu/vista.vim'
+  use 'simrat39/symbols-outline.nvim'
 
   -- Telescope --
   use {'nvim-telescope/telescope.nvim', requires = {

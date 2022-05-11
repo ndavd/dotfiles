@@ -208,18 +208,8 @@ function StartifyReLaunch()
 endfunction
 nn <silent><leader><leader>s :call StartifyReLaunch()<CR>
 
-" --- For Vista.vim -----------------------------------------------------"
-let g:vista_default_executive = 'nvim_lsp'
-let g:vista_icon_indent = ["└─ ", "├─ "]
-au VimResized * let g:vista_sidebar_width =
-      \ string(nvim_win_get_width(0)*0.3)
-let g:vista_update_on_text_changed = 1
-let g:vista_cursor_delay = 10
-if exists('g:scrollview_on_startup')
-  nn <silent><leader>v :Vista!!<CR>:ScrollViewRefresh<CR>
-else
-  nn <silent><leader>v :Vista!!<CR>
-endif
+" --- For Symbols-outline.nvim ------------------------------------------"
+lua require('symbolsoutline_config')
 
 " --- For signify -------------------------------------------------------"
 let s:signify_symbol      = '▌' " ▊
@@ -229,10 +219,6 @@ let g:signify_sign_delete = s:signify_symbol
 
 " --- For comment.nvim --------------------------------------------------"
 lua require('comment_config')
-
-" " --- For indent-blankline ----------------------------------------------"
-" lua require('indentblankline_config')
-" nn <silent><leader>i :IndentBlanklineToggle<CR>
 
 " --- For matchup -------------------------------------------------------"
 let g:matchup_matchparen_offscreen = {}
