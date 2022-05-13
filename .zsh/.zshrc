@@ -80,7 +80,7 @@ _p() {
 
   local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
   if [[ -n $git_branch ]]; then
-    p+=" ["
+    p+="["
     if [[ $git_branch =~ ^(main|master)$ ]] ; then
       p+="$_p_git$git_branch$_p_clear"
     else p+="$git_branch"; fi
