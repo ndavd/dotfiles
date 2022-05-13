@@ -76,7 +76,7 @@ fi
 _isConsole && dirty="*" staged="+" || dirty="" staged="✔"
 
 _p() {
-  p="$_p_pwd%~$_p_clear"
+  p="$_p_pwd%1~$_p_clear"
 
   local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
   if [[ -n $git_branch ]]; then
