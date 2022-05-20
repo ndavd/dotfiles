@@ -72,9 +72,6 @@ return require('packer').startup(function(use)
   -- Cheat.sh --
   use 'dbeniamine/cheat.sh-vim'
 
-  -- Md previewer --
-  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
-
   -- Colorizer --
   use {'norcalli/nvim-colorizer.lua'}
 
