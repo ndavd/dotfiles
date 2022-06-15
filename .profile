@@ -29,3 +29,6 @@ export ZK_NOTEBOOK_DIR=$HOME/data/notes
 
 # Solana
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+
+# Avm
+export PATH=$HOME/.avm/bin:$PATH
