@@ -19,7 +19,7 @@ xinput set-prop 'ELAN0709:00 04F3:30A0 Touchpad' 'libinput Tapping Enabled' 1 &
 xinput set-prop 'ELAN0709:00 04F3:30A0 Touchpad' 'libinput Disable While Typing Enabled' 0 &
 
 xsetroot -cursor_name left_ptr &
-setxkbmap -option caps:escape &
+[[ -f ~/bin/keymaps ]] && ~/bin/keymaps
 
 ### Session
 session=${1:-bspwm}
