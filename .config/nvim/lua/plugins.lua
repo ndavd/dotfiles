@@ -72,6 +72,9 @@ return require('packer').startup(function(use)
   -- Cheat.sh --
   use 'dbeniamine/cheat.sh-vim'
 
+  -- Color picker --
+  use 'ziontee113/color-picker.nvim'
+
   -- Colorizer --
   use {'norcalli/nvim-colorizer.lua'}
 

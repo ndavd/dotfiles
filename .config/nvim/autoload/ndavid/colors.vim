@@ -18,6 +18,7 @@ function s:make_hls() abort
   hi SignColumn guibg=NONE
   hi EndOfBuffer guibg=NONE guifg=#5a5a5a
   hi NormalFloat guibg=NONE
+  hi FloatBoarded guibg=NONE
   hi Folded guibg=NONE
   " Number, CC, Cursor and Normal
   hi LineNr guibg=bg guifg=DarkGrey ctermbg=NONE ctermfg=DarkGrey

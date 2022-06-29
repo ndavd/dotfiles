@@ -116,6 +116,11 @@ lua require('webdevicons_config').my_setup()
 " Update filetype icon highlight
 lua require('webdevicons_config').make_hl()
 
+" --- For Color picker --------------------------------------------------"
+lua require('colorpicker_config')
+nn <silent><C-c> <cmd>PickColor<CR>
+ino <silent><C-c> <cmd>PickColorInsert<CR>
+
 " --- For Colorizer -----------------------------------------------------"
 nn <silent><leader>co :ColorizerToggle<CR>
 
