@@ -34,6 +34,9 @@ local current_dir = function() return vim.fn.getcwd() end
 -- PID
 -- local pid = vim.fn.getpid()
 
+-- Eslint
+require'lspconfig'.eslint.setup{}
+
 -- C, C++
 require'lspconfig'.clangd.setup{
   capabilities = capabilities,
