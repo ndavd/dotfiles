@@ -142,7 +142,12 @@ video() {
 
 ### nvm
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+_nvm_lazyload() {
+  for cmd in "$@"; do
+    alias $cmd="unalias $*; [[ -s $NVM_DIR/nvm.sh ]] && . $NVM_DIR/nvm.sh && $cmd"
+  done
+}
+_nvm_lazyload nvm node npm npx yarn corepack
 
 ### plugins
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh 2>/dev/null
