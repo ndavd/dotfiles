@@ -129,5 +129,6 @@ return require('packer').startup(function(use)
   -- Colorschemes --
   use 'gruvbox-community/gruvbox'
   use 'Mofiqul/vscode.nvim'
+  use 'catppuccin/nvim'
 
 end)
