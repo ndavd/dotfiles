@@ -117,6 +117,11 @@ require'lspconfig'.tsserver.setup{
   capabilities = capabilities,
 }
 
+-- Graphql
+require'lspconfig'.graphql.setup{
+  capabilities = capabilities,
+}
+
 -- Bash
 require'lspconfig'.bashls.setup{
   capabilities = capabilities,
