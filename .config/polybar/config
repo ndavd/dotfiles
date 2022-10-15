@@ -34,10 +34,10 @@ padding-right = 1
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = Monospace:size=8.3;2
+font-0 = Monospace:size=8.3;1
 font-1 = WeatherIcons:size=9;1
 font-2 = MaterialIcons:size=10;1
-font-3 = NotoColorEmoji:fontformat=truetype:scale=13.5;1
+font-3 = NotoColorEmoji:fontformat=truetype:scale=13.5;0
 
 modules-left = bspwm xwindow
 modules-center =
