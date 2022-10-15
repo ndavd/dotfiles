@@ -136,8 +136,8 @@ interval = 60
 
 [module/battery_level]
 type = custom/script
-exec = $HOME/.config/polybar/get_battery.sh minimal
-label = "%output% 🏃"
+exec = $HOME/.config/polybar/get_battery.sh emoji
+label = "%output%"
 interval = 10
 
 [module/disk]
