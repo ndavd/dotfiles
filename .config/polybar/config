@@ -37,11 +37,11 @@ module-margin-right = 0
 font-0 = Monospace:size=8.3;2
 font-1 = WeatherIcons:size=9;1
 font-2 = MaterialIcons:size=10;1
-font-3 = NotoColorEmoji:fontformat=truetype:scale=14;0
+font-3 = NotoColorEmoji:fontformat=truetype:scale=13.5;1
 
 modules-left = bspwm xwindow
 modules-center =
-modules-right = update sep disk sep cpu sep memory sep battery_level sep date
+modules-right = update sep disk hor-sep cpu hor-sep memory sep battery_level sep date
 
 tray-position = right
 tray-padding = 1
@@ -126,18 +126,18 @@ type = internal/date
 interval = 10
 date = "%A, %b %d"
 time = "%H:%M"
-label = "%date% %time%"
+label = "💻 %date% %time%"
 
 [module/update]
 type = custom/script
 exec = (checkupdates; paru -Qua) | wc -l
-label = "👻 %output%"
+label = "%output% 📦"
 interval = 60
 
 [module/battery_level]
 type = custom/script
 exec = $HOME/.config/polybar/get_battery.sh minimal
-label = "%output%"
+label = "%output% 🏃"
 interval = 10
 
 [module/disk]
@@ -155,12 +155,18 @@ interval = 5
 [module/memory]
 type = custom/script
 exec = free -h | awk '/Mem:/ {print $3 "B/" $2 "B"}'
-label = "%output%"
+label = "%output% 💾"
 interval = 30
 
 [module/sep]
 type = custom/script
-exec = echo -n " | "
+exec = echo -n " │ "
+format-foreground = #888
+interval = 1000000
+
+[module/hor-sep]
+type = custom/script
+exec = echo -n " - "
 format-foreground = #888
 interval = 1000000
 
