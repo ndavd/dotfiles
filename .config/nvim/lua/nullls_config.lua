@@ -21,7 +21,10 @@ local sources = {
   formatting.gofmt,
   formatting.rustfmt,
   formatting.clang_format,
+  formatting.shellharden,
   diagnostics.vint,
+  diagnostics.chktex,
+  diagnostics.solhint,
 }
 
 require('null-ls').setup({

@@ -101,9 +101,6 @@ aug END
 " --- Rasi highlighting (rofi theme file) -------------------------------"
 au BufNewFile,BufRead *.rasi set syntax=css
 
-" --- Solidity ----------------------------------------------------------"
-autocmd FileType solidity setlocal softtabstop=4 shiftwidth=4
-
 " --- Markdown ----------------------------------------------------------"
 autocmd FileType markdown setlocal conceallevel=2
 
