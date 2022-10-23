@@ -1,12 +1,12 @@
 local out = {}
 local actions = require('telescope.actions')
 
-require('telescope').setup{
+require('telescope').setup({
   defaults = {
     mappings = {
       i = {
         ['<esc>'] = actions.close,
-      }
+      },
     },
     vimgrep_arguments = {
       'rg',
@@ -15,39 +15,39 @@ require('telescope').setup{
       '--with-filename',
       '--line-number',
       '--column',
-      '--smart-case'
+      '--smart-case',
     },
-    prompt_prefix = " > ",
-    initial_mode = "insert",
-    selection_strategy = "reset",
-    sorting_strategy = "ascending",
-    layout_strategy = "flex",
+    prompt_prefix = ' > ',
+    initial_mode = 'insert',
+    selection_strategy = 'reset',
+    sorting_strategy = 'ascending',
+    layout_strategy = 'flex',
     layout_config = {
       flex = {
         flip_columns = 150,
       },
-      prompt_position = "top",
+      prompt_position = 'top',
       width = 0.9,
       horizontal = {
         preview_width = 0.45,
       },
       vertical = {
         preview_height = 0.5,
-      }
+      },
     },
-    file_sorter =  require'telescope.sorters'.get_fzy_sorter,
-    file_ignore_patterns = {'misc/*', 'notes/*'},
-    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    file_sorter = require('telescope.sorters').get_fzy_sorter,
+    file_ignore_patterns = { 'misc/*', 'notes/*' },
+    generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
     winblend = 0,
     border = {},
-    borderchars = {"─", "│", "─", "│", "┌", "┐", "┘", "└"},
-    disable_devicons = vim.env.TERM~="linux",
-    color_devicons = vim.env.TERM~="linux",
+    borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
+    disable_devicons = vim.env.TERM ~= 'linux',
+    color_devicons = vim.env.TERM ~= 'linux',
     use_less = true,
     set_env = { ['COLORTERM'] = 'truecolor' },
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+    file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+    grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
+    qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
     -- -- Developer configurations: Not meant for general override
     -- buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
@@ -69,19 +69,19 @@ require('telescope').setup{
       -- I will work on this more later.
       use_highlighter = true,
     },
-  }
-}
+  },
+})
 
 -- Load extensions
-require'telescope'.load_extension("frecency")
-require'telescope'.load_extension("fzy_native")
-require'telescope'.load_extension("fzf_writer")
+require('telescope').load_extension('frecency')
+require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('fzf_writer')
 
 -- Search config dir
 out.search_config = function()
   require('telescope.builtin').find_files({
     prompt_title = 'CONFIG',
-    cwd = vim.fn.stdpath('config')
+    cwd = vim.fn.stdpath('config'),
   })
 end
 
@@ -92,7 +92,7 @@ out.git_branches = function()
       map('i', '<c-e>', actions.git_delete_branch)
       map('n', '<c-e>', actions.git_delete_branch)
       return true
-    end
+    end,
   })
 end
 

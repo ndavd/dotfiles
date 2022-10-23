@@ -1,7 +1,9 @@
-local cmp = require'cmp'
-cmp.setup {
+local cmp = require('cmp')
+cmp.setup({
   snippet = {
-    expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
+    expand = function(args)
+      vim.fn['vsnip#anonymous'](args.body)
+    end,
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -17,5 +19,5 @@ cmp.setup {
     { name = 'path' },
     { name = 'treesitter' },
     { name = 'spell' },
-  }
-}
+  },
+})

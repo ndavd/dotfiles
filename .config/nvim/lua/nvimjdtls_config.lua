@@ -16,5 +16,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require('jdtls').start_or_attach({
   capabilities = capabilities,
-  cmd = {"java-lsp.bat"}, root_dir = vim.fn.getcwd(),
+  cmd = { 'java-lsp.bat' },
+  root_dir = vim.fn.getcwd(),
 })

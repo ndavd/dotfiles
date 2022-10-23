@@ -21,11 +21,11 @@ local current_dir = function()
   return vim.fn.getcwd()
 end
 
-local sumneko_lua_path = vim.split(package.path, ";")
+local sumneko_lua_path = vim.split(package.path, ';')
 
 -- this is the ONLY correct way to setup your path
-table.insert(sumneko_lua_path, "lua/?.lua")
-table.insert(sumneko_lua_path, "lua/?/init.lua")
+table.insert(sumneko_lua_path, 'lua/?.lua')
+table.insert(sumneko_lua_path, 'lua/?/init.lua')
 
 local servers = {
   'eslint',
