@@ -61,9 +61,9 @@ set titlestring=%t\ %m\ -\ NVIM
 if &list
   let g:listchar_index = 0
   let g:listchar_options = [
-        \ 'tab:>\ ,conceal:┊,nbsp:⍽,extends:>,precedes:<,trail:·'.
+        \ 'tab:_\ ,conceal:┊,nbsp:⍽,extends:>,precedes:<,trail:·'.
         \ ',eol:﬋',
-        \ 'tab:>\ ,conceal:┊,nbsp:⍽,extends:>,precedes:<,trail:·',
+        \ 'tab:_\ ,conceal:┊,nbsp:⍽,extends:>,precedes:<,trail:·',
         \ '',
         \ ]
   function CycleListchars() abort
