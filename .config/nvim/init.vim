@@ -274,6 +274,7 @@ nn <silent>gd    :lua vim.lsp.buf.definition()<CR>
 nn <silent>gD    :lua vim.lsp.buf.declaration()<CR>
 nn <silent>gr    :lua vim.lsp.buf.rename()<CR>
 nn <silent>gR    :lua vim.lsp.buf.references()<CR>
+nn <silent>gf    :lua vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 10000 })<CR>
 
 " --- For vim-vsnip -----------------------------------------------------"
 imap <expr><C-k> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-k>'
@@ -283,6 +284,9 @@ smap <expr><C-j> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-j>'
 
 " --- For cmp -----------------------------------------------------------"
 lua require'cmp_config'
+
+" --- For null-ls -------------------------------------------------------"
+lua require'nullls_config'
 
 " -----------------------------------------------------------------------"
 finish
