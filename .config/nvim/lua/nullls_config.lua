@@ -16,8 +16,31 @@ local extra_args = {
 
 local sources = {
   formatting.eslint,
-  formatting.prettier,
-  formatting.stylua.with({ extra_args = extra_args.formatting.stylua }),
+  formatting.prettier.with({
+    filetypes = {
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+      'vue',
+      'css',
+      'scss',
+      'less',
+      'html',
+      'json',
+      'jsonc',
+      'yaml',
+      'markdown.mdx',
+      'graphql',
+      'handlebars',
+    },
+  }),
+  formatting.deno_fmt.with({
+    filetypes = { 'markdown' },
+  }),
+  formatting.stylua.with({
+    extra_args = extra_args.formatting.stylua,
+  }),
   formatting.gofmt,
   formatting.rustfmt,
   formatting.clang_format,
