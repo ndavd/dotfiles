@@ -1,0 +1,436 @@
+---
+# Configuration for zellij.
+
+# In order to troubleshoot your configuration try using the following command:
+# `zellij setup --check`
+# It should show current config locations and features that are enabled.
+
+keybinds:
+    unbind: true
+    # the prefix key ^b
+    locked:
+        - action: [SwitchToMode: Normal,]
+          key: [Ctrl: 'b',]
+    normal:
+        # send the prefix-key ^b on pressing b in normal mode
+        # then switch back to locked mode
+        - action: [Write: [2,], SwitchToMode: Locked]
+          key: [Char: 'b']
+        - action: [SwitchToMode: Locked,]
+          key: [Ctrl: 'b', Char: ' ', Char: "\n"]
+        - action: [SwitchToMode: Pane,]
+          key: [Char: 'p',]
+        - action: [SwitchToMode: Resize,]
+          key: [Char: 'r',]
+        - action: [SwitchToMode: Tab,]
+          key: [Char: 't',]
+        - action: [SwitchToMode: Scroll,]
+          key: [Char: 's',]
+        - action: [SwitchToMode: Session,]
+          key: [Char: 'o',]
+        - action: [Quit,]
+          key: [Char: 'q',]
+        - action: [NewPane: , SwitchToMode: Locked, ]
+          key: [ Alt: 'n',]
+        - action: [NewTab: , SwitchToMode: Locked, ]
+          key: [ Char: 'N',]
+        - action: [NewPane: , SwitchToMode: Locked,]
+          key: [ Char: 'n',]
+        - action: [MoveFocusOrTab: Left, SwitchToMode: Locked]
+          key: [ Char: 'h' ]
+        - action: [MoveFocusOrTab: Right, SwitchToMode: Locked]
+          key: [ Char: 'l', ]
+        - action: [MoveFocus: Down, SwitchToMode: Locked]
+          key: [ Char: 'j', ]
+        - action: [MoveFocus: Up, SwitchToMode: Locked]
+          key: [ Char: 'k', ]
+        - action: [MoveFocusOrTab: Left,]
+          key: [ Char: 'H', Alt: 'h' ]
+        - action: [MoveFocusOrTab: Right,]
+          key: [ Char: 'L', Alt: 'l',]
+        - action: [MoveFocus: Down,]
+          key: [ Char: 'J', Alt: 'j',]
+        - action: [MoveFocus: Up,]
+          key: [ Char: 'K', Alt: 'k',]
+        - action: [FocusPreviousPane,]
+          key: [ Char: '[', Alt: '[']
+        - action: [FocusNextPane,]
+          key: [ Char: ']', Alt: '[']
+        - action: [NewPane: Down, SwitchToMode: Locked,]
+          key: [Char: '-',]
+        - action: [NewPane: Right, SwitchToMode: Locked,]
+          key: [Char: '\',]
+        - action: [GoToTab: 1,]
+          key: [ Char: '1',]
+        - action: [GoToTab: 2,]
+          key: [ Char: '2',]
+        - action: [GoToTab: 3,]
+          key: [ Char: '3',]
+        - action: [GoToTab: 4,]
+          key: [ Char: '4',]
+        - action: [GoToTab: 5,]
+          key: [ Char: '5',]
+        - action: [GoToTab: 6,]
+          key: [ Char: '6',]
+        - action: [GoToTab: 7,]
+          key: [ Char: '7',]
+        - action: [GoToTab: 8,]
+          key: [ Char: '8',]
+        - action: [GoToTab: 9,]
+          key: [ Char: '9',]
+        - action: [Resize: Increase,]
+          key: [ Char: '=']
+        - action: [Resize: Increase,]
+          key: [ Char: '+']
+        - action: [Resize: Decrease,]
+          key: [ Char: '-']
+        - action: [Resize: Left,]
+          key: [Left, ]
+        - action: [Resize: Down,]
+          key: [Down, ]
+        - action: [Resize: Up,]
+          key: [ Up, ]
+        - action: [Resize: Right,]
+          key: [ Right, ]
+        - action: [ToggleTab]
+          key: [ Char: "\t" ]
+        - action: [SwitchToMode: RenamePane, PaneNameInput: [0],]
+          key: [Char: 'c']
+        - action: [SwitchToMode: RenameTab, TabNameInput: [0],]
+          key: [Char: 'C']
+    resize:
+        - action: [SwitchToMode: Locked,]
+          key: [Ctrl: 'b']
+        - action: [SwitchToMode: Pane,]
+          key: [Ctrl: 'p',]
+        - action: [SwitchToMode: Tab,]
+          key: [Ctrl: 't',]
+        - action: [SwitchToMode: Locked,]
+          key: [Ctrl: 'r', Char: "\n", Char: ' ',]
+        - action: [SwitchToMode: Scroll,]
+          key: [Ctrl: 's']
+        - action: [Quit]
+          key: [Ctrl: 'q']
+        - action: [Resize: Left,]
+          key: [Char: 'h', Left, ]
+        - action: [Resize: Down,]
+          key: [Char: 'j', Down, ]
+        - action: [Resize: Up,]
+          key: [Char: 'k', Up, ]
+        - action: [Resize: Right,]
+          key: [Char: 'l', Right, ]
+        - action: [NewPane: ,]
+          key: [ Alt: 'n',]
+        - action: [MoveFocus: Left,]
+          key: [ Alt: 'h', Left,]
+        - action: [MoveFocus: Right,]
+          key: [ Alt: 'l', Right,]
+        - action: [MoveFocus: Down,]
+          key: [ Alt: 'j', Down,]
+        - action: [MoveFocus: Up,]
+          key: [ Alt: 'k', Up,]
+        - action: [FocusPreviousPane,]
+          key: [ Alt: '[',]
+        - action: [FocusNextPane,]
+          key: [ Alt: ']',]
+    pane:
+        - action: [SwitchToMode: Locked,]
+          key: [Ctrl: 'b']
+        - action: [SwitchToMode: Normal,]
+          key: [Ctrl: 'p',]
+        - action: [SwitchToMode: Tab,]
+          key: [Ctrl: 't',]
+        - action: [SwitchToMode: Locked,]
+          key: [Ctrl: 'r', Char: "\n", Char: ' ',]
+        - action: [SwitchToMode: Scroll,]
+          key: [Ctrl: 's']
+        - action: [Quit,]
+          key: [Ctrl: 'q',]
+        - action: [MoveFocus: Left,]
+          key: [ Alt: 'h', Left,]
+        - action: [MoveFocus: Right,]
+          key: [ Alt: 'l', Right,]
+        - action: [MoveFocus: Down,]
+          key: [ Alt: 'j', Down,]
+        - action: [MoveFocus: Up,]
+          key: [ Alt: 'k', Up,]
+        - action: [SwitchFocus,]
+          key: [Char: 'p']
+        - action: [NewPane: , SwitchToMode: Locked,]
+          key: [Char: 'n', Alt: 'n',]
+        - action: [NewPane: ,]
+          key: [Char: 'N', ]
+        - action: [NewPane: Down, SwitchToMode: Locked,]
+          key: [Char: 'd',]
+        - action: [NewPane: Right, SwitchToMode: Locked,]
+          key: [Char: 'r',]
+        - action: [TogglePaneFrames, SwitchToMode: Locked,]
+          key: [Char: 'z',]
+        - action: [TogglePaneFrames,]
+          key: [Char: 'Z',]
+        - action: [NewPane: Down,]
+          key: [Char: 'D',]
+        - action: [NewPane: Right,]
+          key: [Char: 'R',]
+        - action: [CloseFocus, SwitchToMode: Locked,]
+          key: [Char: 'x',]
+        - action: [CloseFocus,]
+          key: [Char: 'X',]
+        - action: [ToggleFocusFullscreen, SwitchToMode: Locked,]
+          key: [Char: 'f',]
+        - action: [ToggleFocusFullscreen,]
+          key: [Char: 'F',]
+        - action: [FocusPreviousPane,]
+          key: [ Alt: '[',]
+        - action: [FocusNextPane,]
+          key: [ Alt: ']',]
+        - action: [ToggleFocusFullscreen, SwitchToMode: Normal,]
+          key: [Char: 'f',]
+        - action: [TogglePaneFrames, SwitchToMode: Normal,]
+          key: [Char: 'z',]
+        - action: [ToggleFloatingPanes, SwitchToMode: Normal,]
+          key: [Char: 'w']
+        - action: [TogglePaneEmbedOrFloating, SwitchToMode: Normal,]
+          key: [Char: 'e']
+        - action: [SwitchToMode: RenamePane, PaneNameInput: [0],]
+          key: [Char: 'c']
+    tab:
+        - action: [SwitchToMode: Normal,]
+          key: [Ctrl: 't']
+        - action: [SwitchToMode: Pane,]
+          key: [Ctrl: 'p',]
+        - action: [SwitchToMode: Locked,]
+          key: [Ctrl: 'b', Char: "\n", Char: ' ',]
+        - action: [SwitchToMode: Scroll,]
+          key: [Ctrl: 's']
+        - action: [SwitchToMode: RenameTab, TabNameInput: [0],]
+          key: [Char: 'r']
+        - action: [Quit,]
+          key: [Ctrl: 'q',]
+        - action: [FocusPreviousPane,]
+          key: [ Alt: '[',]
+        - action: [FocusNextPane,]
+          key: [ Alt: ']',]
+        - action: [GoToPreviousTab,]
+          key: [ Char: 'h',]
+        - action: [GoToNextTab,]
+          key: [ Char: 'l',]
+        - action: [GoToNextTab,]
+          key: [ Char: 'j',]
+        - action: [GoToPreviousTab,]
+          key: [ Char: 'k',]
+        - action: [NewTab: ]
+          key: [ Char: 'n',]
+        - action: [CloseTab,]
+          key: [ Char: 'x',]
+        - action: [MoveFocus: Left,]
+          key: [ Alt: 'h',]
+        - action: [MoveFocus: Right,]
+          key: [ Alt: 'l',]
+        - action: [MoveFocus: Down,]
+          key: [ Alt: 'j',]
+        - action: [MoveFocus: Up,]
+          key: [ Alt: 'k',]
+        - action: [GoToTab: 1,]
+          key: [ Char: '1',]
+        - action: [GoToTab: 2,]
+          key: [ Char: '2',]
+        - action: [GoToTab: 3,]
+          key: [ Char: '3',]
+        - action: [GoToTab: 4,]
+          key: [ Char: '4',]
+        - action: [GoToTab: 5,]
+          key: [ Char: '5',]
+        - action: [GoToTab: 6,]
+          key: [ Char: '6',]
+        - action: [GoToTab: 7,]
+          key: [ Char: '7',]
+        - action: [GoToTab: 8,]
+          key: [ Char: '8',]
+        - action: [GoToTab: 9,]
+          key: [ Char: '9',]
+    scroll:
+        - action: [SwitchToMode: Locked,]
+          key: [Ctrl: 'r', Ctrl: 's', Char: ' ', Char: "\n",]
+        - action: [SwitchToMode: Tab,]
+          key: [Ctrl: 't',]
+        - action: [SwitchToMode: Normal,]
+          key: [Ctrl: 's',]
+        - action: [SwitchToMode: Pane,]
+          key: [Ctrl: 'p',]
+        - action: [Quit,]
+          key: [Ctrl: 'q',]
+        - action: [ScrollDown,]
+          key: [Char: 'j', Down,]
+        - action: [ScrollUp,]
+          key: [Char: 'k', Up,]
+        - action: [PageScrollDown,]
+          key: [Ctrl: 'f', PageDown,]
+        - action: [PageScrollUp,]
+          key: [Ctrl: 'b', PageUp,]
+        - action: [NewPane: ,]
+          key: [ Alt: 'n',]
+        - action: [MoveFocus: Left,]
+          key: [ Alt: 'h',]
+        - action: [MoveFocus: Right,]
+          key: [ Alt: 'l',]
+        - action: [MoveFocus: Down,]
+          key: [ Alt: 'j',]
+        - action: [MoveFocus: Up,]
+          key: [ Alt: 'k',]
+        - action: [FocusPreviousPane,]
+          key: [ Alt: '[',]
+        - action: [FocusNextPane,]
+          key: [ Alt: ']',]
+    renametab:
+        - action: [SwitchToMode: Normal,]
+          key: [Ctrl: 'r']
+        - action: [SwitchToMode: Locked,]
+          key: [Ctrl: 'b', Ctrl: 's', Char: ' ',]
+        - action: [SwitchToMode: Tab,]
+          key: [Char: "\n",]
+        - action: [TabNameInput: [27] , SwitchToMode: Tab,]
+          key: [Esc,]
+        - action: [NewPane: ,]
+          key: [ Alt: 'n',]
+        - action: [MoveFocus: Left,]
+          key: [ Alt: 'h',]
+        - action: [MoveFocus: Right,]
+          key: [ Alt: 'l',]
+        - action: [MoveFocus: Down,]
+          key: [ Alt: 'j',]
+        - action: [MoveFocus: Up,]
+          key: [ Alt: 'k',]
+        - action: [FocusPreviousPane,]
+          key: [ Alt: '[',]
+        - action: [FocusNextPane,]
+          key: [ Alt: ']',]
+    renamepane:
+        - action: [SwitchToMode: Normal,]
+          key: [Char: "\n", Ctrl: 'c', Esc]
+        - action: [PaneNameInput: [27] , SwitchToMode: Pane,]
+          key: [Esc,]
+        - action: [NewPane: ,]
+          key: [ Alt: 'n',]
+        - action: [MoveFocus: Left,]
+          key: [ Alt: 'h',]
+        - action: [MoveFocus: Right,]
+          key: [ Alt: 'l',]
+        - action: [MoveFocus: Down,]
+          key: [ Alt: 'j',]
+        - action: [MoveFocus: Up,]
+          key: [ Alt: 'k',]
+        - action: [FocusPreviousPane,]
+          key: [ Alt: '[',]
+        - action: [FocusNextPane,]
+          key: [ Alt: ']',]
+        - action: [Resize: Increase,]
+          key: [ Alt: '=']
+        - action: [Resize: Increase,]
+          key: [ Alt: '+']
+        - action: [Resize: Decrease,]
+          key: [ Alt: '-']
+    session:
+        - action: [SwitchToMode: Normal,]
+          key: [Ctrl: 'o']
+        - action: [SwitchToMode: Resize,]
+          key: [Ctrl: 'r',]
+        - action: [SwitchToMode: Pane,]
+          key: [Ctrl: 'p',]
+        - action: [SwitchToMode: Tab,]
+          key: [Ctrl: 't',]
+        - action: [SwitchToMode: Locked,]
+          key: [Ctrl: 'b', Char: "\n", Char: ' ',]
+        - action: [SwitchToMode: Scroll,]
+          key: [Ctrl: 's']
+        - action: [Quit,]
+          key: [Ctrl: 'q',]
+        - action: [Detach,]
+          key: [Char: 'd',]
+
+plugins:
+    - path: compact
+      tag: tab-bar
+
+theme: fairy
+themes:
+  fairy:
+    bg: [44, 46, 52]
+    fg: [197, 205, 217]
+    black: [0, 0, 0]
+    gray: [62, 66, 73]
+    red: [218, 185,255]
+    green: [255, 146, 208]
+    yellow: [222, 185, 116]
+    blue: [108, 82, 235]
+    magenta: [255, 146, 208]
+    cyan: [44, 46, 52]
+    white: [185, 255, 218]
+    orange: [255, 146, 208]
+
+# Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
+# eg. when terminal window with an active zellij session is closed
+# Options:
+#   - detach (Default)
+#   - quit
+#on_force_close: quit
+
+# Send a request for a simplified ui (without arrow fonts) to plugins
+# Options:
+#   - true
+#   - false (Default)
+simplified_ui: true
+
+# Choose the path to the default shell that zellij will use for opening new panes
+# Default: $SHELL
+# default_shell: fish
+
+# Toggle between having pane frames around the panes
+# Options:
+#   - true (default)
+#   - false
+pane_frames: false
+
+# Choose the theme that is specified in the themes section.
+# For some examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
+# Default: default
+#theme: default
+
+# Choose the mode that zellij uses when starting up.
+# Default: normal
+default_mode: locked
+
+# Toggle enabling the mouse mode.
+# On certain configurations, or terminals this could
+# potentially interfere with copying text.
+# Options:
+#   - true (default)
+#   - false
+#mouse_mode: false
+
+# Configure the scroll back buffer size
+# This is the number of lines zellij stores for each pane in the scroll back
+# buffer. Excess number of lines are discarded in a FIFO fashion.
+# Valid values: positive integers
+# Default value: 10000
+#scroll_buffer_size: 10000
+
+# Provide a command to execute when copying text. The text will be piped to
+# the stdin of the program to perform the copy. This can be used with
+# terminal emulators which do not support the OSC 52 ANSI control sequence
+# that will be used by default if this option is not set.
+# Examples:
+copy_command: "xclip -selection clipboard" # x11
+#copy_command: "wl-copy"                    # wayland
+#copy_command: "pbcopy"                     # osx
+
+# Choose the destination for copied text
+# Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.
+# Does not apply when using copy_command.
+# Options:
+#   - system (default)
+#   - primary
+copy_clipboard: primary
+
+# Enable or disable automatic copy (and clear) of selection when releasing mouse
+copy_on_select: true
