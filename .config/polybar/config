@@ -142,7 +142,7 @@ interval = 10
 
 [module/disk]
 type = custom/script
-exec = printf "%siB" $(df -H /dev/nvme0n1p3 --output=avail | sed -n '2p' | cut -c 2-)
+exec = printf "%siB" $(df -H /dev/nvme0n1p2 --output=avail | sed -n '2p' | cut -c 2-)
 label = "%output%"
 interval = 300
 

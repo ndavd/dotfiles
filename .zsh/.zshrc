@@ -31,6 +31,20 @@ setopt append_history
 ### umask
 umask 077
 
+### fix permissions of current folder recursively
+fix-perm () {
+  if [[ $1 = -h ]]; then
+    echo 'usage: fix-perm [dirs:700] [files:600]' >&2
+    return 1
+  fi
+  if [[ $PWD = $HOME ]]; then
+    echo 'Do not run this from the home directory!' >&2
+    return 1
+  fi
+  find . -type d -exec chmod ${1-700} {} +
+  find . -type f -exec chmod ${2-600} {} +
+}
+
 ### vi mode
 # bindkey -v
 # export KEYTIMEOUT=1

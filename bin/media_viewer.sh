@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 is_mute() {
-  [[ -z $( amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep on ) ]]
+  [[ -n $( wpctl get-volume @DEFAULT_SINK@ | grep MUTED ) ]]
 }
 get_volume() {
-  amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+  bc <<< "$(wpctl get-volume @DEFAULT_SINK@ | cut -d ' ' -f 2) * 100" | cut -d . -f 1
 }
 get_brightness() {
-  xbacklight -get | cut -d '.' -f 1
+  cat /sys/class/backlight/nvidia_0/actual_brightness | cut -d '.' -f 1
 }
 progress_bar() {
   echo -n "$1 "

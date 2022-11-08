@@ -16,15 +16,15 @@ case $1 in
   v)
     case $2 in
       mute)
-        amixer -D pulse set Master 1+ toggle > /dev/null
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle > /dev/null
         ;;
       up)
-        amixer -D pulse set Master on > /dev/null
-        amixer -D pulse sset Master 5%+ > /dev/null
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 > /dev/null
+        [ "$(wpctl get-volume @DEFAULT_SINK@ | cut -d ' ' -f 2 | sed 's/\.//')" -lt 100 ] && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ > /dev/null
         ;;
       down)
-        amixer -D pulse set Master on > /dev/null
-        amixer -D pulse sset Master 5%- > /dev/null
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 > /dev/null
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- > /dev/null
         ;;
     esac
     timeout 1s polybar v

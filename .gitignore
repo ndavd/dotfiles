@@ -1,0 +1,11 @@
+.Xauthority
+.bash_history
+.config/nvim/plugin/packer_compiled.lua
+.ssh
+.zsh/.zcompdump
+data
+downloads
+local
+projects
+src
+texmf

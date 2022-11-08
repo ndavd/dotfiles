@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-battery_capacity=$(cat /sys/class/power_supply/BAT1/capacity)
-battery_status=$(cat /sys/class/power_supply/BAT1/status)
+battery_capacity=$(cat /sys/class/power_supply/BAT0/capacity)
+battery_status=$(cat /sys/class/power_supply/BAT0/status)
 
 if   [ $battery_status == "Charging" ]; then status="CHR"
 elif [ $battery_status == "Full" ]; then status="FULL"
