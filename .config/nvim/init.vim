@@ -211,7 +211,7 @@ function StartifyReLaunch()
   call StartifyUpdateCentering()
   Startify
 endfunction
-nn <silent><leader><leader>s :call StartifyReLaunch()<CR>
+" nn <silent><leader><leader>s :call StartifyReLaunch()<CR>
 
 " --- For Symbols-outline.nvim ------------------------------------------"
 lua require('symbolsoutline_config')
@@ -233,6 +233,7 @@ xmap <cr> <plug>(LiveEasyAlign)
 
 " --- For vim-sleuth ----------------------------------------------------"
 let g:sleuth_automatic = 0
+nn <leader><leader>s :Sleuth<CR>
 
 " --- For nvim-treesitter -----------------------------------------------"
 lua require('treesitter_config')
