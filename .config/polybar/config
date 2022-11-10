@@ -41,7 +41,7 @@ font-3 = NotoColorEmoji:fontformat=truetype:scale=13.5;0
 
 modules-left = bspwm xwindow
 modules-center =
-modules-right = update sep disk hor-sep cpu hor-sep memory sep battery_level sep date
+modules-right = crypto sep update sep disk hor-sep cpu hor-sep memory sep battery_level sep date
 
 tray-position = right
 tray-padding = 1
@@ -132,6 +132,7 @@ label = "💻 %date% %time%"
 type = custom/script
 exec = (checkupdates; paru -Qua) | wc -l
 label = "%output% 📦"
+click-left = $TERMINAL paru &
 interval = 60
 
 [module/battery_level]
@@ -144,31 +145,40 @@ interval = 10
 type = custom/script
 exec = printf "%siB" $(df -H /dev/nvme0n1p2 --output=avail | sed -n '2p' | cut -c 2-)
 label = "%output%"
+click-left = $TERMINAL -e htop &
 interval = 300
 
 [module/cpu]
 type = custom/script
 exec = top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{printf "CPU %2i%%\n", 100 - $1}'
 label = "%output%"
+click-left = $TERMINAL -e htop &
 interval = 5
 
 [module/memory]
 type = custom/script
 exec = free -h | awk '/Mem:/ {print $3 "B/" $2 "B"}'
 label = "%output% 💾"
+click-left = $TERMINAL -e htop &
 interval = 30
+
+[module/crypto]
+type = custom/script
+exec = echo "📈"
+click-left = $TERMINAL -e cointop &
+interval = 0
 
 [module/sep]
 type = custom/script
 exec = echo -n " │ "
 format-foreground = #888
-interval = 1000000
+interval = 0
 
 [module/hor-sep]
 type = custom/script
 exec = echo -n " - "
 format-foreground = #888
-interval = 1000000
+interval = 0
 
 [settings]
 screenchange-reload = true
