@@ -14,11 +14,6 @@ nn <silent><leader>= :wincmd =<CR>
 nn <silent><leader>o :wincmd o<CR>
 nn <silent><leader>sv :wincmd v<CR>
 nn <silent><leader>sh :wincmd s<CR>
-" Split Resizing
-nn <silent> <leader>+ :vertical resize +5<CR>
-nn <silent> <leader>- :vertical resize -5<CR>
-nn <silent> <A-+> :resize +2<CR>
-nn <silent> <A--> :resize -2<CR>
 
 " --- Scroll up/down with keys ------------------------------------------"
 nn <silent><C-j> <C-e>
