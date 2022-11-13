@@ -6,8 +6,8 @@
 [[ $- != *i* ]] && return
 
 ### Optimus Manager
-## Do "ndavid ALL=(ALL) NOPASSWD: /usr/bin/prime-switch" in sudoers
-alias startx='exec sh -c "startx ; sudo /usr/bin/prime-switch"'
+# # Do "ndavid ALL=(ALL) NOPASSWD: /usr/bin/prime-switch" in sudoers
+# alias xinit='exec sh -c "xinit ; sudo /usr/bin/prime-switch"'
 
 ### options
 setopt no_beep
