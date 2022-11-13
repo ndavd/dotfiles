@@ -136,6 +136,7 @@ alias torifyme='systemctl status tor; . torsocks'
 alias veracrypt='veracrypt -t'
 alias ffprobe='ffprobe -hide_banner'
 alias news='newsboat'
+alias nvmd='nvm use default'
 
 ### fzf
 f() {
