@@ -5,6 +5,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 xrdb -load ~/.Xresources
 udiskie &
 nm-applet &
+# earlyoom -n &
 dunst &
 $HOME/.config/dunst/battery_notification &
 picom &
