@@ -15,26 +15,27 @@ local extra_args = {
 }
 
 local sources = {
+  --[[ Let's just use eslint as formatter and if prettier is needed just setup `eslint-plugin-prettier` ]]
+  -- formatting.prettier.with({
+  --   filetypes = {
+  --     'javascript',
+  --     'javascriptreact',
+  --     'typescript',
+  --     'typescriptreact',
+  --     'vue',
+  --     'css',
+  --     'scss',
+  --     'less',
+  --     'html',
+  --     'json',
+  --     'jsonc',
+  --     'yaml',
+  --     'markdown.mdx',
+  --     'graphql',
+  --     'handlebars',
+  --   },
+  -- }),
   formatting.eslint,
-  formatting.prettier.with({
-    filetypes = {
-      'javascript',
-      'javascriptreact',
-      'typescript',
-      'typescriptreact',
-      'vue',
-      'css',
-      'scss',
-      'less',
-      'html',
-      'json',
-      'jsonc',
-      'yaml',
-      'markdown.mdx',
-      'graphql',
-      'handlebars',
-    },
-  }),
   formatting.deno_fmt.with({
     filetypes = { 'markdown' },
   }),
