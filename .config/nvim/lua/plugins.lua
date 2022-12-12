@@ -104,6 +104,7 @@ return require('packer').startup(function(use)
 
   -- Treesitter --
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', requires = 'windwp/nvim-ts-autotag' })
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
 
   -- LSP --
   use('neovim/nvim-lspconfig')
