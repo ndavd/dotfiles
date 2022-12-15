@@ -14,7 +14,7 @@ CPU="$(printf "%s (%s) @ %sGHz\n" "$(echo "$lscpu" | grep -Po '^Model name:\ +\K
 lspci="$(lspci)"
 GPU1="$(echo "$lspci" | sed -En 's/^.+3D controller: (NVIDIA ).+\[(.+)\].+/\1\2/p')"
 GPU2="$(echo "$lspci" | grep -Po '^.+VGA compatible controller: \K.*(?= \(.+\).+)')"
-DISK="$(df -H /dev/nvme0n1p2 | awk '{print $3"iB / "$2"iB ("$5")"}' | tail -1)"
+DISK="$(df -H /dev/nvme1n1p2 | awk '{print $3"iB / "$2"iB ("$5")"}' | tail -1)"
 MEM="$(free -m | awk '/Mem:/ {print $3 "MiB / " $2 "MiB"}')"
 
 cc='\e[0m'
