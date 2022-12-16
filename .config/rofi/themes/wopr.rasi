@@ -52,6 +52,7 @@ element.selected {
 element-text {
   background-color: inherit;
   text-color: inherit;
+  vertical-align: 0.5;
 }
 element-icon {
   size: @height;
