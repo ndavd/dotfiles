@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+# This file syncs my local backup using rsync
+
+# ###
+# Ask for sudo privileges
+# ###
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+
+# ###
+# Styles
+# ###
+RED="\033[0;31m"
+BROWN="\033[0;33m"
+BLUE="\033[0;34m"
+NC="\033[0m" # No Color
+
+# ###
+# Variables
+# ###
+bullet="${BLUE}>> ${NC}"
+sub_bullet="${BROWN}>>> ${NC}"
+
+done="${bullet}DONE"
+sub_done="${sub_bullet}DONE"
+
+home="/home/ndavd"
+backup_related_path="${home}/data/backup-related"
+backup_path="/run/media/ndavd/fort-knox/backup"
+
+# ###
+# Aliases
+# ###
+p() {
+  echo -e "$@"
+}
+count_time() {
+  /usr/bin/time --format="It took %Es" "$@"
+}
+rsync() {
+  count_time rsync --info=name1,progress1 --archive --delete "$@"
+}
+
+# ###
+# Commmands
+# ###
+p "${bullet}Executing pre-backup commands"
+
+# Root directory backup
+p "${sub_bullet}Backing up root directory"
+rsync \
+  --files-from="${backup_related_path}/to-include" \
+  "/" \
+  "${backup_related_path}/mirror"
+p "${sub_done}"
+
+# Generate list of packages
+p "${sub_bullet}Updating list of packages"
+pacman -Qqen > "${backup_related_path}/packages"
+pacman -Qqem > "${backup_related_path}/packages-aur"
+p "${sub_done}"
+
+p "${bullet}Doing incremental backup"
+
+# Backup
+if [ ! -d "${backup_path}" ]; then
+  p "${RED}Backup directory doesn't exist. Exiting..." 1>&2
+  exit 1
+fi
+rsync \
+  --exclude-from="${backup_related_path}/backup-exclude" \
+  "${home}" \
+  "${backup_path}"
+
+p "${done}"
