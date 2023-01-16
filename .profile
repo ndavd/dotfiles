@@ -34,3 +34,6 @@ export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 
 # Avm
 export PATH=$HOME/.avm/bin:$PATH
+
+# Snapcraft creds
+export SNAPCRAFT_STORE_CREDENTIALS="$(cat $HOME/elixir_games/snapcredentials)"
