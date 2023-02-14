@@ -21,12 +21,6 @@ local current_dir = function()
   return vim.fn.getcwd()
 end
 
-local sumneko_lua_path = vim.split(package.path, ';')
-
--- this is the ONLY correct way to setup your path
-table.insert(sumneko_lua_path, 'lua/?.lua')
-table.insert(sumneko_lua_path, 'lua/?/init.lua')
-
 local servers = {
   'eslint',
   'clangd',
@@ -44,7 +38,7 @@ local servers = {
   'cssls',
   'tailwindcss',
   'jsonls',
-  'sumneko_lua',
+  'lua_ls',
 }
 
 local custom_conf = {
@@ -101,13 +95,12 @@ local custom_conf = {
       },
     },
   },
-  sumneko_lua = {
+  lua_ls = {
     settings = {
       Lua = {
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
           version = 'LuaJIT',
-          path = sumneko_lua_path,
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
