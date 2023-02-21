@@ -35,8 +35,8 @@ set tabstop=2 softtabstop=2
 set shiftwidth=2
 set expandtab
 set smartindent
-set cul nu rnu
-set nohls
+set cursorline number relativenumber
+set nohlsearch
 set list
 set ignorecase
 set smartcase
@@ -224,6 +224,11 @@ let g:signify_sign_delete = s:signify_symbol
 
 " --- For comment.nvim --------------------------------------------------"
 lua require('comment_config')
+
+" --- For tree-tree.nvim ------------------------------------------------"
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+lua require('nvim_tree_config')
 
 " --- For matchup -------------------------------------------------------"
 let g:matchup_matchparen_offscreen = {}

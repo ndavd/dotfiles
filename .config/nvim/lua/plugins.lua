@@ -67,6 +67,12 @@ return require('packer').startup(function(use)
   -- RFC --
   use('mhinz/vim-rfc')
 
+  -- File Tree --
+  use({
+    'nvim-tree/nvim-tree.lua',
+    tag = 'nightly',
+  })
+
   -- Cheat.sh --
   use('dbeniamine/cheat.sh-vim')
 
@@ -104,7 +110,7 @@ return require('packer').startup(function(use)
 
   -- Treesitter --
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', requires = 'windwp/nvim-ts-autotag' })
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use('JoosepAlviste/nvim-ts-context-commentstring')
 
   -- LSP --
   use('neovim/nvim-lspconfig')
