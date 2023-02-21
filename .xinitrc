@@ -25,8 +25,14 @@ xsetroot -cursor_name left_ptr &
 ### Session
 session=${1:-bspwm}
 case $session in
+  gnome          )
+    # XORG-GNOME
+    export XDG_SESSION_TYPE=x11
+    export GDK_BACKEND=x11
+    exec gnome-session
+  ;;
   xfce|xfce4     ) exec xfce4-session ;;
   lxqt           ) exec startlxqt ;;
   bspwm          ) exec bspwm ;;
-  *              ) exec $1 ;;
+  *              ) exec "$1" ;;
 esac
