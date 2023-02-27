@@ -7,7 +7,7 @@ get_volume() {
   bc <<< "$(wpctl get-volume @DEFAULT_SINK@ | cut -d ' ' -f 2) * 100" | cut -d . -f 1
 }
 get_brightness() {
-  cat /sys/class/backlight/nvidia_0/actual_brightness | cut -d '.' -f 1
+  cat /sys/class/backlight/nvidia_0/brightness | cut -d '.' -f 1
 }
 progress_bar() {
   echo -n "$1 "
