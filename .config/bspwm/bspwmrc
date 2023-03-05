@@ -7,12 +7,20 @@ udiskie &
 nm-applet &
 earlyoom -n -m 5 -s 5 &
 dunst &
-$HOME/.config/dunst/battery_notification &
+"$HOME"/.config/dunst/battery_notification &
 picom &
 nitrogen --restore &
-$HOME/.config/polybar/launch.sh &
+"$HOME"/.config/polybar/launch.sh &
 
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+# Double screen setup
+if [[ $(xrandr -q | grep 'HDMI-0 connected') ]]; then
+  xrandr \
+    --output HDMI-0 --primary --mode 1920x1080 --rotate normal \
+    --output DP-4 --mode 1920x1080 --rotate normal --right-of HDMI-0
+
+  bspc monitor HDMI-0 -d 1 3 5 7 9
+  bspc monitor DP-4   -d 2 4 6 8 10
+fi
 
 bspc config border_width           2
 bspc config window_gap             0
@@ -35,8 +43,7 @@ bspc config ignore_ewmh_focus on
 bspc rule -a Screenkey manage=off
 bspc rule -a Sxiv state='floating'
 bspc rule -a Brave-browser-nightly:crx_nkbihfbeogaeaoehlefnkodbefgpgknn state='floating' # MetaMask extension
-bspc rule -a discord desktop='^2'
-bspc rule -a Element desktop='^4'
-bspc rule -a Element-Nightly desktop='^4'
-bspc rule -a Tor\ Browser desktop='^5'
-bspc rule -a Spotify desktop='^6'
+bspc rule -a discord desktop=2
+bspc rule -a Element desktop=4
+bspc rule -a Element-Nightly desktop=4
+bspc rule -a Spotify desktop=6
