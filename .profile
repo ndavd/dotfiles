@@ -4,7 +4,7 @@ export PATH=$HOME/local/nvim/bin:$PATH
 
 export QT_QPA_PLATFORMTHEME=qt5ct
 export XDG_CONFIG_HOME=$HOME/.config
-export BROWSER=/usr/bin/brave-nightly
+export BROWSER=/usr/bin/brave
 export TERMINAL=/usr/bin/kitty
 export EDITOR=$HOME/local/nvim/bin/nvim
 export VISUAL=$HOME/local/nvim/bin/nvim
