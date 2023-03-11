@@ -215,6 +215,7 @@ endfunction
 
 " --- For Symbols-outline.nvim ------------------------------------------"
 lua require('symbolsoutline_config')
+nn <silent><C-s> :SymbolsOutline<CR>
 
 " --- For signify -------------------------------------------------------"
 let s:signify_symbol      = '▌' " ▊

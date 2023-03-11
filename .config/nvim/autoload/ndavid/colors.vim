@@ -101,5 +101,8 @@ aug END
 " --- Set colorscheme ---------------------------------------------------"
 
 set background=dark
-let g:vscode_style="dark"
+
+" Load theme config
+lua require('vscode_colors_config')
+
 colorscheme vscode
