@@ -27,12 +27,12 @@ require('telescope').setup({
         flip_columns = 150,
       },
       prompt_position = 'top',
-      width = 0.9,
+      width = 0.95,
       horizontal = {
         preview_width = 0.45,
       },
       vertical = {
-        preview_height = 0.5,
+        preview_height = 0.6,
       },
     },
     file_sorter = require('telescope.sorters').get_fzy_sorter,
