@@ -11,6 +11,8 @@ Print
   maim --hidecursor --select | xclip -selection clipboard -t image/png
 shift + Print
   maim --hidecursor -u --select ~/data/pictures/$(date +%s).png
+super + Print
+  flameshot gui
 
 # Volume Control
 XF86AudioLowerVolume
