@@ -11,6 +11,7 @@
 
 ### options
 setopt no_beep
+setopt hist_ignore_space
 
 ### tab completion
 zmodload zsh/complist
