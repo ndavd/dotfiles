@@ -274,7 +274,7 @@ endfor
 nn <silent><C-n> :lua vim.diagnostic.goto_next{popup=false}<CR>
 nn <silent><C-p> :lua vim.diagnostic.goto_prev{popup=false}<CR>
 nn <silent>gk    :lua vim.lsp.buf.hover()<CR>
-nn <silent>gd    :lua vim.lsp.buf.definition()<CR>
+nn <silent>gd    :lua require('lsp_custom').definition()<CR>
 nn <silent>gD    :lua vim.lsp.buf.declaration()<CR>
 nn <silent>gr    :lua vim.lsp.buf.rename()<CR>
 nn <silent>gR    :lua vim.lsp.buf.references()<CR>
