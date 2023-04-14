@@ -86,7 +86,8 @@ set guicursor=i-r:hor20-Cursor
 
 " --- Mouse options -----------------------------------------------------"
 set mouse=a
-behave xterm
+set mousemodel=extend
+set selection=inclusive
 
 " --- Fix Highlight Errors ----------------------------------------------"
 let g:vimsyn_noerror = 1
