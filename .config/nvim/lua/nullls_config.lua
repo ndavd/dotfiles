@@ -14,15 +14,14 @@ local extra_args = {
   },
 }
 
+local node_modules_bin = 'node_modules/.bin'
+
 local sources = {
-  formatting.eslint,
+  formatting.eslint.with({
+    prefer_local = node_modules_bin,
+  }),
   formatting.prettier.with({
-    runtime_condition = function(params)
-      local utils = require('null-ls.utils')
-      -- use whatever root markers you want to check - these are the defaults
-      local root = utils.root_pattern('.null-ls-root', 'Makefile', '.git')(params.bufname)
-      return root and utils.path.exists(utils.path.join(root, '.prettierrc'))
-    end,
+    only_local = node_modules_bin,
   }),
   formatting.deno_fmt.with({
     filetypes = { 'markdown' },
@@ -34,6 +33,7 @@ local sources = {
   formatting.rustfmt,
   formatting.clang_format,
   formatting.shellharden,
+
   diagnostics.vint,
   diagnostics.chktex,
   diagnostics.solhint,
