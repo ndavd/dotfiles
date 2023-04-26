@@ -42,7 +42,8 @@ bspc config external_rules_command "$HOME/bin/bspwm-external-rules"
 bspc config ignore_ewmh_focus on
 bspc rule -a Screenkey manage=off
 bspc rule -a Sxiv state='floating'
-bspc rule -a Brave-browser-nightly:crx_nkbihfbeogaeaoehlefnkodbefgpgknn state='floating' # MetaMask extension
+bspc rule -a Brave-browser:crx_nkbihfbeogaeaoehlefnkodbefgpgknn state='floating' # MetaMask extension
+bspc rule -a Brave-browser:crx_bfnaelmomeimhlpmgjnjophhpkkoljpa state='floating' # Phantom extension
 bspc rule -a discord desktop=2
 bspc rule -a Element desktop=4
 bspc rule -a Element-Nightly desktop=4
