@@ -79,7 +79,7 @@ if &list
 endif
 
 " --- Fillchars ---------------------------------------------------------"
-let &fcs='stl:-,stlnc:-'
+let &fillchars='stl:-,stlnc:-'
 
 " --- Change guicursor --------------------------------------------------"
 set guicursor=i-r:hor20-Cursor
@@ -100,10 +100,14 @@ aug LuaHighlight
 aug END
 
 " --- Rasi highlighting (rofi theme file) -------------------------------"
-au BufNewFile,BufRead *.rasi set syntax=css
+aug RasiHighlight
+  au BufNewFile,BufRead *.rasi set syntax=css
+aug END
 
 " --- Markdown ----------------------------------------------------------"
-autocmd FileType markdown setlocal conceallevel=2
+aug MarkdownHighlight
+  au FileType markdown setlocal conceallevel=2
+aug END
 
 " -----------------------------------------------------------------------"
 " ---------------- PLUGIN SETTINGS --------------------------------------"
