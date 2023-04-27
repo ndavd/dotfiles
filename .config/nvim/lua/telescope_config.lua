@@ -82,6 +82,7 @@ out.search_config = function()
   require('telescope.builtin').find_files({
     prompt_title = 'CONFIG',
     cwd = vim.fn.stdpath('config'),
+    no_ignore = true,
   })
 end
 
