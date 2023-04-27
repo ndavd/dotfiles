@@ -261,7 +261,7 @@ nn ,a :lua require('telescope.builtin').lsp_code_actions()<CR>
 nn ,h :lua require('telescope.builtin').help_tags()<CR>
 nn ,c :lua require('telescope_config').search_config()<CR>
 nn ,t :lua require('telescope.builtin').treesitter()<CR>
-nn z= :lua require('telescope.builtin').spell_suggest()<CR>
+nn z= :lua require('telescope_config').spell_suggest()<CR>
 nn <leader>gb :lua require('telescope_config').git_branches()<CR>
 
 " --- For lsp -----------------------------------------------------------"

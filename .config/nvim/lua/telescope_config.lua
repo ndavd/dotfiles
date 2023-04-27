@@ -97,4 +97,11 @@ out.git_branches = function()
   })
 end
 
+-- Spell suggest
+out.spell_suggest = function()
+  require('telescope.builtin').spell_suggest({
+    prompt_title = 'Spell Suggestions - ' .. string.upper(vim.api.nvim_buf_get_option(0, 'spelllang')),
+  })
+end
+
 return out
