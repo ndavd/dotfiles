@@ -42,7 +42,7 @@ require('github-theme').setup({
       -- htmlTag = { fg = 'palette.red', bg = '#282c34', sp = 'diag.hint', style = 'underline,bold' },
       DiagnosticHint = { link = 'LspDiagnosticsDefaultHint' },
       -- this will remove the highlight groups
-      -- TSField = {},
+      TSField = {},
     },
   },
 })
