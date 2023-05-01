@@ -25,9 +25,6 @@ return require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons' },
   })
 
-  -- -- Scrollbar --
-  -- use 'dstein64/nvim-scrollview'
-
   -- Better start screen --
   use({ 'mhinz/vim-startify' })
 
@@ -36,9 +33,6 @@ return require('packer').startup(function(use)
 
   -- Indentation --
   use('tpope/vim-sleuth')
-
-  -- -- Indend guides --
-  -- use 'lukas-reineke/indent-blankline.nvim'
 
   -- Auto comment --
   use('numToStr/Comment.nvim')
@@ -118,7 +112,6 @@ return require('packer').startup(function(use)
   use('hrsh7th/nvim-cmp')
   use('hrsh7th/cmp-nvim-lsp')
   use('hrsh7th/cmp-nvim-lua')
-  -- use 'hrsh7th/cmp-buffer'
   use('hrsh7th/cmp-path')
   use('ray-x/cmp-treesitter')
   use('f3fora/cmp-spell')
@@ -138,5 +131,5 @@ return require('packer').startup(function(use)
   use('gruvbox-community/gruvbox')
   use('Mofiqul/vscode.nvim')
   use('catppuccin/nvim')
-  use({ 'projekt0n/github-nvim-theme', branch = 'main' })
+  use({ 'projekt0n/github-nvim-theme', branch = '0.0.x' })
 end)
