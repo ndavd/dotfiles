@@ -141,8 +141,8 @@ alias nvmd='nvm use default'
 
 ### fzf
 f() {
-  local file="$(fzf)"
-  [[ -n $file ]] && cd "$(dirname "$file")"
+  local directory="$(fd --unrestricted --full-path --color=always -E '/.*' -E node_modules -E .git -E target | fzf)"
+  [[ -n $directory ]] && cd "$directory"
 }
 book() {
   local file="$(rg --no-ignore --files $HOME/data/books | fzf)"
