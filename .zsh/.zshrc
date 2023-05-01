@@ -145,11 +145,11 @@ f() {
   [[ -n $directory ]] && cd "$directory"
 }
 book() {
-  local file="$(rg --no-ignore --files $HOME/data/books | fzf)"
+  local file="$(fd --unrestricted --color=always . $HOME/data/books | fzf)"
   [[ -n $file ]] && zathura "$file"
 }
 video() {
-  local file="$(rg --no-ignore --files --glob '*.{mp4,mkv,mpeg,webm,avi,h264,mov,wmv}' 2>/dev/null | fzf)"
+  local file="$(fd --no-ignore --color=always --glob '*.{mp4,mkv,mpeg,webm,avi,h264,mov,wmv}' | fzf)"
   [[ -n $file ]] && mpv "$file"
 }
 
