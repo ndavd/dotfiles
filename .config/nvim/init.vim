@@ -285,7 +285,7 @@ nn <silent>gr    :lua vim.lsp.buf.rename()<CR>
 nn <silent>gR    :lua vim.lsp.buf.references()<CR>
 nn <silent>gf    :lua vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 10000 })<CR>
 " Commands
-com Cd lua vim.cmd('cd ' .. vim.lsp.buf.list_workspace_folders()[1])
+com Cd lua require('lsp_custom').cd_project_root()
 
 " --- For vim-vsnip -----------------------------------------------------"
 imap <expr><C-k> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-k>'

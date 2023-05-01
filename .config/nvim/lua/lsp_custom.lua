@@ -34,4 +34,13 @@ out.definition = function()
   vim.lsp.buf.definition({ on_list = on_list })
 end
 
+out.cd_project_root = function()
+  local ok, workspace_folders_or_err = pcall(vim.lsp.buf.list_workspace_folders)
+  if ok and #workspace_folders_or_err > 0 then
+    vim.cmd('cd ' .. workspace_folders_or_err[1])
+  else
+    print('Can\'t find project\'s root directory')
+  end
+end
+
 return out
