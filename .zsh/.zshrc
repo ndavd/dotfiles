@@ -141,15 +141,15 @@ alias nvmd='nvm use default'
 
 ### fzf
 f() {
-  local file="$(fzf-tmux -1 --tac --tiebreak=index)"
+  local file="$(fzf)"
   [[ -n $file ]] && cd "$(dirname "$file")"
 }
 book() {
-  local file="$(rg --files $HOME/data/books | fzf)"
+  local file="$(rg --no-ignore --files $HOME/data/books | fzf)"
   [[ -n $file ]] && zathura "$file"
 }
 video() {
-  local file="$(rg --files --glob '*.{mp4,mkv,mpeg,webm,avi,h264,mov,wmv}' 2>/dev/null | fzf)"
+  local file="$(rg --no-ignore --files --glob '*.{mp4,mkv,mpeg,webm,avi,h264,mov,wmv}' 2>/dev/null | fzf)"
   [[ -n $file ]] && mpv "$file"
 }
 

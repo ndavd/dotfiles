@@ -14,7 +14,8 @@ export MANWIDTH=100
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # FZF
-export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
+export FZF_DEFAULT_COMMAND="fd --unrestricted --full-path --color=always -E '/.*' -E node_modules -E .git -E target"
+export FZF_DEFAULT_OPTS="--ansi --info=inline --color=gutter:#000000 --no-scrollbar --border=rounded"
 
 # lf
 . $HOME/bin/lf_icons
