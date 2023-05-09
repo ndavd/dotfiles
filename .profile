@@ -1,5 +1,6 @@
 export LC_ALL=en_US.UTF-8
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/local:$PATH
 export PATH=$HOME/local/nvim/bin:$PATH
 
 export QT_QPA_PLATFORMTHEME=qt5ct
