@@ -140,6 +140,9 @@ alias news='newsboat'
 alias nvmd='nvm use default'
 
 ### fzf
+fzfa() {
+  fd --unrestricted --full-path --color=always | fzf
+}
 f() {
   local directory="$(fd --unrestricted --full-path --color=always -E '/.*' -E node_modules -E .git -E target | fzf)"
   [[ -n $directory ]] && cd "$directory"
