@@ -132,6 +132,30 @@ local custom_conf = {
       },
     },
   },
+  rust_analyzer = {
+    settings = {
+      ['rust_analyzer'] = {
+        checkOnSave = {
+          allFeatures = true,
+          command = 'clippy',
+          extraArgs = { '--no-deps' },
+        },
+        cargo = {
+          allFeatures = true,
+          loadOutDirsFromCheck = true,
+          runBuildScripts = true,
+        },
+        procMacro = {
+          enable = true,
+          ignored = {
+            ['async-trait'] = { 'async_trait' },
+            ['napi-derive'] = { 'napi' },
+            ['async-recursion'] = { 'async_recursion' },
+          },
+        },
+      },
+    },
+  },
 }
 
 local function get_conf(server)
