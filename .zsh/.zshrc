@@ -168,6 +168,9 @@ _nvm_lazyload() {
 }
 _nvm_lazyload nvm node npm npx yarn corepack
 
+### opam configuration
+[[ ! -r ~/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
 ### plugins
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh 2>/dev/null
 # zsh-syntax-highlighting must be at the end of `.zshrc`

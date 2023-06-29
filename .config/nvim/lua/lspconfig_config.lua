@@ -39,6 +39,7 @@ local servers = {
   'tailwindcss',
   'jsonls',
   'lua_ls',
+  'ocamllsp',
 }
 
 local custom_conf = {
