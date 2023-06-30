@@ -53,7 +53,12 @@ return require('packer').startup(function(use)
   use('tpope/vim-surround')
 
   -- Complete brackets --
-  use('jiangmiao/auto-pairs')
+  use({
+    'windwp/nvim-autopairs',
+    config = function()
+      require('autopairs_config')
+    end,
+  })
 
   -- Startuptime --
   use('dstein64/vim-startuptime')
@@ -103,7 +108,11 @@ return require('packer').startup(function(use)
   })
 
   -- Treesitter --
-  use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', requires = 'windwp/nvim-ts-autotag' })
+  use({
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    requires = 'windwp/nvim-ts-autotag',
+  })
   use('JoosepAlviste/nvim-ts-context-commentstring')
 
   -- LSP --
