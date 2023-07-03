@@ -27,7 +27,7 @@ local servers = {
   'gopls',
   'texlab',
   'rust_analyzer',
-  'solidity_ls',
+  'solidity_ls_nomicfoundation',
   'vimls',
   'cmake',
   'pyright',
@@ -65,22 +65,8 @@ local custom_conf = {
       },
     },
   },
-  solidity_ls = {
+  solidity_ls_nomicfoundation = {
     capabilities = capabilities,
-    settings = {
-      solidity = {
-        nodemodulespackage = 'solc',
-        compileUsingRemoteVersion = 'latest',
-        compilerOptimization = 200,
-        compileUsingLocalVersion = '',
-        defaultCompiler = 'remote', -- remote | localFile | localNodeModule | embedded
-        linter = 'solhint', -- solhint | solium
-        enabledAsYouTypeCompilationErrorCheck = true,
-        validationDelay = 1500,
-        packageDefaultDependenciesDirectory = 'node_modules',
-        packageDefaultDependenciesContractsDirectory = '',
-      },
-    },
   },
   pyright = {
     root_dir = current_dir,

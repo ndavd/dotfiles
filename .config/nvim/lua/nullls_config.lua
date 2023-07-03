@@ -21,7 +21,23 @@ local sources = {
     prefer_local = node_modules_bin,
   }),
   formatting.prettier.with({
-    only_local = node_modules_bin,
+    prefer_local = node_modules_bin,
+    -- TODO: It is also possible to configure prettier using a package.json entry, it would be nice to check for that.
+    -- Only enabling it if there's an explicit configuration for it
+    condition = function(utils)
+      return utils.root_has_file({
+        '.prettierrc',
+        '.prettierrc.json',
+        '.prettierrc.yml',
+        '.prettierrc.yaml',
+        '.prettierrc.json5',
+        '.prettierrc.js',
+        '.prettierrc.cjs',
+        '.prettierrc.toml',
+        'prettier.config.js',
+        'prettier.config.cjs',
+      })
+    end,
   }),
   formatting.deno_fmt.with({
     filetypes = { 'markdown' },

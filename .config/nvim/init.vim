@@ -96,7 +96,7 @@ let g:vimsyn_noerror = 1
 aug LuaHighlight
   au!
   au TextYankPost *
-        \ silent! lua require('vim.highlight').on_yank({on_visual=false})
+        \ silent! lua require('vim.highlight').on_yank()
 aug END
 
 " --- Rasi highlighting (rofi theme file) -------------------------------"
