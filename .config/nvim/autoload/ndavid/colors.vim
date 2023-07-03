@@ -103,7 +103,7 @@ aug END
 set background=dark
 
 " Load theme config
-" lua require('vscode_colors_config')
-lua require('github_theme_config')
+lua require('vscode_colors_config')
+" lua require('github_theme_config')
 
 colorscheme vscode

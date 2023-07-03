@@ -115,6 +115,9 @@ return require('packer').startup(function(use)
   })
   use('JoosepAlviste/nvim-ts-context-commentstring')
 
+  -- Lua declarations --
+  use('ii14/emmylua-nvim')
+
   -- LSP --
   use('neovim/nvim-lspconfig')
   use('jose-elias-alvarez/null-ls.nvim')
