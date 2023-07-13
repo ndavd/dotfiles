@@ -1,14 +1,10 @@
+-- Setup nonicons
+require('nvim-nonicons').setup({})
+
 local out = {}
 
 out.my_setup = function()
   require('nvim-web-devicons').setup({
-    override = {
-      default_icon = {
-        icon = '', -- 
-        color = '#6d8086',
-        name = 'Default',
-      },
-    },
     default = true,
   })
 end

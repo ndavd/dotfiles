@@ -1,6 +1,13 @@
+local nonicons_extention = require('nvim-nonicons.extentions.nvim-tree')
+
 require('nvim-tree').setup({
   filters = {
     dotfiles = true,
+  },
+  renderer = {
+    icons = {
+      glyphs = nonicons_extention.glyphs,
+    },
   },
 })
 

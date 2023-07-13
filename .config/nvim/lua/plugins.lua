@@ -22,7 +22,7 @@ return require('packer').startup(function(use)
   -- Icon support --
   use({
     'yamatsum/nvim-nonicons',
-    requires = { 'kyazdani42/nvim-web-devicons' },
+    requires = { 'nvim-tree/nvim-web-devicons' },
   })
 
   -- Better start screen --
