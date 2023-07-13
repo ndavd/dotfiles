@@ -1,9 +1,9 @@
-function ndavid#colors#set()
+function! ndavd#colors#set() abort
 endfunction
 
 " --- Highlights --------------------------------------------------------"
 
-function s:make_hls() abort
+function! s:make_hls() abort
   hi Comment ctermfg=DarkBlue
   " Transparent background color for Nvim
   hi Normal guibg=NONE
@@ -85,7 +85,7 @@ aug make_custom_hls
 aug END
 
 " For vscode
-function s:custom_vscode_hls()
+function! s:custom_vscode_hls() abort
   " MatchParen
   hi MatchParen guibg=#303030
   " " Tabline

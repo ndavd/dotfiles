@@ -3,6 +3,6 @@ if exists('s:loaded')
 endif
 let s:loaded = 1
 
-call ndavid#colors#set()
-call ndavid#stl#set()
-call ndavid#keymaps#set()
+call ndavd#colors#set()
+call ndavd#stl#set()
+call ndavd#keymaps#set()

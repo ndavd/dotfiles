@@ -1,4 +1,4 @@
-function ndavid#keymaps#set()
+function! ndavd#keymaps#set() abort
 endfunction
 
 " --- Keymaps -----------------------------------------------------------"

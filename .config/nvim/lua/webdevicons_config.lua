@@ -1,5 +1,6 @@
 -- Setup nonicons
-require('nvim-nonicons').setup({})
+local nonicons = require('nvim-nonicons')
+nonicons.setup({})
 
 local out = {}
 
@@ -66,6 +67,23 @@ out.make_hl = function()
   if STORE_HL ~= nil then
     vim.cmd(STORE_HL)
   end
+end
+
+out.print_icons = function(compact)
+  if compact == nil then
+    compact = true
+  end
+  local icons_table = vim
+    .iter(require('nvim-nonicons.mapping'))
+    :map(function(icon_name)
+      local icon = nonicons.get(icon_name)
+      if compact then
+        return icon .. ' '
+      end
+      return nonicons.get(icon_name) .. ' ' .. icon_name
+    end)
+    :totable()
+  print(table.concat(icons_table, ':'))
 end
 
 return out

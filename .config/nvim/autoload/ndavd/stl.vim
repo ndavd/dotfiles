@@ -1,4 +1,6 @@
-function ndavid#stl#set()
+scriptencoding utf-8
+
+function! ndavd#stl#set() abort
 endfunction
 
 " --- Set statusline ----------------------------------------------------"
@@ -9,19 +11,19 @@ lua require('webdevicons_config').my_setup()
 let s:bg='NONE'
 let s:nbsc=' '
 
-function s:stl()
+function! s:stl() abort
   if s:make_stl()
-    let stl =' %#StatusLineMode#%-11{ndavid#stl#mode()}%*'
+    let stl =' %#StatusLineMode#%-11{ndavd#stl#mode()}%*'
     let icon = luaeval("require'webdevicons_config'.get_icon"
           \ ."{do_hl={true,'StatusLine','StatusLineIcon'}}")
-    let stl .= icon.'%f%{ndavid#stl#modified()}%<'.'%#StatusLineBranch#'
-          \ .'%{ndavid#stl#branch()}%*%{ndavid#stl#sy_stats_wrapper()} '
+    let stl .= icon.'%f%{ndavd#stl#modified()}%<'.'%#StatusLineBranch#'
+          \ .'%{ndavd#stl#branch()}%*%{ndavd#stl#sy_stats_wrapper()} '
     if s:show_ln==1 | let stl .= '%= %l(%02p%%):%-1c' | endif
     let &l:stl = stl
   endif
 endfunction
 
-function ndavid#stl#modified()
+function! ndavd#stl#modified() abort
   if &modifiable
     if &modified
       return '[+]'
@@ -29,19 +31,19 @@ function ndavid#stl#modified()
   else | return '[-]' | endif
 endfunction
 
-function ndavid#stl#branch()
+function! ndavd#stl#branch() abort
   let branch = FugitiveHead(8)
   if branch=~#'master\|main'
     exe 'hi StatusLineBranch guifg=#2ef25d ctermfg=Green guibg='.s:bg.' ctermbg='.s:bg
   else | exe 'hi! link StatusLineBranch StatusLine' | endif
-  return branch == '' ? '' : s:nbsc.'['.branch.']'
+  return branch ==# '' ? '' : s:nbsc.'['.branch.']'
 endfunction
 
-function s:make_stl()
-  return &ft!~'NvimTree\|vista_kind\|startify\|packer\|startuptime'
+function! s:make_stl() abort
+  return &filetype!~#'NvimTree\|vista_kind\|startify\|packer\|startuptime'
 endfunction
 
-function! ndavid#stl#sy_stats_wrapper()
+function! ndavd#stl#sy_stats_wrapper() abort
   let [added, modified, removed] = sy#repo#get_stats()
   let symbols = ['+', '-', '~']
   let stats = [added, removed, modified]  " reorder
@@ -57,7 +59,7 @@ function! ndavid#stl#sy_stats_wrapper()
   return statline
 endfunction
 
-function ndavid#stl#mode()
+function! ndavd#stl#mode() abort
   let mode = mode()
   if match(['n','c'], mode)!=-1
     let guifg='#949494'
@@ -79,20 +81,20 @@ function ndavid#stl#mode()
         \ "\<C-s>": 'S·BLOCK '
         \ }
   let mode = get(mode_map, mode, '')
-  if mode=~'NORMAL\|COMMAND'
+  if mode=~#'NORMAL\|COMMAND'
     exe 'hi StatusLineMode guifg='.guifg.' gui=NONE cterm=NONE ctermfg='.ctermfg
   else
     exe 'hi StatusLineMode guifg='.guifg.' gui=bold cterm=bold ctermfg='.ctermfg
   endif
-  if mode=='INSERT' | let mode = 'ʌʌ'.s:nbsc.mode
-  elseif mode=='REPLACE' | let mode = 'vv'.s:nbsc.mode
+  if mode==#'INSERT' | let mode = 'ʌʌ'.s:nbsc.mode
+  elseif mode==#'REPLACE' | let mode = 'vv'.s:nbsc.mode
   else | let mode = '>>'.s:nbsc.mode | endif
   return mode
 endfunction
 
 " Show line info
 let s:show_ln = 0
-function ndavid#stl#toggle_ln()
+function! ndavd#stl#toggle_ln() abort
   if s:show_ln == 0
     let s:show_ln=1
     call s:stl()
@@ -101,16 +103,18 @@ function ndavid#stl#toggle_ln()
     call s:stl()
   endif
 endfunction
-nn <silent><expr><leader>sl ndavid#stl#toggle_ln()
+nn <silent><expr><leader>sl ndavd#stl#toggle_ln()
 
-" Update Statusline when entering
-au BufEnter * call s:stl()
+aug NdavdStl
+  " Update Statusline when entering
+  au BufEnter * call s:stl()
 
-" Packer statusline
-au FileType packer let &l:stl='%=  Packer %='
-" Startify statusline
-au User StartifyReady let &l:stl='%=  startify %='
-" StartupTime statusline
-au FileType startuptime let &l:stl='%=  StartupTime %='
-" Terminal statusline
-au TermOpen * let &l:stl='%=  terminal %='
+  " Packer statusline
+  au FileType packer let &l:stl='%=  Packer %='
+  " Startify statusline
+  au User StartifyReady let &l:stl='%=  startify %='
+  " StartupTime statusline
+  au FileType startuptime let &l:stl='%=  StartupTime %='
+  " Terminal statusline
+  au TermOpen * let &l:stl='%=  terminal %='
+aug END
