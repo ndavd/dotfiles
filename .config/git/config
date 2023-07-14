@@ -14,3 +14,8 @@
   showUntrackedFiles = normal
 [rebase]
   autosquash = true
+[alias]
+  l = log --pretty=format:"\"%C(auto)%h%d%C(reset) %C(blue)%cn %C(cyan)[%cr]%C(reset) %s\""
+  lg = log --graph --pretty=format:"\"%C(auto)%h%d%C(reset) %C(blue)%cn %C(cyan)[%cr]%C(reset) %s\""
+  ld = log --pretty=format:"\"%C(auto)%H%d%C(reset) %C(blue)%cn %C(cyan)[%cd]%C(reset) %s\""
+  lplus = log --stat --oneline --pretty=format:"\"%C(auto)%H%d%C(reset) %C(blue)%cn %C(cyan)[%cr; %cd]%C(reset)%n%C(#F1502F)%B\""
