@@ -14,7 +14,7 @@ COLOR3 = #000000
 
 ; Made to look like i3status while keeping the costumization that polybar offers
 [bar/bspwm_version_primary]
-monitor = HDMI-0
+monitor = DP-4
 width = 100%
 height = 14
 radius = 0.0
@@ -53,7 +53,7 @@ cursor-scroll = ns-resize
 
 # Currently the same as primary
 [bar/bspwm_version_secondary]
-monitor = DP-4
+monitor = HDMI-0
 width = 100%
 height = 14
 radius = 0.0
