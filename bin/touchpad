@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+xinput set-prop 'MSFT0001:00 06CB:CE2D Touchpad' 'libinput Tapping Enabled' 1 &
+xinput set-prop 'MSFT0001:00 06CB:CE2D Touchpad' 'libinput Disable While Typing Enabled' 0 &

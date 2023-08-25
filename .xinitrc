@@ -15,12 +15,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-### Touchpad
-xinput set-prop 'MSFT0001:00 06CB:CE2D Touchpad' 'libinput Tapping Enabled' 1 &
-xinput set-prop 'MSFT0001:00 06CB:CE2D Touchpad' 'libinput Disable While Typing Enabled' 0 &
-
-xsetroot -cursor_name left_ptr &
+[[ -f ~/bin/touchpad ]] && ~/bin/touchpad
 [[ -f ~/bin/keymaps ]] && ~/bin/keymaps
+[[ -f ~/bin/cursor ]] && ~/bin/cursor
 
 ### Session
 session=${1:-bspwm}
