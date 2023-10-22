@@ -62,7 +62,6 @@
 !.xinitrc
 !.xserverrc
 !.zshenv
-!.project-dirs
 
 # Exclude specific sub files/directories
 
