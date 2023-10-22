@@ -2,16 +2,16 @@
 ## This repository contains the dotfiles for the setup that I use everyday.
 ~~**Warning: dark and minimal setup ahead!**~~
 
-![Screenshot](https://raw.githubusercontent.com/ndav1d/dotfiles/main/.github/bg.png)
+![Demo](https://raw.githubusercontent.com/ndavd/dotfiles/main/.github/demo.gif)
 
-I like to customize everything until it fits my needs and style and I'm
-constantly changing things.
+I like to customize everything until it fits my needs and I'm constantly changing/breaking/refactoring things.
 
-***IDE:***                   [neovim](https://github.com/ndav1d/dotfiles/tree/main/.config/nvim)
-***Text editor:***           [vim](https://github.com/ndav1d/dotfiles/tree/main/.vim)
-***Shell:***                 [zsh](https://github.com/ndav1d/dotfiles/tree/main/.zsh)
-***Terminal emulator:***     [kitty](https://github.com/ndav1d/dotfiles/tree/main/.config/kitty)
-***Window manager:***        [bspwm](https://github.com/ndav1d/dotfiles/tree/main/.config/bspwm)
-***Status bar:***            [polybar](https://github.com/ndav1d/dotfiles/tree/main/.config/polybar)
-***Application launcher:***  [rofi](https://github.com/ndav1d/dotfiles/tree/main/.config/rofi)
-***File manager:***          [lf](https://github.com/ndav1d/dotfiles/tree/main/.config/lf)
+***IDE:***                   [neovim](https://github.com/ndavd/dotfiles/tree/main/.config/nvim)
+***Text editor:***           [vim](https://github.com/ndavd/dotfiles/tree/main/.vim)
+***Shell:***                 [zsh](https://github.com/ndavd/dotfiles/tree/main/.zsh)
+***Terminal emulator:***     [kitty](https://github.com/ndavd/dotfiles/tree/main/.config/kitty)
+***Terminal workspace:***    [zellij](https://github.com/ndavd/dotfiles/tree/main/.config/zellij)
+***Window manager:***        [bspwm](https://github.com/ndavd/dotfiles/tree/main/.config/bspwm)
+***Status bar:***            [polybar](https://github.com/ndavd/dotfiles/tree/main/.config/polybar)
+***Application launcher:***  [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)
+***File manager:***          [lf](https://github.com/ndavd/dotfiles/tree/main/.config/lf)
