@@ -142,8 +142,13 @@ fzfa() {
   fd --unrestricted --full-path --color=always | fzf
 }
 f() {
-  local directory="$(fd --unrestricted --full-path --color=always -E '/.*' -E node_modules -E .git -E target | fzf)"
-  [[ -n $directory ]] && cd "$directory"
+  local dir="$(fd --unrestricted --type d --full-path --color=always -E '/.*' -E node_modules -E .git -E target | fzf)"
+  [[ -n $dir ]] && cd "$dir"
+}
+z() {
+  local dirs=("${(f)"$(<$HOME/.project-dirs)"}")
+  local dir="$(fd --unrestricted --color=always --min-depth 1 --max-depth 1 . "${dirs[@]}" | fzf)"
+  [[ -n $dir ]] && cd "$dir" && zellij -l project
 }
 book() {
   local file="$(fd --unrestricted --color=always . $HOME/data/books | fzf)"

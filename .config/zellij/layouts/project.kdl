@@ -1,5 +1,12 @@
 layout {
-    tab
+    tab name="nvim" focus=true {
+        pane {
+            command "$HOME/.config/zellij/start-nvim"
+        }
+    }
+    tab name="shell" {
+        pane
+    }
 
     default_tab_template {
         children
