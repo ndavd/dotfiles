@@ -16,6 +16,7 @@ require('telescope').setup({
       '--line-number',
       '--column',
       '--smart-case',
+      '--hidden',
     },
     prompt_prefix = ' > ',
     initial_mode = 'insert',
@@ -36,7 +37,7 @@ require('telescope').setup({
       },
     },
     file_sorter = require('telescope.sorters').get_fzy_sorter,
-    file_ignore_patterns = { 'misc/*', 'notes/*' },
+    file_ignore_patterns = { 'misc/', 'notes/', '.git/' },
     generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
     winblend = 0,
     border = {},
@@ -51,6 +52,11 @@ require('telescope').setup({
 
     -- -- Developer configurations: Not meant for general override
     -- buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
+  },
+  pickers = {
+    find_files = {
+      hidden = true,
+    },
   },
   extensions = {
     frecency = {
