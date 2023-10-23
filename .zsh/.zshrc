@@ -147,8 +147,8 @@ f() {
 }
 z() {
   local dirs=(${(f)~"$(<$HOME/.project-dirs)"})
-  local dir="$(fd --unrestricted --relative-path --type d --color=always --min-depth 1 --max-depth 1 . "${dirs[@]}" | fzf)"
-  [[ -n $dir ]] && cd "$dir" && zellij -l project
+  local dir="$(fd --unrestricted --absolute-path --type d --color=always --min-depth 1 --max-depth 1 . "${dirs[@]}" | sed "s|${HOME}|~|" | fzf)"
+  [[ -n $dir ]] && cd $~dir && zellij -l project
 }
 book() {
   local file="$(fd --unrestricted --color=always . $HOME/data/books | fzf)"
