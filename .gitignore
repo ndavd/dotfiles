@@ -19,6 +19,8 @@
 !.config/lf/**
 !.config/newsboat/
 !.config/newsboat/**
+!.config/nnn
+!.config/nnn/**
 !.config/nvim
 !.config/nvim/**
 !.config/polybar/
@@ -69,6 +71,7 @@
 .config/lf/cleaner
 .config/lf/preview
 .config/newsboat/urls
+.config/nnn/plugins/*
 .config/nvim/plugin/packer_compiled.lua
 .zsh/.zcompdump
 bin/*.AppImage

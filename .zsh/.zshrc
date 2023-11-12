@@ -127,15 +127,17 @@ preexec() {
 }
 
 ### aliases
-alias g='git'
-alias ls='ls --color=auto -N'
-alias grep='grep --colour=auto'
-alias egrep='egrep --colour=auto'
-alias fgrep='fgrep --colour=auto'
-alias lf='lfrun'
-alias ffprobe='ffprobe -hide_banner'
-alias news='newsboat'
-alias nvmd='nvm use default'
+alias g="git"
+alias ls="ls --color=auto -N"
+alias grep="grep --colour=auto"
+alias egrep="egrep --colour=auto"
+alias fgrep="fgrep --colour=auto"
+alias ffprobe="ffprobe -hide_banner"
+alias news="newsboat"
+alias nvmd="nvm use default"
+
+### nnn
+source $HOME/.config/nnn/nnn.sh
 
 ### fzf
 fzfa() {

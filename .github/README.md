@@ -14,4 +14,4 @@ I like to customize everything until it fits my needs and I'm constantly changin
 ***Window manager:***        [bspwm](https://github.com/ndavd/dotfiles/tree/main/.config/bspwm)
 ***Status bar:***            [polybar](https://github.com/ndavd/dotfiles/tree/main/.config/polybar)
 ***Application launcher:***  [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)
-***File manager:***          [lf](https://github.com/ndavd/dotfiles/tree/main/.config/lf)
+***File manager:***          [nnn](https://github.com/ndavd/dotfiles/tree/main/.config/nnn)
