@@ -157,7 +157,7 @@ book() {
   [[ -n $file ]] && zathura "$file"
 }
 video() {
-  local file="$(fd --no-ignore --color=always --glob '*.{mp4,mkv,mpeg,webm,avi,h264,mov,wmv}' | fzf)"
+  local file="$(fd --no-ignore --color=always --glob '*.{mp4,mkv,mpeg,webm,avi,h264,mov,wmv}' $HOME/data/videos | fzf)"
   [[ -n $file ]] && mpv "$file"
 }
 
