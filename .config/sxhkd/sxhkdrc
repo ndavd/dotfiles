@@ -46,7 +46,7 @@ super + b
 
 # file manager
 super + g
-  kitty lf
+  kitty n
 
 # program launcher
 super + r
