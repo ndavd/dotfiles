@@ -65,15 +65,10 @@ local custom_conf = {
       },
     },
   },
-  solidity_ls_nomicfoundation = {
-    capabilities = capabilities,
-  },
   pyright = {
     root_dir = current_dir,
-    capabilities = capabilities,
   },
   jsonls = {
-    capabilities = capabilities,
     commands = {
       Format = {
         function()
@@ -146,10 +141,15 @@ local custom_conf = {
 }
 
 local function get_conf(server)
+  local capabilities_conf = {
+    capabilities = capabilities
+  }
   if custom_conf[server] then
-    return custom_conf[server]
+    local c = custom_conf[server]
+    c.capabilities = capabilities_conf.capabilities
+    return c
   end
-  return { capabilities = capabilities }
+  return capabilities_conf
 end
 
 for _, server in pairs(servers) do
