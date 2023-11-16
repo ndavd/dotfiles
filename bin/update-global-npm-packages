@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+source $NVM_DIR/nvm.sh
+nvm use default
+npm update -g \
+  @nomicfoundation/solidity-language-server \
+  @tailwindcss/language-server \
+  bash-language-server \
+  corepack \
+  eslint \
+  graphql-language-service-cli \
+  npm \
+  prettier \
+  solhint \
+  solidity-ls \
+  typescript-language-server \
+  typescript \
+  vim-language-server \
+  vscode-langservers-extracted \
+  yarn \
