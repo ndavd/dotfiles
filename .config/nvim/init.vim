@@ -284,7 +284,6 @@ nn <silent>gd    :lua require('lsp_custom').definition()<CR>
 nn <silent>gD    :lua vim.lsp.buf.declaration()<CR>
 nn <silent>gr    :lua vim.lsp.buf.rename()<CR>
 nn <silent>gR    :lua vim.lsp.buf.references()<CR>
-nn <silent>gf    :lua vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 10000 })<CR>
 nn <silent>gh    :lua vim.lsp.buf.inlay_hint(0)<CR>
 " Commands
 com Cd lua require('lsp_custom').cd_project_root()
@@ -298,8 +297,11 @@ smap <expr><C-j> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-j>'
 " --- For cmp -----------------------------------------------------------"
 lua require('cmp_config')
 
-" --- For null-ls -------------------------------------------------------"
-lua require('nullls_config')
+" --- For conform.nvim --------------------------------------------------"
+lua require('conform_config')
+
+" --- For nvim-lint -----------------------------------------------------"
+lua require('lint_config')
 
 " -----------------------------------------------------------------------"
 " --- Custom lua settings -----------------------------------------------"
