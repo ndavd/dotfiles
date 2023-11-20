@@ -4,7 +4,9 @@ local execute = vim.api.nvim_command
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+  execute(
+    '!git clone https://github.com/wbthomason/packer.nvim ' .. install_path
+  )
 end
 
 require('packer').config = {
@@ -18,6 +20,9 @@ require('packer').config = {
 return require('packer').startup(function(use)
   -- Packer --
   use('wbthomason/packer.nvim')
+
+  -- Mini all things --
+  use('echasnovski/mini.nvim')
 
   -- Icon support --
   use({
@@ -34,52 +39,17 @@ return require('packer').startup(function(use)
   -- Indentation --
   use('tpope/vim-sleuth')
 
-  -- Auto comment --
-  use('numToStr/Comment.nvim')
-
-  -- Easy Align --
-  use({ 'junegunn/vim-easy-align', keys = { { 'x', '<plug>(LiveEasyAlign)' } } })
-
-  -- Hop --
-  use({
-    'phaazon/hop.nvim',
-    as = 'hop',
-    config = function()
-      require('hop').setup({ keys = 'etovxqpdygfblzhckisuran' })
-    end,
-  })
-
-  -- Surround text --
-  use('tpope/vim-surround')
-
-  -- Complete brackets --
-  use({
-    'windwp/nvim-autopairs',
-    config = function()
-      require('autopairs_config')
-    end,
-  })
-
   -- Startuptime --
   use('dstein64/vim-startuptime')
 
   -- RFC --
   use('mhinz/vim-rfc')
 
-  -- File Tree --
-  use({
-    'nvim-tree/nvim-tree.lua',
-    tag = 'nightly',
-  })
-
   -- Cheat.sh --
   use('dbeniamine/cheat.sh-vim')
 
   -- Color picker --
   use('ziontee113/color-picker.nvim')
-
-  -- Colorizer --
-  use({ 'norcalli/nvim-colorizer.lua' })
 
   -- Git --
   use('tpope/vim-fugitive')

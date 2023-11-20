@@ -120,35 +120,13 @@ lua require('webdevicons_config').my_setup()
 " Update filetype icon highlight
 lua require('webdevicons_config').make_hl()
 
+" --- For mini.nvim -----------------------------------------------------"
+lua require('mini_config')
+
 " --- For Color picker --------------------------------------------------"
 lua require('colorpicker_config')
 nn <silent><C-c> <cmd>PickColor<CR>
 ino <silent><C-c> <cmd>PickColorInsert<CR>
-
-" --- For Colorizer -----------------------------------------------------"
-nn <silent><leader>co :ColorizerToggle<CR>
-
-" --- For Hop.nvim ------------------------------------------------------"
-no <silent>,w <cmd>HopWord<CR>
-no <silent>,q <cmd>HopChar2<CR>
-
-" " --- For ScrollView ----------------------------------------------------"
-" let g:scrollview_on_startup = 0
-" let g:scrollview_column = 1
-" let g:scrollview_excluded_filetypes =
-"       \ ['startify', 'vista_kind', 'packer']
-" let g:scrollview_mode = 'flexible'
-" let g:active_scrollview = 0
-" function ToggleSrollView()
-"   if g:active_scrollview == 0
-"     let g:active_scrollview = 1
-"     exe 'ScrollViewEnable'
-"   elseif g:active_scrollview == 1
-"     let g:active_scrollview = 0
-"     exe 'ScrollViewDisable'
-"   endif
-" endfunction
-" nn <silent><leader>sb :call ToggleSrollView()<CR>
 
 " --- For vim-startify --------------------------------------------------"
 function! StartifyEntryFormat()
@@ -218,7 +196,6 @@ function StartifyReLaunch()
   call StartifyUpdateCentering()
   Startify
 endfunction
-" nn <silent><leader><leader>s :call StartifyReLaunch()<CR>
 
 " --- For Symbols-outline.nvim ------------------------------------------"
 lua require('symbolsoutline_config')
@@ -230,19 +207,8 @@ let g:signify_sign_add    = s:signify_symbol
 let g:signify_sign_change = s:signify_symbol
 let g:signify_sign_delete = s:signify_symbol
 
-" --- For comment.nvim --------------------------------------------------"
-lua require('comment_config')
-
-" --- For tree-tree.nvim ------------------------------------------------"
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
-lua require('nvim_tree_config')
-
 " --- For matchup -------------------------------------------------------"
 let g:matchup_matchparen_offscreen = {}
-
-" --- For vim-easy-align ------------------------------------------------"
-xmap <cr> <plug>(LiveEasyAlign)
 
 " --- For vim-sleuth ----------------------------------------------------"
 let g:sleuth_automatic = 0

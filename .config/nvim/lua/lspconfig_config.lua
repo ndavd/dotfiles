@@ -140,7 +140,7 @@ local custom_conf = {
   },
 }
 
-local function get_conf(server)
+local get_conf = function (server)
   local capabilities_conf = {
     capabilities = capabilities
   }
@@ -152,6 +152,6 @@ local function get_conf(server)
   return capabilities_conf
 end
 
-for _, server in pairs(servers) do
+for _, server in ipairs(servers) do
   require('lspconfig')[server].setup(get_conf(server))
 end
