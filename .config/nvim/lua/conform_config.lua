@@ -3,7 +3,7 @@ local out = {}
 local utils = require('conform.util')
 
 local eslintd = { 'eslint_d' }
-local prettier = { 'prettier' }
+local eslintd_prettier = { 'eslint_d', { 'prettierd', 'prettier' } }
 local denofmt = { 'deno_fmt' }
 local stylua = { 'stylua' }
 local gofmt = { 'gofmt' }
@@ -28,14 +28,19 @@ local js_ts_x = function()
 
   if
     has_file(root, {
-      '.eslintrc.js',
-      '.eslintrc.cjs',
-      '.eslintrc.yaml',
-      '.eslintrc.yml',
-      '.eslintrc.json',
+      '.prettierrc',
+      '.prettierrc.json',
+      '.prettierrc.yml',
+      '.prettierrc.yaml',
+      '.prettierrc.json5',
+      '.prettierrc.js',
+      '.prettierrc.cjs',
+      '.prettierrc.toml',
+      'prettier.config.js',
+      'prettier.config.cjs',
     })
   then
-    return eslintd
+    return eslintd_prettier
   end
 
   -- Check for package.json config entry
@@ -43,12 +48,12 @@ local js_ts_x = function()
   if vim.fn.filereadable(package_json_path) == 1 then
     local package_json =
       vim.json.decode(table.concat(vim.fn.readfile(package_json_path)))
-    if package_json['eslintConfig'] ~= nil then
-      return eslintd
+    if package_json['prettier'] ~= nil then
+      return eslintd_prettier
     end
   end
 
-  return prettier
+  return eslintd
 end
 
 require('conform').setup({
@@ -88,7 +93,7 @@ local supports_buffer_formatting = function()
 end
 
 out.formatexpr = function()
-  local n = require('conform').formatexpr()
+  local n = require('conform').formatexpr({ timeout_ms = 10000 })
 
   if n == 0 then
     return 0
