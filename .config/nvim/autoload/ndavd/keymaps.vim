@@ -37,7 +37,7 @@ nn N Nzzzv
 nn J mzJ`z
 
 " --- Formatting --------------------------------------------------------"
-nn gqf mmgggqG`m
+nn <silent>gqf mmgggqG`m
 
 " --- Undo break points -------------------------------------------------"
 ino , ,<C-g>u

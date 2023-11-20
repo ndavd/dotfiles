@@ -53,6 +53,7 @@ set shortmess+=c
 set inccommand=split
 set foldmethod=marker
 set laststatus=3
+set formatexpr=v:lua.require'conform_config'.formatexpr()'
 
 " --- Title -------------------------------------------------------------"
 set title
