@@ -19,17 +19,17 @@ local custom_conf = {
   },
   hipatterns = function()
     local hipatterns = require('mini.hipatterns')
-    local frontier_p = function(word)
+    local p = function(word)
       return '%f[%w]()' .. word .. '()%f[%W]'
     end
-
     return {
       highlighters = {
-        fix = { pattern = frontier_p('FIX'), group = 'MiniHipatternsFixme' },
-        fixme = { pattern = frontier_p('FIXME'), group = 'MiniHipatternsFixme' },
-        hack = { pattern = frontier_p('HACK'), group = 'MiniHipatternsHack' },
-        todo = { pattern = frontier_p('TODO'), group = 'MiniHipatternsTodo' },
-        note = { pattern = frontier_p('NOTE'), group = 'MiniHipatternsNote' },
+        fix = { pattern = p('FIX'), group = 'MiniHipatternsFixme' },
+        fixme = { pattern = p('FIXME'), group = 'MiniHipatternsFixme' },
+        hack = { pattern = p('HACK'), group = 'MiniHipatternsHack' },
+        todo = { pattern = p('TODO'), group = 'MiniHipatternsTodo' },
+        pending = { pattern = p('PENDING'), group = 'MiniHipatternsTodo' },
+        note = { pattern = p('NOTE'), group = 'MiniHipatternsNote' },
         hex_color = hipatterns.gen_highlighter.hex_color(),
       },
     }

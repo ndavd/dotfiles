@@ -26,6 +26,10 @@ end
 local js_ts_x = function()
   local root = vim.lsp.buf.list_workspace_folders()[1]
 
+  if root == nil then
+    return eslintd
+  end
+
   if
     has_file(root, {
       '.prettierrc',

@@ -10,9 +10,6 @@
 "------------------------------------------------------------------------"
 scriptencoding utf-8
 
-" --- Load plugins ------------------------------------------------------"
-lua require('plugins')
-
 " -----------------------------------------------------------------------"
 " --- NVIM settings -----------------------------------------------------"
 
@@ -111,6 +108,9 @@ aug MarkdownHighlight
   au FileType markdown setlocal conceallevel=2
 aug END
 
+" --- Load plugins ------------------------------------------------------"
+lua require('plugins')
+
 " -----------------------------------------------------------------------"
 " --- Plugin settings ---------------------------------------------------"
 
@@ -150,7 +150,7 @@ let g:startify_lists = [
 let g:startify_bookmarks = [
       \ ]
 let g:startify_commands = [
-      \ {'p': 'PackerSync'},
+      \ {'p': 'Lazy sync'},
       \ ]
 let g:startify_files_number = 5
 let g:startify_fortune_use_unicode = 0

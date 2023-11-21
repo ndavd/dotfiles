@@ -72,6 +72,6 @@
 .config/lf/preview
 .config/newsboat/urls
 .config/nnn/plugins/*
-.config/nvim/plugin/packer_compiled.lua
+.config/nvim/lazy-lock.json
 .zsh/.zcompdump
 bin/*.AppImage

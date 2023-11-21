@@ -1,73 +1,62 @@
 -- Bootstrapping
-local fn = vim.fn
-local execute = vim.api.nvim_command
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  execute(
-    '!git clone https://github.com/wbthomason/packer.nvim ' .. install_path
-  )
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.uv.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable',
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-require('packer').config = {
-  profile = {
-    enable = true,
-    threshold = 1,
-  },
-}
-
--- Plugins
-return require('packer').startup(function(use)
-  -- Packer --
-  use('wbthomason/packer.nvim')
-
-  -- Mini all things --
-  use('echasnovski/mini.nvim')
+local plugins = {
+  -- Mini all things! --
+  'echasnovski/mini.nvim',
 
   -- Icon support --
-  use({
+  {
     'yamatsum/nvim-nonicons',
-    requires = { 'nvim-tree/nvim-web-devicons' },
-  })
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+  },
 
   -- Better start screen --
-  use({ 'mhinz/vim-startify' })
+  'mhinz/vim-startify',
 
   -- Better matchit --
-  use('andymass/vim-matchup')
+  'andymass/vim-matchup',
 
   -- Indentation --
-  use('tpope/vim-sleuth')
-
-  -- Startuptime --
-  use('dstein64/vim-startuptime')
+  'tpope/vim-sleuth',
 
   -- RFC --
-  use('mhinz/vim-rfc')
+  'mhinz/vim-rfc',
 
   -- Cheat.sh --
-  use('dbeniamine/cheat.sh-vim')
+  'dbeniamine/cheat.sh-vim',
 
   -- Color picker --
-  use('ziontee113/color-picker.nvim')
+  'ziontee113/color-picker.nvim',
 
   -- Git --
-  use('tpope/vim-fugitive')
-  use('mhinz/vim-signify')
+  'tpope/vim-fugitive',
+  'mhinz/vim-signify',
 
   -- Sql.nvim --
-  use('tami5/sql.nvim')
+  'tami5/sql.nvim',
 
   -- Solidity --
-  use('tomlion/vim-solidity')
+  'tomlion/vim-solidity',
 
   -- View tags --
-  use('simrat39/symbols-outline.nvim')
+  'simrat39/symbols-outline.nvim',
 
   -- Telescope --
-  use({
+  {
     'nvim-telescope/telescope.nvim',
-    requires = {
+    dependencies = {
       'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-fzy-native.nvim',
@@ -75,44 +64,46 @@ return require('packer').startup(function(use)
       'nvim-telescope/telescope-symbols.nvim',
       'nvim-telescope/telescope-frecency.nvim',
     },
-  })
+  },
 
   -- Treesitter --
-  use({
+  {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    requires = 'windwp/nvim-ts-autotag',
-  })
-  use('JoosepAlviste/nvim-ts-context-commentstring')
+    build = ':TSUpdate',
+    dependencies = {
+      'windwp/nvim-ts-autotag',
+      'JoosepAlviste/nvim-ts-context-commentstring',
+    },
+  },
 
   -- Lua declarations --
-  use('ii14/emmylua-nvim')
+  'ii14/emmylua-nvim',
 
   -- LSP --
-  use('neovim/nvim-lspconfig')
-  use('stevearc/conform.nvim')
-  use('mfussenegger/nvim-lint')
-  use('hrsh7th/nvim-cmp')
-  use('hrsh7th/cmp-nvim-lsp')
-  use('hrsh7th/cmp-nvim-lua')
-  use('hrsh7th/cmp-path')
-  use('ray-x/cmp-treesitter')
-  use('f3fora/cmp-spell')
-  use({
-    'hrsh7th/cmp-vsnip',
-    after = 'nvim-cmp',
-    requires = {
+  'neovim/nvim-lspconfig',
+  'stevearc/conform.nvim',
+  'mfussenegger/nvim-lint',
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
       'hrsh7th/vim-vsnip',
-      {
-        'rafamadriz/friendly-snippets',
-        after = 'cmp-vsnip',
-      },
+      'hrsh7th/cmp-vsnip',
+      'rafamadriz/friendly-snippets',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-path',
+      'ray-x/cmp-treesitter',
+      'f3fora/cmp-spell',
     },
-  })
+  },
 
   -- Colorschemes --
-  use('gruvbox-community/gruvbox')
-  use('Mofiqul/vscode.nvim')
-  use('catppuccin/nvim')
-  use({ 'projekt0n/github-nvim-theme', branch = '0.0.x' })
-end)
+  'gruvbox-community/gruvbox',
+  'Mofiqul/vscode.nvim',
+  'catppuccin/nvim',
+  { 'projekt0n/github-nvim-theme', branch = '0.0.x' },
+}
+
+local opts = {}
+
+require('lazy').setup(plugins, opts)
