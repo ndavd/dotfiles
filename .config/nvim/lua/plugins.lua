@@ -22,9 +22,6 @@ local plugins = {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
 
-  -- Better start screen --
-  'mhinz/vim-startify',
-
   -- Better matchit --
   'andymass/vim-matchup',
 

@@ -40,7 +40,7 @@ function! ndavd#stl#branch() abort
 endfunction
 
 function! s:make_stl() abort
-  return &filetype!~#'NvimTree\|vista_kind\|startify\|packer'
+  return &filetype!~#'starter\|lazy'
 endfunction
 
 function! ndavd#stl#sy_stats_wrapper() abort
@@ -109,10 +109,10 @@ aug NdavdStl
   " Update Statusline when entering
   au BufEnter * call s:stl()
 
-  " Packer statusline
-  au FileType packer let &l:stl='%=  Packer %='
-  " Startify statusline
-  au User StartifyReady let &l:stl='%=  startify %='
+  " Lazy statusline
+  au FileType lazy let &l:stl='%=  Lazy %='
+  " mini.starter statusline
+  au User MiniStarterOpened let &l:stl='%=  mini.starter %='
   " Terminal statusline
   au TermOpen * let &l:stl='%=  terminal %='
 aug END
