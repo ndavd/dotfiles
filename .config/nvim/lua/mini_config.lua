@@ -6,7 +6,10 @@ local modules = {
   'files',
   'hipatterns',
   'bracketed',
+  'move',
   'starter',
+  'pick',
+  'extra',
 }
 
 local custom_conf = {
@@ -51,15 +54,36 @@ local custom_conf = {
       return t
     end
 
+    local format_text = function(str)
+      local n = 60
+      local formatted_str = ''
+      local len = #str
+      local i = 1
+      while i < len do
+        local pos
+        if str:sub(i + n, i + n) == ' ' then
+          pos = i + n
+        else
+          local found = str:find(' ', i + n)
+          if found ~= nil then
+            pos = found
+          else
+            pos = len
+          end
+        end
+        formatted_str = formatted_str
+          .. str:sub(i, pos):gsub('^%s*(.-)%s*$', '%1')
+          .. '\n'
+        i = pos
+      end
+      return formatted_str
+    end
+
     local random_quote = function()
       local quotes = require('quotes')
       math.randomseed(os.time())
-      local quote = vim
-        .iter(quotes[math.random(#quotes)])
-        :map(function(str)
-          return vim.fn.system('fold -w 60 -s <(echo "' .. str .. '")')
-        end)
-        :totable()
+      local quote =
+        vim.iter(quotes[math.random(#quotes)]):map(format_text):totable()
       local s = ''
       for _, sub in ipairs(quote) do
         s = s .. sub
@@ -99,6 +123,24 @@ local custom_conf = {
         starter.gen_hook.padding(2, 1),
       },
       footer = '',
+    }
+  end,
+  pick = function()
+    local win_config = function()
+      local height = math.floor(0.8 * vim.o.lines)
+      local width = math.floor(0.8 * vim.o.columns)
+      return {
+        anchor = 'NW',
+        height = height,
+        width = width,
+        row = math.floor(0.3 * (vim.o.lines - height)),
+        col = math.floor(0.5 * (vim.o.columns - width)),
+      }
+    end
+    return {
+      window = {
+        config = win_config,
+      },
     }
   end,
 }
