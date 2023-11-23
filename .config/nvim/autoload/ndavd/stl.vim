@@ -40,7 +40,7 @@ function! ndavd#stl#branch() abort
 endfunction
 
 function! s:make_stl() abort
-  return &filetype!~#'starter\|lazy'
+  return &filetype!~#'starter\|lazy\|pick'
 endfunction
 
 function! ndavd#stl#sy_stats_wrapper() abort
@@ -109,6 +109,7 @@ aug NdavdStl
   " Update Statusline when entering
   au BufEnter * call s:stl()
 
+  au User MiniPickStart let &l:stl='%= 🔭 Pick %='
   " Lazy statusline
   au FileType lazy let &l:stl='%=  Lazy %='
   " mini.starter statusline

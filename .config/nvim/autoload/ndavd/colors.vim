@@ -33,9 +33,6 @@ function! s:make_hls() abort
   " Visual and Search
   hi Visual gui=NONE guibg=#0E1F2F guifg=fg ctermbg=DarkBlue ctermfg=White
   hi Search gui=reverse cterm=reverse
-  " Startify
-  hi StartifyHeader gui=NONE guifg=#d4d4d4
-  hi StartifyFooter gui=NONE guifg=#d4d4d4
   " Signify
   hi SignifySignAdd guifg=#b8cb26 guibg=NONE ctermfg=DarkGreen ctermbg=NONE
   hi SignifySignDelete guifg=#f44747 guibg=NONE ctermfg=DarkRed ctermbg=NONE
@@ -45,23 +42,17 @@ function! s:make_hls() abort
   " Listchars
   hi NonText guifg=#3a3a3a
   hi Whitespace guifg=#3a3a3a
-  " Indent Blankline
-  hi IndentBlankline1 guibg=#101010 ctermbg=DarkGrey
-  hi IndentBlankline2 guibg=NONE ctermbg=NONE
   " Match
   hi MatchWord gui=underline guisp=#bbbbbb ctermbg=DarkRed
   hi MatchWordCur gui=underline guisp=#bbbbbb ctermbg=DarkRed
-  " Packer
-  hi packerWorking guibg=NONE guifg=#599cd6 gui=NONE
-  hi packerSuccess guibg=NONE guifg=#b8cb26 gui=bold
-  hi packerFail guibg=NONE guifg=#f44747 gui=bold
-  " ScrollView
-  hi ScrollView guibg=#ffffff
   " Telescope
   hi! link TelescopePromptBorder Normal
   hi! link TelescopePreviewBorder Normal
   hi! link TelescopeResultsBorder Normal
   hi TelescopePromptPrefix guifg=#ea6962
+  " mini.pick
+  hi! link MiniPickMatchCurrent PMenuSel
+  hi! link MiniPickPrompt MiniStarterItemPrefix
   " Lsp
   hi LspDiagnosticsDefaultError guibg=NONE guifg=#ea6962
   hi LspDiagnosticsVirtualTextError guibg=NONE guifg=#ea6962
@@ -70,10 +61,6 @@ function! s:make_hls() abort
   hi LspDiagnosticsFloatingHint guibg=NONE
   hi LspDiagnosticsFloatingInformation guibg=NONE
   hi LspDiagnosticsFloatingWarning guibg=NONE
-  " Compe
-  hi CompeDocumentation guibg=#222222
-  " Nvim Tree
-  hi NvimTreeNormal guibg=NONE
   " Man
   hi manUnderline guisp=fg gui=underline
   " Folded
@@ -88,10 +75,6 @@ aug END
 function! s:custom_vscode_hls() abort
   " MatchParen
   hi MatchParen guibg=#303030
-  " " Tabline
-  " hi TabLine guifg=#6b9956 guibg=#111111
-  " hi TabLineSel guifg=#111111 guibg=#6b9956
-  " hi TabLineFill guifg=#949494 guibg=NONE
 endfunction
 aug VscodeCustom
   au!
