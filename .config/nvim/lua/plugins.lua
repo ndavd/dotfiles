@@ -47,22 +47,6 @@ local plugins = {
   -- Solidity --
   'tomlion/vim-solidity',
 
-  -- View tags --
-  'simrat39/symbols-outline.nvim',
-
-  -- Telescope --
-  {
-    'nvim-telescope/telescope.nvim',
-    dependencies = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-fzy-native.nvim',
-      'nvim-telescope/telescope-fzf-writer.nvim',
-      'nvim-telescope/telescope-symbols.nvim',
-      'nvim-telescope/telescope-frecency.nvim',
-    },
-  },
-
   -- Treesitter --
   {
     'nvim-treesitter/nvim-treesitter',

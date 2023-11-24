@@ -92,7 +92,7 @@ set selection=inclusive
 let g:vimsyn_noerror = 1
 
 " --- Highlight when yanking --------------------------------------------"
-aug LuaHighlight
+aug HighlightOnYank
   au!
   au TextYankPost *
         \ silent! lua require('vim.highlight').on_yank()
@@ -115,10 +115,7 @@ lua require('plugins')
 " --- Plugin settings ---------------------------------------------------"
 
 " --- For WebDevicons ---------------------------------------------------"
-" Load webdevicons config
-lua require('webdevicons_config').my_setup()
-" Update filetype icon highlight
-lua require('webdevicons_config').make_hl()
+lua require('webdevicons_config')
 
 " --- For mini.nvim -----------------------------------------------------"
 lua require('mini_config')
@@ -127,10 +124,6 @@ lua require('mini_config')
 lua require('colorpicker_config')
 nn <silent><C-c> <cmd>PickColor<CR>
 ino <silent><C-c> <cmd>PickColorInsert<CR>
-
-" --- For Symbols-outline.nvim ------------------------------------------"
-lua require('symbolsoutline_config')
-nn <silent><C-s> :SymbolsOutline<CR>
 
 " --- For signify -------------------------------------------------------"
 let s:signify_symbol      = '▌' " ▊
@@ -148,29 +141,13 @@ nn <leader><leader>s :Sleuth<CR>
 " --- For nvim-treesitter -----------------------------------------------"
 lua require('treesitter_config')
 
-" --- For nvim-telescope ------------------------------------------------"
-" Load config file
-lua require('telescope_config')
-" Keymaps
-nn ,, :lua require('telescope.builtin').find_files()<CR>
-nn ,f :lua require('telescope').extensions.frecency.frecency()<CR>
-nn ,g :lua require('telescope.builtin').live_grep()<CR>
-nn ,s :lua require('telescope.builtin').grep_string()<CR>
-nn ,a :lua require('telescope.builtin').lsp_code_actions()<CR>
-nn ,h :lua require('telescope.builtin').help_tags()<CR>
-nn ,c :lua require('telescope_config').search_config()<CR>
-nn ,t :lua require('telescope.builtin').treesitter()<CR>
-nn z= :lua require('telescope_config').spell_suggest()<CR>
-nn <leader>gb :lua require('telescope_config').git_branches()<CR>
-
 " --- For lsp -----------------------------------------------------------"
-" Load config file
 lua require('lspconfig_config')
-" Lsp formatting
-nn <silent><leader><leader>f :lua vim.lsp.buf.formatting()<CR>
 " Change signs
-let s:lsp_signs=['DiagnosticSignError', 'DiagnosticSignWarn',
-      \ 'DiagnosticSignInfo', 'DiagnosticSignHint']
+let s:lsp_signs=[
+      \ 'DiagnosticSignError', 'DiagnosticSignWarn',
+      \ 'DiagnosticSignInfo', 'DiagnosticSignHint'
+      \ ]
 for i in s:lsp_signs
   exe 'sign define '.i.' text= texthl= linehl= numhl='.i
 endfor
@@ -181,7 +158,6 @@ nn <silent>gk    :lua vim.lsp.buf.hover()<CR>
 nn <silent>gd    :lua require('lsp_custom').definition()<CR>
 nn <silent>gD    :lua vim.lsp.buf.declaration()<CR>
 nn <silent>gr    :lua vim.lsp.buf.rename()<CR>
-nn <silent>gR    :lua vim.lsp.buf.references()<CR>
 nn <silent>gh    :lua vim.lsp.buf.inlay_hint(0)<CR>
 " Commands
 com Cd lua require('lsp_custom').cd_project_root()

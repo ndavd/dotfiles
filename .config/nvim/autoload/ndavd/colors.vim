@@ -53,6 +53,7 @@ function! s:make_hls() abort
   " mini.pick
   hi! link MiniPickMatchCurrent PMenuSel
   hi! link MiniPickPrompt MiniStarterItemPrefix
+  hi! link MiniPickBorder Normal
   " Lsp
   hi LspDiagnosticsDefaultError guibg=NONE guifg=#ea6962
   hi LspDiagnosticsVirtualTextError guibg=NONE guifg=#ea6962

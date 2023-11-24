@@ -1,16 +1,69 @@
 -- Setup nonicons
 local nonicons = require('nvim-nonicons')
-nonicons.setup({})
+nonicons.setup()
+
+local devicons = require('nvim-web-devicons')
 
 local out = {}
 
-out.my_setup = function()
-  require('nvim-web-devicons').setup({
-    default = true,
-  })
-end
+-- From https://github.com/yamatsum/nvim-nonicons/blob/main/lua/nvim-web-devicons/override.lua
+local nonicons_palette = {
+  orange = '#d18616',
+  black = '#586069',
+  bright_black = '#959da5',
+  white = '#d1d5da',
+  bright_white = '#fafbfc',
+  red = '#ea4a5a',
+  bright_red = '#f97583',
+  green = '#34d058',
+  bright_green = '#85e89d',
+  yellow = '#ffea7f',
+  bright_yellow = '#ffea7f',
+  blue = '#2188ff',
+  bright_blue = '#79b8ff',
+  magenta = '#b392f0',
+  bright_magenta = '#b392f0',
+  cyan = '#39c5cf',
+  bright_cyan = '#56d4dd',
+}
+local test_icon = '󰙨'
+
+devicons.setup({
+  default = true,
+  override_by_extension = {
+    ['test.js'] = {
+      icon = test_icon,
+      color = nonicons_palette.yellow,
+      cterm_color = '185',
+      name = 'TestJs',
+    },
+    ['test.jsx'] = {
+      icon = test_icon,
+      color = nonicons_palette.bright_blue,
+      cterm_color = '45',
+      name = 'JavaScriptReactTest',
+    },
+    ['test.ts'] = {
+      icon = test_icon,
+      color = nonicons_palette.bright_blue,
+      cterm_color = '45',
+      name = 'TestTs',
+    },
+    ['test.tsx'] = {
+      icon = test_icon,
+      color = nonicons_palette.bright_blue,
+      cterm_color = '45',
+      name = 'TypeScriptReactTest',
+    },
+  },
+})
 
 local STORE_HL
+
+-- If we don't do this when sourcing init.vim the filetype icon does not update
+if STORE_HL ~= nil then
+  vim.cmd(STORE_HL)
+end
 
 -- Example: get_icon{filepath="foo/bar.vim"}
 out.get_icon = function(opts)
@@ -19,7 +72,7 @@ out.get_icon = function(opts)
   and index 3 is the hl_group of the icon --]]
   local do_hl = opts.do_hl
   local filepath = opts.filepath
-  local file_extension, output
+  local filename, output
   if do_hl == nil then
     do_hl = { false }
   end
@@ -31,21 +84,22 @@ out.get_icon = function(opts)
     local path = vim.fn.split(filepath, '\\')
     path = vim.fn.split(path[#path], '/')
     path = vim.fn.split(path[#path], '\\.')
-    file_extension = path[#path]
+    filename = path[#path]
   else
-    file_extension = vim.fn.split(vim.fn.expand('%:t'), '\\.')
-    file_extension = file_extension[#file_extension]
+    filename = vim.fn.expand('%:t')
   end
-  local icon, hl_group = require('nvim-web-devicons').get_icon('foo', file_extension)
+  local icon, hl_group = require('nvim-web-devicons').get_icon(filename)
   icon = icon .. ' '
   if do_hl[1] then
-    local guifg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(hl_group)), 'fg')
+    local guifg =
+      vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(hl_group)), 'fg')
     if guifg == '' then
       guifg = ''
     else
       guifg = ' guifg=' .. guifg
     end
-    local guibg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(do_hl[2])), 'bg')
+    local guibg =
+      vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(do_hl[2])), 'bg')
     if guibg == '' then
       guibg = ''
     else
@@ -58,15 +112,6 @@ out.get_icon = function(opts)
     output = icon
   end
   return output
-end
-
---[[
-If this function isn't called when sourcing
-init.vim the filetype icon does not update --]]
-out.make_hl = function()
-  if STORE_HL ~= nil then
-    vim.cmd(STORE_HL)
-  end
 end
 
 out.print_icons = function(compact)

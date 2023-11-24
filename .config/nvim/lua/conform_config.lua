@@ -102,7 +102,8 @@ local supports_buffer_formatting = function()
 end
 
 out.formatexpr = function()
-  local n = require('conform').formatexpr({ timeout_ms = 10000 })
+  local timeout_ms = 10000
+  local n = require('conform').formatexpr({ timeout_ms })
 
   if n == 0 then
     return 0
@@ -111,7 +112,7 @@ out.formatexpr = function()
   local whole_buffer_selected = vim.v.count == vim.fn.line('$')
   if whole_buffer_selected and supports_buffer_formatting() then
     -- Execute LSP buffer format (useful for those LSPs which don't support range formatting)
-    vim.lsp.buf.format({ bufnr = 0, timeout_ms = 10000 })
+    vim.lsp.buf.format({ bufnr = 0, timeout_ms })
     return 0
   end
 

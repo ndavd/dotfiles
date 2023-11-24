@@ -5,11 +5,13 @@ endfunction
 
 " --- Set statusline ----------------------------------------------------"
 
-" Load webdevicons config
-lua require('webdevicons_config').my_setup()
-
 let s:bg='NONE'
 let s:nbsc=' '
+
+" If not defined beforehand then
+" in the first rendered statusline there are no colors — Investigation needed
+hi StatusLineMode NONE
+hi StatusLineBranch NONE
 
 function! s:stl() abort
   if s:make_stl()
