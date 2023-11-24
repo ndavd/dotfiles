@@ -5,20 +5,14 @@ endfunction
 
 " --- Set statusline ----------------------------------------------------"
 
-let s:bg='NONE'
 let s:nbsc=' '
-
-" If not defined beforehand then
-" in the first rendered statusline there are no colors — Investigation needed
-hi StatusLineMode NONE
-hi StatusLineBranch NONE
 
 function! s:stl() abort
   if s:make_stl()
-    let stl =' %#StatusLineMode#%-11{ndavd#stl#mode()}%*'
+    let stl =' %{%ndavd#stl#mode_hl()%}%-11{ndavd#stl#mode()}%*'
     let icon = luaeval("require'webdevicons_config'.get_icon"
           \ ."{do_hl={true,'StatusLine','StatusLineIcon'}}")
-    let stl .= icon.'%f%{ndavd#stl#modified()}%<'.'%#StatusLineBranch#'
+    let stl .= icon.'%f%{ndavd#stl#modified()}%<'.'%{%ndavd#stl#branch_hl()%}'
           \ .'%{ndavd#stl#branch()}%*%{ndavd#stl#sy_stats_wrapper()} '
     if s:show_ln==1 | let stl .= '%= %l(%02p%%):%-1c' | endif
     let &l:stl = stl
@@ -33,11 +27,16 @@ function! ndavd#stl#modified() abort
   else | return '[-]' | endif
 endfunction
 
-function! ndavd#stl#branch() abort
+function! ndavd#stl#branch_hl() abort
   let branch = FugitiveHead(8)
   if branch=~#'master\|main'
-    exe 'hi StatusLineBranch guifg=#2ef25d ctermfg=Green guibg='.s:bg.' ctermbg='.s:bg
-  else | exe 'hi! link StatusLineBranch StatusLine' | endif
+    return '%#StatusLineBranchMain#'
+  endif
+    return '%#StatusLineBranchOthers#'
+endfunction
+
+function! ndavd#stl#branch() abort
+  let branch = FugitiveHead(8)
   return branch ==# '' ? '' : s:nbsc.'['.branch.']'
 endfunction
 
@@ -61,21 +60,21 @@ function! ndavd#stl#sy_stats_wrapper() abort
   return statline
 endfunction
 
-function! ndavd#stl#mode() abort
+function! ndavd#stl#mode_hl() abort
   let mode = mode()
   if match(['n','c'], mode)!=-1
-    let guifg='#949494'
-    let ctermfg='DarkGrey'
+    return '%#StatusLineModeNormal#'
   elseif match(['i','ix','s','S',"\<C-s>"], mode())!=-1
-    let guifg='#57b0b2'
-    let ctermfg='LightBlue'
+    return '%#StatusLineModeInsert#'
   elseif match(['R'], mode)!=-1
-    let guifg='#ea6962'
-    let ctermfg='Red'
+    return '%#StatusLineModeReplace#'
   elseif match(['v','V',"\<C-v>"], mode)!=-1
-    let guifg='#a9e861'
-    let ctermfg='Green'
+    return '%#StatusLineModeVisual#'
   endif
+endfunction
+
+function! ndavd#stl#mode() abort
+  let mode = mode()
   let mode_map = {
         \ 'n': 'NORMAL  ', 'i': 'INSERT  ', 'R': 'REPLACE ',
         \ 'v': 'VISUAL  ', 'V': 'V·LINE  ', "\<C-v>": 'V·BLOCK ',
@@ -83,11 +82,6 @@ function! ndavd#stl#mode() abort
         \ "\<C-s>": 'S·BLOCK '
         \ }
   let mode = get(mode_map, mode, '')
-  if mode=~#'NORMAL\|COMMAND'
-    exe 'hi StatusLineMode guifg='.guifg.' gui=NONE cterm=NONE ctermfg='.ctermfg
-  else
-    exe 'hi StatusLineMode guifg='.guifg.' gui=bold cterm=bold ctermfg='.ctermfg
-  endif
   if mode==#'INSERT' | let mode = 'ʌʌ'.s:nbsc.mode
   elseif mode==#'REPLACE' | let mode = 'vv'.s:nbsc.mode
   else | let mode = '>>'.s:nbsc.mode | endif

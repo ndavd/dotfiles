@@ -43,7 +43,6 @@ set nobackup
 set undofile
 set pumblend=15
 set textwidth=80
-" set colorcolumn=+1
 set updatetime=100
 set completeopt=menuone,noselect
 set shortmess+=c

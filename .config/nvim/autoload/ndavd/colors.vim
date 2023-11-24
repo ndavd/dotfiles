@@ -38,7 +38,13 @@ function! s:make_hls() abort
   hi SignifySignDelete guifg=#f44747 guibg=NONE ctermfg=DarkRed ctermbg=NONE
   hi SignifySignChange guifg=#599cd6 guibg=NONE ctermfg=DarkBlue ctermbg=NONE
   " Statusline
-  hi StatusLine gui=NONE guibg=NONE guifg=#ffffff cterm=NONE ctermbg=NONE ctermfg=White
+  hi StatusLine gui=NONE guibg=NONE ctermbg=NONE guifg=#ffffff ctermfg=White
+  hi StatusLineModeNormal gui=NONE guibg=NONE ctermbg=NONE guifg=#949494 ctermfg=DarkGrey
+  hi StatusLineModeInsert gui=NONE guibg=NONE ctermbg=NONE guifg=#57b0b2 ctermfg=LightBlue
+  hi StatusLineModeReplace gui=NONE guibg=NONE ctermbg=NONE guifg=#ea6962 ctermfg=Red
+  hi StatusLineModeVisual gui=NONE guibg=NONE ctermbg=NONE guifg=#a9e861 ctermfg=Green
+  hi StatusLineBranchMain gui=NONE guibg=NONE ctermbg=NONE guifg=#2ef25d ctermfg=Green
+  hi! link StatusLineBranchOthers StatusLine
   " Listchars
   hi NonText guifg=#3a3a3a
   hi Whitespace guifg=#3a3a3a
