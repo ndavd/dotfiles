@@ -34,26 +34,27 @@ devicons.setup({
     ['test.js'] = {
       icon = test_icon,
       color = nonicons_palette.yellow,
-      cterm_color = '185',
       name = 'TestJs',
     },
     ['test.jsx'] = {
       icon = test_icon,
       color = nonicons_palette.bright_blue,
-      cterm_color = '45',
       name = 'JavaScriptReactTest',
     },
     ['test.ts'] = {
       icon = test_icon,
       color = nonicons_palette.bright_blue,
-      cterm_color = '45',
       name = 'TestTs',
     },
     ['test.tsx'] = {
       icon = test_icon,
       color = nonicons_palette.bright_blue,
-      cterm_color = '45',
       name = 'TypeScriptReactTest',
+    },
+    ['txt'] = {
+      icon = nonicons.get('file'),
+      color = nonicons_palette.bright_black,
+      name = 'Text',
     },
   },
 })

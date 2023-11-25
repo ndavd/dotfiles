@@ -12,6 +12,11 @@ local modules = {
   'extra',
 }
 
+local icons = {
+  directory = ' ',
+  file = ' ',
+}
+
 local custom_conf = {
   comment = {
     options = {
@@ -21,6 +26,19 @@ local custom_conf = {
       end,
     },
   },
+  files = function()
+    local prefix = function(fs_entry)
+      if fs_entry.fs_type == 'directory' then
+        return icons.directory, 'MiniFilesDirectory'
+      end
+      local icon, hl = require('nvim-web-devicons').get_icon(fs_entry.name)
+      return icon .. ' ', hl
+    end
+
+    return {
+      content = { prefix = prefix },
+    }
+  end,
   hipatterns = function()
     local hipatterns = require('mini.hipatterns')
     vim.keymap.set('n', '<leader>co', hipatterns.toggle)
@@ -32,28 +50,6 @@ local custom_conf = {
   end,
   starter = function()
     local starter = require('mini.starter')
-    local sections = {
-      actions = {
-        name = 'Actions',
-        contents = {
-          { name = 'plugins sync', action = 'Lazy sync' },
-          { name = 'edit new buffer', action = 'enew' },
-          { name = 'quit', action = 'qall' },
-        },
-      },
-    }
-
-    local parse_section = function(section)
-      local t = section
-      for i, content in ipairs(t.contents) do
-        t.contents[i] = {
-          name = content.name,
-          action = content.action,
-          section = t.name,
-        }
-      end
-      return t
-    end
 
     local format_text = function(str)
       local n = 60
@@ -106,16 +102,76 @@ local custom_conf = {
       }, '\n')
     end
 
+    local sections = {
+      actions = 'Actions',
+      recent_files = 'Recent files',
+    }
+
+    local actions = function()
+      local section = sections.actions
+      return {
+        { name = 'plugins sync', action = 'Lazy sync', section = section },
+        { name = 'edit new buffer', action = 'enew', section = section },
+        { name = 'quit', action = 'qall', section = section },
+      }
+    end
+
+    local recent_files = function(n)
+      n = n or 5
+      return function()
+        local files = vim.tbl_filter(function(f)
+          return vim.fn.filereadable(f) == 1
+        end, vim.v.oldfiles or {})
+
+        if #files == 0 then
+          return {
+            {
+              name = 'There are no recent files (`v:oldfiles` is empty)',
+              action = '',
+            },
+          }
+        end
+
+        local cwd_pattern = ('^%s/'):format(vim.pesc(vim.fn.getcwd()))
+        files = vim.tbl_filter(function(f)
+          return f:find(cwd_pattern) ~= nil
+        end, files)
+
+        if #files == 0 then
+          return {
+            {
+              name = 'There are no recent files in current directory',
+              action = '',
+            },
+          }
+        end
+
+        local items = {}
+        for _, f in ipairs(vim.list_slice(files, 1, n)) do
+          local name = require('webdevicons_config').get_icon({
+            filepath = f,
+          }) .. vim.fn.fnamemodify(f, ':~:.')
+          table.insert(items, {
+            name = name,
+            action = 'edit ' .. f,
+            section = sections.recent_files,
+          })
+        end
+
+        return items
+      end
+    end
+
     return {
       evaluate_single = true,
       header = header(),
       items = {
-        starter.sections.recent_files(5, true, false),
-        parse_section(sections.actions),
+        recent_files,
+        actions,
       },
       content_hooks = {
         starter.gen_hook.adding_bullet(),
-        starter.gen_hook.indexing('all', { sections.actions.name }),
+        starter.gen_hook.indexing('all', { sections.actions }),
         starter.gen_hook.padding(2, 1),
       },
       footer = '',
@@ -235,10 +291,7 @@ local custom_conf = {
         show = function(buf_id, items, query)
           pick.default_show(buf_id, items, query, {
             show_icons = true,
-            icons = {
-              directory = ' ',
-              file = ' ',
-            },
+            icons = icons,
           })
         end,
       },
