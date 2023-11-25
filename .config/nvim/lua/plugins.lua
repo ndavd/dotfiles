@@ -88,3 +88,4 @@ local plugins = {
 local opts = {}
 
 require('lazy').setup(plugins, opts)
+require('lazy.view.config').keys.close = '<Esc>'
