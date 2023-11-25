@@ -110,75 +110,7 @@ aug END
 " --- Load plugins ------------------------------------------------------"
 lua require('plugins')
 
-" -----------------------------------------------------------------------"
-" --- Plugin settings ---------------------------------------------------"
-
-" --- For WebDevicons ---------------------------------------------------"
-lua require('webdevicons_config')
-
-" --- For mini.nvim -----------------------------------------------------"
-lua require('mini_config')
-
-" --- For Color picker --------------------------------------------------"
-lua require('colorpicker_config')
-nn <silent><C-c> <cmd>PickColor<CR>
-ino <silent><C-c> <cmd>PickColorInsert<CR>
-
-" --- For signify -------------------------------------------------------"
-let s:signify_symbol      = '▌' " ▊
-let g:signify_sign_add    = s:signify_symbol
-let g:signify_sign_change = s:signify_symbol
-let g:signify_sign_delete = s:signify_symbol
-
-" --- For matchup -------------------------------------------------------"
-let g:matchup_matchparen_offscreen = {}
-
-" --- For vim-sleuth ----------------------------------------------------"
-let g:sleuth_automatic = 0
-nn <leader><leader>s :Sleuth<CR>
-
-" --- For nvim-treesitter -----------------------------------------------"
-lua require('treesitter_config')
-
-" --- For lsp -----------------------------------------------------------"
-lua require('lspconfig_config')
-" Change signs
-let s:lsp_signs=[
-      \ 'DiagnosticSignError', 'DiagnosticSignWarn',
-      \ 'DiagnosticSignInfo', 'DiagnosticSignHint'
-      \ ]
-for i in s:lsp_signs
-  exe 'sign define '.i.' text= texthl= linehl= numhl='.i
-endfor
-" Keymaps
-nn <silent><C-n> :lua vim.diagnostic.goto_next{popup=false}<CR>
-nn <silent><C-p> :lua vim.diagnostic.goto_prev{popup=false}<CR>
-nn <silent>gk    :lua vim.lsp.buf.hover()<CR>
-nn <silent>gd    :lua require('lsp_custom').definition()<CR>
-nn <silent>gD    :lua vim.lsp.buf.declaration()<CR>
-nn <silent>gr    :lua vim.lsp.buf.rename()<CR>
-nn <silent>gh    :lua vim.lsp.buf.inlay_hint(0)<CR>
-" Commands
-com Cd lua require('lsp_custom').cd_project_root()
-
-" --- For vim-vsnip -----------------------------------------------------"
-imap <expr><C-k> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-k>'
-smap <expr><C-k> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-k>'
-imap <expr><C-j> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-j>'
-smap <expr><C-j> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-j>'
-
-" --- For cmp -----------------------------------------------------------"
-lua require('cmp_config')
-
-" --- For conform.nvim --------------------------------------------------"
-lua require('conform_config')
-
-" --- For nvim-lint -----------------------------------------------------"
-lua require('lint_config')
-
-" -----------------------------------------------------------------------"
 " --- Custom lua settings -----------------------------------------------"
-
 lua require('custom')
 
 " -----------------------------------------------------------------------"

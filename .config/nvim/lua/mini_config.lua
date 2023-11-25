@@ -1,4 +1,5 @@
 local modules = {
+  'ai',
   'comment',
   'align',
   'surround',

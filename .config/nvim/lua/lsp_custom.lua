@@ -1,6 +1,6 @@
 local out = {}
 
-local function filter(arr, fn)
+local filter = function(arr, fn)
   if type(arr) ~= 'table' then
     return arr
   end
@@ -15,18 +15,22 @@ local function filter(arr, fn)
   return filtered
 end
 
-local function filterReactDTS(value)
+local filterDTS = function(value)
   return string.match(value.filename, '%.d.ts') == nil
 end
 
-local function on_list(options)
+local on_list = function(options)
   -- https://github.com/typescript-language-server/typescript-language-server/issues/216
   local items = options.items
   if #items > 1 then
-    items = filter(items, filterReactDTS)
+    items = filter(items, filterDTS)
   end
 
-  vim.fn.setqflist({}, ' ', { title = options.title, items = items, context = options.context })
+  vim.fn.setqflist(
+    {},
+    ' ',
+    { title = options.title, items = items, context = options.context }
+  )
   vim.api.nvim_command('cfirst')
 end
 
@@ -41,6 +45,18 @@ out.cd_project_root = function()
   else
     print('Can\'t find project\'s root directory')
   end
+end
+
+out.goto_next_diagnostic = function()
+  vim.diagnostic.goto_next({ popup = false })
+end
+
+out.goto_prev_diagnostic = function()
+  vim.diagnostic.goto_prev({ popup = false })
+end
+
+out.toggle_buf_inlay_hints = function()
+  vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
 end
 
 return out

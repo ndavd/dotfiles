@@ -14,19 +14,42 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   -- Mini all things! --
-  'echasnovski/mini.nvim',
+  {
+    'echasnovski/mini.nvim',
+    config = function()
+      require('mini_config')
+    end,
+  },
 
   -- Icon support --
   {
     'yamatsum/nvim-nonicons',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = {
+      {
+        'nvim-tree/nvim-web-devicons',
+        config = function()
+          require('webdevicons_config')
+        end,
+      },
+    },
   },
 
   -- Better matchit --
-  'andymass/vim-matchup',
+  {
+    'andymass/vim-matchup',
+    config = function()
+      vim.g.matchup_matchparen_offscreen = {}
+    end,
+  },
 
   -- Indentation --
-  'tpope/vim-sleuth',
+  {
+    'tpope/vim-sleuth',
+    config = function()
+      vim.g.sleuth_automatic = 0
+      vim.keymap.set('n', '<leader><leader>s', '<cmd>Sleuth<CR>')
+    end,
+  },
 
   -- RFC --
   'mhinz/vim-rfc',
@@ -35,11 +58,24 @@ local plugins = {
   'dbeniamine/cheat.sh-vim',
 
   -- Color picker --
-  'ziontee113/color-picker.nvim',
+  {
+    'ziontee113/color-picker.nvim',
+    config = function()
+      require('colorpicker_config')
+    end,
+  },
 
   -- Git --
   'tpope/vim-fugitive',
-  'mhinz/vim-signify',
+  {
+    'mhinz/vim-signify',
+    config = function()
+      local symbol = '▌'
+      vim.g.signify_sign_add = symbol
+      vim.g.signify_sign_change = symbol
+      vim.g.signify_sign_delete = symbol
+    end,
+  },
 
   -- Sql.nvim --
   'tami5/sql.nvim',
@@ -51,6 +87,9 @@ local plugins = {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    config = function()
+      require('treesitter_config')
+    end,
     dependencies = {
       'windwp/nvim-ts-autotag',
       'JoosepAlviste/nvim-ts-context-commentstring',
@@ -61,13 +100,43 @@ local plugins = {
   'ii14/emmylua-nvim',
 
   -- LSP --
-  'neovim/nvim-lspconfig',
-  'stevearc/conform.nvim',
-  'mfussenegger/nvim-lint',
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('lspconfig_config')
+    end,
+  },
+  {
+    'stevearc/conform.nvim',
+    config = function()
+      require('conform_config')
+    end,
+  },
+  {
+    'mfussenegger/nvim-lint',
+    config = function()
+      require('lint_config')
+    end,
+  },
   {
     'hrsh7th/nvim-cmp',
+    config = function()
+      require('cmp_config')
+    end,
     dependencies = {
-      'hrsh7th/vim-vsnip',
+      {
+        'hrsh7th/vim-vsnip',
+        config = function()
+          local jumpable_n = vim.fn['vsnip#jumpable'](1)
+          local jumpable_p = vim.fn['vsnip#jumpable'](-1)
+          vim.keymap.set({ 'i', 's' }, '<C-k>', function()
+            return jumpable_n and '<Plug>(vsnip-jump-next)' or '<C-k>'
+          end, { expr = true })
+          vim.keymap.set({ 'i', 's' }, '<C-j>', function()
+            return jumpable_p and '<Plug>(vsnip-jump-prev)' or '<C-j>'
+          end, { expr = true })
+        end,
+      },
       'hrsh7th/cmp-vsnip',
       'rafamadriz/friendly-snippets',
       'hrsh7th/cmp-nvim-lsp',

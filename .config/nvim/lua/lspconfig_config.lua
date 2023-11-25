@@ -140,9 +140,9 @@ local custom_conf = {
   },
 }
 
-local get_conf = function (server)
+local get_conf = function(server)
   local capabilities_conf = {
-    capabilities = capabilities
+    capabilities = capabilities,
   }
   if custom_conf[server] then
     local c = custom_conf[server]
@@ -155,3 +155,32 @@ end
 for _, server in ipairs(servers) do
   require('lspconfig')[server].setup(get_conf(server))
 end
+
+-- Change signs
+local signs = {
+  'DiagnosticSignError',
+  'DiagnosticSignWarn',
+  'DiagnosticSignInfo',
+  'DiagnosticSignHint',
+}
+for _, sign in ipairs(signs) do
+  vim.cmd(('sign define %s text= texthl= linehl= numhl=%s'):format(sign, sign))
+end
+
+local keymap_opts = { silent = true }
+local lsp_custom = require('lsp_custom')
+
+vim.keymap.set('n', 'gk', vim.lsp.buf.hover, keymap_opts)
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, keymap_opts)
+vim.keymap.set('n', 'gr', vim.lsp.buf.rename, keymap_opts)
+
+vim.keymap.set('n', '<C-n>', lsp_custom.goto_next_diagnostic, keymap_opts)
+vim.keymap.set('n', '<C-p>', lsp_custom.goto_prev_diagnostic, keymap_opts)
+vim.keymap.set('n', 'gh', lsp_custom.toggle_buf_inlay_hints, keymap_opts)
+vim.keymap.set('n', 'gd', lsp_custom.definition, keymap_opts)
+
+vim.api.nvim_create_user_command(
+  'Cd',
+  require('lsp_custom').cd_project_root,
+  {}
+)
