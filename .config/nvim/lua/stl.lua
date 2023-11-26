@@ -70,17 +70,17 @@ local mode = function()
     c = 'COMMAND' .. nbsc,
     s = 'SELECT' .. nbsc .. nbsc,
     S = 'S·LINE' .. nbsc .. nbsc,
-    ['<C-v>'] = 'V·BLOCK' .. nbsc,
-    ['<C-s>'] = 'S·BLOCK' .. nbsc,
+    [''] = 'V·BLOCK' .. nbsc,
+    [''] = 'S·BLOCK' .. nbsc,
   }
   local hl
   if vim.tbl_contains({ 'n', 'c' }, m) then
     hl = hl_groups.mode_normal
-  elseif vim.tbl_contains({ 'i', 'ix', 's', 'S', '<C-s>' }, m) then
+  elseif vim.tbl_contains({ 'i', 'ix', 's', 'S', '' }, m) then
     hl = hl_groups.mode_insert
   elseif vim.tbl_contains({ 'R' }, m) then
     hl = hl_groups.mode_replace
-  elseif vim.tbl_contains({ 'v', 'V', '<C-v>' }, m) then
+  elseif vim.tbl_contains({ 'v', 'V', '' }, m) then
     hl = hl_groups.mode_visual
   end
   hl = parse_hl_group(hl)
