@@ -111,6 +111,7 @@ aug END
 lua require('plugins')
 
 " --- Custom lua settings -----------------------------------------------"
+lua require('stl')
 lua require('custom')
 
 " -----------------------------------------------------------------------"
