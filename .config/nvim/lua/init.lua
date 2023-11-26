@@ -53,7 +53,9 @@ local highlight_on_yank =
 vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
   pattern = '*',
   group = highlight_on_yank,
-  callback = require('vim.highlight').on_yank,
+  callback = function()
+    require('vim.highlight').on_yank()
+  end,
 })
 
 -- Rasi (rofi theme file)

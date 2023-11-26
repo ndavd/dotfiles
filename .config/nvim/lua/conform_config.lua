@@ -51,6 +51,7 @@ local gofmt = { 'gofmt' }
 local rustfmt = { 'rustfmt' }
 local clangformat = { 'clang_format' }
 local shellharden = { 'shellharden' }
+local yamlfmt = { 'yamlfmt' }
 
 local js_ts_x = function()
   local root = vim.lsp.buf.list_workspace_folders()[1]
@@ -85,6 +86,7 @@ require('conform').setup({
     c = clangformat,
     cpp = clangformat,
     sh = shellharden,
+    yaml = yamlfmt,
   },
 
   formatters = {

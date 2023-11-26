@@ -16,4 +16,5 @@ npm update -g \
   typescript \
   vim-language-server \
   vscode-langservers-extracted \
+  yaml-language-server \
   yarn \

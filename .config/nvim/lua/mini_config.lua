@@ -245,7 +245,9 @@ local custom_conf = {
       extra.pickers.spellsuggest(local_opts, {
         source = {
           name = ('Spell suggestions (%s) for %s'):format(
-            string.upper(vim.api.nvim_buf_get_option(0, 'spelllang')),
+            string.upper(
+              vim.api.nvim_get_option_value('spelllang', { buf = 0 })
+            ),
             vim.inspect(vim.fn.expand('<cword>'))
           ),
         },

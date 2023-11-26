@@ -40,6 +40,7 @@ local servers = {
   'jsonls',
   'lua_ls',
   'ocamllsp',
+  'yamlls',
 }
 
 local custom_conf = {
