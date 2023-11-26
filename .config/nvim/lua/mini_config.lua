@@ -181,6 +181,7 @@ local custom_conf = {
   pick = function()
     local pick = require('mini.pick')
     local extra = require('mini.extra')
+
     local win_config = function()
       local height = math.floor(0.8 * vim.o.lines)
       local width = math.floor(0.8 * vim.o.columns)
@@ -191,6 +192,14 @@ local custom_conf = {
         row = math.floor(0.3 * (vim.o.lines - height)),
         col = math.floor(0.5 * (vim.o.columns - width)),
       }
+    end
+
+    local load_temp_rg = function(f)
+      local rg_env = 'RIPGREP_CONFIG_PATH'
+      local cached_rg_config = vim.uv.os_getenv(rg_env) or ''
+      vim.uv.os_setenv(rg_env, vim.fn.stdpath('config') .. '/.rg')
+      f()
+      vim.uv.os_setenv(rg_env, cached_rg_config)
     end
 
     local get_branch = function(item)
@@ -262,22 +271,35 @@ local custom_conf = {
       extra.pickers.lsp({ scope = 'document_symbol' })
     end
 
-    pick.registry.grep_string = function()
-      pick.builtin.grep({ pattern = vim.fn.expand('<cword>') })
+    pick.registry.f = function()
+      load_temp_rg(function()
+        pick.builtin.files({ tool = 'rg' })
+      end)
     end
 
-    vim.keymap.set('n', ',,', pick.builtin.files)
-    vim.keymap.set('n', ',g', pick.builtin.grep_live)
-    vim.keymap.set('n', ',h', pick.builtin.help)
+    pick.registry.gl = function()
+      load_temp_rg(function()
+        pick.builtin.grep_live({ tool = 'rg' })
+      end)
+    end
 
-    vim.keymap.set('n', ',t', extra.pickers.treesitter)
+    pick.registry.gs = function()
+      load_temp_rg(function()
+        pick.builtin.grep({ pattern = vim.fn.expand('<cword>'), tool = 'rg' })
+      end)
+    end
 
-    vim.keymap.set('n', ',s', pick.registry.grep_string)
+    vim.keymap.set('n', ',,', pick.registry.f)
+    vim.keymap.set('n', ',g', pick.registry.gl)
+    vim.keymap.set('n', ',s', pick.registry.gs)
     vim.keymap.set('n', ',r', pick.registry.lsp_references)
     vim.keymap.set('n', ',a', pick.registry.lsp_symbols)
     vim.keymap.set('n', ',b', pick.registry.git_branches)
     vim.keymap.set('n', ',c', pick.registry.config)
     vim.keymap.set('n', 'z=', pick.registry.spell_suggest)
+
+    vim.keymap.set('n', ',h', pick.builtin.help)
+    vim.keymap.set('n', ',t', extra.pickers.treesitter)
 
     return {
       mappings = {
