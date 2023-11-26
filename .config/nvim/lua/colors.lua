@@ -1,9 +1,5 @@
-function! ndavd#colors#set() abort
-endfunction
-
-" --- Highlights --------------------------------------------------------"
-
-function! s:make_hls() abort
+local make_hls = function()
+  vim.cmd([[
   hi Comment ctermfg=DarkBlue
   " Transparent background color for Nvim
   hi Normal guibg=NONE
@@ -72,28 +68,33 @@ function! s:make_hls() abort
   hi manUnderline guisp=fg gui=underline
   " Folded
   hi Folded guisp=#636369
-endfunction
-aug make_custom_hls
-  au!
-  au ColorScheme * call s:make_hls()
-aug END
+  ]])
+end
 
-" For vscode
-function! s:custom_vscode_hls() abort
+local make_vscode_hls = function()
+  vim.cmd([[
   " MatchParen
   hi MatchParen guibg=#303030
-endfunction
-aug VscodeCustom
-  au!
-  au ColorScheme vscode call s:custom_vscode_hls()
-aug END
+  ]])
+end
 
-" --- Set colorscheme ---------------------------------------------------"
+local custom_hls = vim.api.nvim_create_augroup('custom_hls', { clear = true })
+vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+  pattern = '*',
+  group = custom_hls,
+  callback = make_hls,
+})
 
-set background=dark
+local vscode_custom_hls =
+  vim.api.nvim_create_augroup('vscode_custom_hls', { clear = true })
+vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+  pattern = 'vscode',
+  group = vscode_custom_hls,
+  callback = make_vscode_hls,
+})
 
-" Load theme config
-lua require('vscode_colors_config')
-" lua require('github_theme_config')
+vim.o.background = 'dark'
+require('vscode_colors_config')
+-- require('github_theme_config')
 
-colorscheme vscode
+vim.cmd('colorscheme vscode')

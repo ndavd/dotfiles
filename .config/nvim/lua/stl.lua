@@ -148,7 +148,8 @@ Stl = function()
     .. line_stats()
 end
 
-vim.go.stl = '%!v:lua.Stl()'
+vim.o.laststatus=3
+vim.o.stl = '%!v:lua.Stl()'
 vim.keymap.set('n', '<leader>sl', function()
   show_ln = not show_ln
   vim.cmd('redrawstatus')

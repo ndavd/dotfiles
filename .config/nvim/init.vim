@@ -48,7 +48,6 @@ set completeopt=menuone,noselect
 set shortmess+=c
 set inccommand=split
 set foldmethod=marker
-set laststatus=3
 set formatexpr=v:lua.require'conform_config'.formatexpr()'
 
 " --- Title -------------------------------------------------------------"
@@ -112,6 +111,8 @@ lua require('plugins')
 
 " --- Custom lua settings -----------------------------------------------"
 lua require('stl')
+lua require('keymaps')
+lua require('colors')
 lua require('custom')
 
 " -----------------------------------------------------------------------"
