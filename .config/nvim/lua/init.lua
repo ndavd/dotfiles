@@ -30,7 +30,6 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.inccommand = 'split'
 vim.o.foldmethod = 'marker'
-vim.o.formatexpr = 'v:lua.require\'conform_config\'.formatexpr()'
 
 -- Title
 vim.o.title = true

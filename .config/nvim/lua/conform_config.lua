@@ -64,7 +64,7 @@ local js_ts_x = function()
   local package_json_path = get_path_to_file(root, 'package.json')
   if package_json_path then
     local package_json =
-        vim.json.decode(table.concat(vim.fn.readfile(package_json_path)))
+      vim.json.decode(table.concat(vim.fn.readfile(package_json_path)))
     if package_json['prettier'] ~= nil then
       return eslintd_prettier
     end
@@ -103,7 +103,7 @@ local supports_buffer_formatting = function()
   end)
 end
 
-out.formatexpr = function()
+Formatexpr = function()
   local timeout_ms = 10000
 
   local n = require('conform').formatexpr({ timeout_ms = timeout_ms })
@@ -122,5 +122,7 @@ out.formatexpr = function()
   -- Fallback
   return 1
 end
+
+vim.o.formatexpr = 'v:lua.Formatexpr()'
 
 return out
