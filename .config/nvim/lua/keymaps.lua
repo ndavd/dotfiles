@@ -31,7 +31,7 @@ keymap('n', '<leader>tp', '<cmd>tabp<CR>')
 -- Activate/deactivate spelllang
 keymap('n', '<leader>p', '<cmd>setlocal spell spelllang=en_us<CR>')
 keymap('n', '<leader>pt', '<cmd>setlocal spell spelllang=pt_pt<CR>')
-keymap('n', '<S-p>', '<cmd>set nospell<CR>')
+keymap('n', '<leader><S-p>', '<cmd>set nospell<CR>')
 
 -- Execute neovim custom settings from current file contents, e.g.
 -- :NVIM_CUSTOM: echo "Hello, World!"

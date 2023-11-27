@@ -36,7 +36,7 @@ end
 ---@param files string|string[]
 ---@return string|nil
 local get_path_to_file = function(path, files)
-  local found = vim.fs.find(files, { upward = true, path })
+  local found = vim.fs.find(files, { upward = true, path = path })
   if #found == 0 then
     return nil
   end
@@ -64,7 +64,7 @@ local js_ts_x = function()
   local package_json_path = get_path_to_file(root, 'package.json')
   if package_json_path then
     local package_json =
-      vim.json.decode(table.concat(vim.fn.readfile(package_json_path)))
+        vim.json.decode(table.concat(vim.fn.readfile(package_json_path)))
     if package_json['prettier'] ~= nil then
       return eslintd_prettier
     end
@@ -105,6 +105,7 @@ end
 
 out.formatexpr = function()
   local timeout_ms = 10000
+
   local n = require('conform').formatexpr({ timeout_ms = timeout_ms })
 
   if n == 0 then
@@ -114,7 +115,7 @@ out.formatexpr = function()
   local whole_buffer_selected = vim.v.count == vim.fn.line('$')
   if whole_buffer_selected and supports_buffer_formatting() then
     -- Execute LSP buffer format (useful for those LSPs which don't support range formatting)
-    vim.lsp.buf.format({ bufnr = 0, timeout_ms = timeout_ms })
+    vim.lsp.buf.format({ timeout_ms = timeout_ms })
     return 0
   end
 
