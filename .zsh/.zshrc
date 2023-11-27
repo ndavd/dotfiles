@@ -136,9 +136,6 @@ alias ffprobe="ffprobe -hide_banner"
 alias news="newsboat"
 alias nvmd="nvm use default"
 
-### nnn
-source $HOME/.config/nnn/nnn.sh
-
 ### fzf
 fzfa() {
   fd --unrestricted --full-path --color=always | fzf

@@ -122,11 +122,11 @@ override-redirect = true
 ;;;; MODULES
 
 [module/get_vol]
-type = custom/script 
-exec = $HOME/bin/media_viewer.sh v
+type = custom/script
+exec = $HOME/.config/polybar/media-viewer v
 [module/get_bright]
-type = custom/script 
-exec = $HOME/bin/media_viewer.sh b
+type = custom/script
+exec = $HOME/.config/polybar/media-viewer b
 
 [module/xwindow]
 type = internal/xwindow
@@ -178,7 +178,7 @@ interval = 60
 
 [module/battery_level]
 type = custom/script
-exec = $HOME/.config/polybar/get_battery.sh emoji
+exec = $HOME/.config/polybar/get-battery emoji
 label = "%output%"
 interval = 10
 

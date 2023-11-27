@@ -16,21 +16,21 @@ super + Print
 
 # Volume Control
 XF86AudioLowerVolume
-  $HOME/bin/media_control.sh v down
+  $HOME/.config/polybar/media-control v down
 XF86AudioRaiseVolume
-  $HOME/bin/media_control.sh v up
+  $HOME/.config/polybar/media-control v up
 XF86AudioMute
-  $HOME/bin/media_control.sh v mute
+  $HOME/.config/polybar/media-control v mute
 
 # Brightness Control
 XF86MonBrightnessDown
-  $HOME/bin/media_control.sh b down
+  $HOME/.config/polybar/media-control b down
 XF86MonBrightnessUp
-  $HOME/bin/media_control.sh b up
+  $HOME/.config/polybar/media-control b up
 
 # Change keyboard layout
 ctrl + super + s
-  $HOME/bin/chkb
+  $HOME/.config/dunst/chkb
 
 #
 # BSPWM HOTKEYS
@@ -132,8 +132,8 @@ super + alt + m
 
 # Swap on tiled | Move on floating
 shift + super + {h,j,k,l}
-  $HOME/bin/bspwm_mv_rs mv {1,2,3,4}
+  $HOME/.config/bspwm/mv-rs mv {1,2,3,4}
 
 # Resize on tiled | Resize on floating
 super + alt + {h,j,k,l}
-  $HOME/bin/bspwm_mv_rs rs {1,2,3,4}
+  $HOME/.config/bspwm/mv-rs rs {1,2,3,4}

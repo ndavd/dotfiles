@@ -10,7 +10,7 @@ dunst &
 "$HOME"/.config/dunst/battery_notification &
 picom &
 nitrogen --restore &
-"$HOME"/.config/polybar/launch.sh &
+"$HOME"/.config/polybar/launch &
 
 # Double screen setup
 if [[ $(xrandr -q | grep 'HDMI-0 connected') ]]; then
@@ -42,7 +42,7 @@ bspc config presel_feedback_color  "#cf3704"
 bspc config normal_border_color    "#161616"
 
 # use Xprop to get the window class
-bspc config external_rules_command "$HOME/bin/bspwm-external-rules"
+bspc config external_rules_command "$HOME/.config/bspwm/external-rules"
 bspc config ignore_ewmh_focus on
 bspc rule -a Screenkey manage=off
 bspc rule -a Sxiv state='floating'
