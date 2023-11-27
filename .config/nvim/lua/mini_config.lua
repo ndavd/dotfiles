@@ -236,11 +236,12 @@ local custom_conf = {
     pick.registry.config = function()
       return pick.builtin.cli({
         command = {
-          'fd',
-          '--type=f',
+          'rg',
+          '--files',
           '--no-follow',
           '--color=never',
           '--no-ignore',
+          '--hidden',
         },
       }, {
         source = {
