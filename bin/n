@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-GUI=1 BIN=1 nnn -dcu -P p
+GUI=1 BIN=1 nnn -Adcu -P p
