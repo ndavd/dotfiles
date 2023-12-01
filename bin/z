@@ -24,6 +24,7 @@ dir="$(fd \
   --color=always \
   --min-depth 1 \
   --max-depth 1 \
+  --exclude .git \
   . "${dirs[@]}" \
   | sed "s|${HOME}|~|" \
   | fzf \
