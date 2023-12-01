@@ -29,9 +29,6 @@ export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
 # Go
 export PATH=$(go env GOPATH)/bin:$PATH
 
-# Rust
-export PATH=$HOME/.cargo/bin:$PATH
-
 # zk
 export ZK_NOTEBOOK_DIR=$HOME/data/notes
 
