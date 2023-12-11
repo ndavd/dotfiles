@@ -77,9 +77,6 @@ local plugins = {
     end,
   },
 
-  -- Sql.nvim --
-  'tami5/sql.nvim',
-
   -- Treesitter --
   {
     'nvim-treesitter/nvim-treesitter',
