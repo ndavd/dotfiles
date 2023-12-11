@@ -12,13 +12,17 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local load = function(path)
+  return function()
+    require(path)
+  end
+end
+
 local plugins = {
   -- Mini all things! --
   {
     'echasnovski/mini.nvim',
-    config = function()
-      require('mini_config')
-    end,
+    config = load('mini_config'),
   },
 
   -- Icon support --
@@ -27,9 +31,7 @@ local plugins = {
     dependencies = {
       {
         'nvim-tree/nvim-web-devicons',
-        config = function()
-          require('webdevicons_config')
-        end,
+        config = load('webdevicons_config'),
       },
     },
   },
@@ -60,9 +62,7 @@ local plugins = {
   -- Color picker --
   {
     'ziontee113/color-picker.nvim',
-    config = function()
-      require('colorpicker_config')
-    end,
+    config = load('colorpicker_config'),
   },
 
   -- Git --
@@ -87,9 +87,7 @@ local plugins = {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    config = function()
-      require('treesitter_config')
-    end,
+    config = load('treesitter_config'),
     dependencies = {
       'windwp/nvim-ts-autotag',
       'JoosepAlviste/nvim-ts-context-commentstring',
@@ -99,27 +97,19 @@ local plugins = {
   -- LSP --
   {
     'neovim/nvim-lspconfig',
-    config = function()
-      require('lspconfig_config')
-    end,
+    config = load('lspconfig_config'),
   },
   {
     'stevearc/conform.nvim',
-    config = function()
-      require('conform_config')
-    end,
+    config = load('conform_config'),
   },
   {
     'mfussenegger/nvim-lint',
-    config = function()
-      require('lint_config')
-    end,
+    config = load('lint_config'),
   },
   {
     'hrsh7th/nvim-cmp',
-    config = function()
-      require('cmp_config')
-    end,
+    config = load('cmp_config'),
     dependencies = {
       {
         'hrsh7th/vim-vsnip',
