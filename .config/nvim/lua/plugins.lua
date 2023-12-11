@@ -80,9 +80,6 @@ local plugins = {
   -- Sql.nvim --
   'tami5/sql.nvim',
 
-  -- Solidity --
-  'tomlion/vim-solidity',
-
   -- Treesitter --
   {
     'nvim-treesitter/nvim-treesitter',
