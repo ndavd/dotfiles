@@ -96,9 +96,6 @@ local plugins = {
     },
   },
 
-  -- Lua declarations --
-  'ii14/emmylua-nvim',
-
   -- LSP --
   {
     'neovim/nvim-lspconfig',
