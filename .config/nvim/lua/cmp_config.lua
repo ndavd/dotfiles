@@ -18,7 +18,6 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
-    { name = 'nvim_lua' },
     { name = 'path' },
     { name = 'treesitter' },
     { name = 'spell' },

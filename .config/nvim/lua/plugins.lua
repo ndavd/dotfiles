@@ -121,7 +121,6 @@ local plugins = {
       'hrsh7th/cmp-vsnip',
       'rafamadriz/friendly-snippets',
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-path',
       'ray-x/cmp-treesitter',
       'f3fora/cmp-spell',
