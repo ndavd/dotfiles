@@ -298,9 +298,7 @@ local custom_conf = {
     vim.keymap.set('n', ',b', pick.registry.git_branches)
     vim.keymap.set('n', ',c', pick.registry.config)
     vim.keymap.set('n', 'z=', pick.registry.spell_suggest)
-
     vim.keymap.set('n', ',h', pick.builtin.help)
-    vim.keymap.set('n', ',t', extra.pickers.treesitter)
 
     return {
       mappings = {
