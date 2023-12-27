@@ -210,14 +210,25 @@ local custom_conf = {
       return pick.get_picker_opts().source.cwd
     end
 
-    local choose_checkout = function(item)
+    local checkout_branch = function(branch)
       vim.fn.system({
         'git',
         '-C',
         get_repo_dir(),
         'checkout',
-        get_branch(item),
+        branch,
       })
+    end
+
+    local choose_checkout = function(item)
+      local branch = get_branch(item)
+      local remote = branch:match('^remotes/(.-)/')
+      if remote == nil then
+        checkout_branch(branch)
+        return
+      end
+      local local_branch = branch:match('^remotes/' .. remote .. '/(.*)')
+      checkout_branch(local_branch)
     end
 
     local show_branch_history = function(buf_id, item)
@@ -227,10 +238,9 @@ local custom_conf = {
     end
 
     pick.registry.git_branches = function(local_opts)
-      extra.pickers.git_branches(
-        local_opts,
-        { source = { choose = choose_checkout, preview = show_branch_history } }
-      )
+      extra.pickers.git_branches(local_opts, {
+        source = { choose = choose_checkout, preview = show_branch_history },
+      })
     end
 
     pick.registry.config = function()
