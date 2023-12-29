@@ -331,6 +331,7 @@ local custom_conf = {
       },
       window = {
         config = win_config,
+        prompt_cursor = '▁',
       },
     }
   end,
