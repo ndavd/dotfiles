@@ -90,43 +90,7 @@ override-redirect = true
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[bar/b]
-width = 18%
-height = 30
-offset-x = 41%
-offset-y = 90%
-radius = 1.0
-fixed-center = true
-background = #222
-foreground = ${colors.foreground}
-font-0 = UbuntuMono Nerd Font Mono:style=Regular:size=18;3
-font-1 = Hack Nerd Font Mono:style=Regular:size=15;2
-font-2 = NotoColorEmoji:scale=8;2
-modules-center = get_bright
-override-redirect = true
-[bar/v]
-width = 18%
-height = 30
-offset-x = 41%
-offset-y = 90%
-radius = 1.0
-fixed-center = true
-background = #222
-foreground = ${colors.foreground}
-font-0 = UbuntuMono Nerd Font Mono:style=Regular:size=18;3
-font-1 = Hack Nerd Font Mono:style=Regular:size=15;2
-font-2 = NotoColorEmoji:scale=8;2
-modules-center = get_vol
-override-redirect = true
-
 ;;;; MODULES
-
-[module/get_vol]
-type = custom/script
-exec = $HOME/.config/polybar/media-viewer v
-[module/get_bright]
-type = custom/script
-exec = $HOME/.config/polybar/media-viewer b
 
 [module/xwindow]
 type = internal/xwindow

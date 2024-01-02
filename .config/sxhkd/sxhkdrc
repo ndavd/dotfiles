@@ -2,7 +2,7 @@
 # WM INDEPENDENT HOTKEYS
 #
 
-# make sxhkd reload its configuration files:
+# reload sxhkd configuration files:
 super + Escape
   pkill -USR1 -x sxhkd
 
@@ -16,17 +16,17 @@ super + Print
 
 # Volume Control
 XF86AudioLowerVolume
-  $HOME/.config/polybar/media-control v down
+  media-controller v down 5
 XF86AudioRaiseVolume
-  $HOME/.config/polybar/media-control v up
+  media-controller v up 5
 XF86AudioMute
-  $HOME/.config/polybar/media-control v mute
+  media-controller v mute
 
 # Brightness Control
 XF86MonBrightnessDown
-  $HOME/.config/polybar/media-control b down
+  media-controller b down 5
 XF86MonBrightnessUp
-  $HOME/.config/polybar/media-control b up
+  media-controller b up 5
 
 # Change keyboard layout
 ctrl + super + s

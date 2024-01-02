@@ -15,3 +15,4 @@ I like to customize everything until it fits my needs and I'm constantly changin
 ***Status bar:***            [polybar](https://github.com/ndavd/dotfiles/tree/main/.config/polybar)
 ***Application launcher:***  [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)
 ***File manager:***          [nnn](https://github.com/ndavd/dotfiles/tree/main/.config/nnn)
+***Media controls:***        [media-controller](https://github.com/ndavd/media-controller)
