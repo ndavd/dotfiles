@@ -16,17 +16,17 @@ super + Print
 
 # Volume Control
 XF86AudioLowerVolume
-  media-controller v down 5
+  $HOME/.config/sxhkd/media-controller-wrapper v down 5
 XF86AudioRaiseVolume
-  media-controller v up 5
+  $HOME/.config/sxhkd/media-controller-wrapper v up 5
 XF86AudioMute
-  media-controller v mute
+  $HOME/.config/sxhkd/media-controller-wrapper v mute
 
 # Brightness Control
 XF86MonBrightnessDown
-  media-controller b down 5
+  $HOME/.config/sxhkd/media-controller-wrapper b down 5
 XF86MonBrightnessUp
-  media-controller b up 5
+  $HOME/.config/sxhkd/media-controller-wrapper b up 5
 
 # Change keyboard layout
 ctrl + super + s
