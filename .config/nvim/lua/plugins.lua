@@ -53,12 +53,6 @@ local plugins = {
     end,
   },
 
-  -- RFC --
-  'mhinz/vim-rfc',
-
-  -- Cheat.sh --
-  'dbeniamine/cheat.sh-vim',
-
   -- Color picker --
   {
     'ziontee113/color-picker.nvim',
