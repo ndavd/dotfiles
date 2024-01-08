@@ -88,10 +88,8 @@ local plugins = {
     config = load('lspconfig_config'),
   },
   {
-    -- TODO: Revert to stevearc/conform.nvim once PR is merged
-    'ndavd/conform.nvim',
+    'stevearc/conform.nvim',
     config = load('conform_config'),
-    branch = 'feat/support-buf-lsp-formatting',
   },
   {
     'mfussenegger/nvim-lint',
