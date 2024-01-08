@@ -47,32 +47,24 @@ vim.o.selection = 'inclusive'
 vim.g.vimsyn_noerror = 1
 
 -- Highlight when yanking
-local highlight_on_yank =
-  vim.api.nvim_create_augroup('highlight_on_yank', { clear = true })
 vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
   pattern = '*',
-  group = highlight_on_yank,
   callback = function()
     require('vim.highlight').on_yank()
   end,
 })
 
 -- Rasi (rofi theme file)
-local rasi_custom = vim.api.nvim_create_augroup('rasi_custom', { clear = true })
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.rasi',
-  group = rasi_custom,
   callback = function()
     vim.bo.syntax = 'css'
   end,
 })
 
 -- Markdown
-local markdown_custom =
-  vim.api.nvim_create_augroup('markdown_custom', { clear = true })
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   pattern = 'markdown',
-  group = markdown_custom,
   callback = function()
     vim.wo.conceallevel = 2
   end,

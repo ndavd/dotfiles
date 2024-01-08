@@ -78,18 +78,13 @@ local make_vscode_hls = function()
   ]])
 end
 
-local custom_hls = vim.api.nvim_create_augroup('custom_hls', { clear = true })
 vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
   pattern = '*',
-  group = custom_hls,
   callback = make_hls,
 })
 
-local vscode_custom_hls =
-  vim.api.nvim_create_augroup('vscode_custom_hls', { clear = true })
 vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
   pattern = 'vscode',
-  group = vscode_custom_hls,
   callback = make_vscode_hls,
 })
 
