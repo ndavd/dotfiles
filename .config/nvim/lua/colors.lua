@@ -95,6 +95,5 @@ vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
 
 vim.o.background = 'dark'
 require('vscode_colors_config')
--- require('github_theme_config')
 
 vim.cmd('colorscheme vscode')

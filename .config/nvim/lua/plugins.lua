@@ -124,10 +124,7 @@ local plugins = {
   },
 
   -- Colorschemes --
-  'gruvbox-community/gruvbox',
   'Mofiqul/vscode.nvim',
-  'catppuccin/nvim',
-  { 'projekt0n/github-nvim-theme', branch = '0.0.x' },
 }
 
 local opts = {}
