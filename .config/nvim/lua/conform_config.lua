@@ -97,32 +97,6 @@ require('conform').setup({
   notify_on_error = true,
 })
 
-local supports_buffer_formatting = function()
-  return vim.iter(vim.lsp.get_clients({ bufnr = 0 })):any(function(c)
-    return c.supports_method(vim.lsp.protocol.Methods.textDocument_formatting)
-  end)
-end
-
-Formatexpr = function()
-  local timeout_ms = 10000
-
-  local n = require('conform').formatexpr({ timeout_ms = timeout_ms })
-
-  if n == 0 then
-    return 0
-  end
-
-  local whole_buffer_selected = vim.v.count == vim.fn.line('$')
-  if whole_buffer_selected and supports_buffer_formatting() then
-    -- Execute LSP buffer format (useful for those LSPs which don't support range formatting)
-    vim.lsp.buf.format({ timeout_ms = timeout_ms })
-    return 0
-  end
-
-  -- Fallback
-  return 1
-end
-
-vim.o.formatexpr = 'v:lua.Formatexpr()'
+vim.o.formatexpr = 'v:lua.require\'conform\'.formatexpr()'
 
 return out
