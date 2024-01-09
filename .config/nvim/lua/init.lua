@@ -46,8 +46,12 @@ vim.o.selection = 'inclusive'
 -- Fix highlight errors
 vim.g.vimsyn_noerror = 1
 
+-- Setup main augroup
+local aug = require('aug')
+aug.setup()
+
 -- Highlight when yanking
-vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
+aug.add_autocmd({ 'TextYankPost' }, {
   pattern = '*',
   callback = function()
     require('vim.highlight').on_yank()
@@ -55,7 +59,7 @@ vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
 })
 
 -- Rasi (rofi theme file)
-vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+aug.add_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.rasi',
   callback = function()
     vim.bo.syntax = 'css'
@@ -63,7 +67,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
 })
 
 -- Markdown
-vim.api.nvim_create_autocmd({ 'FileType' }, {
+aug.add_autocmd({ 'FileType' }, {
   pattern = 'markdown',
   callback = function()
     vim.wo.conceallevel = 2

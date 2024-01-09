@@ -78,12 +78,14 @@ local make_vscode_hls = function()
   ]])
 end
 
-vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+local aug = require('aug')
+
+aug.add_autocmd({ 'ColorScheme' }, {
   pattern = '*',
   callback = make_hls,
 })
 
-vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+aug.add_autocmd({ 'ColorScheme' }, {
   pattern = 'vscode',
   callback = make_vscode_hls,
 })

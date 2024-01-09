@@ -190,7 +190,7 @@ vim.api.nvim_create_user_command(
 )
 
 -- Remove formatexpr default
-vim.api.nvim_create_autocmd('LspAttach', {
+require('aug').add_autocmd('LspAttach', {
   callback = function(ev)
     vim.bo[ev.buf].formatexpr = nil
   end,
