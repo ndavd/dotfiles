@@ -80,12 +80,12 @@ end
 
 local aug = require('aug')
 
-aug.add_autocmd({ 'ColorScheme' }, {
+aug.add({ 'ColorScheme' }, {
   pattern = '*',
   callback = make_hls,
 })
 
-aug.add_autocmd({ 'ColorScheme' }, {
+aug.add({ 'ColorScheme' }, {
   pattern = 'vscode',
   callback = make_vscode_hls,
 })

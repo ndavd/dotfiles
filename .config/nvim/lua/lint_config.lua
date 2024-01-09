@@ -4,7 +4,7 @@ require('lint').linters_by_ft = {
   solidity = { 'solhint' },
 }
 
-require('aug').add_autocmd({ 'BufWritePost', 'InsertLeave' }, {
+require('aug').add({ 'BufWritePost', 'InsertLeave' }, {
   callback = function()
     require('lint').try_lint()
   end,

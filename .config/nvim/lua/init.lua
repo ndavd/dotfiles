@@ -48,10 +48,9 @@ vim.g.vimsyn_noerror = 1
 
 -- Setup main augroup
 local aug = require('aug')
-aug.setup()
 
 -- Highlight when yanking
-aug.add_autocmd({ 'TextYankPost' }, {
+aug.add({ 'TextYankPost' }, {
   pattern = '*',
   callback = function()
     require('vim.highlight').on_yank()
@@ -59,7 +58,7 @@ aug.add_autocmd({ 'TextYankPost' }, {
 })
 
 -- Rasi (rofi theme file)
-aug.add_autocmd({ 'BufNewFile', 'BufRead' }, {
+aug.add({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.rasi',
   callback = function()
     vim.bo.syntax = 'css'
@@ -67,7 +66,7 @@ aug.add_autocmd({ 'BufNewFile', 'BufRead' }, {
 })
 
 -- Markdown
-aug.add_autocmd({ 'FileType' }, {
+aug.add({ 'FileType' }, {
   pattern = 'markdown',
   callback = function()
     vim.wo.conceallevel = 2
