@@ -1,6 +1,7 @@
 local out = {}
 
-local utils = require('conform.util')
+local conform = require('conform')
+local conform_utils = require('conform.util')
 
 local eslint_files = {
   '.eslintrc.js',
@@ -73,7 +74,7 @@ local js_ts_x = function()
   return eslintd
 end
 
-require('conform').setup({
+conform.setup({
   formatters_by_ft = {
     javascript = js_ts_x,
     typescript = js_ts_x,
@@ -90,13 +91,24 @@ require('conform').setup({
   },
 
   formatters = {
-    eslint_d = { cwd = utils.root_file(with_package_json(eslint_files)) },
-    prettier = { cwd = utils.root_file(with_package_json(prettier_files)) },
-    prettierd = { cwd = utils.root_file(with_package_json(prettier_files)) },
+    eslint_d = {
+      cwd = conform_utils.root_file(with_package_json(eslint_files)),
+    },
+    prettier = {
+      cwd = conform_utils.root_file(with_package_json(prettier_files)),
+    },
+    prettierd = {
+      cwd = conform_utils.root_file(with_package_json(prettier_files)),
+    },
   },
   notify_on_error = true,
+  -- log_level = vim.log.levels.DEBUG,
 })
 
-vim.o.formatexpr = 'v:lua.require\'conform\'.formatexpr()'
+Formatexpr = function()
+  return conform.formatexpr({ timeout_ms = 10000 })
+end
+
+vim.o.formatexpr = 'v:lua.Formatexpr()'
 
 return out
