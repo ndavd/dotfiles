@@ -29,11 +29,12 @@ export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
 # Go
 export PATH=$(go env GOPATH)/bin:$PATH
 
-# zk
-export ZK_NOTEBOOK_DIR=$HOME/data/notes
-
 # Solana
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 
 # Avm
 export PATH=$HOME/.avm/bin:$PATH
+
+# NPM
+export DISABLE_OPENCOLLECTIVE=1
+export ADBLOCK=1
