@@ -33,8 +33,11 @@ export PATH=$(go env GOPATH)/bin:$PATH
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 
 # Avm
-export PATH=$HOME/.avm/bin:$PATH
+export PATH="$HOME/.avm/bin:$PATH"
 
 # NPM
 export DISABLE_OPENCOLLECTIVE=1
 export ADBLOCK=1
+
+# Foundryup
+export PATH="$HOME/.config/.foundry/bin:$PATH"
