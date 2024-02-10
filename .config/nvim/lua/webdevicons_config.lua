@@ -94,16 +94,12 @@ out.get_icon = function(opts)
   if do_hl[1] then
     local guifg =
       vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(hl_group)), 'fg')
-    if guifg == '' then
-      guifg = ''
-    else
+    if guifg ~= '' then
       guifg = ' guifg=' .. guifg
     end
     local guibg =
       vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(do_hl[2])), 'bg')
-    if guibg == '' then
-      guibg = ''
-    else
+    if guibg ~= '' then
       guibg = ' guibg=' .. guibg
     end
     STORE_HL = 'hi ' .. do_hl[3] .. guibg .. guifg
