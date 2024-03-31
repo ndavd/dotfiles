@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [[ $1 == "off" ]]; then
+  redshift -x
+  exit 0
+fi
+
+redshift -P -O "${1:-4500}"
