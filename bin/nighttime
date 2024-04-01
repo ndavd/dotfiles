@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
 if [[ $1 == "off" ]]; then
+  echo "Turning off..."
   redshift -x
   exit 0
 fi
 
-redshift -P -O "${1:-4500}"
+value="${1:-4500}"
+
+echo "Setting to ${value}K..."
+redshift -P -O "$value"
