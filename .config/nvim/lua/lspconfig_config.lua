@@ -41,6 +41,7 @@ local servers = {
   'lua_ls',
   'ocamllsp',
   'yamlls',
+  'taplo',
 }
 
 local custom_conf = {
