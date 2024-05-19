@@ -42,6 +42,7 @@ local servers = {
   'ocamllsp',
   'yamlls',
   'taplo',
+  'wgsl_analyzer'
 }
 
 local custom_conf = {
