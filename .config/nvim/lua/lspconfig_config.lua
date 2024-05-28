@@ -21,6 +21,7 @@ local current_dir = function()
   return vim.fn.getcwd()
 end
 
+-- Servers
 local servers = {
   'eslint',
   'clangd',
@@ -42,9 +43,10 @@ local servers = {
   'ocamllsp',
   'yamlls',
   'taplo',
-  'wgsl_analyzer'
+  'wgsl_analyzer',
 }
 
+-- Custom servers config
 local custom_conf = {
   texlab = {
     settings = {
@@ -162,17 +164,25 @@ for _, server in ipairs(servers) do
   require('lspconfig')[server].setup(get_conf(server))
 end
 
--- Change signs
-local signs = {
-  'DiagnosticSignError',
-  'DiagnosticSignWarn',
-  'DiagnosticSignInfo',
-  'DiagnosticSignHint',
-}
-for _, sign in ipairs(signs) do
-  vim.cmd(('sign define %s text= texthl= linehl= numhl=%s'):format(sign, sign))
-end
+-- Diagnostic signs
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '',
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+    },
+  },
+})
 
+-- Keymaps
 local keymap_opts = { silent = true }
 local lsp_custom = require('lsp_custom')
 
