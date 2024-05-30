@@ -27,7 +27,7 @@ local file_modified = function()
 end
 
 local git_branch = function()
-  local b = vim.fn.FugitiveHead(8)
+  local b = vim.b.minigit_summary_string
   local hl
   if vim.tbl_contains({ 'main', 'master' }, b) then
     hl = parse_hl_group(hl_groups.branch_main)

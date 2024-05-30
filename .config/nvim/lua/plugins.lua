@@ -60,7 +60,6 @@ local plugins = {
   },
 
   -- Git --
-  'tpope/vim-fugitive',
   {
     'mhinz/vim-signify',
     config = function()

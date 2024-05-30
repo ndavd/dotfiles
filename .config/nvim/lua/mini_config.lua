@@ -10,6 +10,7 @@ local modules = {
   'move',
   'starter',
   'pick',
+  'git',
   'extra',
 }
 
@@ -332,6 +333,23 @@ local custom_conf = {
       window = {
         config = win_config,
         prompt_cursor = '▁',
+      },
+    }
+  end,
+  git = function()
+    -- Set the summary string to just the branch
+    local format_summary_string = function(data)
+      vim.b[data.buf].minigit_summary_string =
+        vim.b[data.buf].minigit_summary.head_name
+    end
+    vim.api.nvim_create_autocmd(
+      'User',
+      { pattern = 'MiniGitUpdated', callback = format_summary_string }
+    )
+
+    return {
+      command = {
+        split = 'vertical',
       },
     }
   end,
