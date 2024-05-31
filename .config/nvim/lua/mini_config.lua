@@ -198,7 +198,7 @@ local custom_conf = {
     end
 
     local checkout_branch = function(branch)
-      vim.fn.system({
+      vim.system({
         'git',
         '-C',
         get_repo_dir(),
