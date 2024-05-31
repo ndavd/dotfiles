@@ -1,21 +1,21 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ndavd/dotfiles?style=flat-square)
 
-## This repository contains the dotfiles for the setup that I use everyday.
+## My Dotfiles
 
 > Warning: minimal setup ahead!
 
 ![Demo](https://raw.githubusercontent.com/ndavd/dotfiles/main/.github/demo.gif)
 
-- I spent the time optimizing my environment to not lose more time on repetitive
+- I spent the time optimizing my system to not lose more time on repetitive
   actions that can be automated.
-- As my needs change so does my environment.
+- As my needs change so does my system.
 - For the reasons stated above, these dotfiles are perpetually
   under-construction.
 
 - _**Editor:**_
   [neovim](https://github.com/ndavd/dotfiles/tree/main/.config/nvim)
 - _**Shell:**_ [zsh](https://github.com/ndavd/dotfiles/tree/main/.zsh)
-- _**Terminal emulator:**_
+- _**Terminal Emulator:**_
   [kitty](https://github.com/ndavd/dotfiles/tree/main/.config/kitty)
 - _**Terminal Workspace:**_
   [zellij](https://github.com/ndavd/dotfiles/tree/main/.config/zellij)
