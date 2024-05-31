@@ -36,6 +36,12 @@ local plugins = {
     },
   },
 
+  -- Better file explorer --
+  {
+    'stevearc/oil.nvim',
+    config = load('oil_config'),
+  },
+
   -- Better matchit --
   {
     'andymass/vim-matchup',

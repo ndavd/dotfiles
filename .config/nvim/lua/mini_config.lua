@@ -4,7 +4,6 @@ local modules = {
   'align',
   'surround',
   'pairs',
-  'files',
   'hipatterns',
   'bracketed',
   'move',
@@ -28,19 +27,6 @@ local custom_conf = {
       end,
     },
   },
-  files = function()
-    local prefix = function(fs_entry)
-      if fs_entry.fs_type == 'directory' then
-        return icons.directory, 'MiniFilesDirectory'
-      end
-      local icon, hl = require('nvim-web-devicons').get_icon(fs_entry.name)
-      return icon .. ' ', hl
-    end
-
-    return {
-      content = { prefix = prefix },
-    }
-  end,
   hipatterns = function()
     local hipatterns = require('mini.hipatterns')
     vim.keymap.set('n', '<leader>co', hipatterns.toggle)
@@ -339,8 +325,9 @@ local custom_conf = {
   git = function()
     -- Set the summary string to just the branch
     local format_summary_string = function(data)
-      vim.b[data.buf].minigit_summary_string =
-        vim.b[data.buf].minigit_summary.head_name
+      local summary = vim.b[data.buf].minigit_summary
+      vim.b[data.buf].minigit_summary_string = summary and summary.head_name
+        or ''
     end
     vim.api.nvim_create_autocmd(
       'User',
