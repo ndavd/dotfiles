@@ -133,6 +133,9 @@ Stl = function()
   if ft == 'lazy' then
     return '%= 📦 Lazy %='
   end
+  if ft == 'oil' then
+    return '%= 📂 Explorer %='
+  end
   if ft == 'minipick' then
     return '%= 🔭 Pick %='
   end
