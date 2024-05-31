@@ -1,18 +1,31 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ndavd/dotfiles?style=flat-square)
+
 ## This repository contains the dotfiles for the setup that I use everyday.
-~~**Warning: dark and minimal setup ahead!**~~
+
+> Warning: minimal setup ahead!
 
 ![Demo](https://raw.githubusercontent.com/ndavd/dotfiles/main/.github/demo.gif)
 
-I like to customize everything until it fits my needs and I'm constantly changing/breaking/refactoring things.
+- I spent the time optimizing my environment to not lose more time on repetitive
+  actions that can be automated.
+- As my needs change so does my environment.
+- For the reasons stated above, these dotfiles are perpetually
+  under-construction.
 
-***IDE:***                   [neovim](https://github.com/ndavd/dotfiles/tree/main/.config/nvim)
-***Text editor:***           [vim](https://github.com/ndavd/dotfiles/tree/main/.vim)
-***Shell:***                 [zsh](https://github.com/ndavd/dotfiles/tree/main/.zsh)
-***Terminal emulator:***     [kitty](https://github.com/ndavd/dotfiles/tree/main/.config/kitty)
-***Terminal workspace:***    [zellij](https://github.com/ndavd/dotfiles/tree/main/.config/zellij)
-***Window manager:***        [bspwm](https://github.com/ndavd/dotfiles/tree/main/.config/bspwm)
-***Status bar:***            [polybar](https://github.com/ndavd/dotfiles/tree/main/.config/polybar)
-***Application launcher:***  [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)
-***File manager:***          [nnn](https://github.com/ndavd/dotfiles/tree/main/.config/nnn)
-***Media controls:***        [media-controller](https://github.com/ndavd/media-controller)
+- _**Editor:**_
+  [neovim](https://github.com/ndavd/dotfiles/tree/main/.config/nvim)
+- _**Shell:**_ [zsh](https://github.com/ndavd/dotfiles/tree/main/.zsh)
+- _**Terminal emulator:**_
+  [kitty](https://github.com/ndavd/dotfiles/tree/main/.config/kitty)
+- _**Terminal Workspace:**_
+  [zellij](https://github.com/ndavd/dotfiles/tree/main/.config/zellij)
+- _**Window Manager:**_
+  [bspwm](https://github.com/ndavd/dotfiles/tree/main/.config/bspwm)
+- _**Status Bar:**_
+  [polybar](https://github.com/ndavd/dotfiles/tree/main/.config/polybar)
+- _**Application Launcher:**_
+  [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)
+- _**File Manager:**_
+  [nnn](https://github.com/ndavd/dotfiles/tree/main/.config/nnn)
+- _**Media Controls:**_
+  [ndavd/media-controller](https://github.com/ndavd/media-controller)
