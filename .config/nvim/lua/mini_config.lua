@@ -325,9 +325,8 @@ local custom_conf = {
   git = function()
     -- Set the summary string to just the branch
     local format_summary_string = function(data)
-      local summary = vim.b[data.buf].minigit_summary
-      vim.b[data.buf].minigit_summary_string = summary and summary.head_name
-        or ''
+      vim.b[data.buf].minigit_summary_string =
+        vim.b[data.buf].minigit_summary.head_name
     end
     vim.api.nvim_create_autocmd(
       'User',
