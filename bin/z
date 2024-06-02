@@ -1,11 +1,11 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 if [[ $1 == "l" ]]; then
   session="$(zellij ls -s -n | fzf)"
   zellij \
     -l project \
     attach \
-    $session
+    "$session"
   exit 0
 fi
 
@@ -16,7 +16,8 @@ if [[ $# -ne 0 ]]; then
   exit 0
 fi
 
-dirs=(${(f)~"$(<$HOME/.project-dirs)"})
+# dirs=(${(f)~"$(<$HOME/.project-dirs)"})
+readarray -t dirs < "$HOME"/.project-dirs
 dir="$(fd \
   --unrestricted \
   --absolute-path \
@@ -26,8 +27,7 @@ dir="$(fd \
   --max-depth 1 \
   --exclude .git \
   . "${dirs[@]}" \
-  | sed "s|${HOME}|~|" \
-  | fzf \
+  | fzf
 )"
 
 adjectives=(
@@ -167,9 +167,9 @@ nouns=(
 )
 
 if [[ -n $dir ]]; then
-  cd $~dir
+  cd "$dir"
   zellij \
     -l project \
     attach \
-    -c "$(basename $dir)-${adjectives[$RANDOM % ${#adjectives[@]}]}-${nouns[$RANDOM % ${#nouns[@]}]}"
+    -c "$(basename "$dir")-${adjectives[$RANDOM % ${#adjectives[@]}]}-${nouns[$RANDOM % ${#nouns[@]}]}"
 fi

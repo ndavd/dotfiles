@@ -17,15 +17,15 @@ export MANWIDTH=100
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --unrestricted --full-path --color=always -E '/.*' -E node_modules -E .git -E target"
-export FZF_DEFAULT_OPTS='
+export FZF_DEFAULT_OPTS="
   --ansi
   --info=inline
   --color=gutter:#000000
   --no-scrollbar
   --border=none
-  --preview="$(cat $HOME/.config/fzf/preview.sh)"
+  --preview='$(cat $HOME/.config/fzf/preview-script)'
   --preview-window=right,50%,border-left
-'
+"
 
 # Go
 export PATH=$(go env GOPATH)/bin:$PATH
