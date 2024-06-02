@@ -23,7 +23,7 @@ export FZF_DEFAULT_OPTS="
   --color=gutter:#000000
   --no-scrollbar
   --border=none
-  --preview='$(cat $HOME/.config/fzf/preview-script)'
+  --preview='$HOME/.config/fzf/preview {}'
   --preview-window=right,50%,border-left
 "
 
