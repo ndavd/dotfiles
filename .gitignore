@@ -19,8 +19,6 @@
 !.config/lf/**
 !.config/newsboat/
 !.config/newsboat/**
-!.config/nnn
-!.config/nnn/**
 !.config/nvim
 !.config/nvim/**
 !.config/polybar/
@@ -35,6 +33,8 @@
 !.config/zathura/**
 !.config/zellij/
 !.config/zellij/**
+!.config/fzf/
+!.config/fzf/**
 
 !.config/mimeapps.list
 !.config/picom.conf
@@ -71,7 +71,6 @@
 .config/lf/cleaner
 .config/lf/preview
 .config/newsboat/urls
-.config/nnn/plugins/*
 .config/nvim/lazy-lock.json
 .zsh/.zcompdump
 bin/*.AppImage

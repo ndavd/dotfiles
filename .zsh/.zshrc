@@ -137,6 +137,11 @@ alias news="newsboat"
 alias nvmd="nvm use default"
 alias paru="paru --assume-installed cargo"
 alias drop="dragon-drop"
+alias fzf='fzf \
+  --border=none \
+  --preview="$(cat $HOME/.config/fzf/preview.sh)" \
+  --preview-window=right,50%,border-left
+'
 
 ### fzf
 fzfa() {

@@ -17,14 +17,15 @@ export MANWIDTH=100
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --unrestricted --full-path --color=always -E '/.*' -E node_modules -E .git -E target"
-export FZF_DEFAULT_OPTS="--ansi --info=inline --color=gutter:#000000 --no-scrollbar --border=rounded"
-
-# NNN
-export NNN_FIFO="/tmp/nnn.fifo"
-export NNN_PLUG="g:-!git diff;p:preview-tui;d:dragdrop"
-export NNN_ICONLOOKUP=1
-export NNN_BATTHEME="Coldark-Dark"
-export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
+export FZF_DEFAULT_OPTS='\
+  --ansi \
+  --info=inline \
+  --color=gutter:#000000 \
+  --no-scrollbar \
+  --border=none \
+  --preview="$(cat $HOME/.config/fzf/preview.sh)" \
+  --preview-window=right,50%,border-left
+'
 
 # Go
 export PATH=$(go env GOPATH)/bin:$PATH

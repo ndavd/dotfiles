@@ -25,7 +25,5 @@
   [polybar](https://github.com/ndavd/dotfiles/tree/main/.config/polybar)
 - _**Application Launcher:**_
   [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)
-- _**File Manager:**_
-  [nnn](https://github.com/ndavd/dotfiles/tree/main/.config/nnn)
 - _**Media Controls:**_
   [ndavd/media-controller](https://github.com/ndavd/media-controller)
