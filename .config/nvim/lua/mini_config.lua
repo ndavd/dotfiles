@@ -353,6 +353,10 @@ local custom_conf = {
       if summary.change > 0 then
         table.insert(stats, '~' .. summary.change)
       end
+      if #stats == 0 then
+        vim.b[data.buf].minidiff_summary_string = ''
+        return
+      end
       vim.b[data.buf].minidiff_summary_string = ('[%s]'):format(
         table.concat(stats, ',')
       )
@@ -361,6 +365,7 @@ local custom_conf = {
       'User',
       { pattern = 'MiniDiffUpdated', callback = format_summary_string }
     )
+
     local diff_sign = '▌'
     return {
       view = {
