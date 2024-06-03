@@ -41,22 +41,7 @@ local git_branch = function()
 end
 
 local git_status = function()
-  local stats = vim.fn['sy#repo#get_stats']()
-  local status = {}
-  if stats[1] > 0 then
-    table.insert(status, '+' .. stats[1])
-  end
-  if stats[3] > 0 then
-    table.insert(status, '-' .. stats[3])
-  end
-  if stats[2] > 0 then
-    table.insert(status, '~' .. stats[2])
-  end
-  stats = table.concat(status, ',')
-  if stats == '' then
-    return ''
-  end
-  return ('[%s]'):format(stats)
+  return vim.b.minidiff_summary_string or ''
 end
 
 local mode = function()

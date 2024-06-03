@@ -29,10 +29,6 @@ local make_hls = function()
   " Visual and Search
   hi Visual gui=NONE guibg=#0E1F2F guifg=fg ctermbg=DarkBlue ctermfg=White
   hi Search gui=reverse cterm=reverse
-  " Signify
-  hi SignifySignAdd guifg=#b8cb26 guibg=NONE ctermfg=DarkGreen ctermbg=NONE
-  hi SignifySignDelete guifg=#f44747 guibg=NONE ctermfg=DarkRed ctermbg=NONE
-  hi SignifySignChange guifg=#599cd6 guibg=NONE ctermfg=DarkBlue ctermbg=NONE
   " Statusline
   hi StatusLine gui=NONE guibg=NONE ctermbg=NONE guifg=#ffffff ctermfg=White
   hi StatusLineModeNormal gui=NONE guibg=NONE ctermbg=NONE guifg=#949494 ctermfg=DarkGrey
@@ -47,15 +43,14 @@ local make_hls = function()
   " Match
   hi MatchWord gui=underline guisp=#bbbbbb ctermbg=DarkRed
   hi MatchWordCur gui=underline guisp=#bbbbbb ctermbg=DarkRed
-  " Telescope
-  hi! link TelescopePromptBorder Normal
-  hi! link TelescopePreviewBorder Normal
-  hi! link TelescopeResultsBorder Normal
-  hi TelescopePromptPrefix guifg=#ea6962
   " mini.pick
   hi! link MiniPickMatchCurrent PMenuSel
   hi! link MiniPickPrompt MiniStarterItemPrefix
   hi! link MiniPickBorder Normal
+  " Diff
+  hi Added guifg=#b8cb26 ctermfg=DarkGreen
+  hi Removed guifg=#f44747 ctermfg=DarkRed
+  hi Changed guifg=#599cd6 ctermfg=DarkBlue
   " Lsp
   hi LspDiagnosticsDefaultError guibg=NONE guifg=#ea6962
   hi LspDiagnosticsVirtualTextError guibg=NONE guifg=#ea6962

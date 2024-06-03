@@ -10,6 +10,7 @@ local modules = {
   'starter',
   'pick',
   'git',
+  'diff',
   'extra',
 }
 
@@ -336,6 +337,35 @@ local custom_conf = {
     return {
       command = {
         split = 'vertical',
+      },
+    }
+  end,
+  diff = function()
+    local format_summary_string = function(data)
+      local summary = vim.b[data.buf].minidiff_summary
+      local stats = {}
+      if summary.add > 0 then
+        table.insert(stats, '+' .. summary.add)
+      end
+      if summary.delete > 0 then
+        table.insert(stats, '-' .. summary.delete)
+      end
+      if summary.change > 0 then
+        table.insert(stats, '~' .. summary.change)
+      end
+      vim.b[data.buf].minidiff_summary_string = ('[%s]'):format(
+        table.concat(stats, ',')
+      )
+    end
+    vim.api.nvim_create_autocmd(
+      'User',
+      { pattern = 'MiniDiffUpdated', callback = format_summary_string }
+    )
+    local diff_sign = '▌'
+    return {
+      view = {
+        style = 'sign',
+        signs = { add = diff_sign, change = diff_sign, delete = diff_sign },
       },
     }
   end,

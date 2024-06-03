@@ -65,17 +65,6 @@ local plugins = {
     config = load('colorpicker_config'),
   },
 
-  -- Git --
-  {
-    'mhinz/vim-signify',
-    config = function()
-      local symbol = '▌'
-      vim.g.signify_sign_add = symbol
-      vim.g.signify_sign_change = symbol
-      vim.g.signify_sign_delete = symbol
-    end,
-  },
-
   -- Treesitter --
   {
     'nvim-treesitter/nvim-treesitter',
