@@ -59,12 +59,6 @@ local plugins = {
     end,
   },
 
-  -- Color picker --
-  {
-    'ziontee113/color-picker.nvim',
-    config = load('plugins/colorpicker'),
-  },
-
   -- Treesitter --
   {
     'nvim-treesitter/nvim-treesitter',
