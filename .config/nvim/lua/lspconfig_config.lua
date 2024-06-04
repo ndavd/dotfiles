@@ -186,6 +186,10 @@ vim.diagnostic.config({
 local keymap_opts = { silent = true }
 local lsp_custom = require('lsp_custom')
 
+vim.keymap.del('n', 'grn')
+vim.keymap.del({ 'n', 'v' }, 'gra')
+vim.keymap.del({ 'n' }, 'grr')
+
 vim.keymap.set('n', 'gk', vim.lsp.buf.hover, keymap_opts)
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, keymap_opts)
 vim.keymap.set('n', 'gr', vim.lsp.buf.rename, keymap_opts)
