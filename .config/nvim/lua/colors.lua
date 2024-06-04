@@ -86,6 +86,6 @@ aug.add({ 'ColorScheme' }, {
 })
 
 vim.o.background = 'dark'
-require('vscode_colors_config')
+require('plugins.vscode_colors')
 
 vim.cmd('colorscheme vscode')

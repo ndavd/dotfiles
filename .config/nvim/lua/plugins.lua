@@ -22,7 +22,7 @@ local plugins = {
   -- Mini all things! --
   {
     'echasnovski/mini.nvim',
-    config = load('mini_config'),
+    config = load('plugins/mini'),
   },
 
   -- Icon support --
@@ -31,7 +31,7 @@ local plugins = {
     dependencies = {
       {
         'nvim-tree/nvim-web-devicons',
-        config = load('webdevicons_config'),
+        config = load('plugins/webdevicons'),
       },
     },
   },
@@ -39,7 +39,7 @@ local plugins = {
   -- Better file explorer --
   {
     'stevearc/oil.nvim',
-    config = load('oil_config'),
+    config = load('plugins/oil'),
   },
 
   -- Better matchit --
@@ -62,14 +62,14 @@ local plugins = {
   -- Color picker --
   {
     'ziontee113/color-picker.nvim',
-    config = load('colorpicker_config'),
+    config = load('plugins/colorpicker'),
   },
 
   -- Treesitter --
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    config = load('treesitter_config'),
+    config = load('plugins/treesitter'),
     dependencies = {
       'windwp/nvim-ts-autotag',
       'JoosepAlviste/nvim-ts-context-commentstring',
@@ -79,19 +79,19 @@ local plugins = {
   -- LSP --
   {
     'neovim/nvim-lspconfig',
-    config = load('lspconfig_config'),
+    config = load('plugins/lspconfig'),
   },
   {
     'stevearc/conform.nvim',
-    config = load('conform_config'),
+    config = load('plugins/conform'),
   },
   {
     'mfussenegger/nvim-lint',
-    config = load('lint_config'),
+    config = load('plugins/lint'),
   },
   {
     'hrsh7th/nvim-cmp',
-    config = load('cmp_config'),
+    config = load('plugins/cmp'),
     dependencies = {
       {
         'hrsh7th/vim-vsnip',

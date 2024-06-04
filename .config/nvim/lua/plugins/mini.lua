@@ -137,7 +137,7 @@ local custom_conf = {
 
         local items = {}
         for _, f in ipairs(vim.list_slice(files, 1, n)) do
-          local name = require('webdevicons_config').get_icon({
+          local name = require('plugins.webdevicons').get_icon({
             filepath = f,
           }) .. vim.fn.fnamemodify(f, ':~:.')
           table.insert(items, {
@@ -343,6 +343,10 @@ local custom_conf = {
   diff = function()
     local format_summary_string = function(data)
       local summary = vim.b[data.buf].minidiff_summary
+      if summary == nil then
+        vim.b[data.buf].minidiff_summary_string = ''
+        return
+      end
       local stats = {}
       if summary.add > 0 then
         table.insert(stats, '+' .. summary.add)

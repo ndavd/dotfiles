@@ -78,7 +78,7 @@ local mode = function()
 end
 
 local filepath = function()
-  local icon = require('webdevicons_config').get_icon({
+  local icon = require('plugins.webdevicons').get_icon({
     do_hl = { true, hl_groups.stl, hl_groups.icon },
   })
   return icon .. vim.fn.expand('%f')
