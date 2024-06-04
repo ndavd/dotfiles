@@ -1,3 +1,5 @@
+local aug = require('aug')
+
 local modules = {
   'ai',
   'comment',
@@ -329,7 +331,8 @@ local custom_conf = {
       vim.b[data.buf].minigit_summary_string =
         vim.b[data.buf].minigit_summary.head_name
     end
-    vim.api.nvim_create_autocmd(
+
+    aug.add(
       'User',
       { pattern = 'MiniGitUpdated', callback = format_summary_string }
     )
@@ -365,7 +368,7 @@ local custom_conf = {
         table.concat(stats, ',')
       )
     end
-    vim.api.nvim_create_autocmd(
+    aug.add(
       'User',
       { pattern = 'MiniDiffUpdated', callback = format_summary_string }
     )

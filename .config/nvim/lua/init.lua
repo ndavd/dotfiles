@@ -1,10 +1,7 @@
--- Define mapleader
-vim.g.mapleader = ' '
-
--- 256 color support
-vim.o.termguicolors = true
-
 -- Settings
+vim.g.mapleader = ' '
+vim.o.termguicolors = true
+vim.o.background = 'dark'
 vim.o.wrap = false
 vim.o.clipboard = 'unnamedplus'
 vim.o.showmode = false

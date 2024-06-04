@@ -116,7 +116,10 @@ local plugins = {
   },
 
   -- Colorschemes --
-  'Mofiqul/vscode.nvim',
+  {
+    'Mofiqul/vscode.nvim',
+    config = load('plugins.vscode_colors'),
+  },
 }
 
 local opts = {}

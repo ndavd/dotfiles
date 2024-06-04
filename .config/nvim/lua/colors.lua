@@ -66,26 +66,9 @@ local make_hls = function()
   ]])
 end
 
-local make_vscode_hls = function()
-  vim.cmd([[
-  " MatchParen
-  hi MatchParen guibg=#303030
-  ]])
-end
-
-local aug = require('aug')
-
-aug.add({ 'ColorScheme' }, {
+require('aug').add({ 'ColorScheme' }, {
   pattern = '*',
   callback = make_hls,
 })
-
-aug.add({ 'ColorScheme' }, {
-  pattern = 'vscode',
-  callback = make_vscode_hls,
-})
-
-vim.o.background = 'dark'
-require('plugins.vscode_colors')
 
 vim.cmd('colorscheme vscode')
