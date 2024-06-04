@@ -2,18 +2,19 @@ local aug = require('aug')
 
 local modules = {
   'ai',
-  'comment',
   'align',
-  'surround',
-  'pairs',
-  'hipatterns',
   'bracketed',
-  'move',
-  'starter',
-  'pick',
-  'git',
+  'colors',
+  'comment',
   'diff',
   'extra',
+  'git',
+  'hipatterns',
+  'move',
+  'pairs',
+  'pick',
+  'starter',
+  'surround',
 }
 
 local icons = {
