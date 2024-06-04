@@ -17,11 +17,6 @@ local modules = {
   'surround',
 }
 
-local icons = {
-  directory = ' ',
-  file = ' ',
-}
-
 local custom_conf = {
   comment = {
     options = {
@@ -316,7 +311,10 @@ local custom_conf = {
         show = function(buf_id, items, query)
           pick.default_show(buf_id, items, query, {
             show_icons = true,
-            icons = icons,
+            icons = {
+              directory = ' ',
+              file = ' ',
+            },
           })
         end,
       },
@@ -375,6 +373,7 @@ local custom_conf = {
     )
 
     local diff_sign = '▌'
+
     return {
       view = {
         style = 'sign',

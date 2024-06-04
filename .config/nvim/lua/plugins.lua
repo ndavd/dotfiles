@@ -42,14 +42,6 @@ local plugins = {
     config = load('plugins/oil'),
   },
 
-  -- Better matchit --
-  {
-    'andymass/vim-matchup',
-    config = function()
-      vim.g.matchup_matchparen_offscreen = {}
-    end,
-  },
-
   -- Indentation --
   {
     'tpope/vim-sleuth',
