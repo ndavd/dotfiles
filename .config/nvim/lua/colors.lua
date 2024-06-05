@@ -40,9 +40,6 @@ local make_hls = function()
   " Listchars
   hi NonText guifg=#3a3a3a
   hi Whitespace guifg=#3a3a3a
-  " Match
-  hi MatchWord gui=underline guisp=#bbbbbb ctermbg=DarkRed
-  hi MatchWordCur gui=underline guisp=#bbbbbb ctermbg=DarkRed
   " mini.pick
   hi! link MiniPickMatchCurrent PMenuSel
   hi! link MiniPickPrompt MiniStarterItemPrefix
