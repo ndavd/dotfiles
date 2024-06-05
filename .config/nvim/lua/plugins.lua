@@ -42,6 +42,15 @@ local plugins = {
     config = load('plugins/oil'),
   },
 
+  -- Automatic indentation --
+  {
+    'tpope/vim-sleuth',
+    config = function()
+      vim.g.sleuth_automatic = 0
+      vim.keymap.set('n', '<leader><leader>s', '<cmd>Sleuth<CR>')
+    end,
+  },
+
   -- Treesitter --
   {
     'nvim-treesitter/nvim-treesitter',
