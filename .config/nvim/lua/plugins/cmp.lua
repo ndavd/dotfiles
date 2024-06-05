@@ -27,3 +27,13 @@ cmp.setup({
     { name = 'spell' },
   },
 })
+
+-- vsnip
+local jumpable_n = vim.fn['vsnip#jumpable'](1)
+local jumpable_p = vim.fn['vsnip#jumpable'](-1)
+vim.keymap.set({ 'i', 's' }, '<C-k>', function()
+  return jumpable_n and '<Plug>(vsnip-jump-next)' or '<C-k>'
+end, { expr = true })
+vim.keymap.set({ 'i', 's' }, '<C-j>', function()
+  return jumpable_p and '<Plug>(vsnip-jump-prev)' or '<C-j>'
+end, { expr = true })

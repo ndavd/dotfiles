@@ -42,15 +42,6 @@ local plugins = {
     config = load('plugins/oil'),
   },
 
-  -- Indentation --
-  {
-    'tpope/vim-sleuth',
-    config = function()
-      vim.g.sleuth_automatic = 0
-      vim.keymap.set('n', '<leader><leader>s', '<cmd>Sleuth<CR>')
-    end,
-  },
-
   -- Treesitter --
   {
     'nvim-treesitter/nvim-treesitter',
@@ -79,19 +70,7 @@ local plugins = {
     'hrsh7th/nvim-cmp',
     config = load('plugins/cmp'),
     dependencies = {
-      {
-        'hrsh7th/vim-vsnip',
-        config = function()
-          local jumpable_n = vim.fn['vsnip#jumpable'](1)
-          local jumpable_p = vim.fn['vsnip#jumpable'](-1)
-          vim.keymap.set({ 'i', 's' }, '<C-k>', function()
-            return jumpable_n and '<Plug>(vsnip-jump-next)' or '<C-k>'
-          end, { expr = true })
-          vim.keymap.set({ 'i', 's' }, '<C-j>', function()
-            return jumpable_p and '<Plug>(vsnip-jump-prev)' or '<C-j>'
-          end, { expr = true })
-        end,
-      },
+      'hrsh7th/vim-vsnip',
       'hrsh7th/cmp-vsnip',
       'rafamadriz/friendly-snippets',
       'hrsh7th/cmp-nvim-lsp',
