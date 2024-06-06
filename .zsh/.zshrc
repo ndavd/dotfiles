@@ -156,7 +156,7 @@ video() {
 }
 
 ### motd
-[[ $- =~ l ]] && [[ $TERM == linux ]] && . $HOME/bin/motd && . $HOME/bin/woprfetch
+[[ $- =~ l ]] && [[ $TERM == linux ]] && . $HOME/bin/motd && fastfetch
 
 ### nvm
 export NVM_DIR="$HOME/.config/nvm"

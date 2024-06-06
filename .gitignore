@@ -7,8 +7,12 @@
 !.config/bspwm/**
 !.config/dunst/
 !.config/dunst/**
+!.config/fastfetch/
+!.config/fastfetch/**
 !.config/flameshot/
 !.config/flameshot/**
+!.config/fzf/
+!.config/fzf/**
 !.config/git/
 !.config/git/**
 !.config/go/
@@ -33,8 +37,6 @@
 !.config/zathura/**
 !.config/zellij/
 !.config/zellij/**
-!.config/fzf/
-!.config/fzf/**
 
 !.config/mimeapps.list
 !.config/picom.conf

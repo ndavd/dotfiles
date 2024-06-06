@@ -80,5 +80,5 @@ f() {
   [[ -n $file ]] && cd "$(dirname "$file")"
 }
 
-neofetch
+fastfetch
 # pfetch
