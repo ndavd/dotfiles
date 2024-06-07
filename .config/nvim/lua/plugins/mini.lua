@@ -350,13 +350,13 @@ local custom_conf = {
         return
       end
       local stats = {}
-      if summary.add > 0 then
+      if summary.add ~= nil and summary.add > 0 then
         table.insert(stats, '+' .. summary.add)
       end
-      if summary.delete > 0 then
+      if summary.delete ~= nil and summary.delete > 0 then
         table.insert(stats, '-' .. summary.delete)
       end
-      if summary.change > 0 then
+      if summary.change ~= nil and summary.change > 0 then
         table.insert(stats, '~' .. summary.change)
       end
       if #stats == 0 then
