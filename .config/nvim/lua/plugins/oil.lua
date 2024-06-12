@@ -3,6 +3,14 @@ local util = require('oil.util')
 
 oil.setup({
   default_file_explorer = true,
+  skip_confirm_for_simple_edits = true,
+  view_options = {
+    show_hidden = true,
+    natural_order = true,
+    is_always_hidden = function(name, _)
+      return vim.tbl_contains({ '..', '.git' }, name)
+    end,
+  },
   keymaps = {
     ['gd'] = {
       desc = 'Drag and drop entry under the cursor',
