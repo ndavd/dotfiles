@@ -48,11 +48,15 @@ out.cd_project_root = function()
 end
 
 out.goto_next_diagnostic = function()
-  vim.diagnostic.jump({ count = 1, float = false })
+  vim.diagnostic.jump({ count = 1 })
 end
 
 out.goto_prev_diagnostic = function()
-  vim.diagnostic.jump({ count = -1, float = false })
+  vim.diagnostic.jump({ count = -1 })
+end
+
+out.open_diagnostic_float = function()
+  vim.diagnostic.open_float()
 end
 
 out.toggle_buf_inlay_hints = function()
