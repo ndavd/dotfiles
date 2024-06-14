@@ -379,6 +379,11 @@ local custom_conf = {
         style = 'sign',
         signs = { add = diff_sign, change = diff_sign, delete = diff_sign },
       },
+      mappings = {
+        apply = '',
+        reset = '',
+        textobject = '',
+      },
     }
   end,
 }

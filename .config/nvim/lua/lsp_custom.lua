@@ -48,15 +48,18 @@ out.cd_project_root = function()
 end
 
 out.goto_next_diagnostic = function()
-  vim.diagnostic.goto_next({ popup = false })
+  vim.diagnostic.jump({ count = 1, float = false })
 end
 
 out.goto_prev_diagnostic = function()
-  vim.diagnostic.goto_prev({ popup = false })
+  vim.diagnostic.jump({ count = -1, float = false })
 end
 
 out.toggle_buf_inlay_hints = function()
-  vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
+  vim.lsp.inlay_hint.enable(
+    not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }),
+    { bufnr = 0 }
+  )
 end
 
 return out
