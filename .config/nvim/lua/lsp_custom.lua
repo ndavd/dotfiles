@@ -48,14 +48,12 @@ out.cd_project_root = function()
 end
 
 out.goto_next_diagnostic = function()
-  vim.diagnostic.jump({ count = 1 })
+  vim.diagnostic.jump({ count = 1, float = true })
+  vim.diagnostic.open_float()
 end
 
 out.goto_prev_diagnostic = function()
-  vim.diagnostic.jump({ count = -1 })
-end
-
-out.open_diagnostic_float = function()
+  vim.diagnostic.jump({ count = -1, float = true })
   vim.diagnostic.open_float()
 end
 

@@ -196,7 +196,6 @@ vim.keymap.set('n', 'gr', vim.lsp.buf.rename, keymap_opts)
 
 vim.keymap.set('n', '<C-n>', lsp_custom.goto_next_diagnostic, keymap_opts)
 vim.keymap.set('n', '<C-p>', lsp_custom.goto_prev_diagnostic, keymap_opts)
-vim.keymap.set('n', '<C-o>', lsp_custom.open_diagnostic_float, keymap_opts)
 vim.keymap.set('n', 'gh', lsp_custom.toggle_buf_inlay_hints, keymap_opts)
 vim.keymap.set('n', 'gd', lsp_custom.definition, keymap_opts)
 
