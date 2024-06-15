@@ -134,7 +134,7 @@ alias egrep="egrep --colour=auto"
 alias fgrep="fgrep --colour=auto"
 alias ffprobe="ffprobe -hide_banner"
 alias news="newsboat"
-alias nvmd="nvm use default"
+alias n="nvm use default"
 alias paru="paru --assume-installed cargo"
 alias drop="dragon-drop"
 
