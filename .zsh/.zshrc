@@ -135,6 +135,7 @@ alias fgrep="fgrep --colour=auto"
 alias ffprobe="ffprobe -hide_banner"
 alias news="newsboat"
 alias n="nvm use default"
+alias nnvim="nvm use default && nvim"
 alias paru="paru --assume-installed cargo"
 alias drop="dragon-drop"
 
