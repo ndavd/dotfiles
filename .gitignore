@@ -15,8 +15,6 @@
 !.config/fzf/**
 !.config/git/
 !.config/git/**
-!.config/go/
-!.config/go/**
 !.config/kitty/
 !.config/kitty/**
 !.config/lf/
@@ -66,6 +64,7 @@
 !.xinitrc
 !.xserverrc
 !.zshenv
+!.config/go/env
 
 # Exclude specific sub files/directories
 
