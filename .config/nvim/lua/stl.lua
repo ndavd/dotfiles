@@ -112,7 +112,7 @@ end
 Stl = function()
   local ft = vim.o.ft
   local bt = vim.o.bt
-  if ft == 'starter' then
+  if ft == 'ministarter' then
     return ('%%= %s %%='):format(greeting())
   end
   if ft == 'lazy' then
