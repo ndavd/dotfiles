@@ -61,7 +61,7 @@ end)
 if vim.o.list then
   local listchar_index = 1
   local l = 'tab:_\\ ,conceal:┊,nbsp:⍽,extends:>,precedes:<,trail:·'
-  local listchar_options = { l .. ',eol:﬋', l, '' }
+  local listchar_options = { l .. ',eol:󱞥', l, '' }
   local cycle_listchars = function()
     vim.o.listchars = listchar_options[listchar_index]
     listchar_index = (listchar_index % #listchar_options) + 1
