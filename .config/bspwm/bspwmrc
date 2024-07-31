@@ -11,6 +11,7 @@ dunst &
 picom &
 nitrogen --restore &
 "$HOME"/.config/polybar/launch &
+opensnitch-ui &
 
 # Double screen setup
 if [[ $(xrandr -q | grep 'HDMI-0 connected') ]]; then
