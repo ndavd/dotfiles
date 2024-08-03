@@ -56,4 +56,5 @@ bspc rule -a Slack desktop=2
 bspc rule -a Element desktop=4
 bspc rule -a Element-Nightly desktop=4
 bspc rule -a steam desktop=5
+bspc rule -a "SDL Application" desktop=5 # Steam
 bspc rule -a Spotify desktop=6
