@@ -40,5 +40,8 @@ export PATH="$HOME/.avm/bin:$PATH"
 export DISABLE_OPENCOLLECTIVE=1
 export ADBLOCK=1
 
-# Foundryup
+# Foundry
 export PATH="$HOME/.config/.foundry/bin:$PATH"
+
+# Huff
+export PATH="$HOME/.huff/bin:$PATH"
