@@ -38,54 +38,34 @@ local custom_conf = {
   starter = function()
     local starter = require('mini.starter')
 
-    local format_text = function(str)
-      local n = 60
-      local formatted_str = ''
-      local len = #str
-      local i = 1
-      while i < len do
-        local pos
-        if str:sub(i + n, i + n) == ' ' then
-          pos = i + n
-        else
-          pos = str:find(' ', i + n) or len
-        end
-        formatted_str = formatted_str
-          .. str:sub(i, pos):gsub('^%s*(.-)%s*$', '%1')
-          .. '\n'
-        i = pos
-      end
-      return formatted_str
+    local greeting = function()
+      local parts = { 'evening', 'morning', 'afternoon', 'evening' }
+      local hour = tonumber(vim.fn.strftime('%H'))
+      local day_part = parts[math.floor((hour + 4) / 8) + 1]
+      local username = vim.uv.os_get_passwd()['username']
+      return ('Good %s, %s'):format(day_part, username)
     end
 
-    local random_quote = function()
-      local quotes = require('quotes')
-      math.randomseed(os.time())
-      local quote =
-        vim.iter(quotes[math.random(#quotes)]):map(format_text):totable()
-      local s = ''
-      for _, sub in ipairs(quote) do
-        s = s .. sub
-      end
-      return s
+    local bitcoin = function()
+      return table.concat({
+        '⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀',
+        '⠀⠀⠀⣠⣀⣀⢀⣿⡏⠀⣾⡷⠀⠀⠀',
+        '⠀⠀⠀⠛⠻⣿⣿⣿⣷⣶⣿⣇⣀⠀⠀',
+        '⠀⠀⠀⠀⢰⣿⣿⡟⠉⠉⠛⢿⣿⣷⡄',
+        '⠀⠀⠀⠀⣼⣿⣿⣃⠀⠀⢀⣼⣿⣿⡇',
+        '⠀⠀⠀⢠⣿⣿⡿⠿⠿⣿⣿⣿⣿⡋⠀',
+        '⠀⡀⠀⣾⣿⣿⠃⠀⠀⠀⠙⣿⣿⣷⡄',
+        '⠰⣿⣿⣿⣿⣿⣤⣤⣀⣠⣴⣿⣿⣿⠁',
+        '⠀⠀⠀⣸⣿⠛⢻⣿⠿⠿⠿⠿⠟⠁⠀',
+        '⠀⠀⠀⠻⠏⠀⣾⡿⠀⠀⠀⠀⠀⠀⠀',
+      }, '\n')
     end
 
     local header = function()
       return table.concat({
         'NVIM v' .. tostring(vim.version()),
-        '',
-        'Welcome to the Dark Side of text editing',
-        'Nvim is open source and freely distributable',
-        '',
-        random_quote(),
-        '     o       ⌌━━━ ⌍',
-        '      o     | //   ░',
-        '       o  _/,-||-_╲_\\',
-        '          / (■)(■)\\\\░\\',
-        '         / \\_/_\\__/\\  ╲',
-        '        (   ╱╱ii\\/ )  \\_',
-        '         ╲▁  ▔▔▔▔─⌍▁▁▁▁▁/',
-        '          ▁▁▐ ▐  ▐ \\',
+        greeting(),
+        bitcoin(),
       }, '\n')
     end
 

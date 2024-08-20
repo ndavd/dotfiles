@@ -100,20 +100,11 @@ local line_stats = function()
   )
 end
 
-local greeting = function()
-  local parts = { 'evening', 'morning', 'afternoon', 'evening' }
-  local hour = tonumber(vim.fn.strftime('%H'))
-  local day_part = parts[math.floor((hour + 4) / 8) + 1]
-  local username = vim.uv.os_get_passwd()['username']
-
-  return ('Good %s, %s'):format(day_part, username)
-end
-
 Stl = function()
   local ft = vim.o.ft
   local bt = vim.o.bt
   if ft == 'ministarter' then
-    return ('%%= %s %%='):format(greeting())
+    return '%= NVIM %='
   end
   if ft == 'lazy' then
     return '%= 📦 Lazy %='
