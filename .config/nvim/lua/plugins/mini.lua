@@ -276,6 +276,8 @@ local custom_conf = {
     vim.keymap.set('n', 'z=', pick.registry.spell_suggest)
     vim.keymap.set('n', ',h', pick.builtin.help)
 
+    vim.ui.select = pick.ui_select
+
     return {
       mappings = {
         scroll_down = '<C-d>',

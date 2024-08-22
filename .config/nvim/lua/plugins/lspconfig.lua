@@ -193,6 +193,7 @@ vim.keymap.del({ 'n' }, 'grr')
 vim.keymap.set('n', 'gk', vim.lsp.buf.hover, keymap_opts)
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, keymap_opts)
 vim.keymap.set('n', 'gr', vim.lsp.buf.rename, keymap_opts)
+vim.keymap.set('n', 'g?', vim.lsp.buf.code_action, keymap_opts)
 
 vim.keymap.set('n', '<C-n>', lsp_custom.goto_next_diagnostic, keymap_opts)
 vim.keymap.set('n', '<C-p>', lsp_custom.goto_prev_diagnostic, keymap_opts)
