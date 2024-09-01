@@ -42,7 +42,7 @@ local servers = {
   'texlab',
   'tsserver',
   'vimls',
-  'wgsl_analyzer',
+  'glasgow',
   'yamlls',
 }
 
