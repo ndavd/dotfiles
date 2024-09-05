@@ -40,7 +40,7 @@ local servers = {
   'tailwindcss',
   'taplo',
   'texlab',
-  'tsserver',
+  'ts_ls',
   'vimls',
   'glasgow',
   'yamlls',
@@ -108,7 +108,7 @@ local custom_conf = {
       },
     },
   },
-  tsserver = {
+  ts_ls = {
     init_options = {
       preferences = {
         includeInlayParameterNameHints = 'all',
