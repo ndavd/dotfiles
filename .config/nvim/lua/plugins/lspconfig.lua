@@ -44,6 +44,7 @@ local servers = {
   'vimls',
   'glasgow',
   'yamlls',
+  'dockerls'
 }
 
 -- Custom servers config
