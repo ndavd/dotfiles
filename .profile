@@ -45,3 +45,6 @@ export PATH="$HOME/.config/.foundry/bin:$PATH"
 
 # Huff
 export PATH="$HOME/.huff/bin:$PATH"
+
+# Cyfrinup
+export PATH="$HOME/.cyfrin/bin:$PATH"
