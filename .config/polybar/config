@@ -42,10 +42,8 @@ font-3 = NotoColorEmoji:fontformat=truetype:scale=13.5;0
 
 modules-left = bspwm xwindow
 modules-center =
-modules-right = crypto sep update sep disk hor-sep cpu hor-sep memory sep battery_level sep date
+modules-right = crypto sep update sep disk hor-sep cpu hor-sep memory sep battery_level sep date tray
 
-tray-position = right
-tray-padding = 1
 wm-restack = bspwm
 override-redirect = true
 cursor-click = pointer
@@ -91,6 +89,11 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 ;;;; MODULES
+
+[module/tray]
+type = internal/tray
+format-margin = 0 px
+tray-spacing = 0 px
 
 [module/xwindow]
 type = internal/xwindow
