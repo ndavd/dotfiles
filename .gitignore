@@ -23,6 +23,8 @@
 !.config/newsboat/**
 !.config/nvim
 !.config/nvim/**
+!.config/paru/
+!.config/paru/**
 !.config/polybar/
 !.config/polybar/**
 !.config/rofi/
