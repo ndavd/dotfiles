@@ -1,29 +1,25 @@
 keybinds clear-defaults=true {
     locked {
-        bind "Ctrl b" { SwitchToMode "normal"; }
-    }
-    normal {
-        bind "Ctrl b" "Space" "Enter" { SwitchToMode "locked"; }
-        bind "q" { Quit; }
-        bind "n" { NewTab; SwitchToMode "normal"; }
-        bind "c" { CloseTab; SwitchToMode "normal"; }
-        bind "h" { MoveFocusOrTab "left"; SwitchToMode "normal"; }
-        bind "l" { MoveFocusOrTab "right"; SwitchToMode "normal"; }
-        bind "j" { MoveFocus "down"; SwitchToMode "normal"; }
-        bind "k" { MoveFocus "up"; SwitchToMode "normal"; }
-        bind "1" { GoToTab 1; }
-        bind "2" { GoToTab 2; }
-        bind "3" { GoToTab 3; }
-        bind "4" { GoToTab 4; }
-        bind "5" { GoToTab 5; }
-        bind "6" { GoToTab 6; }
-        bind "7" { GoToTab 7; }
-        bind "8" { GoToTab 8; }
-        bind "9" { GoToTab 9; }
-        bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
+        bind "Alt q" { Quit; }
+        bind "Alt h" { MoveFocusOrTab "left"; }
+        bind "Alt l" { MoveFocusOrTab "right"; }
+        bind "Alt j" { MoveFocus "down"; }
+        bind "Alt k" { MoveFocus "up"; }
+        bind "Alt n" { NewTab; }
+        bind "Alt c" { CloseTab; }
+        bind "Alt r" { SwitchToMode "renametab"; TabNameInput 0; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
+        bind "Alt 9" { GoToTab 9; }
     }
     renametab {
-        bind "Ctrl c" "Esc" { UndoRenameTab; SwitchToMode "normal"; }
+        bind "Ctrl c" "Esc" { UndoRenameTab; SwitchToMode "locked"; }
         bind "Enter" { SwitchToMode "locked"; }
     }
 }
