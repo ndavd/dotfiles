@@ -1,15 +1,6 @@
 -- Change floating window borders
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = {
-    { '🭽', 'FloatBorder' },
-    { '▔', 'FloatBorder' },
-    { '🭾', 'FloatBorder' },
-    { '▕', 'FloatBorder' },
-    { '🭿', 'FloatBorder' },
-    { '▁', 'FloatBorder' },
-    { '🭼', 'FloatBorder' },
-    { '▏', 'FloatBorder' },
-  },
+  border = 'single',
 })
 
 -- The nvim-cmp almost supports LSP's capabilities so you should advertise it to LSP servers..
@@ -36,7 +27,7 @@ local servers = {
   'ocamllsp',
   'pyright',
   'rust_analyzer',
-  'solidity_ls_nomicfoundation',
+  'solidity_ls',
   'tailwindcss',
   'taplo',
   'texlab',
@@ -44,7 +35,7 @@ local servers = {
   'vimls',
   'glasgow',
   'yamlls',
-  'dockerls'
+  'dockerls',
 }
 
 -- Custom servers config
