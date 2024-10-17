@@ -264,7 +264,10 @@ local custom_conf = {
 
     pick.registry.gl = function()
       local ok, mini_rg = pcall(vim.fn.readfile, '/tmp/.mini-rg')
-      local default = ok and vim.fn.split(mini_rg[#mini_rg], '=')[2] or '*'
+      local default = ok
+          and #mini_rg > 0
+          and vim.fn.split(mini_rg[#mini_rg], '=')[2]
+        or '*'
       vim.ui.input({
         prompt = 'Rg glob: ',
         default = default,
