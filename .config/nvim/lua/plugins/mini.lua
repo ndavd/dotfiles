@@ -272,9 +272,11 @@ local custom_conf = {
     end
 
     pick.registry.gl = function()
+      local ok, mini_rg = pcall(vim.fn.readfile, '/tmp/.mini-rg')
+      local default = ok and vim.fn.split(mini_rg[#mini_rg], '=')[2] or '*'
       vim.ui.input({
         prompt = 'Rg glob: ',
-        default = '*',
+        default = default,
       }, function(pattern)
         if pattern == '' or pattern == '*' then
           pattern = nil
