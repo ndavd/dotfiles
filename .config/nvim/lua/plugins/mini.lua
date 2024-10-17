@@ -162,22 +162,13 @@ local custom_conf = {
 
     local load_temp_rg = function(f, extra_glob)
       local rg_path = vim.fn.stdpath('config') .. '/.rg'
-      ::outer::
-      if extra_glob ~= nil then
-        local rg_file = io.open(rg_path)
-        if rg_file == nil then
-          goto outer
-        end
-        local contents = rg_file:read('*a')
-        rg_file:close()
-        local tmp_rg_path = '/tmp/.mini-rg'
-        local tmp_rg_file = io.open(tmp_rg_path, 'w')
-        if tmp_rg_file == nil then
-          goto outer
-        end
-        tmp_rg_file:write(contents .. '--glob=' .. extra_glob .. '\n')
-        rg_path = tmp_rg_path
-      end
+      local ok, lines = pcall(vim.fn.readfile, rg_path)
+      lines = vim.list_extend(
+        ok and lines or {},
+        extra_glob and { '--glob=' .. extra_glob } or {}
+      )
+      rg_path = '/tmp/.mini-rg'
+      vim.fn.writefile(lines, rg_path)
       local rg_env = 'RIPGREP_CONFIG_PATH'
       local cached_rg_config = vim.uv.os_getenv(rg_env) or ''
       vim.uv.os_setenv(rg_env, rg_path)
