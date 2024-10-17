@@ -56,9 +56,9 @@ fix-perm () {
 ZVM_CURSOR_STYLE_ENABLED=false
 
 ### edit with nvim
-# autoload edit-command-line; zle -N edit-command-line
-# bindkey '^e' edit-command-line
-# bindkey '^?' backward-delete-char # make backspace erase chars when switching modes
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
 
 # tmux
 tm() {
