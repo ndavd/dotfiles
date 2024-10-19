@@ -160,18 +160,10 @@ local custom_conf = {
       }
     end
 
-    local load_temp_rg = function(f, extra_glob)
-      local rg_path = vim.fn.stdpath('config') .. '/.rg'
-      local ok, lines = pcall(vim.fn.readfile, rg_path)
-      lines = vim.list_extend(
-        ok and lines or {},
-        extra_glob and { '--glob=' .. extra_glob } or {}
-      )
-      rg_path = '/tmp/.mini-rg'
-      vim.fn.writefile(lines, rg_path)
+    local load_temp_rg = function(f)
       local rg_env = 'RIPGREP_CONFIG_PATH'
       local cached_rg_config = vim.uv.os_getenv(rg_env) or ''
-      vim.uv.os_setenv(rg_env, rg_path)
+      vim.uv.os_setenv(rg_env, vim.fn.stdpath('config') .. '/.rg')
       f()
       vim.uv.os_setenv(rg_env, cached_rg_config)
     end
@@ -263,25 +255,8 @@ local custom_conf = {
     end
 
     pick.registry.gl = function()
-      local ok, mini_rg = pcall(vim.fn.readfile, '/tmp/.mini-rg')
-      local default = ok
-          and #mini_rg > 0
-          and vim.fn.split(mini_rg[#mini_rg], '=')[2]
-        or '*'
-      vim.ui.input({
-        prompt = 'Rg glob: ',
-        default = default,
-      }, function(pattern)
-        if pattern == '' or pattern == '*' then
-          pattern = nil
-        end
-        local name = 'Grep live (rg)'
-        if pattern ~= nil then
-          name = name .. ' glob=' .. pattern
-        end
-        load_temp_rg(function()
-          pick.builtin.grep_live({ tool = 'rg' }, { source = { name = name } })
-        end, pattern)
+      load_temp_rg(function()
+        pick.builtin.grep_live({ tool = 'rg' })
       end)
     end
 
