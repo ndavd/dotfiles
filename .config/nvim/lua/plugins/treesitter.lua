@@ -1,3 +1,9 @@
+-- Folds
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.foldtext = ''
+vim.o.foldlevelstart = 99
+
 require('nvim-treesitter.configs').setup({
   ensure_installed = 'all',
   -- indent = { enable = true },
@@ -17,6 +23,6 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
-require('ts_context_commentstring').setup {
-  enable_autocmd = false
-}
+require('ts_context_commentstring').setup({
+  enable_autocmd = false,
+})
