@@ -4,7 +4,7 @@ layout {
     default_tab_template {
         children
         pane size=1 borderless=true {
-            plugin location="file:$HOME/projects/zellij-cb/target/wasm32-wasi/release/zellij-cb.wasm"
+            plugin location="file:$HOME/projects/zellij-cb/target/wasm32-wasip1/release/zellij-cb.wasm"
         }
     }
 }
