@@ -23,7 +23,6 @@ local plugins = {
   {
     'echasnovski/mini.nvim',
     config = load('plugins/mini'),
-    branch = 'pick-glob',
   },
 
   -- Icon support --
