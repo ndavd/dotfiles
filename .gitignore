@@ -25,6 +25,8 @@
 !.config/nvim/**
 !.config/paru/
 !.config/paru/**
+!.config/picom/
+!.config/picom/**
 !.config/polybar/
 !.config/polybar/**
 !.config/rofi/
@@ -39,7 +41,6 @@
 !.config/zellij/**
 
 !.config/mimeapps.list
-!.config/picom.conf
 
 !.github/
 !.github/**
