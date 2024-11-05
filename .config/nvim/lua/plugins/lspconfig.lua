@@ -36,6 +36,7 @@ local servers = {
   'glasgow',
   'yamlls',
   'dockerls',
+  'prismals',
 }
 
 -- Custom servers config
