@@ -43,6 +43,8 @@ super + Return
 # browser
 super + b
   $BROWSER
+shift + super + b
+  $BROWSER -guest
 
 # file manager
 super + g
