@@ -139,6 +139,14 @@ local custom_conf = {
       },
     },
   },
+  solidity_ls = {
+    settings = {
+      solidity = {
+        enabledAsYouTypeCompilationErrorCheck = true,
+        validationDelay = 1500,
+      },
+    },
+  },
 }
 
 local get_conf = function(server)
