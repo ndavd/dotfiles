@@ -39,6 +39,8 @@
 !.config/zathura/**
 !.config/zellij/
 !.config/zellij/**
+!.config/ghostty/
+!.config/ghostty/**
 
 !.config/mimeapps.list
 

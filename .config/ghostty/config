@@ -1,0 +1,9 @@
+font-family = JetBrainsMono Nerd Font
+font-size = 10
+font-codepoint-map = U+f101-U+f25c=nonicons
+shell-integration = none
+cursor-style = block
+cursor-style-blink = false
+window-decoration = false
+gtk-adwaita = false
+theme = Builtin Pastel Dark
