@@ -41,6 +41,10 @@
 !.config/zellij/**
 !.config/ghostty/
 !.config/ghostty/**
+!.config/gtk-3.0/
+!.config/gtk-3.0/**
+!.config/gtk-4.0/
+!.config/gtk-4.0/**
 
 !.config/mimeapps.list
 
