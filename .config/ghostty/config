@@ -1,9 +1,17 @@
+shell-integration = none
+
 font-family = JetBrainsMono Nerd Font
 font-size = 10
 font-codepoint-map = U+f101-U+f25c=nonicons
-shell-integration = none
+font-thicken = true
+
 cursor-style = block
 cursor-style-blink = false
+cursor-color = CCCCCC
+
 window-decoration = false
-gtk-adwaita = false
-theme = Builtin Pastel Dark
+confirm-close-surface = false
+quit-after-last-window-closed = true
+
+theme = Argonaut
+background = 000000
