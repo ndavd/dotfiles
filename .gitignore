@@ -13,8 +13,14 @@
 !.config/flameshot/**
 !.config/fzf/
 !.config/fzf/**
+!.config/ghostty/
+!.config/ghostty/**
 !.config/git/
 !.config/git/**
+!.config/gtk-3.0/
+!.config/gtk-3.0/**
+!.config/gtk-4.0/
+!.config/gtk-4.0/**
 !.config/kitty/
 !.config/kitty/**
 !.config/lf/
@@ -39,12 +45,6 @@
 !.config/zathura/**
 !.config/zellij/
 !.config/zellij/**
-!.config/ghostty/
-!.config/ghostty/**
-!.config/gtk-3.0/
-!.config/gtk-3.0/**
-!.config/gtk-4.0/
-!.config/gtk-4.0/**
 
 !.config/mimeapps.list
 
