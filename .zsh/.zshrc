@@ -138,6 +138,7 @@ alias n="nvm use default"
 alias nnvim="nvm use default && nvim"
 alias paru="paru --assume-installed cargo"
 alias drop="dragon-drop"
+alias bat="bat -p"
 
 ### fzf
 fzfa() {
