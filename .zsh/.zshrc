@@ -27,8 +27,7 @@ bindkey -M isearch '^M' accept-search
 ### history
 HISTFILE=~/.histfile
 HISTSIZE=1000
-SAVEHIST=5000
-setopt append_history
+SAVEHIST=0
 
 ### umask
 umask 077
