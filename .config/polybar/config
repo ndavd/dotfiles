@@ -42,7 +42,7 @@ font-3 = NotoColorEmoji:fontformat=truetype:scale=13.5;0
 
 modules-left = bspwm xwindow
 modules-center =
-modules-right = crypto sep update sep disk hor-sep cpu hor-sep memory sep battery_level sep date tray
+modules-right = update sep disk hor-sep cpu hor-sep memory sep battery_level sep date tray
 
 wm-restack = bspwm
 override-redirect = true
@@ -79,7 +79,7 @@ font-3 = NotoColorEmoji:fontformat=truetype:scale=13.5;0
 
 modules-left = bspwm xwindow
 modules-center =
-modules-right = crypto sep update sep disk hor-sep cpu hor-sep memory sep battery_level sep date
+modules-right = update sep disk hor-sep cpu hor-sep memory sep battery_level sep date
 
 tray-position = right
 tray-padding = 1
@@ -169,13 +169,6 @@ exec = free -h | awk '/Mem:/ {print $3 "B/" $2 "B"}'
 label = "%output% 💾"
 click-right = $TERMINAL -e htop &
 interval = 30
-
-[module/crypto]
-type = custom/script
-exec = echo "📈"
-click-left = dunstify --timeout=15000 "💰 Crypto Prices 💰" "\n$(~/bin/check-prices)"
-click-right = $TERMINAL -e cointop &
-interval = 1000000
 
 [module/sep]
 type = custom/script
