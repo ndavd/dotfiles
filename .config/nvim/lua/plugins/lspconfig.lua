@@ -183,6 +183,9 @@ vim.diagnostic.config({
   },
 })
 
+-- Diagnostic virtual lines
+vim.diagnostic.config({ virtual_lines = true })
+
 -- Keymaps
 local keymap_opts = { silent = true }
 local lsp_custom = require('lsp_custom')
