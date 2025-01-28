@@ -64,4 +64,10 @@ out.toggle_buf_inlay_hints = function()
   )
 end
 
+out.toggle_diagnostic_virt_lines = function()
+  vim.diagnostic.config({
+    virtual_lines = not vim.diagnostic.config().virtual_lines,
+  })
+end
+
 return out

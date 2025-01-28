@@ -183,9 +183,6 @@ vim.diagnostic.config({
   },
 })
 
--- Diagnostic virtual lines
-vim.diagnostic.config({ virtual_lines = true })
-
 -- Keymaps
 local keymap_opts = { silent = true }
 local lsp_custom = require('lsp_custom')
@@ -202,6 +199,7 @@ vim.keymap.set('n', 'g?', vim.lsp.buf.code_action, keymap_opts)
 
 vim.keymap.set('n', '<C-n>', lsp_custom.goto_next_diagnostic, keymap_opts)
 vim.keymap.set('n', '<C-p>', lsp_custom.goto_prev_diagnostic, keymap_opts)
+vim.keymap.set('n', 'gv', lsp_custom.toggle_diagnostic_virt_lines, keymap_opts)
 vim.keymap.set('n', 'gi', lsp_custom.toggle_buf_inlay_hints, keymap_opts)
 vim.keymap.set('n', 'gd', lsp_custom.definition, keymap_opts)
 
