@@ -1,3 +1,5 @@
+local lsp_custom = require('lsp_custom')
+
 -- Change floating window borders
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = 'single',
@@ -142,6 +144,8 @@ local custom_conf = {
   solidity_ls = {
     settings = {
       solidity = {
+        compileUsingRemoteVersion = lsp_custom.get_solc_version(),
+        defaultCompiler = 'remote',
         enabledAsYouTypeCompilationErrorCheck = true,
         validationDelay = 1500,
       },
@@ -185,7 +189,6 @@ vim.diagnostic.config({
 
 -- Keymaps
 local keymap_opts = { silent = true }
-local lsp_custom = require('lsp_custom')
 
 vim.keymap.del('n', 'grn')
 vim.keymap.del({ 'n', 'v' }, 'gra')
@@ -203,11 +206,13 @@ vim.keymap.set('n', 'gv', lsp_custom.toggle_diagnostic_virt_lines, keymap_opts)
 vim.keymap.set('n', 'gi', lsp_custom.toggle_buf_inlay_hints, keymap_opts)
 vim.keymap.set('n', 'gd', lsp_custom.definition, keymap_opts)
 
-vim.api.nvim_create_user_command(
-  'Cd',
-  require('lsp_custom').cd_project_root,
-  {}
-)
+-- Commands
+
+vim.api.nvim_create_user_command('Cd', lsp_custom.cd_project_root, {})
+
+vim.api.nvim_create_user_command('Solc', function()
+  vim.cmd('split ' .. lsp_custom.get_solc_version_path())
+end, {})
 
 -- Remove formatexpr default
 require('aug').add('LspAttach', {

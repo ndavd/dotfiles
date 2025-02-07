@@ -81,6 +81,7 @@
 .config/lf/cleaner
 .config/lf/preview
 .config/newsboat/urls
+.config/nvim/.solc-version
 .config/nvim/lazy-lock.json
 .zsh/.zcompdump
 bin/*.AppImage

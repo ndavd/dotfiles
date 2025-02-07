@@ -70,4 +70,17 @@ out.toggle_diagnostic_virt_lines = function()
   })
 end
 
+out.get_solc_version_path = function()
+  return vim.fn.stdpath('config') .. '/.solc-version'
+end
+
+out.get_solc_version = function()
+  local solc_version =
+    tostring(vim.fn.readfile(out.get_solc_version_path(), '', 1)[1])
+  if solc_version == '' or vim.startswith(solc_version, '#') then
+    return 'latest'
+  end
+  return solc_version
+end
+
 return out
