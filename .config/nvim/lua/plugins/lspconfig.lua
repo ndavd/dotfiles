@@ -9,7 +9,7 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Make root_dir the current directory ( not recommended )
+-- Make root_dir the current directory (not recommended)
 local current_dir = function()
   return vim.fn.getcwd()
 end
@@ -39,6 +39,7 @@ local servers = {
   'yamlls',
   'dockerls',
   'prismals',
+  'astro',
 }
 
 -- Custom servers config
