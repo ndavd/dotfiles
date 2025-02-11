@@ -45,6 +45,9 @@
 !.config/zathura/**
 !.config/zellij/
 !.config/zellij/**
+!.config/systemd/
+!.config/systemd/user/
+!.config/systemd/user/ipns-publish.*
 
 !.config/mimeapps.list
 

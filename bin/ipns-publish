@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+ipfs daemon &
+sleep 10
+ipfs name publish \
+  --key=ndavd \
+  "$(curl -sS https://raw.githubusercontent.com/ndavd/blog/refs/heads/main/cid.txt)/"
+ipfs shutdown
