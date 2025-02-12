@@ -1,22 +1,5 @@
 #!/usr/bin/env bash
-source $NVM_DIR/nvm.sh
+source "$NVM_DIR"/nvm.sh
 nvm use default
 npm update -g \
-  @fsouza/prettierd \
-  @nomicfoundation/solidity-language-server \
-  @tailwindcss/language-server \
-  bash-language-server \
-  corepack \
-  eslint_d \
-  eslint \
-  graphql-language-service-cli \
-  npm \
-  prettier \
-  solhint \
-  solidity-ls \
-  typescript-language-server \
-  typescript \
-  vim-language-server \
-  vscode-langservers-extracted \
-  yaml-language-server \
-  yarn \
+  $(npm list --parseable=true -g | tail -n +2 | sed -E '/node_modules\/(npm)$/d;s|.*/node_modules/||')
