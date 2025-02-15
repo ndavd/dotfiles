@@ -45,7 +45,7 @@ local get_path_to_file = function(path, files)
 end
 
 local eslintd = { 'eslint_d' }
-local eslintd_prettier = { 'eslint_d', { 'prettierd', 'prettier' } }
+local eslintd_prettier = { 'eslint_d', 'prettierd', 'prettier' }
 local denofmt = { 'deno_fmt' }
 local stylua = { 'stylua' }
 local gofmt = { 'gofmt' }
