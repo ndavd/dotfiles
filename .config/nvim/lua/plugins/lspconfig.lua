@@ -46,21 +46,8 @@ local servers = {
 local custom_conf = {
   texlab = {
     settings = {
-      latex = {
+      texlab = {
         build = {
-          args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '-pvc' },
-          forwardSearchAfter = true,
-          onSave = true,
-        },
-        forwardSearch = {
-          executable = 'zathura',
-          args = {
-            '-reuse-instance',
-            '%p',
-            '-forward-search',
-            '%f',
-            '%l',
-          },
           onSave = true,
         },
       },
