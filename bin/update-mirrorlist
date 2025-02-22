@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-sudo reflector --latest 50 --country Portugal,Spain,France,Germany --sort rate --save /etc/pacman.d/mirrorlist
+curl -s \
+  "https://archlinux.org/mirrorlist/?country=PT&country=ES&country=FR&country=DE&protocol=https&use_mirror_status=on" |\
+  sed -e 's/^#Server/Server/' -e '/^#/d' |\
+  rankmirrors -n 10 - |\
+  sudo tee /etc/pacman.d/mirrorlist
