@@ -30,6 +30,7 @@ export FZF_DEFAULT_OPTS="
 
 # Go
 export PATH=$(go env GOPATH)/bin:$PATH
+export GOPATH=$(go env GOPATH)
 
 # Solana
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
