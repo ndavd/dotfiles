@@ -54,6 +54,7 @@ local clangformat = { 'clang_format' }
 local shellharden = { 'shellharden' }
 local yamlfmt = { 'yamlfmt' }
 local forgefmt = { 'forge_fmt' }
+local sqlformatter = { 'sql_formatter' }
 
 local js_ts_x = function()
   local root = vim.lsp.buf.list_workspace_folders()[1]
@@ -90,6 +91,7 @@ conform.setup({
     sh = shellharden,
     yaml = yamlfmt,
     solidity = forgefmt,
+    sql = sqlformatter,
   },
 
   formatters = {
