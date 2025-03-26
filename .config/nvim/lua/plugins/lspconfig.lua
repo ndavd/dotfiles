@@ -40,6 +40,7 @@ local servers = {
   'dockerls',
   'prismals',
   'astro',
+  'sqls',
 }
 
 -- Custom servers config
