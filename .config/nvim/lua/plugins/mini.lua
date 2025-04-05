@@ -46,26 +46,10 @@ local custom_conf = {
       return ('Good %s, %s'):format(day_part, username)
     end
 
-    local bitcoin = function()
-      return table.concat({
-        '⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀',
-        '⠀⠀⠀⣠⣀⣀⢀⣿⡏⠀⣾⡷⠀⠀⠀',
-        '⠀⠀⠀⠛⠻⣿⣿⣿⣷⣶⣿⣇⣀⠀⠀',
-        '⠀⠀⠀⠀⢰⣿⣿⡟⠉⠉⠛⢿⣿⣷⡄',
-        '⠀⠀⠀⠀⣼⣿⣿⣃⠀⠀⢀⣼⣿⣿⡇',
-        '⠀⠀⠀⢠⣿⣿⡿⠿⠿⣿⣿⣿⣿⡋⠀',
-        '⠀⡀⠀⣾⣿⣿⠃⠀⠀⠀⠙⣿⣿⣷⡄',
-        '⠰⣿⣿⣿⣿⣿⣤⣤⣀⣠⣴⣿⣿⣿⠁',
-        '⠀⠀⠀⣸⣿⠛⢻⣿⠿⠿⠿⠿⠟⠁⠀',
-        '⠀⠀⠀⠻⠏⠀⣾⡿⠀⠀⠀⠀⠀⠀⠀',
-      }, '\n')
-    end
-
     local header = function()
       return table.concat({
         'NVIM v' .. tostring(vim.version()),
         greeting(),
-        bitcoin(),
       }, '\n')
     end
 
