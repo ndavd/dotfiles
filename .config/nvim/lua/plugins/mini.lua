@@ -286,7 +286,7 @@ local custom_conf = {
       },
       window = {
         config = win_config,
-        prompt_cursor = '▁',
+        prompt_caret = '▁',
       },
     }
   end,
