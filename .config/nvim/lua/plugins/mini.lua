@@ -9,7 +9,6 @@ local modules = {
   'diff',
   'extra',
   'git',
-  'hipatterns',
   'move',
   'pairs',
   'pick',
@@ -26,15 +25,6 @@ local custom_conf = {
       end,
     },
   },
-  hipatterns = function()
-    local hipatterns = require('mini.hipatterns')
-    vim.keymap.set('n', '<leader>co', hipatterns.toggle)
-    return {
-      highlighters = {
-        hex_color = hipatterns.gen_highlighter.hex_color(),
-      },
-    }
-  end,
   starter = function()
     local starter = require('mini.starter')
 

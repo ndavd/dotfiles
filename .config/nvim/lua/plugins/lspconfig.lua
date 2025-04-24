@@ -209,3 +209,16 @@ require('aug').add('LspAttach', {
     vim.bo[ev.buf].formatexpr = nil
   end,
 })
+
+-- Enable textDocument/documentColor if available
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    if client:supports_method('textDocument/documentColor') then
+      vim.lsp.document_color.enable(true, args.buf, { style = 'virtual' })
+    end
+  end,
+})

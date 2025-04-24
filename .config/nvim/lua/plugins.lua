@@ -94,9 +94,6 @@ local plugins = {
     'Mofiqul/vscode.nvim',
     config = load('plugins.vscode'),
   },
-
-  -- Syntax --
-  'marktoda/vim-huff',
 }
 
 local opts = {}
