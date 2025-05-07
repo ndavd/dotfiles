@@ -50,3 +50,7 @@ export PATH="$HOME/.huff/bin:$PATH"
 
 # Cyfrinup
 export PATH="$HOME/.cyfrin/bin:$PATH"
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
