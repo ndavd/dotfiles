@@ -1,26 +1,26 @@
 [user]
-  email = ndavidq0@gmail.com
-  name = Nuno David
-  signingKey = ~/.ssh/sig_commits
+    email = ndavidq0@gmail.com
+    name = Nuno David
+    signingKey = ~/.ssh/sig_commits
 [commit]
-  gpgsign = true
+    gpgsign = true
 [gpg]
-  format = ssh
+    format = ssh
 [gpg.ssh]
-  allowedSignersFile = ~/.config/git/allowed_signers
+    allowedSignersFile = ~/.config/git/allowed_signers
 [init]
-  defaultBranch = main
+    defaultBranch = main
 [status]
-  showUntrackedFiles = normal
+    showUntrackedFiles = normal
 [rebase]
-  autosquash = true
-  autoStash = true
-[alias]
-  l = log --pretty=format:"\"%C(auto)%h%d%C(reset) %C(blue)%cn %C(cyan)[%cr]%C(reset) %s\""
-  lg = log --graph --pretty=format:"\"%C(auto)%h%d%C(reset) %C(blue)%cn %C(cyan)[%cr]%C(reset) %s\""
-  ld = log --pretty=format:"\"%C(auto)%H%d%C(reset) %C(blue)%cn %C(cyan)[%cd]%C(reset) %s\""
-  lplus = log --stat --oneline --pretty=format:"\"%C(auto)%H%d%C(reset) %C(blue)%cn %C(cyan)[%cr; %cd]%C(reset)%n%C(#F1502F)%B\""
+    autoSquash = true
+    autoStash = true
 [push]
-  default = current
+    default = current
 [fetch]
-  prune = true
+    prune = true
+[alias]
+    l = log --pretty=format:"\"%C(auto)%h%d%C(reset) %C(blue)%cn %C(cyan)[%cr]%C(reset) %s\""
+    lg = log --graph --pretty=format:"\"%C(auto)%h%d%C(reset) %C(blue)%cn %C(cyan)[%cr]%C(reset) %s\""
+    ld = log --pretty=format:"\"%C(auto)%H%d%C(reset) %C(blue)%cn %C(cyan)[%cd]%C(reset) %s\""
+    lplus = log --stat --oneline --pretty=format:"\"%C(auto)%H%d%C(reset) %C(blue)%cn %C(cyan)[%cr; %cd]%C(reset)%n%C(#F1502F)%B\""
