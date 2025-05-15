@@ -1,6 +1,6 @@
 [user]
-  email      = ndavidq0@gmail.com
-  name       = Nuno David
+  email = ndavidq0@gmail.com
+  name = Nuno David
   signingKey = ~/.ssh/sig_commits
 [commit]
   gpgsign = true
@@ -14,6 +14,7 @@
   showUntrackedFiles = normal
 [rebase]
   autosquash = true
+  autoStash = true
 [alias]
   l = log --pretty=format:"\"%C(auto)%h%d%C(reset) %C(blue)%cn %C(cyan)[%cr]%C(reset) %s\""
   lg = log --graph --pretty=format:"\"%C(auto)%h%d%C(reset) %C(blue)%cn %C(cyan)[%cr]%C(reset) %s\""
