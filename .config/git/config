@@ -24,3 +24,5 @@
     lg = log --graph --pretty=format:"\"%C(auto)%h%d%C(reset) %C(blue)%cn %C(cyan)[%cr]%C(reset) %s\""
     ld = log --pretty=format:"\"%C(auto)%H%d%C(reset) %C(blue)%cn %C(cyan)[%cd]%C(reset) %s\""
     lplus = log --stat --oneline --pretty=format:"\"%C(auto)%H%d%C(reset) %C(blue)%cn %C(cyan)[%cr; %cd]%C(reset)%n%C(#F1502F)%B\""
+
+# vim: set ts=4 sw=4 et :
