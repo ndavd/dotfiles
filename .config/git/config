@@ -21,3 +21,5 @@
   lplus = log --stat --oneline --pretty=format:"\"%C(auto)%H%d%C(reset) %C(blue)%cn %C(cyan)[%cr; %cd]%C(reset)%n%C(#F1502F)%B\""
 [push]
   default = current
+[fetch]
+  prune = true
