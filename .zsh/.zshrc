@@ -12,6 +12,8 @@
 ### options
 setopt no_beep
 setopt hist_ignore_space
+# speedup command completion
+unsetopt pathdirs
 
 ### tab completion
 zmodload zsh/complist
