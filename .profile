@@ -58,3 +58,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Noirup
 export NARGO_HOME="/home/ndavd/.nargo"
 export PATH="$NARGO_HOME/bin:$PATH"
+
+# BBup (Barretenberg)
+export PATH="$HOME/.bb:$PATH"
