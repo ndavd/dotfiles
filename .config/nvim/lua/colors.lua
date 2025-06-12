@@ -44,6 +44,8 @@ local make_hls = function()
   hi! link MiniPickMatchCurrent PMenuSel
   hi! link MiniPickPrompt MiniStarterItemPrefix
   hi! link MiniPickBorder Normal
+  " mini.starter
+  hi! link MiniStarterItemPrefix ErrorMsg
   " Diff
   hi Added guifg=#b8cb26 ctermfg=DarkGreen
   hi Removed guifg=#f44747 ctermfg=DarkRed
