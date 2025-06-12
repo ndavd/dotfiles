@@ -94,6 +94,9 @@ local plugins = {
     'Mofiqul/vscode.nvim',
     config = load('plugins.vscode'),
   },
+
+  -- Noir language --
+  'noir-lang/noir-nvim',
 }
 
 local opts = {}
