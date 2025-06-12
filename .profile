@@ -54,3 +54,7 @@ export PATH="$HOME/.cyfrin/bin:$PATH"
 # Bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Noirup
+export NARGO_HOME="/home/ndavd/.nargo"
+export PATH="$NARGO_HOME/bin:$PATH"
