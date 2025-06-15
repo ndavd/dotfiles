@@ -5,7 +5,7 @@ binary_name="babylond"
 install_path="$HOME/local"
 
 latest_tag="$(curl -s "https://api.github.com/repos/$gh_repo/releases/latest" | jq -r .tag_name)"
-released_binary_name="babylon-${latest_tag:1}-linux-arm64"
+released_binary_name="babylon-${latest_tag:1}-linux-amd64"
 
 echo "Downloading $binary_name@$latest_tag"
 
