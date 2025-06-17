@@ -13,7 +13,7 @@ nitrogen --restore &
 "$HOME"/.config/polybar/launch &
 opensnitch-ui &
 
-"$HOME/.config/bspwm/setup-monitors"
+"$HOME/bin/setup-monitors"
 
 bspc config border_width           2
 bspc config window_gap             0
