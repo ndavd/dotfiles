@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+install_path="$HOME/local"
+
+jq -c '.[]' "$HOME/.gh-binaries.json" | while read -r obj; do
+  gh_repo="$(echo "$obj" | jq -r '.repo')"
+  binary_name="$(echo "$obj" | jq -r '.binary_name')"
+  released_binary_name="$(echo "$obj" | jq -r '.released_binary_name')"
+
+  latest_tag="$(curl -s "https://api.github.com/repos/$gh_repo/releases/latest" | jq -r '.tag_name')"
+  released_binary_name="${released_binary_name/\{LATEST_TAG\}/${latest_tag:1}}"
+
+  echo "> Downloading $binary_name@$latest_tag"
+
+  wget -q --show-progress -P "$install_path" "https://github.com/$gh_repo/releases/latest/download/$released_binary_name"
+
+  chmod +x "$install_path/$released_binary_name"
+  mv "$install_path/$released_binary_name" "$install_path/$binary_name"
+
+  echo "Installed $binary_name"
+done
