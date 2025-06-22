@@ -1,17 +1,34 @@
 #!/usr/bin/env bash
 
+# Supported JSON format ($HOME/.gh-binaries.json)
+# [
+#   {
+#     "repo": "GH_USER/GH_REPO",
+#     "binary_name": "cli",
+#     "released_binary_name": "cli-{LATEST_TAG}-linux",
+#     "version_command": "cli --version"
+#   },
+# ]
+
 install_path="$HOME/local"
 
 jq -c '.[]' "$HOME/.gh-binaries.json" | while read -r obj; do
   gh_repo="$(echo "$obj" | jq -r '.repo')"
   binary_name="$(echo "$obj" | jq -r '.binary_name')"
   released_binary_name="$(echo "$obj" | jq -r '.released_binary_name')"
+  version_command="$(echo "$obj" | jq -r '.version_command')"
 
-  latest_tag="$(curl -s "https://api.github.com/repos/$gh_repo/releases/latest" | jq -r '.tag_name')"
-  released_binary_name="${released_binary_name/\{LATEST_TAG\}/${latest_tag:1}}"
+  current_version="$(eval "$version_command" 2>/dev/null | sed 's/^v//')"
+  latest_tag="$(curl -s "https://api.github.com/repos/$gh_repo/releases/latest" | jq -r '.tag_name' | sed 's/^v//')"
 
-  echo "> Downloading $binary_name@$latest_tag"
+  if [ "$current_version" == "$latest_tag" ]; then
+    echo "> $binary_name@v$latest_tag is up to date"
+    continue
+  else
+    echo "> Downloading $binary_name@v$latest_tag"
+  fi
 
+  released_binary_name="${released_binary_name/\{LATEST_TAG\}/$latest_tag}"
   wget -q --show-progress -P "$install_path" "https://github.com/$gh_repo/releases/latest/download/$released_binary_name"
 
   chmod +x "$install_path/$released_binary_name"
