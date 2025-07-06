@@ -141,6 +141,9 @@ alias paru="paru --assume-installed cargo"
 alias drop="dragon-drop"
 alias bat="bat -p"
 
+# hyprland init alias
+alias hinit="uwsm start default"
+
 ### fzf
 fzfa() {
   fd --unrestricted --full-path --color=always | fzf
