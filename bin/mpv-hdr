@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# mpv with HDR settings for Wayland
+# Requires `vk-hdr-layer-kwin6-git` (AUR) to work
+
+ENABLE_HDR_WSI=1 mpv \
+  --vo=gpu-next --target-colorspace-hint=yes --gpu-api=vulkan --gpu-context=waylandvk \
+  "$1"
