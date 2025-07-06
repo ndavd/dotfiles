@@ -27,6 +27,8 @@
 !.config/kitty/**
 !.config/lf/
 !.config/lf/**
+!.config/mpv/
+!.config/mpv/**
 !.config/newsboat/
 !.config/newsboat/**
 !.config/nvim
