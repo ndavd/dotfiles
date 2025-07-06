@@ -21,6 +21,8 @@
 !.config/gtk-3.0/**
 !.config/gtk-4.0/
 !.config/gtk-4.0/**
+!.config/hypr/
+!.config/hypr/**
 !.config/kitty/
 !.config/kitty/**
 !.config/lf/
@@ -39,15 +41,15 @@
 !.config/rofi/**
 !.config/sxhkd/
 !.config/sxhkd/**
+!.config/systemd/
+!.config/systemd/user/
+!.config/systemd/user/ipns-publish.*
 !.config/tabtab/
 !.config/tabtab/**
 !.config/zathura/
 !.config/zathura/**
 !.config/zellij/
 !.config/zellij/**
-!.config/systemd/
-!.config/systemd/user/
-!.config/systemd/user/ipns-publish.*
 
 !.config/mimeapps.list
 
