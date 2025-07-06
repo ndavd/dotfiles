@@ -25,6 +25,8 @@
 !.config/kitty/**
 !.config/lf/
 !.config/lf/**
+!.config/mpv/
+!.config/mpv/**
 !.config/newsboat/
 !.config/newsboat/**
 !.config/nvim
@@ -39,15 +41,15 @@
 !.config/rofi/**
 !.config/sxhkd/
 !.config/sxhkd/**
+!.config/systemd/
+!.config/systemd/user/
+!.config/systemd/user/ipns-publish.*
 !.config/tabtab/
 !.config/tabtab/**
 !.config/zathura/
 !.config/zathura/**
 !.config/zellij/
 !.config/zellij/**
-!.config/systemd/
-!.config/systemd/user/
-!.config/systemd/user/ipns-publish.*
 
 !.config/mimeapps.list
 
