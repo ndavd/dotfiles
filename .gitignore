@@ -48,6 +48,8 @@
 !.config/systemd/user/ipns-publish.*
 !.config/tabtab/
 !.config/tabtab/**
+!.config/waybar/
+!.config/waybar/**
 !.config/zathura/
 !.config/zathura/**
 !.config/zellij/
