@@ -50,6 +50,8 @@
 !.config/tabtab/**
 !.config/waybar/
 !.config/waybar/**
+!.config/wofi/
+!.config/wofi/**
 !.config/zathura/
 !.config/zathura/**
 !.config/zellij/
