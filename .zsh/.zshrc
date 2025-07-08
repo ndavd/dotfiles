@@ -142,7 +142,7 @@ alias drop="dragon-drop"
 alias bat="bat -p"
 
 # hyprland init alias
-alias hinit="uwsm start default"
+alias hinit="uwsm start Hyprland"
 
 ### fzf
 fzfa() {
