@@ -9,8 +9,12 @@
     "hyprland/workspaces": {
       "format": "{id}"
     },
+    "hyprland/window": {
+      "format": "{title}"
+    },
     "modules-left": [
         "hyprland/workspaces",
+        "hyprland/window",
         "sway/mode",
         "sway/scratchpad",
         "custom/media"
