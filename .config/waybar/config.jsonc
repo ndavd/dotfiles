@@ -2,7 +2,7 @@
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+    "height": 14, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
@@ -23,22 +23,11 @@
         "sway/window"
     ],
     "modules-right": [
-        "mpd",
-        "idle_inhibitor",
-        "pulseaudio",
-        "network",
-        "power-profiles-daemon",
         "cpu",
         "memory",
-        "temperature",
-        "backlight",
-        "keyboard-state",
-        "sway/language",
         "battery",
-        "battery#bat2",
         "clock",
-        "tray",
-        "custom/power"
+        "tray"
     ],
     // Modules configuration
     // "sway/workspaces": {
@@ -110,17 +99,16 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
-        "spacing": 10,
+        "icon-size": 15,
+        "spacing": 2,
         // "icons": {
         //   "blueman": "bluetooth",
         //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
         // }
     },
     "clock": {
-        // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "{:%A, %b %d %H:%M}",
+        "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {
         "format": "{usage}% ",
