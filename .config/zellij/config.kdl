@@ -30,6 +30,6 @@ pane_frames false
 
 default_mode "locked"
 
-copy_command "xclip -selection clipboard"
+copy_command "copy"
 copy_clipboard "primary"
 copy_on_select true

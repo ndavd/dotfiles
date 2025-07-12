@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+monitor="HDMI-A-1"
+
+refresh_rate="$(hyprctl monitors -j | jq ".[] | select(.name == \"$monitor\") | .refreshRate")"
+
+high_refresh_rate="239.97"
+hdr_compatible_refresh_rate="143.99"
+
+if [[ $refresh_rate == "$hdr_compatible_refresh_rate"* ]]; then
+  hyprctl keyword monitor "HDMI-A-1, 2560x1440@$high_refresh_rate, 0x0, 1"
+  notify-send "$monitor set to $high_refresh_rate Hz"
+else
+  hyprctl keyword monitor "HDMI-A-1, 2560x1440@$hdr_compatible_refresh_rate, 0x0, 1"
+  notify-send "$monitor set to $hdr_compatible_refresh_rate Hz"
+fi

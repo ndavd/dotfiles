@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-media-controller \
-  --color=#000000aa \
-  --font-description="BigBlueTerm437 Nerd Font Mono" \
-  "$@"

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+hdr_format="$(mediainfo "$1" | grep --color=always "HDR format")"
+if [ "$hdr_format" = "" ]; then
+  echo "Not HDR"
+else
+  echo -e "$hdr_format"
+fi
