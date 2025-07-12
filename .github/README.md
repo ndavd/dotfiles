@@ -2,7 +2,11 @@
 
 ## My Dotfiles
 
-> Warning: minimal setup ahead!
+These dotfiles finally support Wayland. After logging in on the TTY, you may
+pick to load either system via the commands:
+
+- `hinit` - Hyprland
+- `xinit` - X11, bspwm
 
 ![Demo](https://raw.githubusercontent.com/ndavd/dotfiles/main/.github/demo.gif)
 
@@ -12,18 +16,17 @@
 - For the reasons stated above, these dotfiles are perpetually
   under-construction.
 
-- _**Editor:**_
-  [neovim](https://github.com/ndavd/dotfiles/tree/main/.config/nvim)
-- _**Shell:**_ [zsh](https://github.com/ndavd/dotfiles/tree/main/.zsh)
-- _**Terminal Emulator:**_
-  [kitty](https://github.com/ndavd/dotfiles/tree/main/.config/kitty)
-- _**Terminal Workspace:**_
-  [zellij](https://github.com/ndavd/dotfiles/tree/main/.config/zellij)
-- _**Window Manager:**_
-  [bspwm](https://github.com/ndavd/dotfiles/tree/main/.config/bspwm)
-- _**Status Bar:**_
-  [polybar](https://github.com/ndavd/dotfiles/tree/main/.config/polybar)
-- _**Application Launcher:**_
-  [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)
-- _**Media Controls:**_
-  [ndavd/media-controller](https://github.com/ndavd/media-controller)
+<div align="center">
+
+|     Type of application     |                                  X11                                   |                               Wayland                                |
+| :-------------------------: | :--------------------------------------------------------------------: | :------------------------------------------------------------------: |
+|        _**Editor:**_        |   [neovim](https://github.com/ndavd/dotfiles/tree/main/.config/nvim)   |                                  =                                   |
+|        _**Shell:**_         |        [zsh](https://github.com/ndavd/dotfiles/tree/main/.zsh)         |                                  =                                   |
+|  _**Terminal Emulator:**_   |   [kitty](https://github.com/ndavd/dotfiles/tree/main/.config/kitty)   |                                  =                                   |
+|  _**Terminal Workspace:**_  |  [zellij](https://github.com/ndavd/dotfiles/tree/main/.config/zellij)  |                                  =                                   |
+|    _**Window Manager:**_    |   [bspwm](https://github.com/ndavd/dotfiles/tree/main/.config/bspwm)   | [hyprland](https://github.com/ndavd/dotfiles/tree/main/.config/hypr) |
+|      _**Status Bar:**_      | [polybar](https://github.com/ndavd/dotfiles/tree/main/.config/polybar) | [waybar](https://github.com/ndavd/dotfiles/tree/main/.config/waybar) |
+| _**Application Launcher:**_ |    [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)    |   [wofi](https://github.com/ndavd/dotfiles/tree/main/.config/wofi)   |
+|    _**Media Controls:**_    |  [ndavd/media-controller](https://github.com/ndavd/media-controller)   |                                  =                                   |
+
+</div>
