@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+package_list="$(checkupdates 2>/dev/null; /usr/bin/paru -Qua 2>/dev/null)"
+package_count="$([ "$package_list" != "" ] && echo "$package_list" | wc -l || echo 0)"
+tooltip=$([ "$package_list" != "" ] && echo "$package_list" | sed ':a;N;$!ba;s/\n/\\r/g' || echo "No pending package updates")
+echo "{\"text\": \"$package_count\", \"tooltip\": \"$tooltip\"}"

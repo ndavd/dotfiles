@@ -14,6 +14,7 @@
     ],
     "modules-center": [],
     "modules-right": [
+        "custom/package_updates",
         "disk",
         "cpu",
         "memory",
@@ -53,5 +54,11 @@
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""]
+    },
+    "custom/package_updates": {
+        "interval": 300,
+        "format": "{text} ",
+        "exec": "$XDG_CONFIG_HOME/waybar/get-pending-updates",
+        "return-type": "json"
     }
 }
