@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+  media_controller=$HOME/local/wayland-media-controller
+else
+  media_controller=$HOME/local/regular-media-controller
+fi
+
+"$media_controller" \
+  --color=#000000aa \
+  --font-description="BigBlueTerm437 Nerd Font Mono" \
+  "$@"
