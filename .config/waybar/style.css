@@ -167,11 +167,7 @@ label:focus {
 }
 
 #cpu {
-    color: #000000;
-}
-
-#disk {
-    background-color: #964B00;
+    color: #ffffff;
 }
 
 #backlight {
