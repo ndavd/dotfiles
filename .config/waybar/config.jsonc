@@ -24,8 +24,8 @@
         "tray"
     ],
     "tray": {
-        "icon-size": 15,
-        "spacing": 4,
+        "icon-size": 16,
+        "spacing": 5,
     },
     "clock": {
         "interval": 10,
