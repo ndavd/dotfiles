@@ -28,10 +28,12 @@
         "spacing": 4,
     },
     "clock": {
+        "interval": 10,
         "format": "{:%A, %b %d %H:%M}",
         "tooltip-format": "<tt>{calendar}</tt>"
     },
     "cpu": {
+        "interval": 10,
         "format": "{usage}% ",
         "tooltip": true
     },
@@ -41,10 +43,12 @@
         "tooltip-format": "Used {used} / {total} ({percentage_used}%)"
     },
     "memory": {
+        "interval": 30,
         "format": "{used}GiB ",
         "tooltip-format": "Using {percentage}%"
     },
     "battery": {
+        "interval": 10,
         "states": {
             "warning": 30,
             "critical": 15
@@ -57,7 +61,7 @@
         "format-icons": ["", "", "", "", ""]
     },
     "custom/package_updates": {
-        "interval": 300,
+        "interval": 60,
         "format": "{text} ",
         "exec": "$XDG_CONFIG_HOME/waybar/get-pending-updates",
         "return-type": "json"
