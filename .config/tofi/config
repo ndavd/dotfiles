@@ -1,0 +1,13 @@
+width = 100%
+height = 100%
+border-width = 0
+outline-width = 0
+padding-left = 35%
+padding-top = 35%
+result-spacing = 15
+num-results = 10
+font = monospace
+font-size = 14
+selection-color = #cf0704ff
+background-color = #000C
+prompt-text = "RUN: "

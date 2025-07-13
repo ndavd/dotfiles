@@ -48,10 +48,10 @@
 !.config/systemd/user/ipns-publish.*
 !.config/tabtab/
 !.config/tabtab/**
+!.config/tofi/
+!.config/tofi/**
 !.config/waybar/
 !.config/waybar/**
-!.config/wofi/
-!.config/wofi/**
 !.config/xdg-desktop-portal/
 !.config/xdg-desktop-portal/**
 !.config/zathura/

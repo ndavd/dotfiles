@@ -19,7 +19,7 @@ pick to load either system via the commands:
 |  _**Terminal Workspace:**_  | [zellij](https://github.com/ndavd/dotfiles/tree/main/.config/zellij) |                                   =                                    |
 |    _**Window Manager:**_    | [hyprland](https://github.com/ndavd/dotfiles/tree/main/.config/hypr) |   [bspwm](https://github.com/ndavd/dotfiles/tree/main/.config/bspwm)   |
 |      _**Status Bar:**_      | [waybar](https://github.com/ndavd/dotfiles/tree/main/.config/waybar) | [polybar](https://github.com/ndavd/dotfiles/tree/main/.config/polybar) |
-| _**Application Launcher:**_ |   [wofi](https://github.com/ndavd/dotfiles/tree/main/.config/wofi)   |    [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)    |
+| _**Application Launcher:**_ |   [tofi](https://github.com/ndavd/dotfiles/tree/main/.config/tofi)   |    [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)    |
 |    _**Media Controls:**_    | [ndavd/media-controller](https://github.com/ndavd/media-controller)  |                                   =                                    |
 
 </div>
