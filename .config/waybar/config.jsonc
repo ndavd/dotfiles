@@ -3,7 +3,8 @@
     "height": 14,
     "spacing": 4,
     "hyprland/workspaces": {
-      "format": "{id}"
+      "format": "{id}",
+      "cursor": true
     },
     "hyprland/window": {
       "format": "{title}"
@@ -24,7 +25,7 @@
     ],
     "tray": {
         "icon-size": 15,
-        "spacing": 2,
+        "spacing": 4,
     },
     "clock": {
         "format": "{:%A, %b %d %H:%M}",

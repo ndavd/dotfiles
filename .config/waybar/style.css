@@ -3,6 +3,7 @@
     font-family: FontAwesome, monospace;
     /* font-family: monospace; */
     font-size: 13px;
+    margin: -1;
 }
 
 window#waybar {
