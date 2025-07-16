@@ -17,6 +17,7 @@
     "modules-right": [
         "custom/package_updates",
         "disk",
+        "temperature",
         "cpu",
         "memory",
         "battery",
@@ -59,6 +60,10 @@
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""]
+    },
+    "temperature": {
+        "hwmon-path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon4/temp1_input",
+        "format": "{temperatureC}°C "
     },
     "custom/package_updates": {
         "interval": 60,
