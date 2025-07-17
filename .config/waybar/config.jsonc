@@ -1,74 +1,104 @@
 // -*- mode: jsonc -*-
 {
-    "height": 14,
-    "spacing": 4,
-    "hyprland/workspaces": {
-      "format": "{id}",
-      "cursor": true
+  "height": 14,
+  "spacing": 4,
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "cursor": true
+  },
+  "hyprland/window": {
+    "format": "{title}"
+  },
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "privacy",
+    "custom/package_updates",
+    "disk",
+    "temperature",
+    "cpu",
+    "memory",
+    "battery",
+    "clock",
+    "tray"
+  ],
+  "tray": {
+    "icon-size": 16,
+    "spacing": 5
+  },
+  "clock": {
+    "interval": 10,
+    "format": "{:%A, %b %d %H:%M}",
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+  "cpu": {
+    "interval": 10,
+    "format": "{usage}% ",
+    "tooltip": true
+  },
+  "disk": {
+    "interval": 300,
+    "format": "{free} ",
+    "tooltip-format": "Used {used} / {total} ({percentage_used}%)"
+  },
+  "memory": {
+    "interval": 30,
+    "format": "{used}GiB ",
+    "tooltip-format": "Using {percentage}%"
+  },
+  "battery": {
+    "interval": 10,
+    "states": {
+      "warning": 30,
+      "critical": 15
     },
-    "hyprland/window": {
-      "format": "{title}"
-    },
-    "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/window"
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "temperature": {
+    "hwmon-path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon4/temp1_input",
+    "format": "{temperatureC}°C "
+  },
+  "custom/package_updates": {
+    "interval": 60,
+    "format": "{text} ",
+    "exec": "$XDG_CONFIG_HOME/waybar/get-pending-updates",
+    "return-type": "json"
+  },
+  "privacy": {
+    "icon-spacing": 4,
+    "icon-size": 16,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 14
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 14
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 14
+      }
     ],
-    "modules-center": [],
-    "modules-right": [
-        "custom/package_updates",
-        "disk",
-        "temperature",
-        "cpu",
-        "memory",
-        "battery",
-        "clock",
-        "tray"
-    ],
-    "tray": {
-        "icon-size": 16,
-        "spacing": 5,
-    },
-    "clock": {
-        "interval": 10,
-        "format": "{:%A, %b %d %H:%M}",
-        "tooltip-format": "<tt>{calendar}</tt>"
-    },
-    "cpu": {
-        "interval": 10,
-        "format": "{usage}% ",
-        "tooltip": true
-    },
-    "disk": {
-        "interval": 300,
-        "format": "{free} ",
-        "tooltip-format": "Used {used} / {total} ({percentage_used}%)"
-    },
-    "memory": {
-        "interval": 30,
-        "format": "{used}GiB ",
-        "tooltip-format": "Using {percentage}%"
-    },
-    "battery": {
-        "interval": 10,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "temperature": {
-        "hwmon-path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon4/temp1_input",
-        "format": "{temperatureC}°C "
-    },
-    "custom/package_updates": {
-        "interval": 60,
-        "format": "{text} ",
-        "exec": "$XDG_CONFIG_HOME/waybar/get-pending-updates",
-        "return-type": "json"
-    }
+    "ignore-monitor": true
+  }
 }
