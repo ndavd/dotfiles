@@ -1,10 +1,10 @@
 [global]
 follow = mouse
-frame_width = 1
+frame_width = 2
 frame_color = "#b4befe"
 separator_color= frame
 highlight = "#74c7ec"
-background = "#11111199"
+background = "#000000aa"
 foreground = "#cdd6f4"
 corner_radius = 5
 progress_bar_corner_radius = 5
