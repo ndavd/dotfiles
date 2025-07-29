@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-docker system prune --volumes --all
-paru -Scc
-sudo pacman -Rns "$(pacman -Qdtq)"
+docker system prune --volumes --all --force
+yes | paru -Scc
 # rm -rf "$HOME"/.cache/*
 sudo journalctl --vacuum-time=2weeks
