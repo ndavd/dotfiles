@@ -1,7 +1,5 @@
 * {
-  /* `otf-font-awesome` is required to be installed for icons */
   font-family: FontAwesome, monospace;
-  /* font-family: monospace; */
   font-size: 13px;
   margin: -1;
 }
@@ -16,15 +14,6 @@ window#waybar {
 window#waybar.hidden {
   opacity: 0.2;
 }
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
 
 window#waybar.termite {
   background-color: #3F3F3F;
@@ -83,7 +72,6 @@ button:hover {
 }
 
 #custom-package_updates,
-#clock,
 #battery,
 #cpu,
 #memory,
@@ -102,6 +90,10 @@ button:hover {
 #mpd {
   padding: 0 10px;
   color: #ffffff;
+}
+
+#clock {
+  padding-left: 10px;
 }
 
 #window,
