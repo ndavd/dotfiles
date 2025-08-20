@@ -61,3 +61,6 @@ export PATH="$NARGO_HOME/bin:$PATH"
 
 # BBup (Barretenberg)
 export PATH="$HOME/.bb:$PATH"
+
+# AWS SAM
+export SAM_CLI_TELEMETRY=0
