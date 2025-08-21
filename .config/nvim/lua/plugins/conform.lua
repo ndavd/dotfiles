@@ -46,6 +46,7 @@ end
 
 local eslintd = { 'eslint_d' }
 local eslintd_prettier = { 'eslint_d', 'prettierd', 'prettier' }
+local prettier = { 'prettierd', 'prettier' }
 local denofmt = { 'deno_fmt' }
 local stylua = { 'stylua' }
 local gofmt = { 'gofmt' }
@@ -82,6 +83,7 @@ conform.setup({
     typescript = js_ts_x,
     javascriptreact = js_ts_x,
     typescriptreact = js_ts_x,
+    json = prettier,
     markdown = denofmt,
     lua = stylua,
     go = gofmt,
