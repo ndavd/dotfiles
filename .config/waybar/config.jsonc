@@ -65,7 +65,7 @@
     ]
   },
   "custom/package_updates": {
-    "interval": 300,
+    "interval": 7200,
     "format": "{text} ",
     "exec": "$XDG_CONFIG_HOME/waybar/get-pending-updates",
     "return-type": "json"
