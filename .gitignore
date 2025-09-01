@@ -31,6 +31,8 @@
 !.config/mpv/**
 !.config/newsboat/
 !.config/newsboat/**
+!.config/nix/
+!.config/nix/**
 !.config/nvim
 !.config/nvim/**
 !.config/paru/
