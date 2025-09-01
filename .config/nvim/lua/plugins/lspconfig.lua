@@ -41,6 +41,7 @@ local servers = {
   'prismals',
   'astro',
   'sqls',
+  'nixd',
 }
 
 -- Custom servers config
