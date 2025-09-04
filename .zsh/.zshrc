@@ -61,15 +61,6 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
-# tmux
-tm() {
-  if (( $# )); then
-    tmux has-session -t "$*" && tmux attach -t "$*" || tmux new-session -s "$*"
-  else
-    tmux attach || tmux new-session
-  fi
-}
-
 ### check if console
 _isConsole() {
   [[ $TERM =~ "linux|screen" ]] && return 0 || return 1
@@ -93,7 +84,13 @@ fi
 _isConsole && dirty="*" staged="+" || dirty="" staged="✔"
 
 _p() {
-  p="$_p_pwd%1~$_p_clear"
+  if [[ $SHELL == /nix* ]]; then
+    nix_prefix="%F{cyan}<nix>%f"
+  else
+    nix_prefix=""
+  fi
+
+  p="$nix_prefix$_p_pwd%1~$_p_clear"
 
   local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
   if [[ -n $git_branch ]]; then

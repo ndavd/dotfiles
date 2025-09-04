@@ -16,39 +16,89 @@ umask 077
 
 use_color=true
 
-# Colors/Style
-_p_clear='\[\e[0m\]'
-_p_green='\[\e[38;5;02m\]'
-_p_bold='\[\e[1m\]'
-_p_italic='\[\e[3m\]'
-_p_underline='\[\e[4m\]'
-_p_git='\[\e[38;5;47m\]'
-_p_rootud='\[\e[38;5;9m\]'
-_p_ud='\[\e[38;5;02m\]'
-_p_pwd='\[\e[38;5;12m\]'
+### check if console
+_isConsole() {
+  [[ "$TERM" =~ (linux|screen) ]] && return 0 || return 1
+}
 
-_git_c() {
-  local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
-  if [[ -n $git_branch ]]; then
-    # dirty working tree & staged differences
-    local changes=
-    git diff --no-ext-diff --quiet 2>/dev/null || changes+=" $_p_bold*"
-    git diff-index --cached --quiet HEAD 2>/dev/null || changes+=" $_p_bold✓"
-    if [[ $git_branch =~ ^(main|master)$ ]] ; then
-      echo " $_p_git$git_branch$_p_clear$changes$_p_clear"
-    else
-      echo " $git_branch$changes$_p_clear"
-    fi
+# Colors/Style
+
+_bold="\[\e[1m\]"
+_underline="\[\e[4m\]"
+_clear="\[\e[0m\]"
+if _isConsole; then
+  _blue="${_bold}\[\e[34m\]"
+  _git="${_bold}\[\e[36m\]"
+else
+  _blue="\[\e[38;5;12m\]"
+  _git="\[\e[38;5;47m\]"
+fi
+
+if [[ $UID -eq 0 ]]; then
+  _pwd="${_bold}\[\e[31m\]"
+else
+  _pwd="$_blue"
+fi
+
+_short_pwd() {
+  if [[ "$PWD" == "$HOME" ]]; then
+    printf "~"
   else
-    echo ""
+    basename "$PWD"
   fi
 }
 
-_p() {
-  # PS1="$_p_rootud\u@\h$_p_clear:$_p_pwd\w$_p_clear$(_git_c)\$ "
-  PS1="$_p_pwd\w$_p_clear$(_git_c)\\$ "
+if _isConsole; then
+  dirty="*"
+  staged="+"
+else
+  dirty=""
+  staged="✔"
+fi
+
+_prompt_command() {
+  if [[ $SHELL == /nix* ]]; then
+    _nix_prefix="\[\e[36m\]<nix>\[\e[0m\]"
+  else
+    _nix_prefix=""
+  fi
+  local p="${_nix_prefix}${_pwd}$(_short_pwd)${_clear}"
+
+  local git_branch
+  git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+  if [[ -n $git_branch ]]; then
+    p+="["
+
+    if [[ $git_branch =~ ^(main|master)$ ]]; then
+      p+="${_git}${git_branch}${_clear}"
+    else
+      p+="$git_branch"
+    fi
+
+    git diff --no-ext-diff --quiet 2>/dev/null || p+="${_bold}\[\e[31m\]$dirty${_clear}"
+    git diff-index --cached --quiet HEAD 2>/dev/null || p+="${_bold}\[\e[32m\]$staged${_clear}"
+
+    p+="]"
+  fi
+
+  if _isConsole; then
+    if [[ $UID -eq 0 ]]; then
+      p+="\[\e[31m\]#${_clear}"
+    else
+      p+="${_bold}\[\e[33m\]\$${_clear}"
+    fi
+  else
+    if [[ $UID -eq 0 ]]; then
+      p+="\[\e[31m\]₿${_clear}"
+    else
+      p+="\[\e[33m\]₿${_clear}"
+    fi
+  fi
+
+  PS1="${p} "
 }
-PROMPT_COMMAND=_p
+
+PROMPT_COMMAND=_prompt_command
 
 alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
@@ -61,6 +111,9 @@ shopt -s histappend
 
 # ESC to use vi mode
 set -o vi
+
+# clear shell with ^L
+bind '"\C-l": clear-screen'
 
 # aliases
 alias g='git'
@@ -80,5 +133,5 @@ f() {
   [[ -n $file ]] && cd "$(dirname "$file")"
 }
 
-fastfetch
+# fastfetch
 # pfetch
