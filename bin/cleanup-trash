@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
+# nix
+nix-collect-garbage -d
+
+# docker
 docker system prune --volumes --all --force
+
+# pacman
 yes | paru -Scc
-# rm -rf "$HOME"/.cache/*
+
+# journalctl
 sudo journalctl --vacuum-time=2weeks
