@@ -156,7 +156,8 @@ local get_conf = function(server)
 end
 
 for _, server in ipairs(servers) do
-  require('lspconfig')[server].setup(get_conf(server))
+  vim.lsp.config(server, get_conf(server))
+  vim.lsp.enable(server)
 end
 
 -- Diagnostic signs
