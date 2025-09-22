@@ -106,9 +106,9 @@ _p() {
   fi
 
   if _isConsole; then
-    [[ $UID -eq 0 ]] && p+="%F{red}#$_p_clear" || p+="$_p_bold%F{yellow}\$$_p_clear"
+    [[ $UID -eq 0 ]] && p+="%F{red}#$_p_clear" || p+="$_p_bold%F{208}\$$_p_clear"
   else
-    [[ $UID -eq 0 ]] && p+="%F{red}₿$_p_clear" || p+="%F{yellow}₿$_p_clear"
+    [[ $UID -eq 0 ]] && p+="%F{red}₿$_p_clear" || p+="%F{208}₿$_p_clear"
   fi
   PROMPT="${p} "
 }
