@@ -52,7 +52,7 @@ local stylua = { 'stylua' }
 local gofmt = { 'gofmt' }
 local rustfmt = { 'rustfmt' }
 local clangformat = { 'clang_format' }
-local shellharden = { 'shellharden' }
+local shellharden_shfmt = { 'shellharden', 'shfmt' }
 local yamlfmt = { 'yamlfmt' }
 local forgefmt = { 'forge_fmt' }
 local sqlformatter = { 'sql_formatter' }
@@ -91,7 +91,7 @@ conform.setup({
     rust = rustfmt,
     c = clangformat,
     cpp = clangformat,
-    sh = shellharden,
+    sh = shellharden_shfmt,
     yaml = yamlfmt,
     solidity = forgefmt,
     sql = sqlformatter,
