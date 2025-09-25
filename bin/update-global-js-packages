@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 source "$NVM_DIR"/nvm.sh
 nvm use default
-npm update -g \
-  $(npm list --parseable=true -g | tail -n +2 | sed -E '/node_modules\/(npm)$/d;s|.*/node_modules/||')
+npm update --global
 bun update --global
