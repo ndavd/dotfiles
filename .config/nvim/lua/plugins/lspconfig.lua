@@ -42,6 +42,7 @@ local servers = {
   'astro',
   'sqls',
   'nixd',
+  'biome',
 }
 
 -- Custom servers config

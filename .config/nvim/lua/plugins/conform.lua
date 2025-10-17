@@ -44,8 +44,9 @@ local get_path_to_file = function(path, files)
   return found[1]
 end
 
-local eslintd = { 'eslint_d' }
-local eslintd_prettier = { 'eslint_d', 'prettierd', 'prettier' }
+local eslintd = { 'biome', 'eslint_d', stop_after_first = true }
+local eslintd_prettier =
+  { 'biome', 'eslint_d', 'prettierd', 'prettier', stop_after_first = true }
 local prettier = { 'prettierd', 'prettier' }
 local denofmt = { 'deno_fmt' }
 local stylua = { 'stylua' }
