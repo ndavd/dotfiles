@@ -137,6 +137,7 @@ alias nnvim="nvm use default && nvim"
 alias paru="paru --assume-installed cargo"
 alias drop="dragon-drop"
 alias bat="bat -p"
+alias davinci="QT_QPA_PLATFORM=xcb LD_PRELOAD=\"/usr/lib/libgio-2.0.so /usr/lib/libgmodule-2.0.so /usr/lib/libglib-2.0.so\" /opt/resolve/bin/resolve"
 
 # hyprland init alias
 alias hinit="uwsm start Hyprland"
