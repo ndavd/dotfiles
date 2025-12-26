@@ -41,6 +41,8 @@
 !.config/picom/**
 !.config/polybar/
 !.config/polybar/**
+!.config/qmk-keymaps/
+!.config/qmk-keymaps/**
 !.config/rofi/
 !.config/rofi/**
 !.config/sxhkd/
