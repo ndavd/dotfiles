@@ -62,12 +62,13 @@ aug.add({ 'BufNewFile', 'BufRead' }, {
 })
 
 -- Markdown
-aug.add({ 'FileType' }, {
-  pattern = 'markdown',
-  callback = function()
-    vim.wo.conceallevel = 2
-  end,
-})
+-- NOTE: Looks better overall with `conceallevel` 2 but its also concealing code blocks which make it harder to read
+-- aug.add({ 'FileType' }, {
+--   pattern = 'markdown',
+--   callback = function()
+--     vim.wo.conceallevel = 2
+--   end,
+-- })
 
 require('plugins')
 require('colors')
