@@ -26,6 +26,8 @@ vim.o.textwidth = 80
 vim.o.completeopt = 'menuone,noselect'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.inccommand = 'split'
+vim.o.foldtext = ''
+vim.o.foldlevelstart = 99
 
 -- Title
 vim.o.title = true

@@ -7,11 +7,10 @@ vim.api.nvim_create_autocmd('PackChanged', {
     local name, kind, active = ev.data.spec.name, ev.data.kind, ev.data.active
 
     local treesitter_name = 'nvim-treesitter'
-    if name == treesitter_name and (kind == 'install' or kind == 'update') then
+    if name == treesitter_name and kind == 'update' then
       if not active then
         vim.cmd.packadd(treesitter_name)
       end
-      vim.cmd('TSInstall')
       vim.cmd('TSUpdate')
     end
   end,

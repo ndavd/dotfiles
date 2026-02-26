@@ -1,23 +1,73 @@
-require('nvim-treesitter').setup({
-  install_dir = vim.fn.stdpath('data') .. '/site',
-})
+local nvim_treesitter = require('nvim-treesitter')
+
+nvim_treesitter.setup({})
 
 require('ts_context_commentstring').setup({
   enable_autocmd = false,
 })
 
--- Folds
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.o.foldtext = ''
-vim.o.foldlevelstart = 99
-
--- Indents
-vim.o.indentexpr = 'v:lua.require\'nvim-treesitter\'.indentexpr()'
-
--- Highlights
 vim.api.nvim_create_autocmd('FileType', {
   callback = function()
-    pcall(vim.treesitter.start)
+    local success = pcall(vim.treesitter.start)
+    if success then
+      vim.wo.foldmethod = 'expr'
+      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.bo.indentexpr = 'v:lua.require\'nvim-treesitter\'.indentexpr()'
+    end
   end,
+})
+
+nvim_treesitter.install({
+  'asm',
+  'awk',
+  'bash',
+  'c',
+  'cairo',
+  'circom',
+  'cmake',
+  'csv',
+  'cuda',
+  'diff',
+  'dockerfile',
+  'editorconfig',
+  'git_config',
+  'git_rebase',
+  'gitattributes',
+  'gitcommit',
+  'gitignore',
+  'go',
+  'gomod',
+  'gosum',
+  'graphql',
+  'html',
+  'html_tags',
+  'html_tags',
+  'hyprlang',
+  'ini',
+  'javascript',
+  'jq',
+  'jsdoc',
+  'json',
+  'json5',
+  'jsx',
+  'latex',
+  'lua',
+  'luadoc',
+  'make',
+  'markdown',
+  'markdown_inline',
+  'nix',
+  'proto',
+  'proto',
+  'regex',
+  'rust',
+  'sql',
+  'toml',
+  'tsx',
+  'typescript',
+  'vim',
+  'wgsl',
+  'wgsl_bevy',
+  'yaml',
+  'zsh',
 })
