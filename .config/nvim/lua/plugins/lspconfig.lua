@@ -1,10 +1,5 @@
 local lsp_custom = require('lsp_custom')
 
--- Change floating window borders
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = 'single',
-})
-
 -- The nvim-cmp almost supports LSP's capabilities so you should advertise it to LSP servers..
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
