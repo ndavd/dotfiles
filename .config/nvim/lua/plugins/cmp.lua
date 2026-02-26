@@ -26,6 +26,12 @@ cmp.setup({
     { name = 'treesitter' },
     { name = 'spell' },
   },
+  window = {
+    completion = cmp.config.window.bordered({
+      border = 'solid',
+    }),
+    documentation = cmp.config.window.bordered(),
+  },
 })
 
 -- vsnip

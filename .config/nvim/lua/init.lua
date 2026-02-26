@@ -28,6 +28,7 @@ vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.inccommand = 'split'
 vim.o.foldtext = ''
 vim.o.foldlevelstart = 99
+vim.o.winborder = 'single'
 
 -- Title
 vim.o.title = true
