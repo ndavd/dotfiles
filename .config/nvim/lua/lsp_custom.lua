@@ -83,4 +83,10 @@ out.get_solc_version = function()
   return solc_version
 end
 
+out.buf_hover = function()
+  vim.lsp.buf.hover({
+    border = 'single',
+  })
+end
+
 return out
