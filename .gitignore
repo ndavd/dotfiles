@@ -101,6 +101,6 @@
 .config/mpv/scripts/uosc/
 .config/newsboat/urls
 .config/nvim/.solc-version
-.config/nvim/lazy-lock.json
+.config/nvim/nvim-pack-lock.json
 .zsh/.zcompdump
 bin/*.AppImage
