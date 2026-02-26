@@ -61,6 +61,7 @@ nvim_treesitter.install({
   'proto',
   'regex',
   'rust',
+  'solidity',
   'sql',
   'toml',
   'tsx',
