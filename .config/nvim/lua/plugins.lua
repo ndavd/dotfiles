@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 -- Mini all things --
-vim.pack.add({ gh('echasnovski/mini.nvim') })
+vim.pack.add({ gh('mini.nvim/mini.nvim') })
 require('plugins/mini')
 
 -- Automatic indentation --

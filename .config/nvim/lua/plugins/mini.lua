@@ -20,13 +20,32 @@ local modules = {
 
 local custom_conf = {
   files = function()
-    vim.api.nvim_create_autocmd('User', {
-      pattern = 'MiniFilesWindowOpen',
+    local files = require('mini.files')
+
+    local show_dotfiles = true
+    local toggle_dotfiles = function()
+      show_dotfiles = not show_dotfiles
+      local dotfiles_filter = show_dotfiles
+          and function(_)
+            return true
+          end
+        or function(fs_entry)
+          return not vim.startswith(fs_entry.name, '.')
+        end
+      files.refresh({ content = { filter = dotfiles_filter } })
+    end
+
+    aug.add('User', {
+      pattern = 'MiniFilesBufferCreate',
       callback = function(args)
-        local win_id = args.data.win_id
-        vim.wo[win_id].winblend = vim.o.pumblend
+        local buf_id = args.data.buf_id
+        vim.keymap.set('n', '.', toggle_dotfiles, { buffer = buf_id })
       end,
     })
+
+    vim.keymap.set('n', '<leader>ec', function()
+      files.open(vim.api.nvim_buf_get_name(0))
+    end)
 
     return {
       mappings = {

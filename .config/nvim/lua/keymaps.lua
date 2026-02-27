@@ -33,9 +33,6 @@ keymap('n', '<leader>p', '<cmd>setlocal spell spelllang=en_us<CR>')
 keymap('n', '<leader>pt', '<cmd>setlocal spell spelllang=pt_pt<CR>')
 keymap('n', '<leader><S-p>', '<cmd>set nospell<CR>')
 
--- Edit current directory
-keymap('n', '<leader>ec', '<cmd>e %:h<CR>')
-
 -- Execute neovim custom settings from current file contents, e.g.
 -- :NVIM_CUSTOM: echo "Hello, World!"
 keymap('n', '<leader>cc', function()

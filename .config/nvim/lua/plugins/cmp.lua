@@ -26,8 +26,7 @@ require('blink.cmp').setup({
       },
     },
     menu = {
-      border = 'solid',
-      winblend = vim.o.pumblend,
+      border = 'none',
       max_height = 99,
     },
   },
