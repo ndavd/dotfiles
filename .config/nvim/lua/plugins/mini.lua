@@ -10,6 +10,7 @@ local modules = {
   'extra',
   'files',
   'git',
+  'icons',
   'move',
   'pairs',
   'pick',
@@ -47,6 +48,7 @@ local custom_conf = {
   },
   starter = function()
     local starter = require('mini.starter')
+    local icons = require('mini.icons')
 
     local greeting = function()
       local parts = { 'evening', 'morning', 'afternoon', 'evening' }
@@ -113,9 +115,8 @@ local custom_conf = {
 
         local items = {}
         for _, f in ipairs(vim.list_slice(files, 1, n)) do
-          local name = require('plugins/webdevicons').get_icon({
-            filepath = f,
-          }) .. vim.fn.fnamemodify(f, ':~:.')
+          local icon = icons.get('file', vim.fn.fnamemodify(f, ':t'))
+          local name = icon .. ' ' .. vim.fn.fnamemodify(f, ':~:.')
           table.insert(items, {
             name = name,
             action = 'edit ' .. f,
