@@ -8,6 +8,7 @@ local modules = {
   'comment',
   'diff',
   'extra',
+  'files',
   'git',
   'move',
   'pairs',
@@ -17,6 +18,25 @@ local modules = {
 }
 
 local custom_conf = {
+  files = function()
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'MiniFilesWindowOpen',
+      callback = function(args)
+        local win_id = args.data.win_id
+        vim.wo[win_id].winblend = vim.o.pumblend
+      end,
+    })
+
+    return {
+      mappings = {
+        go_in = '',
+        go_in_plus = '<CR>',
+        go_out = '',
+        go_out_plus = '-',
+        reveal_cwd = '',
+      },
+    }
+  end,
   comment = {
     options = {
       custom_commentstring = function()
@@ -51,7 +71,11 @@ local custom_conf = {
     local actions = function()
       local section = sections.actions
       return {
-        { name = 'plugins sync', action = 'lua vim.pack.update()', section = section },
+        {
+          name = 'plugins sync',
+          action = 'lua vim.pack.update()',
+          section = section,
+        },
         { name = 'edit new buffer', action = 'enew', section = section },
         { name = 'quit', action = 'qall', section = section },
       }
@@ -89,7 +113,7 @@ local custom_conf = {
 
         local items = {}
         for _, f in ipairs(vim.list_slice(files, 1, n)) do
-          local name = require('plugins.webdevicons').get_icon({
+          local name = require('plugins/webdevicons').get_icon({
             filepath = f,
           }) .. vim.fn.fnamemodify(f, ':~:.')
           table.insert(items, {
