@@ -7,11 +7,22 @@ vim.api.nvim_create_autocmd('PackChanged', {
     local name, kind, active = ev.data.spec.name, ev.data.kind, ev.data.active
 
     local treesitter_name = 'nvim-treesitter'
+    local blink_cmp_name = 'blink.cmp'
+
     if name == treesitter_name and kind == 'update' then
       if not active then
         vim.cmd.packadd(treesitter_name)
       end
       vim.cmd('TSUpdate')
+    end
+
+    if name == blink_cmp_name and (kind == 'install' or kind == 'update') then
+      local obj = vim
+        .system({ 'cargo', 'build', '--release' }, { cwd = ev.data.path })
+        :wait()
+      if obj.code ~= 0 then
+        print(obj.stderr)
+      end
     end
   end,
 })
@@ -46,24 +57,16 @@ require('plugins/treesitter')
 
 -- LSP --
 vim.pack.add({
-  gh('hrsh7th/cmp-nvim-lsp'),
-  gh('neovim/nvim-lspconfig'),
+  gh('rafamadriz/friendly-snippets'),
+  gh('saghen/blink.cmp'),
 })
+require('plugins/cmp')
+vim.pack.add({ gh('neovim/nvim-lspconfig') })
 require('plugins/lspconfig')
 vim.pack.add({ gh('stevearc/conform.nvim') })
 require('plugins/conform')
 vim.pack.add({ gh('mfussenegger/nvim-lint') })
 require('plugins/lint')
-vim.pack.add({
-  gh('hrsh7th/vim-vsnip'),
-  gh('hrsh7th/cmp-vsnip'),
-  gh('rafamadriz/friendly-snippets'),
-  gh('hrsh7th/cmp-path'),
-  gh('ray-x/cmp-treesitter'),
-  gh('f3fora/cmp-spell'),
-  gh('hrsh7th/nvim-cmp'),
-})
-require('plugins/cmp')
 
 -- Colorschemes --
 vim.pack.add({ gh('Mofiqul/vscode.nvim') })

@@ -1,7 +1,8 @@
 local lsp_custom = require('lsp_custom')
 
 -- The nvim-cmp almost supports LSP's capabilities so you should advertise it to LSP servers..
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 -- Make root_dir the current directory (not recommended)
 local current_dir = function()

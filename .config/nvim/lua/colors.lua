@@ -64,6 +64,8 @@ local make_hls = function()
   hi Folded guisp=#636369
   " Floating window borders
   hi! link FloatBorder NonText
+  " Cmp
+  hi! link BlinkCmpMenu Normal
   ]])
 end
 
