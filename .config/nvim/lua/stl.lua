@@ -59,14 +59,14 @@ local mode = function()
     [''] = 'S·BLOCK' .. nbsc,
   }
   local hl
-  if vim.tbl_contains({ 'n', 'c' }, m) then
-    hl = hl_groups.mode_normal
-  elseif vim.tbl_contains({ 'i', 'ix', 's', 'S', '' }, m) then
+  if vim.tbl_contains({ 'i', 'ix', 's', 'S', '' }, m) then
     hl = hl_groups.mode_insert
   elseif vim.tbl_contains({ 'R' }, m) then
     hl = hl_groups.mode_replace
   elseif vim.tbl_contains({ 'v', 'V', '' }, m) then
     hl = hl_groups.mode_visual
+  else
+    hl = hl_groups.mode_normal
   end
   hl = parse_hl_group(hl)
   local prefixes = {
@@ -74,11 +74,11 @@ local mode = function()
     R = 'vv',
   }
   local prefix = prefixes[m] or '>>'
-  return hl .. nbsc .. '%-11 ' .. prefix .. nbsc .. modes[m] .. '%*'
+  return hl .. nbsc .. '%-11 ' .. prefix .. nbsc .. (modes[m] or '') .. '%*'
 end
 
 local filepath = function()
-  local icon = require('plugins.webdevicons').get_icon({
+  local icon = require('plugins/webdevicons').get_icon({
     do_hl = { true, hl_groups.stl, hl_groups.icon },
   })
   return icon .. vim.fn.expand('%f')
@@ -109,8 +109,8 @@ Stl = function()
   if ft == 'lazy' then
     return '%= 📦 Lazy %='
   end
-  if ft == 'oil' then
-    return '%= 📂 Explorer %='
+  if ft == 'minifiles' then
+    return ' 📂 Explorer %='
   end
   if ft == 'minipick' then
     return '%= 🔭 Pick %='

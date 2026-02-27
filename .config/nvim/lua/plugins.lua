@@ -38,10 +38,6 @@ vim.pack.add({
 })
 require('plugins/webdevicons')
 
--- Better file explorer --
-vim.pack.add({ gh('stevearc/oil.nvim') })
-require('plugins/oil')
-
 -- Automatic indentation --
 vim.pack.add({ gh('tpope/vim-sleuth') })
 vim.g.sleuth_automatic = 0
