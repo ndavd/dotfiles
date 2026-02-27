@@ -31,13 +31,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
 vim.pack.add({ gh('echasnovski/mini.nvim') })
 require('plugins/mini')
 
--- Icon support --
-vim.pack.add({
-  gh('nvim-tree/nvim-web-devicons'),
-  gh('yamatsum/nvim-nonicons'),
-})
-require('plugins/webdevicons')
-
 -- Automatic indentation --
 vim.pack.add({ gh('tpope/vim-sleuth') })
 vim.g.sleuth_automatic = 0

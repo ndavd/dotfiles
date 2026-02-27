@@ -78,10 +78,8 @@ local mode = function()
 end
 
 local filepath = function()
-  local icon = require('plugins/webdevicons').get_icon({
-    do_hl = { true, hl_groups.stl, hl_groups.icon },
-  })
-  return icon .. vim.fn.expand('%f')
+  local icon, hl = require('mini.icons').get('file', vim.fn.expand('%'))
+  return '%#' .. hl .. '#' .. icon .. '%* ' .. vim.fn.expand('%f')
 end
 
 local line_stats = function()
