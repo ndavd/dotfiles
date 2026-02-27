@@ -35,10 +35,19 @@ local custom_conf = {
       files.refresh({ content = { filter = dotfiles_filter } })
     end
 
+    local dragon_drop = function()
+      local entry = files.get_fs_entry()
+      if not entry then
+        return
+      end
+      vim.system({ 'dragon-drop', entry.path })
+    end
+
     aug.add('User', {
       pattern = 'MiniFilesBufferCreate',
       callback = function(args)
         local buf_id = args.data.buf_id
+        vim.keymap.set('n', 'gd', dragon_drop, { buffer = buf_id })
         vim.keymap.set('n', '.', toggle_dotfiles, { buffer = buf_id })
       end,
     })
