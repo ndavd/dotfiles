@@ -37,4 +37,11 @@ require('blink.cmp').setup({
       winblend = vim.o.pumblend,
     },
   },
+  fuzzy = {
+    sorts = {
+      'exact',
+      'score',
+      'sort_text',
+    },
+  },
 })
