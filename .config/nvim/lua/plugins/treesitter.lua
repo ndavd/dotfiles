@@ -1,23 +1,27 @@
-local nvim_treesitter = require('nvim-treesitter')
+local out = {}
 
-nvim_treesitter.setup({})
+out.setup = function()
+  local nvim_treesitter = require('nvim-treesitter')
 
-require('ts_context_commentstring').setup({
-  enable_autocmd = false,
-})
+  nvim_treesitter.setup({})
 
-require('aug').add('FileType', {
-  callback = function()
-    local success = pcall(vim.treesitter.start)
-    if success then
-      vim.wo.foldmethod = 'expr'
-      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-      vim.bo.indentexpr = 'v:lua.require\'nvim-treesitter\'.indentexpr()'
-    end
-  end,
-})
+  require('ts_context_commentstring').setup({
+    enable_autocmd = false,
+  })
 
-nvim_treesitter.install({
+  require('aug').add('FileType', {
+    callback = function()
+      local success = pcall(vim.treesitter.start)
+      if success then
+        vim.wo.foldmethod = 'expr'
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.bo.indentexpr = 'v:lua.require\'nvim-treesitter\'.indentexpr()'
+      end
+    end,
+  })
+end
+
+out.parsers = {
   'asm',
   'awk',
   'bash',
@@ -71,4 +75,6 @@ nvim_treesitter.install({
   'wgsl_bevy',
   'yaml',
   'zsh',
-})
+}
+
+return out

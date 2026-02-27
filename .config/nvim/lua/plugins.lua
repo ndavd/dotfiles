@@ -2,21 +2,27 @@ local gh = function(gh_path)
   return 'https://github.com/' .. gh_path
 end
 
+local treesitter_config = require('plugins/treesitter')
+
 require('aug').add('PackChanged', {
   callback = function(ev)
     local name, kind, active = ev.data.spec.name, ev.data.kind, ev.data.active
 
+    local is_install_or_update = kind == 'install' or kind == 'update'
+
     local treesitter_name = 'nvim-treesitter'
     local blink_cmp_name = 'blink.cmp'
 
-    if name == treesitter_name and kind == 'update' then
+    if name == treesitter_name and is_install_or_update then
       if not active then
         vim.cmd.packadd(treesitter_name)
       end
-      vim.cmd('TSUpdate')
+      local treesitter = require(treesitter_name)
+      treesitter.install(treesitter_config.parsers)
+      treesitter.update()
     end
 
-    if name == blink_cmp_name and (kind == 'install' or kind == 'update') then
+    if name == blink_cmp_name and is_install_or_update then
       local obj = vim
         .system({ 'cargo', 'build', '--release' }, { cwd = ev.data.path })
         :wait()
@@ -42,7 +48,7 @@ vim.pack.add({
   gh('JoosepAlviste/nvim-ts-context-commentstring'),
   gh('nvim-treesitter/nvim-treesitter'),
 })
-require('plugins/treesitter')
+treesitter_config.setup()
 
 -- LSP --
 vim.pack.add({

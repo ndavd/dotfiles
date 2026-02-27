@@ -79,7 +79,7 @@ end
 
 local filepath = function()
   local icon, hl = require('mini.icons').get('file', vim.fn.expand('%'))
-  return '%#' .. hl .. '#' .. icon .. '%* ' .. vim.fn.expand('%f')
+  return parse_hl_group(hl) .. icon .. '%* ' .. vim.fn.expand('%f')
 end
 
 local line_stats = function()
