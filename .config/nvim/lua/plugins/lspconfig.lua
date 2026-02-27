@@ -1,4 +1,5 @@
 local lsp_custom = require('lsp_custom')
+local aug = require('aug')
 
 -- The nvim-cmp almost supports LSP's capabilities so you should advertise it to LSP servers..
 -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -202,14 +203,14 @@ vim.api.nvim_create_user_command('Solc', function()
 end, {})
 
 -- Remove formatexpr default
-require('aug').add('LspAttach', {
+aug.add('LspAttach', {
   callback = function(ev)
     vim.bo[ev.buf].formatexpr = nil
   end,
 })
 
 -- Enable textDocument/documentColor if available
-vim.api.nvim_create_autocmd('LspAttach', {
+aug.add('LspAttach', {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client == nil then

@@ -2,7 +2,7 @@ local gh = function(gh_path)
   return 'https://github.com/' .. gh_path
 end
 
-vim.api.nvim_create_autocmd('PackChanged', {
+require('aug').add('PackChanged', {
   callback = function(ev)
     local name, kind, active = ev.data.spec.name, ev.data.kind, ev.data.active
 

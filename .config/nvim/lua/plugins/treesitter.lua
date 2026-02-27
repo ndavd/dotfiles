@@ -6,7 +6,7 @@ require('ts_context_commentstring').setup({
   enable_autocmd = false,
 })
 
-vim.api.nvim_create_autocmd('FileType', {
+require('aug').add('FileType', {
   callback = function()
     local success = pcall(vim.treesitter.start)
     if success then
