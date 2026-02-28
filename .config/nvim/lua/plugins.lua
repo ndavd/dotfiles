@@ -37,11 +37,6 @@ require('aug').add('PackChanged', {
 vim.pack.add({ gh('nvim-mini/mini.nvim') })
 require('plugins/mini')
 
--- Automatic indentation --
-vim.pack.add({ gh('tpope/vim-sleuth') })
-vim.g.sleuth_automatic = 0
-vim.keymap.set('n', '<leader><leader>s', '<cmd>Sleuth<CR>')
-
 -- Treesitter --
 vim.pack.add({
   gh('windwp/nvim-ts-autotag'),
