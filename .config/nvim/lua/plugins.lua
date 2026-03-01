@@ -1,10 +1,12 @@
+local aug = require('aug')
+
 local gh = function(gh_path)
   return 'https://github.com/' .. gh_path
 end
 
 local treesitter_config = require('plugins/treesitter')
 
-require('aug').add('PackChanged', {
+aug.add('PackChanged', {
   callback = function(ev)
     local name, kind, active = ev.data.spec.name, ev.data.kind, ev.data.active
 
@@ -64,3 +66,9 @@ require('plugins.vscode')
 
 -- Noir language support --
 vim.pack.add({ gh('noir-lang/noir-nvim') })
+aug.add({ 'FileType' }, {
+  pattern = { 'noir' },
+  callback = function(ev)
+    vim.bo[ev.buf].commentstring = '// %s'
+  end,
+})
