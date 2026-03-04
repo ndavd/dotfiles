@@ -55,9 +55,10 @@ export PATH="$HOME/.cyfrin/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Noirup
-export NARGO_HOME="/home/ndavd/.nargo"
+# Nargo/Noirup
+export NARGO_HOME="$HOME/.nargo"
 export PATH="$NARGO_HOME/bin:$PATH"
+export NARGO_CRATES_ROOT="$NARGO_HOME/crates"
 
 # BBup (Barretenberg)
 export PATH="$HOME/.bb:$PATH"
