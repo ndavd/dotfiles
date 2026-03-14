@@ -65,3 +65,6 @@ export PATH="$HOME/.bb:$PATH"
 
 # AWS SAM
 export SAM_CLI_TELEMETRY=0
+
+# pnpm
+export PATH="$HOME/.local/share/pnpm:$PATH"
