@@ -67,4 +67,5 @@ export PATH="$HOME/.bb:$PATH"
 export SAM_CLI_TELEMETRY=0
 
 # pnpm
-export PATH="$HOME/.local/share/pnpm:$PATH"
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
