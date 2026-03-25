@@ -216,6 +216,10 @@ aug.add('LspAttach', {
     if client == nil then
       return
     end
-    vim.lsp.document_color.enable(true, args.buf, { style = 'virtual' })
+    vim.lsp.document_color.enable(
+      true,
+      { bufnr = args.buf },
+      { style = 'virtual' }
+    )
   end,
 })
