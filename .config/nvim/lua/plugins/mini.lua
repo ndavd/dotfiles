@@ -64,6 +64,9 @@ local custom_conf = {
         go_out_plus = '-',
         reveal_cwd = '',
       },
+      windows = {
+        width_focus = 80,
+      },
     }
   end,
   comment = {
