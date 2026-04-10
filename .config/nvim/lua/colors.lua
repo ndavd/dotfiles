@@ -1,72 +1,81 @@
+--- @param name string
+--- @param val vim.api.keyset.highlight
+local update_hl = function(name, val)
+  vim.api.nvim_set_hl(0, name, vim.tbl_extend('force', val, { update = true }))
+end
+
+local none = 0
+
 local make_hls = function()
-  vim.cmd([[
-  hi Comment ctermfg=DarkBlue
-  " Transparent background color for Nvim
-  hi Normal guibg=NONE
-  hi NonText guibg=NONE
-  hi ModeMsg guibg=NONE
-  hi MoreMsg guibg=NONE
-  hi ModeArea guibg=NONE
-  hi ErrorMsg guibg=NONE
-  hi Error guibg=NONE
-  hi Directory guibg=NONE
-  hi VertSplit guibg=NONE ctermbg=NONE
-  hi SignColumn guibg=NONE
-  hi EndOfBuffer guibg=NONE guifg=#5a5a5a
-  hi NormalFloat guibg=NONE
-  hi FloatBoarded guibg=NONE
-  hi Folded guibg=NONE
-  " Number, CC, Cursor and Normal
-  hi LineNr guibg=bg guifg=DarkGrey ctermbg=NONE ctermfg=DarkGrey
-  hi CursorLine guibg=NONE ctermbg=NONE cterm=NONE
-  hi CursorLineNr guibg=bg guifg=White cterm=NONE ctermbg=NONE ctermfg=White
-  hi ColorColumn guibg=#111111 ctermbg=DarkGrey
-  hi VertSplit guifg=Grey cterm=NONE ctermfg=Grey
-  " IncSearch
-  hi IncSearch gui=reverse
-  " Pmenu
-  hi PmenuSel blend=0
-  " Visual and Search
-  hi Visual gui=NONE guibg=#0E1F2F guifg=fg ctermbg=DarkBlue ctermfg=White
-  hi Search gui=reverse cterm=reverse
-  " Statusline
-  hi StatusLine gui=NONE guibg=NONE ctermbg=NONE guifg=#ffffff ctermfg=White
-  hi StatusLineModeNormal gui=NONE guibg=NONE ctermbg=NONE guifg=#949494 ctermfg=DarkGrey
-  hi StatusLineModeInsert gui=NONE guibg=NONE ctermbg=NONE guifg=#57b0b2 ctermfg=LightBlue
-  hi StatusLineModeReplace gui=NONE guibg=NONE ctermbg=NONE guifg=#ea6962 ctermfg=Red
-  hi StatusLineModeVisual gui=NONE guibg=NONE ctermbg=NONE guifg=#a9e861 ctermfg=Green
-  hi StatusLineBranchMain gui=NONE guibg=NONE ctermbg=NONE guifg=#2ef25d ctermfg=Green
-  hi! link StatusLineBranchOthers StatusLine
-  " Listchars
-  hi NonText guifg=#3a3a3a
-  hi Whitespace guifg=#3a3a3a
-  " mini.pick
-  hi! link MiniPickMatchCurrent PMenuSel
-  hi! link MiniPickPrompt MiniStarterItemPrefix
-  hi! link MiniPickBorder Normal
-  " mini.starter
-  hi! link MiniStarterItemPrefix ErrorMsg
-  " Diff
-  hi Added guifg=#b8cb26 ctermfg=DarkGreen
-  hi Removed guifg=#f44747 ctermfg=DarkRed
-  hi Changed guifg=#599cd6 ctermfg=DarkBlue
-  " Lsp
-  hi LspDiagnosticsDefaultError guibg=NONE guifg=#ea6962
-  hi LspDiagnosticsVirtualTextError guibg=NONE guifg=#ea6962
-  hi LspDiagnosticsSignError guibg=NONE guifg=#ea6962
-  hi LspDiagnosticsFloatingError guibg=NONE guifg=#ea6962
-  hi LspDiagnosticsFloatingHint guibg=NONE
-  hi LspDiagnosticsFloatingInformation guibg=NONE
-  hi LspDiagnosticsFloatingWarning guibg=NONE
-  " Man
-  hi manUnderline guisp=fg gui=underline
-  " Folded
-  hi Folded guisp=#636369
-  " Floating window borders
-  hi! link FloatBorder NonText
-  " Cmp
-  hi! link BlinkCmpMenu Normal
-  ]])
+  update_hl('Comment', { ctermfg = 'DarkBlue' })
+  -- Transparent bg
+  update_hl('Normal', { bg = none })
+  update_hl('NonText', { bg = none })
+  update_hl('ModeMsg', { bg = none })
+  update_hl('MoreMsg', { bg = none })
+  update_hl('ModeArea', { bg = none })
+  update_hl('ErrorMsg', { bg = none })
+  update_hl('Error', { bg = none })
+  update_hl('Directory', { bg = none })
+  update_hl('VertSplit', { bg = none })
+  update_hl('SignColumn', { bg = none })
+  update_hl('EndOfBuffer', { bg = none, fg = '#5a5a5a' })
+  update_hl('NormalFloat', { bg = none })
+  update_hl('FloatBoarded', { bg = none })
+  update_hl('Folded', { bg = none })
+  -- Number, CC, Cursor and Normal
+  update_hl('LineNr', { bg = 'bg', fg = 'DarkGrey' })
+  update_hl('CursorLine', { bg = none })
+  update_hl('CursorLineNr', { bg = none, fg = '#ffffff' })
+  update_hl('ColorColumn', { bg = '#111111' })
+  update_hl('VertSplit', { fg = 'Grey' })
+  -- IncSearch
+  update_hl('IncSearch', { reverse = true })
+  -- Pmenu
+  update_hl('PmenuSel', { blend = none })
+  -- Visual and Search
+  update_hl('Visual', { bg = '#0e1f2f', fg = 'fg' })
+  update_hl('Search', { reverse = true })
+  -- Statusline
+  update_hl('StatusLine', { bg = none, fg = '#ffffff' })
+  update_hl('StatusLineModeNormal', { bg = none, fg = '#949494' })
+  update_hl('StatusLineModeInsert', { bg = none, fg = '#57b0b2' })
+  update_hl('StatusLineModeReplace', { bg = none, fg = '#ea6962' })
+  update_hl('StatusLineModeVisual', { bg = none, fg = '#a9e861' })
+  update_hl('StatusLineBranchMain', { bg = none, fg = '#2ef25d' })
+  update_hl('StatusLineBranchOthers', { link = 'StatusLine' })
+  -- Listchars
+  update_hl('NonText', { fg = '#3a3a3a' })
+  update_hl('Whitespace', { fg = '#3a3a3a' })
+  -- mini.pick
+  update_hl('MiniPickMatchCurrent', { link = 'PMenuSel' })
+  update_hl('MiniPickPrompt', { link = 'MiniStarterItemPrefix' })
+  update_hl('MiniPickBorder', { link = 'Normal' })
+  -- mini.starter
+  update_hl('MiniStarterItemPrefix', { link = 'ErrorMsg' })
+  -- Diff
+  update_hl('Added', { fg = '#b8cb26' })
+  update_hl('Removed', { fg = '#f44747' })
+  update_hl('Changed', { fg = '#599cd6' })
+  -- Lsp
+  update_hl('LspDiagnosticsDefaultError', { link = 'StatusLineModeReplace' })
+  update_hl(
+    'LspDiagnosticsVirtualTextError',
+    { link = 'StatusLineModeReplace' }
+  )
+  update_hl('LspDiagnosticsSignError', { link = 'StatusLineModeReplace' })
+  update_hl('LspDiagnosticsFloatingError', { link = 'StatusLineModeReplace' })
+  update_hl('LspDiagnosticsFloatingHint', { bg = none })
+  update_hl('LspDiagnosticsFloatingInformation', { bg = none })
+  update_hl('LspDiagnosticsFloatingWarning', { bg = none })
+  -- Man
+  update_hl('manUnderline', { sp = 'fg', underline = true })
+  -- Folded
+  update_hl('Folded', { sp = '#636369' })
+  -- Floating window borders
+  update_hl('FloatBorder', { link = 'NonText' })
+  -- Cmp
+  update_hl('BlinkCmpMenu', { link = 'Normal' })
 end
 
 require('aug').add({ 'ColorScheme' }, {
