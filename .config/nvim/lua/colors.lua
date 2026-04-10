@@ -4,7 +4,7 @@ local update_hl = function(name, val)
   vim.api.nvim_set_hl(0, name, vim.tbl_extend('force', val, { update = true }))
 end
 
-local none = 0
+local none = -1
 
 local make_hls = function()
   update_hl('Comment', { ctermfg = 'DarkBlue' })
@@ -24,7 +24,7 @@ local make_hls = function()
   update_hl('FloatBoarded', { bg = none })
   update_hl('Folded', { bg = none })
   -- Number, CC, Cursor and Normal
-  update_hl('LineNr', { bg = 'bg', fg = 'DarkGrey' })
+  update_hl('LineNr', { bg = none, fg = 'DarkGrey' })
   update_hl('CursorLine', { bg = none })
   update_hl('CursorLineNr', { bg = none, fg = '#ffffff' })
   update_hl('ColorColumn', { bg = '#111111' })
@@ -32,7 +32,7 @@ local make_hls = function()
   -- IncSearch
   update_hl('IncSearch', { reverse = true })
   -- Pmenu
-  update_hl('PmenuSel', { blend = none })
+  update_hl('PmenuSel', { blend = 0 })
   -- Visual and Search
   update_hl('Visual', { bg = '#0e1f2f', fg = 'fg' })
   update_hl('Search', { reverse = true })
