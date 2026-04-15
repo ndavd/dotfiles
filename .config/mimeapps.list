@@ -7,6 +7,7 @@ application/pdf=org.pwmt.zathura.desktop;
 x-scheme-handler/tg=userapp-Telegram Desktop-IREOR1.desktop
 x-scheme-handler/clickup=ClickUp.desktop
 x-scheme-handler/tonsite=org.telegram.desktop.desktop
+x-scheme-handler/slack=slack.desktop
 
 [Added Associations]
 x-scheme-handler/tg=userapp-Telegram Desktop-IREOR1.desktop;
