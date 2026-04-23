@@ -59,6 +59,7 @@ local forgefmt = { 'forge_fmt' }
 local sqlformatter = { 'sql_formatter' }
 local nixfmt = { 'nixfmt' }
 local texfmt = { 'tex-fmt' }
+local taplo = { 'taplo' }
 
 local js_ts_x = function()
   local root = vim.lsp.buf.list_workspace_folders()[1]
@@ -99,6 +100,7 @@ conform.setup({
     sql = sqlformatter,
     nix = nixfmt,
     tex = texfmt,
+    toml = taplo,
   },
 
   formatters = {
