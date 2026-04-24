@@ -50,7 +50,10 @@ treesitter_config.setup()
 -- LSP --
 vim.pack.add({
   gh('rafamadriz/friendly-snippets'),
-  gh('saghen/blink.cmp'),
+  {
+    src = gh('saghen/blink.cmp'),
+    version = 'v1',
+  },
 })
 require('plugins/cmp')
 vim.pack.add({ gh('neovim/nvim-lspconfig') })
