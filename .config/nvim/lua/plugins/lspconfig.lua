@@ -72,14 +72,15 @@ local custom_conf = {
           version = 'LuaJIT',
         },
         diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = { 'vim' },
+          -- Get the language server to recognize the `vim` and `hl` globals
+          globals = { 'vim', 'hl' },
         },
         workspace = {
-          -- Make the server aware of Neovim runtime files
+          -- Make the server aware of Neovim and Hyprland runtime files
           library = {
             vim.env.VIMRUNTIME,
             '${3rd}/luv/library',
+            '/usr/share/hypr/stubs',
           },
           checkThirdParty = false,
         },
