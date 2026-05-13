@@ -152,6 +152,7 @@ hl.config({
     },
     resize_on_border = false,
     allow_tearing = false,
+    no_focus_fallback = true,
     layout = 'dwindle',
   },
   cursor = {
@@ -255,6 +256,9 @@ hl.config({
   gestures = {
     workspace_swipe_touch = false,
   },
+  binds = {
+    scroll_event_delay = 0,
+  },
 })
 
 hl.device({
@@ -335,13 +339,28 @@ hl.bind(
   )
 )
 
--- Example special workspace (scratchpad)
-hl.bind(u.keys(mainMod, 's'), hl.dsp.workspace.toggle_special('magic'))
-hl.bind(u.keys(mainMod, 'SHIFT', 's'), hl.dsp.window.move({ workspace = 'special:magic' }))
-
--- Scroll through existing workspaces with mainMod + scroll
-hl.bind(u.keys(mainMod, 'mouse_down'), hl.dsp.focus({ workspace = 'e+1' }))
-hl.bind(u.keys(mainMod, 'mouse_up'), hl.dsp.focus({ workspace = 'e-1' }))
+hl.bind(u.keys(mainMod, 's'), function()
+  local workspace = hl.get_active_workspace()
+  if workspace == nil then
+    return
+  end
+  local next_layout = workspace.tiled_layout == 'dwindle' and 'scrolling' or 'dwindle'
+  hl.workspace_rule({ workspace = tostring(workspace.id), layout = next_layout })
+end)
+hl.bind(u.keys(mainMod, 'mouse_down'), function()
+  if hl.get_active_workspace().tiled_layout == 'scrolling' then
+    hl.dispatch(hl.dsp.layout('move +200'))
+  else
+    hl.dispatch(hl.dsp.focus({ workspace = 'e+1' }))
+  end
+end)
+hl.bind(u.keys(mainMod, 'mouse_up'), function()
+  if hl.get_active_workspace().tiled_layout == 'scrolling' then
+    hl.dispatch(hl.dsp.layout('move -200'))
+  else
+    hl.dispatch(hl.dsp.focus({ workspace = 'e-1' }))
+  end
+end)
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(u.keys(mainMod, 'mouse:272'), hl.dsp.window.drag(), { mouse = true })
