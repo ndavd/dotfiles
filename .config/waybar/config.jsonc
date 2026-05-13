@@ -15,6 +15,7 @@
   ],
   "modules-center": [],
   "modules-right": [
+    "hyprland/submap",
     "privacy",
     "custom/package_updates",
     "disk",
@@ -24,6 +25,10 @@
     "clock",
     "tray"
   ],
+  "hyprland/submap": {
+    "format": "s^{}",
+    "tooltip": false
+  },
   "tray": {
     "icon-size": 16,
     "spacing": 5

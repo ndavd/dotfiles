@@ -286,7 +286,7 @@ label:focus {
   color: rgba(207, 87, 0, 0.6);
 }
 
-#privacy-item.audio-in {
+#privacy-item.audio-in, #submap {
   color: rgba(28, 160, 0, 0.6);
 }
 
