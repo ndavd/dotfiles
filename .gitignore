@@ -45,6 +45,8 @@
 !.config/qmk-keymaps/**
 !.config/rofi/
 !.config/rofi/**
+!.config/rumdl/
+!.config/rumdl/**
 !.config/sxhkd/
 !.config/sxhkd/**
 !.config/systemd/

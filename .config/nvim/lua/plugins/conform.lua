@@ -48,7 +48,7 @@ local eslintd = { 'biome', 'eslint_d', stop_after_first = true }
 local eslintd_prettier =
   { 'biome', 'eslint_d', 'prettierd', 'prettier', stop_after_first = true }
 local prettier = { 'prettierd', 'prettier' }
-local denofmt = { 'deno_fmt' }
+local rumdl = { 'rumdl' }
 local stylua = { 'stylua' }
 local gofmt = { 'gofmt' }
 local rustfmt = { 'rustfmt' }
@@ -88,7 +88,7 @@ conform.setup({
     javascriptreact = js_ts_x,
     typescriptreact = js_ts_x,
     json = prettier,
-    markdown = denofmt,
+    markdown = rumdl,
     lua = stylua,
     go = gofmt,
     rust = rustfmt,
