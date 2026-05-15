@@ -21,36 +21,80 @@ local external_monitor = {
   hdr_compatible_refresh_rate = 144,
 }
 
-local u = {
-  ---@param width integer
-  ---@param height integer
-  ---@param refresh_rate integer
-  monitor_mode = function(width, height, refresh_rate)
-    return ('%dx%d@%d'):format(width, height, refresh_rate)
-  end,
+---@param width integer
+---@param height integer
+---@param refresh_rate integer
+local function monitor_mode(width, height, refresh_rate)
+  return ('%dx%d@%d'):format(width, height, refresh_rate)
+end
 
-  ---@param x integer
-  ---@param y integer
-  monitor_position = function(x, y)
-    return ('%dx%d'):format(x, y)
-  end,
+---@param x integer
+---@param y integer
+local function monitor_position(x, y)
+  return ('%dx%d'):format(x, y)
+end
 
-  ---@param ... string
-  keys = function(...)
-    return table.concat({ ... }, ' + ')
-  end,
-}
+---@param ... string
+local function keys(...)
+  return table.concat({ ... }, ' + ')
+end
+
+--- Toggles high refresh rate for HDR compatibility
+local function toggle_hz()
+  local refresh_rate = math.ceil(hl.get_monitor(external_monitor.output).refresh_rate)
+
+  local next_refresh_rate = refresh_rate == external_monitor.high_refresh_rate
+      and external_monitor.hdr_compatible_refresh_rate
+    or refresh_rate == external_monitor.hdr_compatible_refresh_rate and external_monitor.high_refresh_rate
+    or nil
+
+  if next_refresh_rate == nil then
+    return
+  end
+
+  hl.monitor({
+    output = external_monitor.output,
+    mode = monitor_mode(external_monitor.width, external_monitor.height, next_refresh_rate),
+  })
+  hl.dispatch(
+    hl.dsp.exec_cmd(
+      ('notify-send "%s set to %dHz"'):format(external_monitor.output, next_refresh_rate)
+    )
+  )
+end
+
+--- Switches between dwindle and scrolling layouts
+local function toggle_scrolling_layout()
+  local workspace = hl.get_active_workspace()
+  if workspace == nil then
+    return
+  end
+  local next_layout = workspace.tiled_layout == 'dwindle' and 'scrolling' or 'dwindle'
+  hl.workspace_rule({ workspace = tostring(workspace.id), layout = next_layout })
+end
+
+--- Controls scrolling behavior depending on the active layout
+---@param direction '+' | '-'
+local function layout_aware_scroll(direction)
+  return function()
+    if hl.get_active_workspace().tiled_layout == 'scrolling' then
+      hl.dispatch(hl.dsp.layout(('move %s200'):format(direction)))
+    else
+      hl.dispatch(hl.dsp.focus({ workspace = ('e%s1'):format(direction) }))
+    end
+  end
+end
 
 -- MONITORS AND WORKSPACES
 
 hl.monitor({
   output = internal_monitor.output,
-  mode = u.monitor_mode(
+  mode = monitor_mode(
     internal_monitor.width,
     internal_monitor.height,
     internal_monitor.refresh_rate
   ),
-  position = u.monitor_position(external_monitor.width, 0),
+  position = monitor_position(external_monitor.width, 0),
   scale = '1',
 })
 
@@ -66,12 +110,12 @@ local external_monitor_setup = {
   hdr_fullscreen = function()
     hl.monitor({
       output = external_monitor.output,
-      mode = u.monitor_mode(
+      mode = monitor_mode(
         external_monitor.width,
         external_monitor.height,
         external_monitor.high_refresh_rate
       ),
-      position = u.monitor_position(0, 0),
+      position = monitor_position(0, 0),
       scale = '1',
       bitdepth = 8,
       cm = 'srgb',
@@ -84,12 +128,12 @@ local external_monitor_setup = {
     -- better SDR -> HDR mapping
     hl.monitor({
       output = external_monitor.output,
-      mode = u.monitor_mode(
+      mode = monitor_mode(
         external_monitor.width,
         external_monitor.height,
         external_monitor.hdr_compatible_refresh_rate
       ),
-      position = u.monitor_position(0, 0),
+      position = monitor_position(0, 0),
       scale = '1',
       bitdepth = 10,
       cm = 'hdr',
@@ -105,14 +149,25 @@ else
   external_monitor_setup.hdr_fullscreen()
 end
 
+--- Switches between hdr desktop and hdr fullscreen setups
+local function toggle_hdr_desktop()
+  hdr_desktop = not hdr_desktop
+  if hdr_desktop then
+    external_monitor_setup.hdr_desktop()
+  else
+    external_monitor_setup.hdr_fullscreen()
+  end
+  hl.dispatch(hl.dsp.submap('reset'))
+end
+
 for i = 1, 10 do
   local key = i % 10
   hl.workspace_rule({
     workspace = tostring(i),
     monitor = i % 2 == 0 and internal_monitor.output or external_monitor.output,
   })
-  hl.bind(u.keys(mainMod, key), hl.dsp.focus({ workspace = i }))
-  hl.bind(u.keys(mainMod, 'SHIFT', key), hl.dsp.window.move({ workspace = i, follow = false }))
+  hl.bind(keys(mainMod, key), hl.dsp.focus({ workspace = i }))
+  hl.bind(keys(mainMod, 'SHIFT', key), hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
 -- AUTOSTART
@@ -258,103 +313,61 @@ hl.device({
 
 -- KEYBINDINGS
 
-hl.bind(u.keys(mainMod, 'return'), hl.dsp.exec_cmd(terminal))
-hl.bind(u.keys(mainMod, 'w'), hl.dsp.window.close())
-hl.bind(u.keys(mainMod, 'o'), hl.dsp.window.float({ action = 'toggle' }))
-hl.bind(u.keys(mainMod, 'f'), hl.dsp.window.fullscreen({ mode = 'fullscreen' }))
+hl.bind(keys(mainMod, 'return'), hl.dsp.exec_cmd(terminal))
+hl.bind(keys(mainMod, 'w'), hl.dsp.window.close())
+hl.bind(keys(mainMod, 'o'), hl.dsp.window.float({ action = 'toggle' }))
+hl.bind(keys(mainMod, 'f'), hl.dsp.window.fullscreen({ mode = 'fullscreen' }))
 hl.bind(
-  u.keys(mainMod, 'SHIFT', 'f'),
+  keys(mainMod, 'SHIFT', 'f'),
   hl.dsp.window.fullscreen_state({ internal = 0, client = 2, action = 'toggle' })
 )
 
-hl.bind(u.keys(mainMod, 'r'), hl.dsp.exec_cmd(menu))
-hl.bind(u.keys(mainMod, 'b'), hl.dsp.exec_cmd(browser))
+hl.bind(keys(mainMod, 'r'), hl.dsp.exec_cmd(menu))
+hl.bind(keys(mainMod, 'b'), hl.dsp.exec_cmd(browser))
 hl.bind(
-  u.keys(mainMod, 'p'),
+  keys(mainMod, 'p'),
   hl.dsp.exec_cmd(
     'notify-send "mpv" "Playing $(wl-paste)" && mpv --ytdl-raw-options=cookies-from-browser=brave+gnomekeyring "$(wl-paste)"'
   )
 )
-hl.bind(u.keys(mainMod, 'c'), hl.dsp.exec_cmd('obs --startvirtualcam --minimize-to-tray'))
-hl.bind(u.keys(mainMod, 'q'), hl.dsp.exec_cmd('qalculate-gtk'))
+hl.bind(keys(mainMod, 'c'), hl.dsp.exec_cmd('obs --startvirtualcam --minimize-to-tray'))
+hl.bind(keys(mainMod, 'q'), hl.dsp.exec_cmd('qalculate-gtk'))
 
 -- toggle high refresh rate for HDR compatibility
-hl.bind(u.keys(mainMod, 'SHIFT', 'm'), function()
-  local refresh_rate = math.ceil(hl.get_monitor(external_monitor.output).refresh_rate)
+hl.bind(keys(mainMod, 'SHIFT', 'm'), toggle_hz)
 
-  local output = external_monitor.output
-  local width = external_monitor.width
-  local height = external_monitor.height
-  local high_refresh_rate = external_monitor.high_refresh_rate
-  local hdr_compatible_refresh_rate = external_monitor.hdr_compatible_refresh_rate
-  local notify_cmd = 'notify-send "%s set to %dHz"'
+hl.bind(keys(mainMod, 'h'), hl.dsp.focus({ direction = 'l' }))
+hl.bind(keys(mainMod, 'j'), hl.dsp.focus({ direction = 'd' }))
+hl.bind(keys(mainMod, 'k'), hl.dsp.focus({ direction = 'u' }))
+hl.bind(keys(mainMod, 'l'), hl.dsp.focus({ direction = 'r' }))
 
-  if refresh_rate == high_refresh_rate then
-    hl.monitor({
-      output = output,
-      mode = u.monitor_mode(width, height, hdr_compatible_refresh_rate),
-    })
-    hl.dispatch(hl.dsp.exec_cmd(notify_cmd:format(output, hdr_compatible_refresh_rate)))
-  elseif refresh_rate == hdr_compatible_refresh_rate then
-    hl.monitor({
-      output = output,
-      mode = u.monitor_mode(width, height, high_refresh_rate),
-    })
-    hl.dispatch(hl.dsp.exec_cmd(notify_cmd:format(output, high_refresh_rate)))
-  end
-end)
+hl.bind(keys(mainMod, 'SHIFT', 'h'), hl.dsp.window.swap({ direction = 'l' }))
+hl.bind(keys(mainMod, 'SHIFT', 'j'), hl.dsp.window.swap({ direction = 'd' }))
+hl.bind(keys(mainMod, 'SHIFT', 'k'), hl.dsp.window.swap({ direction = 'u' }))
+hl.bind(keys(mainMod, 'SHIFT', 'l'), hl.dsp.window.swap({ direction = 'r' }))
 
-hl.bind(u.keys(mainMod, 'h'), hl.dsp.focus({ direction = 'l' }))
-hl.bind(u.keys(mainMod, 'j'), hl.dsp.focus({ direction = 'd' }))
-hl.bind(u.keys(mainMod, 'k'), hl.dsp.focus({ direction = 'u' }))
-hl.bind(u.keys(mainMod, 'l'), hl.dsp.focus({ direction = 'r' }))
+hl.bind(keys(mainMod, 'space'), hl.dsp.window.cycle_next())
 
-hl.bind(u.keys(mainMod, 'SHIFT', 'h'), hl.dsp.window.swap({ direction = 'l' }))
-hl.bind(u.keys(mainMod, 'SHIFT', 'j'), hl.dsp.window.swap({ direction = 'd' }))
-hl.bind(u.keys(mainMod, 'SHIFT', 'k'), hl.dsp.window.swap({ direction = 'u' }))
-hl.bind(u.keys(mainMod, 'SHIFT', 'l'), hl.dsp.window.swap({ direction = 'r' }))
-
-hl.bind(u.keys(mainMod, 'space'), hl.dsp.window.cycle_next())
-
-hl.bind(u.keys(mainMod, 'ALT', 'h'), hl.dsp.window.resize({ x = -20, y = 0, relative = true }))
-hl.bind(u.keys(mainMod, 'ALT', 'j'), hl.dsp.window.resize({ x = 0, y = 20, relative = true }))
-hl.bind(u.keys(mainMod, 'ALT', 'k'), hl.dsp.window.resize({ x = 0, y = -20, relative = true }))
-hl.bind(u.keys(mainMod, 'ALT', 'l'), hl.dsp.window.resize({ x = 20, y = 0, relative = true }))
+hl.bind(keys(mainMod, 'ALT', 'h'), hl.dsp.window.resize({ x = -20, y = 0, relative = true }))
+hl.bind(keys(mainMod, 'ALT', 'j'), hl.dsp.window.resize({ x = 0, y = 20, relative = true }))
+hl.bind(keys(mainMod, 'ALT', 'k'), hl.dsp.window.resize({ x = 0, y = -20, relative = true }))
+hl.bind(keys(mainMod, 'ALT', 'l'), hl.dsp.window.resize({ x = 20, y = 0, relative = true }))
 
 hl.bind('PRINT', hl.dsp.exec_cmd('hyprshot -s -m region --clipboard-only'))
 hl.bind(
-  u.keys('SHIFT', 'PRINT'),
+  keys('SHIFT', 'PRINT'),
   hl.dsp.exec_cmd(
     'hyprshot -m region --filename "$(date +%s).png" --output-folder "$HOME/data/pictures"'
   )
 )
 
-hl.bind(u.keys(mainMod, 's'), function()
-  local workspace = hl.get_active_workspace()
-  if workspace == nil then
-    return
-  end
-  local next_layout = workspace.tiled_layout == 'dwindle' and 'scrolling' or 'dwindle'
-  hl.workspace_rule({ workspace = tostring(workspace.id), layout = next_layout })
-end)
-hl.bind(u.keys(mainMod, 'mouse_down'), function()
-  if hl.get_active_workspace().tiled_layout == 'scrolling' then
-    hl.dispatch(hl.dsp.layout('move +200'))
-  else
-    hl.dispatch(hl.dsp.focus({ workspace = 'e+1' }))
-  end
-end)
-hl.bind(u.keys(mainMod, 'mouse_up'), function()
-  if hl.get_active_workspace().tiled_layout == 'scrolling' then
-    hl.dispatch(hl.dsp.layout('move -200'))
-  else
-    hl.dispatch(hl.dsp.focus({ workspace = 'e-1' }))
-  end
-end)
+hl.bind(keys(mainMod, 's'), toggle_scrolling_layout)
+hl.bind(keys(mainMod, 'mouse_down'), layout_aware_scroll('-'))
+hl.bind(keys(mainMod, 'mouse_up'), layout_aware_scroll('+'))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(u.keys(mainMod, 'mouse:272'), hl.dsp.window.drag(), { mouse = true })
-hl.bind(u.keys(mainMod, 'mouse:273'), hl.dsp.window.resize(), { mouse = true })
+hl.bind(keys(mainMod, 'mouse:272'), hl.dsp.window.drag(), { mouse = true })
+hl.bind(keys(mainMod, 'mouse:273'), hl.dsp.window.resize(), { mouse = true })
 
 hl.bind(
   'XF86AudioRaiseVolume',
@@ -382,23 +395,15 @@ hl.bind(
   { locked = true, repeating = true }
 )
 hl.bind(
-  u.keys(mainMod, 'ALT', 'm'),
+  keys(mainMod, 'ALT', 'm'),
   hl.dsp.exec_cmd('media-controller-wrapper m mute'),
   { repeating = true }
 )
 
-hl.bind(u.keys(mainMod, 'e'), hl.dsp.submap('extra'))
+hl.bind(keys(mainMod, 'e'), hl.dsp.submap('extra'))
 hl.define_submap('extra', function()
   hl.bind('escape', hl.dsp.submap('reset'))
-  hl.bind('h', function()
-    hdr_desktop = not hdr_desktop
-    if hdr_desktop then
-      external_monitor_setup.hdr_desktop()
-    else
-      external_monitor_setup.hdr_fullscreen()
-    end
-    hl.dispatch(hl.dsp.submap('reset'))
-  end)
+  hl.bind('h', toggle_hdr_desktop)
 end)
 
 -- WINDOWS
