@@ -3,6 +3,8 @@
 # Include root directories
 
 !.config/
+!.config/foot/
+!.config/foot/**
 !.config/bspwm/
 !.config/bspwm/**
 !.config/dunst/

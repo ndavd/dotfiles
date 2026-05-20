@@ -8,7 +8,7 @@ export PATH=$HOME/bin:$PATH
 export QT_QPA_PLATFORMTHEME=qt5ct
 export XDG_CONFIG_HOME=$HOME/.config
 export BROWSER=/usr/bin/brave
-export TERMINAL=/usr/bin/kitty
+export TERMINAL=/usr/bin/foot
 export EDITOR=$HOME/local/nvim/bin/nvim
 export VISUAL=$HOME/local/nvim/bin/nvim
 

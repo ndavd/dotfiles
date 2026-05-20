@@ -81,7 +81,7 @@ else
   _p_git='%F{47}'
 fi
 [[ $UID -eq 0 ]] && _p_pwd="$_p_bold%F{red}" || _p_pwd="$_p_blue"
-_isConsole && dirty="*" staged="+" || dirty="" staged="✔"
+_isConsole && dirty="*" staged="+" || dirty="‼" staged="✔"
 
 _p() {
   if [[ $SHELL == /nix* ]]; then
@@ -134,12 +134,12 @@ alias ffprobe="ffprobe -hide_banner"
 alias news="newsboat"
 alias n="nvm use default"
 alias nnvim="nvm use default && nvim"
-alias paru="paru --assume-installed cargo"
+alias paru="paru --assume-installed cargo --assume-installed hyprland-git"
 alias drop="dragon-drop"
 alias bat="bat -p"
 
 # hyprland init alias
-alias hinit="uwsm start hyprland.desktop"
+alias hinit="start-hyprland"
 
 ### fzf
 fzfa() {

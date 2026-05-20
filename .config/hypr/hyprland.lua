@@ -1,6 +1,6 @@
 -- hl.config({ debug = { disable_logs = false } })
 
-local terminal = 'kitty'
+local terminal = '$TERMINAL'
 local menu = 'tofi-drun --drun-launch=true'
 local browser =
   'brave --ozone-platform-hint=auto --gtk-version=4 --disable-features=WaylandWpColorManagerV1'
@@ -102,10 +102,6 @@ hl.config({
   render = { cm_auto_hdr = 1 },
 })
 
--- workaround while https://github.com/hyprwm/Hyprland/pull/14523 isn't released
--- then hl.get_monitor will expose cm to check for hdr
-local hdr_desktop = false
-
 local external_monitor_setup = {
   hdr_fullscreen = function()
     hl.monitor({
@@ -133,8 +129,6 @@ local external_monitor_setup = {
         external_monitor.height,
         external_monitor.hdr_compatible_refresh_rate
       ),
-      position = monitor_position(0, 0),
-      scale = '1',
       bitdepth = 10,
       cm = 'hdr',
       sdr_min_luminance = 0.005,
@@ -143,19 +137,15 @@ local external_monitor_setup = {
     })
   end,
 }
-if hdr_desktop then
-  external_monitor_setup.hdr_desktop()
-else
-  external_monitor_setup.hdr_fullscreen()
-end
+external_monitor_setup.hdr_fullscreen()
 
 --- Switches between hdr desktop and hdr fullscreen setups
 local function toggle_hdr_desktop()
-  hdr_desktop = not hdr_desktop
-  if hdr_desktop then
-    external_monitor_setup.hdr_desktop()
-  else
+  -- checking for hdr prefix so it matches both hdr and hdredid
+  if hl.get_monitor(external_monitor.output).cm:sub(1, 3) == 'hdr' then
     external_monitor_setup.hdr_fullscreen()
+  else
+    external_monitor_setup.hdr_desktop()
   end
   hl.dispatch(hl.dsp.submap('reset'))
 end
@@ -436,3 +426,4 @@ hl.window_rule({ match = { class = 'Element-Nightly' }, workspace = '4' })
 hl.window_rule({ match = { class = 'steam' }, workspace = '5' })
 hl.window_rule({ match = { class = 'SDL Application' }, workspace = '5' }) -- Also steam
 hl.window_rule({ match = { class = 'Spotify' }, workspace = '6' })
+hl.window_rule({ match = { class = 'foot' }, no_auto_hdr = true })

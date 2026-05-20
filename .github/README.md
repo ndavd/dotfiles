@@ -2,25 +2,25 @@
 
 ## My Dotfiles
 
-These dotfiles finally support Wayland. After logging in on the TTY, you may
-pick to load either system via the commands:
+These dotfiles finally support Wayland. After logging in on the TTY, you may pick to load either
+system via the commands:
 
 - `hinit` - Hyprland
 - `xinit` - X11, bspwm
 
 <div align="center">
-<img width="400px" src="https://raw.githubusercontent.com/ndavd/dotfiles/main/.github/hinit-xinit.webp" />
+<img width="400px" src="./hinit-xinit.webp" />
 
-|     Type of application     |                               Wayland                                |                                  X11                                   |
-| :-------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------------: |
-|        _**Editor:**_        |  [neovim](https://github.com/ndavd/dotfiles/tree/main/.config/nvim)  |                                   =                                    |
-|        _**Shell:**_         |       [zsh](https://github.com/ndavd/dotfiles/tree/main/.zsh)        |                                   =                                    |
-|  _**Terminal Emulator:**_   |  [kitty](https://github.com/ndavd/dotfiles/tree/main/.config/kitty)  |                                   =                                    |
-|  _**Terminal Workspace:**_  | [zellij](https://github.com/ndavd/dotfiles/tree/main/.config/zellij) |                                   =                                    |
-|    _**Window Manager:**_    | [hyprland](https://github.com/ndavd/dotfiles/tree/main/.config/hypr) |   [bspwm](https://github.com/ndavd/dotfiles/tree/main/.config/bspwm)   |
-|      _**Status Bar:**_      | [waybar](https://github.com/ndavd/dotfiles/tree/main/.config/waybar) | [polybar](https://github.com/ndavd/dotfiles/tree/main/.config/polybar) |
-| _**Application Launcher:**_ |   [tofi](https://github.com/ndavd/dotfiles/tree/main/.config/tofi)   |    [rofi](https://github.com/ndavd/dotfiles/tree/main/.config/rofi)    |
-|    _**Media Controls:**_    | [ndavd/media-controller](https://github.com/ndavd/media-controller)  |                                   =                                    |
+|     Type of application     |                               Wayland                               |              X11              |
+| :-------------------------: | :-----------------------------------------------------------------: | :---------------------------: |
+|        _**Editor:**_        |                      [neovim](../.config/nvim)                      |               =               |
+|        _**Shell:**_         |                           [zsh](../.zsh)                            |               =               |
+|  _**Terminal Emulator:**_   |                       [foot](../.config/foot)                       |   [kitty](../.config/kitty)   |
+|  _**Terminal Workspace:**_  |                     [zellij](../.config/zellij)                     |               =               |
+|    _**Window Manager:**_    |                     [hyprland](../.config/hypr)                     |   [bspwm](../.config/bspwm)   |
+|      _**Status Bar:**_      |                     [waybar](../.config/waybar)                     | [polybar](../.config/polybar) |
+| _**Application Launcher:**_ |                       [tofi](../.config/tofi)                       |    [rofi](../.config/rofi)    |
+|    _**Media Controls:**_    | [ndavd/media-controller](https://github.com/ndavd/media-controller) |               =               |
 
 </div>
 
