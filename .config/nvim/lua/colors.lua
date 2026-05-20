@@ -34,7 +34,6 @@ local make_hls = function()
   -- Pmenu
   update_hl('PmenuSel', { blend = 0 })
   -- Visual and Search
-  update_hl('Visual', { bg = '#0e1f2f', fg = 'fg' })
   update_hl('Search', { reverse = true })
   -- Statusline
   update_hl('StatusLine', { bg = none, fg = '#ffffff' })
