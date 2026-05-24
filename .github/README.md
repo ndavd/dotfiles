@@ -11,16 +11,16 @@ system via the commands:
 <div align="center">
 <img width="400px" src="./hinit-xinit.webp" />
 
-|     Type of application     |                               Wayland                               |              X11              |
-| :-------------------------: | :-----------------------------------------------------------------: | :---------------------------: |
-|        _**Editor:**_        |                      [neovim](../.config/nvim)                      |               =               |
-|        _**Shell:**_         |                           [zsh](../.zsh)                            |               =               |
-|  _**Terminal Emulator:**_   |                       [foot](../.config/foot)                       |   [kitty](../.config/kitty)   |
-|  _**Terminal Workspace:**_  |                     [zellij](../.config/zellij)                     |               =               |
-|    _**Window Manager:**_    |                     [hyprland](../.config/hypr)                     |   [bspwm](../.config/bspwm)   |
-|      _**Status Bar:**_      |                     [waybar](../.config/waybar)                     | [polybar](../.config/polybar) |
-| _**Application Launcher:**_ |                       [tofi](../.config/tofi)                       |    [rofi](../.config/rofi)    |
-|    _**Media Controls:**_    | [ndavd/media-controller](https://github.com/ndavd/media-controller) |               =               |
+|           Program           |                                                  Wayland                                                  |                                 X11                                 |
+| :-------------------------: | :-------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------: |
+|        _**Editor:**_        |                                         [neovim](../.config/nvim)                                         |                                  =                                  |
+|        _**Shell:**_         |                                              [zsh](../.zsh)                                               |                                  =                                  |
+|  _**Terminal Emulator:**_   |                                          [foot](../.config/foot)                                          |                      [kitty](../.config/kitty)                      |
+|  _**Terminal Workspace:**_  |                                        [zellij](../.config/zellij)                                        |                                  =                                  |
+|    _**Window Manager:**_    |                                        [hyprland](../.config/hypr)                                        |                      [bspwm](../.config/bspwm)                      |
+|      _**Status Bar:**_      |                     ~[waybar](../.config/waybar)~ [quickshell](../.config/quickshell)                     |                    [polybar](../.config/polybar)                    |
+| _**Application Launcher:**_ |                       ~[tofi](../.config/tofi)~ [quickshell](../.config/quickshell)                       |                       [rofi](../.config/rofi)                       |
+|    _**Media Controls:**_    | ~[ndavd/media-controller](https://github.com/ndavd/media-controller)~ [quickshell](../.config/quickshell) | [ndavd/media-controller](https://github.com/ndavd/media-controller) |
 
 </div>
 

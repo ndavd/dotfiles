@@ -69,3 +69,6 @@ export SAM_CLI_TELEMETRY=0
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
+
+# qt6
+export PATH="/usr/lib/qt6/bin:$PATH"

@@ -1,7 +1,7 @@
 -- hl.config({ debug = { disable_logs = false } })
 
 local terminal = '$TERMINAL'
-local menu = 'tofi-drun --drun-launch=true'
+local menu = 'qs ipc call launcher run'
 local browser =
   'brave --ozone-platform-hint=auto --gtk-version=4 --disable-features=WaylandWpColorManagerV1'
 
@@ -37,52 +37,6 @@ end
 ---@param ... string
 local function keys(...)
   return table.concat({ ... }, ' + ')
-end
-
---- Toggles high refresh rate for HDR compatibility
-local function toggle_hz()
-  local refresh_rate = math.ceil(hl.get_monitor(external_monitor.output).refresh_rate)
-
-  local next_refresh_rate = refresh_rate == external_monitor.high_refresh_rate
-      and external_monitor.hdr_compatible_refresh_rate
-    or refresh_rate == external_monitor.hdr_compatible_refresh_rate and external_monitor.high_refresh_rate
-    or nil
-
-  if next_refresh_rate == nil then
-    return
-  end
-
-  hl.monitor({
-    output = external_monitor.output,
-    mode = monitor_mode(external_monitor.width, external_monitor.height, next_refresh_rate),
-  })
-  hl.dispatch(
-    hl.dsp.exec_cmd(
-      ('notify-send "%s set to %dHz"'):format(external_monitor.output, next_refresh_rate)
-    )
-  )
-end
-
---- Switches between dwindle and scrolling layouts
-local function toggle_scrolling_layout()
-  local workspace = hl.get_active_workspace()
-  if workspace == nil then
-    return
-  end
-  local next_layout = workspace.tiled_layout == 'dwindle' and 'scrolling' or 'dwindle'
-  hl.workspace_rule({ workspace = tostring(workspace.id), layout = next_layout })
-end
-
---- Controls scrolling behavior depending on the active layout
----@param direction '+' | '-'
-local function layout_aware_scroll(direction)
-  return function()
-    if hl.get_active_workspace().tiled_layout == 'scrolling' then
-      hl.dispatch(hl.dsp.layout(('move %s200'):format(direction)))
-    else
-      hl.dispatch(hl.dsp.focus({ workspace = ('e%s1'):format(direction) }))
-    end
-  end
 end
 
 -- MONITORS AND WORKSPACES
@@ -163,11 +117,11 @@ end
 -- AUTOSTART
 
 hl.on('hyprland.start', function()
-  hl.exec_cmd('waybar')
-  hl.exec_cmd('hyprpaper')
+  hl.exec_cmd('qs')
   hl.exec_cmd('hypridle')
   hl.exec_cmd('/usr/lib/hyprpolkitagent/hyprpolkitagent')
   hl.exec_cmd('opensnitch-ui')
+  hl.exec_cmd('nm-applet')
 end)
 
 -- ENVIRONMENT VARIABLES
@@ -193,7 +147,7 @@ hl.config({
         colors = { 'rgba(cf0704ff)', 'rgba(af5704ff)' },
         angle = 45,
       },
-      inactive_border = 'rgba(595959aa)',
+      inactive_border = 'rgb(252525)',
     },
     resize_on_border = false,
     allow_tearing = false,
@@ -221,17 +175,16 @@ local linear = 'linear'
 local almostLinear = 'almostLinear'
 local quick = 'quick'
 
-local curves = {
+for name, points in pairs({
   [easeOutQuint] = { { 0.23, 1 }, { 0.32, 1 } },
   [linear] = { { 0, 0 }, { 1, 1 } },
   [almostLinear] = { { 0.5, 0.5 }, { 0.75, 1.0 } },
   [quick] = { { 0.15, 0 }, { 0.1, 1 } },
-}
-for name, points in pairs(curves) do
+}) do
   hl.curve(name, { type = 'bezier', points = points })
 end
 
-local animations = {
+for _, anim in ipairs({
   { leaf = 'global', speed = 10, bezier = 'default' },
   { leaf = 'border', speed = 5.39, bezier = easeOutQuint },
   { leaf = 'windows', speed = 4.79, bezier = easeOutQuint },
@@ -248,8 +201,7 @@ local animations = {
   { leaf = 'workspaces', speed = 6, bezier = 'default', style = 'slide' },
   { leaf = 'workspacesIn', speed = 4, bezier = 'default', style = 'slide' },
   { leaf = 'workspacesOut', speed = 6, bezier = 'default', style = 'slide' },
-}
-for _, anim in ipairs(animations) do
+}) do
   anim.enabled = true
   hl.animation(anim)
 end
@@ -324,24 +276,43 @@ hl.bind(keys(mainMod, 'c'), hl.dsp.exec_cmd('obs --startvirtualcam --minimize-to
 hl.bind(keys(mainMod, 'q'), hl.dsp.exec_cmd('qalculate-gtk'))
 
 -- toggle high refresh rate for HDR compatibility
-hl.bind(keys(mainMod, 'SHIFT', 'm'), toggle_hz)
+hl.bind(keys(mainMod, 'SHIFT', 'm'), function()
+  local refresh_rate = math.ceil(hl.get_monitor(external_monitor.output).refresh_rate)
 
-hl.bind(keys(mainMod, 'h'), hl.dsp.focus({ direction = 'l' }))
-hl.bind(keys(mainMod, 'j'), hl.dsp.focus({ direction = 'd' }))
-hl.bind(keys(mainMod, 'k'), hl.dsp.focus({ direction = 'u' }))
-hl.bind(keys(mainMod, 'l'), hl.dsp.focus({ direction = 'r' }))
+  local next_refresh_rate = refresh_rate == external_monitor.high_refresh_rate
+      and external_monitor.hdr_compatible_refresh_rate
+    or refresh_rate == external_monitor.hdr_compatible_refresh_rate and external_monitor.high_refresh_rate
+    or nil
 
-hl.bind(keys(mainMod, 'SHIFT', 'h'), hl.dsp.window.swap({ direction = 'l' }))
-hl.bind(keys(mainMod, 'SHIFT', 'j'), hl.dsp.window.swap({ direction = 'd' }))
-hl.bind(keys(mainMod, 'SHIFT', 'k'), hl.dsp.window.swap({ direction = 'u' }))
-hl.bind(keys(mainMod, 'SHIFT', 'l'), hl.dsp.window.swap({ direction = 'r' }))
+  if next_refresh_rate == nil then
+    return
+  end
 
-hl.bind(keys(mainMod, 'space'), hl.dsp.window.cycle_next())
+  hl.monitor({
+    output = external_monitor.output,
+    mode = monitor_mode(external_monitor.width, external_monitor.height, next_refresh_rate),
+  })
+  hl.dispatch(
+    hl.dsp.exec_cmd(
+      ('notify-send "%s set to %dHz"'):format(external_monitor.output, next_refresh_rate)
+    )
+  )
+end)
 
-hl.bind(keys(mainMod, 'ALT', 'h'), hl.dsp.window.resize({ x = -20, y = 0, relative = true }))
-hl.bind(keys(mainMod, 'ALT', 'j'), hl.dsp.window.resize({ x = 0, y = 20, relative = true }))
-hl.bind(keys(mainMod, 'ALT', 'k'), hl.dsp.window.resize({ x = 0, y = -20, relative = true }))
-hl.bind(keys(mainMod, 'ALT', 'l'), hl.dsp.window.resize({ x = 20, y = 0, relative = true }))
+for direction, data in pairs({
+  l = { key = 'h', vector = { -1, 0 } },
+  d = { key = 'j', vector = { 0, 1 } },
+  u = { key = 'k', vector = { 0, -1 } },
+  r = { key = 'l', vector = { 1, 0 } },
+}) do
+  hl.bind(keys(mainMod, data.key), hl.dsp.focus({ direction = direction }))
+  hl.bind(keys(mainMod, 'SHIFT', data.key), hl.dsp.window.swap({ direction = direction }))
+  hl.bind(
+    keys(mainMod, 'ALT', data.key),
+    hl.dsp.window.resize({ x = data.vector[1] * 20, y = data.vector[2] * 20, relative = true }),
+    { repeating = true }
+  )
+end
 
 hl.bind('PRINT', hl.dsp.exec_cmd('hyprshot -s -m region --clipboard-only'))
 hl.bind(
@@ -351,7 +322,27 @@ hl.bind(
   )
 )
 
-hl.bind(keys(mainMod, 's'), toggle_scrolling_layout)
+--- Toggles between dwindle and scrolling layouts
+hl.bind(keys(mainMod, 's'), function()
+  local workspace = hl.get_active_workspace()
+  if workspace == nil then
+    return
+  end
+  local next_layout = workspace.tiled_layout == 'dwindle' and 'scrolling' or 'dwindle'
+  hl.workspace_rule({ workspace = tostring(workspace.id), layout = next_layout })
+end)
+
+--- Controls scrolling behavior depending on the active layout
+---@param direction '+' | '-'
+local function layout_aware_scroll(direction)
+  return function()
+    if hl.get_active_workspace().tiled_layout == 'scrolling' then
+      hl.dispatch(hl.dsp.layout(('move %s200'):format(direction)))
+    else
+      hl.dispatch(hl.dsp.focus({ workspace = ('e%s1'):format(direction) }))
+    end
+  end
+end
 hl.bind(keys(mainMod, 'mouse_down'), layout_aware_scroll('-'))
 hl.bind(keys(mainMod, 'mouse_up'), layout_aware_scroll('+'))
 
@@ -361,32 +352,32 @@ hl.bind(keys(mainMod, 'mouse:273'), hl.dsp.window.resize(), { mouse = true })
 
 hl.bind(
   'XF86AudioRaiseVolume',
-  hl.dsp.exec_cmd('media-controller-wrapper v up 5'),
+  hl.dsp.exec_cmd('wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1'),
   { locked = true, repeating = true }
 )
 hl.bind(
   'XF86AudioLowerVolume',
-  hl.dsp.exec_cmd('media-controller-wrapper v down 5'),
+  hl.dsp.exec_cmd('wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- --limit 1'),
   { locked = true, repeating = true }
 )
 hl.bind(
   'XF86AudioMute',
-  hl.dsp.exec_cmd('media-controller-wrapper v mute'),
+  hl.dsp.exec_cmd('wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'),
   { locked = true, repeating = true }
 )
 hl.bind(
   'XF86MonBrightnessUp',
-  hl.dsp.exec_cmd('media-controller-wrapper b up 5'),
+  hl.dsp.exec_cmd('brightnessctl s 5%+'),
   { locked = true, repeating = true }
 )
 hl.bind(
   'XF86MonBrightnessDown',
-  hl.dsp.exec_cmd('media-controller-wrapper b down 5'),
+  hl.dsp.exec_cmd('brightnessctl s 5%-'),
   { locked = true, repeating = true }
 )
 hl.bind(
   keys(mainMod, 'ALT', 'm'),
-  hl.dsp.exec_cmd('media-controller-wrapper m mute'),
+  hl.dsp.exec_cmd('wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle'),
   { repeating = true }
 )
 

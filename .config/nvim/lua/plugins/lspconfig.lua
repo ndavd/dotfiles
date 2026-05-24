@@ -39,6 +39,7 @@ local servers = {
   'sqls',
   'nixd',
   'biome',
+  'qmlls',
 }
 
 -- Custom servers config

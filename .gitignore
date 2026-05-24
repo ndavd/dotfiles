@@ -3,8 +3,6 @@
 # Include root directories
 
 !.config/
-!.config/foot/
-!.config/foot/**
 !.config/bspwm/
 !.config/bspwm/**
 !.config/dunst/
@@ -13,6 +11,8 @@
 !.config/fastfetch/**
 !.config/flameshot/
 !.config/flameshot/**
+!.config/foot/
+!.config/foot/**
 !.config/fzf/
 !.config/fzf/**
 !.config/ghostty/
@@ -45,6 +45,8 @@
 !.config/polybar/**
 !.config/qmk-keymaps/
 !.config/qmk-keymaps/**
+!.config/quickshell/
+!.config/quickshell/**
 !.config/rofi/
 !.config/rofi/**
 !.config/rumdl/
