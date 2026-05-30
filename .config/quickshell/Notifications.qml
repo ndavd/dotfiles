@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -6,18 +8,14 @@ import Quickshell.Hyprland
 import Quickshell.Services.Notifications
 
 PanelWindow {
-    id: notif
+    id: root
 
-    required property var modelData
-
-    property bool isHovering: false
-
-    property int iconSize: 15
-    property int imageSize: 50
-    property int iconSpacing: 5
-    property int w: 400
-    property int h: 90
-    property int padding: 10
+    readonly property int iconSize: 15
+    readonly property int imageSize: 50
+    readonly property int iconSpacing: 5
+    readonly property int w: 400
+    readonly property int padding: 10
+    readonly property int animDuration: 200
 
     screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? Quickshell.screens[0]
 
@@ -26,139 +24,151 @@ PanelWindow {
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
-    WlrLayershell.margins.top: {
-        const values = NotificationsManager.trackedNotifications.values;
-        const index = values.length - 1 - values.indexOf(notif.modelData);
-        return Config.h + index * (implicitHeight + 2);
+    WlrLayershell.margins.top: Config.statusBarHeight
+    mask: Region {
+        item: listView
     }
-    implicitHeight: notif.h
-    implicitWidth: notif.w
-
-    property real rightMargin: 0
-
-    WlrLayershell.margins.right: rightMargin
-
-    NumberAnimation {
-        target: notif
-        property: "rightMargin"
-        from: -notif.w
-        to: 0
-        duration: 10
-        easing.type: Easing.OutCubic
-        running: true
-    }
+    implicitHeight: listView.contentHeight
+    implicitWidth: w
 
     color: "transparent"
 
-    Rectangle {
-        anchors.fill: parent
-        color: Config.bg
-        radius: 8
-        border.color: modelData.urgency == NotificationUrgency.Critical ? "red" : Qt.rgba(Config.fg.r, Config.fg.g, Config.fg.b, 0.15)
-        border.width: 1
+    ListView {
+        id: listView
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        implicitHeight: contentHeight
+        model: NotificationsManager.trackedNotifications
+        verticalLayoutDirection: ListView.BottomToTop
+        spacing: 2
+        interactive: false
 
-        ColumnLayout {
-            id: mainLayout
-            spacing: 4
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            anchors.margins: notif.padding
+        add: Transition {
+            NumberAnimation {
+                property: "x"
+                from: root.w
+                to: 0
+                duration: root.animDuration
+                easing.type: Easing.OutCubic
+            }
+        }
 
-            RowLayout {
+        delegate: Rectangle {
+            id: notif
+            required property var modelData
+
+            width: root.w
+            height: mainLayout.implicitHeight + root.padding * 2
+
+            color: Config.bg
+            radius: 8
+            border.color: modelData.urgency == NotificationUrgency.Critical ? "red" : Config.fgDim
+            border.width: 1
+
+            property bool isHovering: false
+
+            ColumnLayout {
+                id: mainLayout
+                spacing: 4
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: root.padding
+
                 RowLayout {
-                    spacing: notif.iconSpacing
+                    RowLayout {
+                        spacing: root.iconSpacing
 
-                    Rectangle {
-                        Layout.preferredWidth: notif.iconSize
-                        Layout.preferredHeight: notif.iconSize
-                        color: "transparent"
-                        ThemedText {
-                            anchors.centerIn: parent
-                            text: ""
-                            font.pixelSize: 14
-                            opacity: 0.8
-                            visible: modelData.appIcon == ""
+                        Rectangle {
+                            Layout.preferredWidth: root.iconSize
+                            Layout.preferredHeight: root.iconSize
+                            color: "transparent"
+                            ThemedText {
+                                anchors.centerIn: parent
+                                text: ""
+                                font.pixelSize: 14
+                                opacity: 0.8
+                                visible: notif.modelData.appIcon == ""
+                            }
+                            Image {
+                                anchors.centerIn: parent
+                                source: notif.modelData.appIcon
+                                fillMode: Image.PreserveAspectFit
+                                sourceSize.width: root.iconSize
+                                sourceSize.height: root.iconSize
+                                visible: source !== ""
+                            }
                         }
-                        Image {
-                            anchors.centerIn: parent
-                            source: modelData.appIcon
-                            fillMode: Image.PreserveAspectFit
-                            sourceSize.width: notif.iconSize
-                            sourceSize.height: notif.iconSize
-                            visible: source !== ""
+
+                        ThemedText {
+                            text: notif.modelData.appName
+                            font.pixelSize: 11
+                            opacity: 0.8
                         }
                     }
-
+                    Item {
+                        Layout.fillWidth: true
+                    }
                     ThemedText {
-                        text: modelData.appName
+                        text: NotificationsManager.notifTimes[notif.modelData.id] ? Qt.formatTime(NotificationsManager.notifTimes[notif.modelData.id], "HH:mm") : ""
                         font.pixelSize: 11
                         opacity: 0.8
                     }
                 }
-                Item {
-                    Layout.fillWidth: true
-                }
-                ThemedText {
-                    text: NotificationsManager.notifTimes[modelData.id] ? Qt.formatTime(NotificationsManager.notifTimes[modelData.id], "HH:mm") : ""
-                    font.pixelSize: 11
-                    opacity: 0.8
+
+                RowLayout {
+                    spacing: root.padding
+                    ColumnLayout {
+                        Layout.alignment: Qt.AlignTop
+                        spacing: 2
+
+                        ThemedText {
+                            text: notif.modelData.summary
+                            font.pixelSize: 14
+                            font.bold: true
+                            Layout.fillWidth: true
+                            elide: Text.ElideRight
+                            maximumLineCount: 1
+                        }
+                        ThemedText {
+                            text: notif.modelData.body
+                            font.pixelSize: 13
+                            Layout.fillWidth: true
+                            wrapMode: Text.WordWrap
+                            elide: Text.ElideRight
+                            maximumLineCount: 4
+                        }
+                    }
+
+                    Image {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: root.imageSize
+                        Layout.preferredHeight: root.imageSize
+                        sourceSize.width: root.imageSize
+                        sourceSize.height: root.imageSize
+                        source: notif.modelData.image
+                        fillMode: Image.PreserveAspectFit
+                        visible: notif.modelData.image !== ""
+                    }
                 }
             }
 
-            RowLayout {
-                spacing: notif.padding
-                ColumnLayout {
-                    Layout.alignment: Qt.AlignTop
-                    spacing: 2
-
-                    ThemedText {
-                        text: modelData.summary
-                        font.pixelSize: 14
-                        font.bold: true
-                        Layout.fillWidth: true
-                        elide: Text.ElideRight
-                        maximumLineCount: 1
-                    }
-                    ThemedText {
-                        text: modelData.body
-                        font.pixelSize: 13
-                        Layout.fillWidth: true
-                        wrapMode: Text.WordWrap
-                        elide: Text.ElideRight
-                        maximumLineCount: 2
-                    }
-                }
-
-                Image {
-                    Layout.alignment: Qt.AlignTop
-                    source: modelData.image
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: notif.imageSize
-                    sourceSize.height: notif.imageSize
-                    visible: source !== ""
-                }
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: notif.modelData.dismiss()
             }
 
-            Item {
-                Layout.fillHeight: true
+            HoverHandler {
+                onHoveredChanged: notif.isHovering = hovered
+            }
+
+            Timer {
+                interval: notif.modelData.expireTimeout > 0 ? notif.modelData.expireTimeout : 10000
+                running: !notif.isHovering && !IdleManager.isIdle
+                onTriggered: notif.modelData.expire()
             }
         }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: modelData.dismiss()
-        }
-    }
-
-    HoverHandler {
-        onHoveredChanged: notif.isHovering = hovered
-    }
-
-    Timer {
-        interval: modelData.expireTimeout > 0 ? modelData.expireTimeout : 10000
-        running: !notif.isHovering && !NotificationsManager.isIdle
-        onTriggered: modelData.expire()
     }
 }

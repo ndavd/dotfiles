@@ -8,20 +8,22 @@ PopupWindow {
     required property var anchorItem
     property var text
 
+    readonly property int padding: 20
+
     color: "transparent"
-    anchor.window: rootWindow ?? null
+    anchor.window: rootWindow
     anchor.rect.x: anchorItem.parent.x + anchorItem.x + anchorItem.width / 2 - tooltip.implicitWidth / 2
-    anchor.rect.y: rootWindow ? rootWindow.implicitHeight : 0
-    implicitWidth: label ? label.implicitWidth + 20 : 0
-    implicitHeight: label ? label.implicitHeight + 20 : 0
-    visible: false
+    anchor.rect.y: rootWindow.implicitHeight
+    implicitWidth: label.implicitWidth + padding
+    implicitHeight: label.implicitHeight + padding
+    visible: true
 
     Rectangle {
         anchors.fill: parent
         color: Config.bg
         radius: 10
         opacity: 0.9
-        border.color: Qt.rgba(Config.fg.r, Config.fg.g, Config.fg.b, 0.15)
+        border.color: Config.fgDim
         border.width: 1
 
         ThemedText {

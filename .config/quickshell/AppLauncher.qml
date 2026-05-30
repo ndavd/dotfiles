@@ -11,37 +11,45 @@ PanelWindow {
 
     signal dismissed
 
-    property int fontSize: 20
-    property int matchesCount: 10
-    property int iconSize: 25
+    readonly property int fontSize: 20
+    readonly property int matchesCount: 10
+    readonly property int iconSize: 25
 
-    property var filteredEntries: {
+    readonly property var filteredEntries: {
         const searchString = searchField.text.trim();
         if (searchString == "") {
             return [];
         }
-        return DesktopEntries.applications.values.filter(app => matches(app.name, searchString));
+        const matchingEntries = DesktopEntries.applications.values.map(app => {
+            const value = matches(app.name, searchString);
+            app["matchingValue"] = value;
+            return app;
+        }).filter(x => x.matchingValue != -1);
+        matchingEntries.sort((a, b) => a.matchingValue - b.matchingValue);
+        return matchingEntries;
     }
 
     property int selectedEntryIndex: 0
 
-    property int currentPage: Math.floor(selectedEntryIndex / matchesCount)
+    readonly property int currentPage: Math.floor(selectedEntryIndex / matchesCount)
 
     function matches(name, searchString) {
-        if (searchString.trim() == "") {
-            return true;
+        const searchParts = searchString.trim().toLowerCase().split(" ").filter(x => x !== "");
+        if (searchParts.length == 0) {
+            return -1;
         }
-        const searchParts = searchField.text.trim().toLowerCase().split(" ").filter(x => x !== "");
         const n = name.trim().toLowerCase();
         let position = 0;
+        let value = 0;
         for (var i = 0; i < searchParts.length; i++) {
             const idx = n.indexOf(searchParts[i], position);
             if (idx == -1) {
-                return false;
+                return -1;
             }
+            value += idx;
             position = idx + searchParts[i].length;
         }
-        return true;
+        return value;
     }
 
     anchors {
@@ -81,7 +89,11 @@ PanelWindow {
                     color: Config.fg
                     selectionColor: Config.primary
                     font.pixelSize: root.fontSize
-                    cursorDelegate: Item {}
+                    cursorDelegate: ThemedText {
+                        text: "_"
+                        font.pixelSize: parent.font.pixelSize
+                        visible: parent.cursorVisible
+                    }
                     background: Item {}
                     onTextChanged: root.selectedEntryIndex = 0
                     Keys.onReturnPressed: {
@@ -95,13 +107,15 @@ PanelWindow {
             ColumnLayout {
                 Layout.leftMargin: 20
                 Repeater {
-                    model: root.filteredEntries.map((_, i) => i).slice(root.currentPage * root.matchesCount, root.currentPage * root.matchesCount + root.matchesCount)
+                    model: ScriptModel {
+                        values: root.filteredEntries.map((_, i) => i).slice(root.currentPage * root.matchesCount, root.currentPage * root.matchesCount + root.matchesCount)
+                    }
                     delegate: RowLayout {
                         id: entryArea
                         required property int modelData
                         spacing: 10
 
-                        property var entry: root.filteredEntries[modelData]
+                        readonly property var entry: root.filteredEntries[modelData]
 
                         Image {
                             Layout.preferredWidth: root.iconSize

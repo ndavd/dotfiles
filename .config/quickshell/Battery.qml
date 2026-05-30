@@ -1,31 +1,25 @@
+pragma ComponentBehavior: Bound
 import QtQuick
-import Quickshell.Services.UPower
 
 ThemedText {
-    id: battery
+    id: root
 
     required property var rootWindow
 
-    property var uPowerDevice: UPower.displayDevice
-    property int batteryPercentage: uPowerDevice.percentage.toFixed(2) * 100
-
-    text: batteryPercentage + "% " + ["", "", "", "", ""][Math.min(Math.floor(batteryPercentage / 20), 4)]
-    color: batteryPercentage <= 25 ? "red" : Config.fg
+    text: BatteryManager.text
+    color: BatteryManager.color
 
     HoverHandler {
-        onHoveredChanged: {
-            if (hovered) {
-                tooltip.visible = true;
-            } else {
-                tooltip.visible = false;
-            }
-        }
+        onHoveredChanged: tooltipLoader.active = hovered
     }
 
-    TextTooltip {
-        id: tooltip
-        rootWindow: battery.rootWindow
-        anchorItem: battery
-        text: UPowerDeviceState.toString(battery.uPowerDevice.state)
+    Loader {
+        id: tooltipLoader
+        active: false
+        sourceComponent: TextTooltip {
+            rootWindow: root.rootWindow
+            anchorItem: root
+            text: BatteryManager.textSecondary
+        }
     }
 }

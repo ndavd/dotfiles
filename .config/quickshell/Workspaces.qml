@@ -2,20 +2,25 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Hyprland
 
 Repeater {
+    id: root
+
     required property var screen
 
-    model: Hyprland.workspaces.values.filter(w => w.monitor && w.monitor.name == screen.name)
+    model: ScriptModel {
+        values: Hyprland.workspaces.values.filter(w => w.monitor?.name && w.monitor.name == root.screen.name)
+    }
 
     Rectangle {
         id: workspace
         required property var modelData
-        property bool isFocused: Hyprland.focusedWorkspace?.id == modelData.id
+        readonly property bool isFocused: Hyprland.focusedWorkspace?.id == modelData.id
 
         Layout.fillHeight: true
-        width: Config.h
+        width: Config.statusBarHeight
         color: isFocused ? Config.primary : "transparent"
 
         ThemedText {

@@ -49,60 +49,19 @@ hl.monitor({
     internal_monitor.refresh_rate
   ),
   position = monitor_position(external_monitor.width, 0),
-  scale = '1',
+  scale = 1,
 })
 
-hl.config({
-  render = { cm_auto_hdr = 1 },
+hl.monitor({
+  output = external_monitor.output,
+  mode = monitor_mode(
+    external_monitor.width,
+    external_monitor.height,
+    external_monitor.high_refresh_rate
+  ),
+  position = monitor_position(0, 0),
+  scale = 1,
 })
-
-local external_monitor_setup = {
-  hdr_fullscreen = function()
-    hl.monitor({
-      output = external_monitor.output,
-      mode = monitor_mode(
-        external_monitor.width,
-        external_monitor.height,
-        external_monitor.high_refresh_rate
-      ),
-      position = monitor_position(0, 0),
-      scale = '1',
-      bitdepth = 8,
-      cm = 'srgb',
-      sdr_min_luminance = 0.2,
-      sdr_max_luminance = 80,
-      supports_wide_color = false,
-    })
-  end,
-  hdr_desktop = function()
-    -- better SDR -> HDR mapping
-    hl.monitor({
-      output = external_monitor.output,
-      mode = monitor_mode(
-        external_monitor.width,
-        external_monitor.height,
-        external_monitor.hdr_compatible_refresh_rate
-      ),
-      bitdepth = 10,
-      cm = 'hdr',
-      sdr_min_luminance = 0.005,
-      sdr_max_luminance = 250,
-      supports_wide_color = true,
-    })
-  end,
-}
-external_monitor_setup.hdr_fullscreen()
-
---- Switches between hdr desktop and hdr fullscreen setups
-local function toggle_hdr_desktop()
-  -- checking for hdr prefix so it matches both hdr and hdredid
-  if hl.get_monitor(external_monitor.output).cm:sub(1, 3) == 'hdr' then
-    external_monitor_setup.hdr_fullscreen()
-  else
-    external_monitor_setup.hdr_desktop()
-  end
-  hl.dispatch(hl.dsp.submap('reset'))
-end
 
 for i = 1, 10 do
   local key = i % 10
@@ -118,7 +77,6 @@ end
 
 hl.on('hyprland.start', function()
   hl.exec_cmd('qs')
-  hl.exec_cmd('hypridle')
   hl.exec_cmd('/usr/lib/hyprpolkitagent/hyprpolkitagent')
   hl.exec_cmd('opensnitch-ui')
   hl.exec_cmd('nm-applet')
@@ -275,30 +233,6 @@ hl.bind(
 hl.bind(keys(mainMod, 'c'), hl.dsp.exec_cmd('obs --startvirtualcam --minimize-to-tray'))
 hl.bind(keys(mainMod, 'q'), hl.dsp.exec_cmd('qalculate-gtk'))
 
--- toggle high refresh rate for HDR compatibility
-hl.bind(keys(mainMod, 'SHIFT', 'm'), function()
-  local refresh_rate = math.ceil(hl.get_monitor(external_monitor.output).refresh_rate)
-
-  local next_refresh_rate = refresh_rate == external_monitor.high_refresh_rate
-      and external_monitor.hdr_compatible_refresh_rate
-    or refresh_rate == external_monitor.hdr_compatible_refresh_rate and external_monitor.high_refresh_rate
-    or nil
-
-  if next_refresh_rate == nil then
-    return
-  end
-
-  hl.monitor({
-    output = external_monitor.output,
-    mode = monitor_mode(external_monitor.width, external_monitor.height, next_refresh_rate),
-  })
-  hl.dispatch(
-    hl.dsp.exec_cmd(
-      ('notify-send "%s set to %dHz"'):format(external_monitor.output, next_refresh_rate)
-    )
-  )
-end)
-
 for direction, data in pairs({
   l = { key = 'h', vector = { -1, 0 } },
   d = { key = 'j', vector = { 0, 1 } },
@@ -384,7 +318,31 @@ hl.bind(
 hl.bind(keys(mainMod, 'e'), hl.dsp.submap('extra'))
 hl.define_submap('extra', function()
   hl.bind('escape', hl.dsp.submap('reset'))
-  hl.bind('h', toggle_hdr_desktop)
+
+  --- toggle high refresh rate for HDR compatibility
+  hl.bind('h', function()
+    local refresh_rate = math.ceil(hl.get_monitor(external_monitor.output).refresh_rate)
+
+    local next_refresh_rate = refresh_rate == external_monitor.high_refresh_rate
+        and external_monitor.hdr_compatible_refresh_rate
+      or refresh_rate == external_monitor.hdr_compatible_refresh_rate and external_monitor.high_refresh_rate
+      or nil
+
+    if next_refresh_rate == nil then
+      return
+    end
+
+    hl.monitor({
+      output = external_monitor.output,
+      mode = monitor_mode(external_monitor.width, external_monitor.height, next_refresh_rate),
+    })
+    hl.dispatch(
+      hl.dsp.exec_cmd(
+        ('notify-send "%s set to %dHz"'):format(external_monitor.output, next_refresh_rate)
+      )
+    )
+    hl.dispatch(hl.dsp.submap('reset'))
+  end)
 end)
 
 -- WINDOWS

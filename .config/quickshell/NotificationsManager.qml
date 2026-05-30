@@ -2,12 +2,10 @@ pragma Singleton
 
 import Quickshell
 import Quickshell.Services.Notifications
-import Quickshell.Wayland
 
 Singleton {
     id: root
 
-    property bool isIdle: false
     property var notifTimes: ({})
 
     NotificationServer {
@@ -23,12 +21,6 @@ Singleton {
         }
     }
 
-    property alias trackedNotifications: notifServer.trackedNotifications
-
-    IdleMonitor {
-        timeout: 300
-        onIsIdleChanged: {
-            root.isIdle = isIdle;
-        }
-    }
+    readonly property alias trackedNotifications: notifServer.trackedNotifications
+    readonly property int notificationCount: trackedNotifications.values.length
 }

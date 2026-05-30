@@ -37,26 +37,23 @@ RowLayout {
                 anchor.rect.y: tray.rootWindow.implicitHeight
             }
 
-            IconImage {
+            child: IconImage {
                 source: trayIcon.modelData.icon
-                implicitSize: Config.trayIconSize * 1.1
+                implicitSize: 15
             }
 
             HoverHandler {
-                onHoveredChanged: {
-                    if (trayIcon.modelData.title.trim() !== "" && hovered) {
-                        tooltip.visible = true;
-                    } else {
-                        tooltip.visible = false;
-                    }
-                }
+                onHoveredChanged: tooltipLoader.active = trayIcon.modelData.title.trim() !== "" && hovered
             }
 
-            TextTooltip {
-                id: tooltip
-                rootWindow: tray.rootWindow
-                anchorItem: tray
-                text: trayIcon.modelData.title
+            Loader {
+                id: tooltipLoader
+                active: false
+                sourceComponent: TextTooltip {
+                    rootWindow: tray.rootWindow
+                    anchorItem: tray
+                    text: trayIcon.modelData.title
+                }
             }
         }
     }

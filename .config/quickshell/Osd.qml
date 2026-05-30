@@ -2,101 +2,27 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
-import Quickshell.Io
-import Quickshell.Services.Pipewire
 
 PanelWindow {
     id: root
 
+    readonly property int w: 300
+    readonly property int bottomMargin: 100
+    readonly property real bgOpacity: 0.7
+    readonly property int osdFontSize: 16
+    readonly property bool showValue: OsdManager.currentType == OsdManager.OsdType.Volume || (OsdManager.currentType == OsdManager.OsdType.Mute && !OsdManager.muted) || OsdManager.currentType == OsdManager.OsdType.Brightness
+
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
-    WlrLayershell.margins.bottom: 100
-    implicitWidth: 300
-    implicitHeight: Config.h
+    WlrLayershell.margins.bottom: bottomMargin
+    implicitWidth: w
+    implicitHeight: Config.statusBarHeight
     anchors {
         bottom: true
     }
-    color: Qt.rgba(Config.bg.r, Config.bg.g, Config.bg.b, 0.7)
-
-    required property var modelData
-
-    screen: modelData
-
-    visible: false
-
-    QtObject {
-        id: osdType
-        readonly property int volume: 0
-        readonly property int mute: 1
-        readonly property int micMute: 2
-        readonly property int brightness: 3
-    }
-
-    property int currentType: osdType.volume
-
-    property var sink: Pipewire.defaultAudioSink
-    property var sinkAudio: sink?.audio
-    property real volume: Math.round((sink?.audio?.volume ?? 0) * 100)
-    property bool muted: sink?.audio?.muted ?? false
-
-    property var source: Pipewire.defaultAudioSource
-    property var sourceAudio: source?.audio
-    property bool micMuted: sourceAudio?.muted ?? false
-
-    PwObjectTracker {
-        objects: [root.sink, root.source]
-    }
-    onVolumeChanged: {
-        if (!sink?.ready) {
-            return;
-        }
-        root.currentType = osdType.volume;
-        root.show();
-    }
-
-    onMutedChanged: {
-        if (!sink?.ready) {
-            return;
-        }
-        root.currentType = osdType.mute;
-        root.show();
-    }
-
-    onMicMutedChanged: {
-        if (!source?.ready) {
-            return;
-        }
-        root.currentType = osdType.micMute;
-        root.show();
-    }
-
-    property real brightness: parseInt(brightnessFile.text().trim())
-
-    Process {
-        command: ["sh", "-c", "ls /sys/class/backlight/*/brightness"]
-        running: true
-        stdout: StdioCollector {
-            onStreamFinished: {
-                brightnessFile.path = this.text.trim();
-                brightnessFile.watchChanges = true;
-            }
-        }
-    }
-    FileView {
-        id: brightnessFile
-        watchChanges: true
-        onFileChanged: {
-            this.reload();
-            root.currentType = osdType.brightness;
-            root.show();
-        }
-    }
-
-    function show() {
-        root.visible = true;
-        hideTimer.restart();
-    }
+    color: Qt.rgba(Config.bg.r, Config.bg.g, Config.bg.b, bgOpacity)
+    visible: OsdManager.visible
 
     RowLayout {
         anchors.centerIn: parent
@@ -105,18 +31,18 @@ PanelWindow {
         ThemedText {
             text: {
                 const vol = "VOL:";
-                switch (root.currentType) {
-                case osdType.volume:
+                switch (OsdManager.currentType) {
+                case OsdManager.OsdType.Volume:
                     return vol;
-                case osdType.mute:
-                    return root.muted ? "MUTED" : vol;
-                case osdType.micMute:
-                    return root.micMuted ? "MIC MUTED" : "MIC ON";
-                case osdType.brightness:
-                    return "BRI:";
+                case OsdManager.OsdType.Mute:
+                    return OsdManager.muted ? "MUTED" : vol;
+                case OsdManager.OsdType.MicMute:
+                    return OsdManager.micMuted ? "MIC MUTED" : "MIC ON";
+                case OsdManager.OsdType.Brightness:
+                    return "BRT:";
                 }
             }
-            font.pixelSize: 16
+            font.pixelSize: osdFontSize
             font.bold: true
         }
         Rectangle {
@@ -127,23 +53,17 @@ PanelWindow {
 
             Rectangle {
                 height: parent.height
-                width: parent.width * (root.currentType == osdType.brightness ? root.brightness : root.volume) / 100
+                width: parent.width * (OsdManager.currentType == OsdManager.OsdType.Brightness ? OsdManager.brightness : OsdManager.volume) / 100
                 color: Config.fg
                 radius: 2
             }
-            visible: root.currentType == osdType.volume || (root.currentType == osdType.mute && !root.muted) || root.currentType == osdType.brightness
+            visible: root.showValue
         }
         ThemedText {
-            text: `${String(root.currentType == osdType.volume ? root.volume : root.brightness).padStart(3, ' ')}%`
-            font.pixelSize: 16
+            text: `${String(OsdManager.currentType == OsdManager.OsdType.Volume ? OsdManager.volume : OsdManager.brightness).padStart(3, ' ')}%`
+            font.pixelSize: osdFontSize
             font.bold: true
-            visible: root.currentType == osdType.volume || (root.currentType == osdType.mute && !root.muted) || root.currentType == osdType.brightness
+            visible: root.showValue
         }
-    }
-
-    Timer {
-        id: hideTimer
-        interval: 2000
-        onTriggered: root.visible = false
     }
 }

@@ -110,3 +110,4 @@
 .config/nvim/nvim-pack-lock.json
 .zsh/.zcompdump
 bin/*.AppImage
+**/.claude

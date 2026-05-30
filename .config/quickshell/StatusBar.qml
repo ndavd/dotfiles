@@ -8,31 +8,28 @@ PanelWindow {
 
     WlrLayershell.layer: WlrLayer.Bottom
 
-    required property var modelData
-
-    screen: modelData
-
     anchors {
         top: true
         left: true
         right: true
     }
-    implicitHeight: Config.h
+    implicitHeight: Config.statusBarHeight
     color: Config.bg
 
     RowLayout {
         anchors.fill: parent
-        Layout.fillHeight: true
         spacing: 0
 
         RowLayout {
             spacing: Config.leftSideSpacing
 
             Workspaces {
-                screen: root.modelData
+                screen: root.screen
             }
 
-            WindowTitle {}
+            WindowTitle {
+                Layout.preferredWidth: Math.min(implicitWidth, root.width * 0.4)
+            }
         }
 
         Item {
@@ -41,18 +38,6 @@ PanelWindow {
 
         RowLayout {
             spacing: Config.rightSideSpacing
-
-            Timer {
-                interval: 30000
-                running: true
-                repeat: true
-                triggeredOnStart: true
-                onTriggered: {
-                    mem.update();
-                    cpu.update();
-                    disk.update();
-                }
-            }
 
             Privacy {
                 rootWindow: root
@@ -65,17 +50,14 @@ PanelWindow {
             }
 
             Disk {
-                id: disk
                 rootWindow: root
             }
 
             Cpu {
-                id: cpu
                 rootWindow: root
             }
 
             Memory {
-                id: mem
                 rootWindow: root
             }
 

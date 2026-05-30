@@ -3,9 +3,6 @@ import Quickshell
 import Quickshell.Wayland
 
 PanelWindow {
-    required property var modelData
-    screen: modelData
-
     WlrLayershell.layer: WlrLayer.Background
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
     WlrLayershell.exclusionMode: ExclusionMode.Ignore

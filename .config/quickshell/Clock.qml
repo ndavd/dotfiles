@@ -1,46 +1,28 @@
+pragma ComponentBehavior: Bound
 import QtQuick
-import Quickshell.Io
 
 ThemedText {
-    id: clock
-
+    id: root
     required property var rootWindow
 
-    Timer {
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: {
-            clock.text = Qt.formatDateTime(new Date(), "dddd, MMM dd HH:mm");
-            const now = new Date();
-            interval = 60000 - (now.getSeconds() * 1000 + now.getMilliseconds());
-        }
-    }
+    text: ClockManager.text
 
     HoverHandler {
         onHoveredChanged: {
             if (hovered) {
-                calProc.running = true;
-                tooltip.visible = true;
-            } else {
-                tooltip.visible = false;
+                ClockManager.updateSecondary();
             }
+            tooltipLoader.active = hovered;
         }
     }
 
-    Process {
-        id: calProc
-        command: ["cal"]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                tooltip.text = this.text.trim();
-            }
+    Loader {
+        id: tooltipLoader
+        active: false
+        sourceComponent: TextTooltip {
+            rootWindow: root.rootWindow
+            anchorItem: root
+            text: ClockManager.textSecondary
         }
-    }
-
-    TextTooltip {
-        id: tooltip
-        rootWindow: clock.rootWindow
-        anchorItem: clock
     }
 }
