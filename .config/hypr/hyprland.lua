@@ -2,8 +2,7 @@
 
 local terminal = '$TERMINAL'
 local menu = 'qs ipc call launcher run'
-local browser =
-  'brave --ozone-platform-hint=auto --gtk-version=4 --disable-features=WaylandWpColorManagerV1'
+local browser = '$BROWSER'
 
 local mainMod = 'SUPER'
 
