@@ -52,7 +52,7 @@ local aug = require('aug')
 aug.add({ 'TextYankPost' }, {
   pattern = '*',
   callback = function()
-    require('vim.hl').on_yank()
+    vim.hl.hl_op()
   end,
 })
 
