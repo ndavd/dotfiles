@@ -19,6 +19,7 @@ Singleton {
             times[notif.id] = new Date();
             root.notifTimes = times;
         }
+        actionsSupported: true
     }
 
     readonly property alias trackedNotifications: notifServer.trackedNotifications
