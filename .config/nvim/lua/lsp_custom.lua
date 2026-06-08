@@ -48,13 +48,35 @@ out.cd_project_root = function()
 end
 
 out.goto_next_diagnostic = function()
-  vim.diagnostic.jump({ count = 1, float = true })
-  vim.diagnostic.open_float()
+  vim.diagnostic.jump({
+    count = 1,
+    on_jump = function(diagnostic, bufnr)
+      if diagnostic == nil then
+        return
+      end
+      vim.diagnostic.open_float({
+        bufnr = bufnr,
+        focus = false,
+        scope = 'cursor',
+      })
+    end,
+  })
 end
 
 out.goto_prev_diagnostic = function()
-  vim.diagnostic.jump({ count = -1, float = true })
-  vim.diagnostic.open_float()
+  vim.diagnostic.jump({
+    count = -1,
+    on_jump = function(diagnostic, bufnr)
+      if diagnostic == nil then
+        return
+      end
+      vim.diagnostic.open_float({
+        bufnr = bufnr,
+        focus = false,
+        scope = 'cursor',
+      })
+    end,
+  })
 end
 
 out.toggle_buf_inlay_hints = function()
