@@ -77,7 +77,6 @@ end
 hl.on('hyprland.start', function()
   hl.exec_cmd('qs')
   hl.exec_cmd('/usr/lib/hyprpolkitagent/hyprpolkitagent')
-  hl.exec_cmd('opensnitch-ui')
   hl.exec_cmd('nm-applet')
 end)
 
