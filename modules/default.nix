@@ -1,0 +1,26 @@
+{
+  imports = [
+    ./hyprland
+    ./quickshell
+    ./zellij
+    ./options.nix
+    ./common.nix
+    ./nix.nix
+    ./nvim.nix
+    ./git.nix
+    ./foot.nix
+    ./kitty.nix
+    ./nvidia.nix
+    ./gaming.nix
+    ./pipewire.nix
+    ./zsh.nix
+    ./mpv.nix
+    ./boot.nix
+    ./rg.nix
+    ./rumdl.nix
+    ./fastfetch.nix
+    ./theme.nix
+    ./zathura.nix
+    ./xdg.nix
+  ];
+}
