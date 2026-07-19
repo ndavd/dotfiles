@@ -22,5 +22,6 @@
     ./theme.nix
     ./zathura.nix
     ./xdg.nix
+    ./systemd.nix
   ];
 }

@@ -106,7 +106,6 @@ in
       egrep = "egrep --colour=auto";
       fgrep = "fgrep --colour=auto";
       ffprobe = "ffprobe -hide_banner";
-      news = "newsboat";
       drop = "dragon-drop";
       bat = "bat -p";
       hinit = "start-hyprland";
