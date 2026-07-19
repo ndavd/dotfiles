@@ -42,16 +42,22 @@
       ...
     }@inputs:
     let
-      system = "x86_64-linux";
-      hosts = [ "wopr" ];
-      pkgs = nixpkgs.legacyPackages.${system};
-      treefmt = import ./treefmt.nix { inherit inputs pkgs; };
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+      hosts = {
+        wopr = "x86_64-linux";
+      };
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+      pkgsFor = system: nixpkgs.legacyPackages.${system};
     in
     {
-      inherit system hosts;
+      inherit hosts;
 
-      nixosConfigurations = nixpkgs.lib.genAttrs hosts (
-        name:
+      nixosConfigurations = nixpkgs.lib.mapAttrs (
+        name: system:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs system; };
           modules = [
@@ -59,10 +65,18 @@
             ./hosts/${name}
           ];
         }
+      ) hosts;
+
+      packages = forAllSystems (system: {
+        nvim = (pkgsFor system).callPackage ./pkgs/nvim { inherit inputs system; };
+      });
+
+      formatter = forAllSystems (
+        system:
+        (import ./treefmt.nix {
+          inherit inputs;
+          pkgs = pkgsFor system;
+        }).config.build.wrapper
       );
-
-      formatter.${system} = treefmt.config.build.wrapper;
-
-      packages.${system}.nvim = pkgs.callPackage ./pkgs/nvim { inherit inputs system; };
     };
 }
