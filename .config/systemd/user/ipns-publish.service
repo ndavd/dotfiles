@@ -1,5 +1,0 @@
-[Unit]
-Description=Publish latest CID to IPNS
-
-[Service]
-ExecStart=/home/ndavd/bin/ipns-publish
