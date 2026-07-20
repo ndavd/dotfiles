@@ -38,7 +38,9 @@
 
   outputs =
     {
+      self,
       nixpkgs,
+      treefmt-nix,
       ...
     }@inputs:
     let
@@ -59,12 +61,21 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
+          treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
         in
         {
           nvim = pkgs.callPackage ./pkgs/nvim { inherit inputs system; };
-          formatter = (import ./treefmt.nix { inherit inputs pkgs; }).config.build.wrapper;
+          fmt = treefmtEval.config.build.check self;
+          formatter = treefmtEval.config.build.wrapper;
         }
       );
+
+      hostChecks = nixpkgs.lib.mapAttrs' (name: system: {
+        name = system;
+        value = {
+          "${name}" = self.nixosConfigurations.${name}.config.system.build.toplevel;
+        };
+      }) hosts;
     in
     {
       inherit hosts;
@@ -83,6 +94,10 @@
       packages = forEachSystem (system: {
         nvim = perSystem.${system}.nvim;
       });
+
+      checks = nixpkgs.lib.recursiveUpdate (forEachSystem (system: {
+        inherit (perSystem.${system}) nvim fmt;
+      })) hostChecks;
 
       formatter = forEachSystem (system: perSystem.${system}.formatter);
     };
