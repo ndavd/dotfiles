@@ -92,7 +92,7 @@
       ) hosts;
 
       packages = forEachSystem (system: {
-        nvim = perSystem.${system}.nvim;
+        inherit (perSystem.${system}) nvim;
       });
 
       checks = nixpkgs.lib.recursiveUpdate (forEachSystem (system: {
