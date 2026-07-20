@@ -44,14 +44,27 @@
     let
       systems = [
         "x86_64-linux"
+        "x86_64-darwin"
         "aarch64-linux"
         "aarch64-darwin"
       ];
+
       hosts = {
         wopr = "x86_64-linux";
       };
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-      pkgsFor = system: nixpkgs.legacyPackages.${system};
+
+      forEachSystem = nixpkgs.lib.genAttrs systems;
+
+      perSystem = forEachSystem (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          nvim = pkgs.callPackage ./pkgs/nvim { inherit inputs system; };
+          formatter = (import ./treefmt.nix { inherit inputs pkgs; }).config.build.wrapper;
+        }
+      );
     in
     {
       inherit hosts;
@@ -67,16 +80,10 @@
         }
       ) hosts;
 
-      packages = forAllSystems (system: {
-        nvim = (pkgsFor system).callPackage ./pkgs/nvim { inherit inputs system; };
+      packages = forEachSystem (system: {
+        nvim = perSystem.${system}.nvim;
       });
 
-      formatter = forAllSystems (
-        system:
-        (import ./treefmt.nix {
-          inherit inputs;
-          pkgs = pkgsFor system;
-        }).config.build.wrapper
-      );
+      formatter = forEachSystem (system: perSystem.${system}.formatter);
     };
 }
