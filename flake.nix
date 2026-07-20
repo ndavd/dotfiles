@@ -34,6 +34,11 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zellij-cb = {
+      url = "github:ndavd/zellij-cb";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

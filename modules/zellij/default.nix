@@ -1,12 +1,13 @@
 {
   pkgs,
   config,
-  lib,
+  inputs,
+  system,
   ...
 }:
 let
   inherit (config.host) owner;
-  zellij-cb = lib.getExe (pkgs.pkgsCross.wasi32.callPackage ../../pkgs/zellij-cb.nix { });
+  zellij-cb = "${inputs.zellij-cb.packages.${system}.default}/bin/zellij-cb.wasm";
 in
 {
   environment.systemPackages = with pkgs; [
