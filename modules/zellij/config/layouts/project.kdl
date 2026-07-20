@@ -1,7 +1,8 @@
 layout {
     tab name="nvim" focus=true {
         pane {
-            command "nvim"
+            command "direnv"
+            args "exec" "." "nvim"
         }
     }
     tab name="shell" {
