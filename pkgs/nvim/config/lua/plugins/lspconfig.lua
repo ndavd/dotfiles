@@ -66,6 +66,7 @@ local custom_conf = {
             vim.env.VIMRUNTIME,
             '${3rd}/luv/library',
             vim.env.XDG_CONFIG_HOME .. '/hypr/stubs',
+            vim.env.XDG_CONFIG_HOME .. '/swayimg/stubs',
           },
           checkThirdParty = false,
         },

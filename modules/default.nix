@@ -3,6 +3,7 @@
     ./hyprland
     ./quickshell
     ./zellij
+    ./swayimg
     ./options.nix
     ./common.nix
     ./nix.nix

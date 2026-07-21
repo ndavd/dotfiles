@@ -153,7 +153,6 @@ in
       telegram-desktop
       p7zip
       poppler
-      sxiv
       texliveBasic
       tree
       unrar

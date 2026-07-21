@@ -5,10 +5,9 @@
 let
   mimeapps = {
     defaultApplications = {
-      "video/x-matroska" = "mpv.desktop";
-      "video/mp4" = "mpv.desktop";
-      "image/png" = "sxiv.desktop";
-      "image/jpeg" = "sxiv.desktop";
+      "video/*" = "mpv.desktop";
+      "audio/*" = "mpv.desktop";
+      "image/*" = "swayimg.desktop";
       "application/pdf" = "org.pwmt.zathura.desktop";
       "x-scheme-handler/tg" = "userapp-Telegram Desktop-IREOR1.desktop";
       "x-scheme-handler/clickup" = "ClickUp.desktop";
