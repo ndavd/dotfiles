@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "agevault": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1784644860,
+        "narHash": "sha256-oH5I2iHr4b0sPuqSaFr0teJfQK/PQqvxkkdf/N/KpJE=",
+        "owner": "ndavd",
+        "repo": "agevault",
+        "rev": "94f32db22063f3dd19e49074b2b955a4f776bc1b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ndavd",
+        "repo": "agevault",
+        "type": "github"
+      }
+    },
     "aquamarine": {
       "inputs": {
         "hyprutils": [
@@ -40,7 +61,7 @@
           "nixpkgs"
         ],
         "rust-overlay": "rust-overlay",
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
         "lastModified": 1784638593,
@@ -566,6 +587,7 @@
     },
     "root": {
       "inputs": {
+        "agevault": "agevault",
         "book-of-profits": "book-of-profits",
         "hjem": "hjem",
         "hyprland-git": "hyprland-git",
@@ -573,7 +595,7 @@
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "treefmt-nix": "treefmt-nix_2",
+        "treefmt-nix": "treefmt-nix_3",
         "zellij-cb": "zellij-cb"
       }
     },
@@ -637,7 +659,7 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "book-of-profits",
+          "agevault",
           "nixpkgs"
         ]
       },
@@ -658,6 +680,27 @@
     "treefmt-nix_2": {
       "inputs": {
         "nixpkgs": [
+          "book-of-profits",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784369104,
+        "narHash": "sha256-47cxbcZODibHv3rELFQ9vZly0vUNkND/atn/U7HLeb0=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "df3c0640565d04a0261253cdd89fce78ec50168a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_3": {
+      "inputs": {
+        "nixpkgs": [
           "nixpkgs"
         ]
       },
@@ -675,7 +718,7 @@
         "type": "github"
       }
     },
-    "treefmt-nix_3": {
+    "treefmt-nix_4": {
       "inputs": {
         "nixpkgs": [
           "zellij-cb",
@@ -744,7 +787,7 @@
           "nixpkgs"
         ],
         "rust-overlay": "rust-overlay_2",
-        "treefmt-nix": "treefmt-nix_3"
+        "treefmt-nix": "treefmt-nix_4"
       },
       "locked": {
         "lastModified": 1784591407,

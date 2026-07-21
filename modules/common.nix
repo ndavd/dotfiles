@@ -125,8 +125,8 @@ in
 
     systemPackages = with pkgs; [
       inputs.book-of-profits.packages.${system}.default
+      inputs.agevault.packages.${system}.default
 
-      audacity
       brave
       dragon-drop
       claude-code
@@ -159,6 +159,7 @@ in
       unrar
       yt-dlp
       zathura
+      pinentry-qt
     ];
   };
 
