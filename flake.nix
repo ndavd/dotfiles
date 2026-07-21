@@ -39,6 +39,11 @@
       url = "github:ndavd/zellij-cb";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    book-of-profits = {
+      url = "github:ndavd/book-of-profits";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

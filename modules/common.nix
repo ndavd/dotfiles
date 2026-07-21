@@ -123,6 +123,8 @@ in
     };
 
     systemPackages = with pkgs; [
+      inputs.book-of-profits.packages.${system}.default
+
       audacity
       brave
       dragon-drop

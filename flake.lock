@@ -33,7 +33,45 @@
         "type": "github"
       }
     },
+    "book-of-profits": {
+      "inputs": {
+        "crane": "crane",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay",
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1784638593,
+        "narHash": "sha256-bhPjJys3sxU9EeM2iELGldY6Bz1sVCMWcs8VVBCO6Qs=",
+        "owner": "ndavd",
+        "repo": "book-of-profits",
+        "rev": "7ace49277133d321f57dbe30fb00c7d16a06eed3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ndavd",
+        "repo": "book-of-profits",
+        "type": "github"
+      }
+    },
     "crane": {
+      "locked": {
+        "lastModified": 1784564969,
+        "narHash": "sha256-TkTWNhJV/8Wk3czlbz4bwHZkFCaCHPsOy+oJe4PUiXg=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "7930f6c291de6f83c257839d434592aa085f290a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
+    "crane_2": {
       "locked": {
         "lastModified": 1784564969,
         "narHash": "sha256-TkTWNhJV/8Wk3czlbz4bwHZkFCaCHPsOy+oJe4PUiXg=",
@@ -528,17 +566,39 @@
     },
     "root": {
       "inputs": {
+        "book-of-profits": "book-of-profits",
         "hjem": "hjem",
         "hyprland-git": "hyprland-git",
         "neovim-nightly": "neovim-nightly",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "treefmt-nix": "treefmt-nix",
+        "treefmt-nix": "treefmt-nix_2",
         "zellij-cb": "zellij-cb"
       }
     },
     "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "book-of-profits",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784611586,
+        "narHash": "sha256-OfqgY+0hp/zseZB7uyH0U8kIDPS4scZZCyAurEplvG0=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "14f58845249f3552a89b07772626b8d3c632fa86",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
       "inputs": {
         "nixpkgs": [
           "zellij-cb",
@@ -577,6 +637,27 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
+          "book-of-profits",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784369104,
+        "narHash": "sha256-47cxbcZODibHv3rELFQ9vZly0vUNkND/atn/U7HLeb0=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "df3c0640565d04a0261253cdd89fce78ec50168a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_2": {
+      "inputs": {
+        "nixpkgs": [
           "nixpkgs"
         ]
       },
@@ -594,7 +675,7 @@
         "type": "github"
       }
     },
-    "treefmt-nix_2": {
+    "treefmt-nix_3": {
       "inputs": {
         "nixpkgs": [
           "zellij-cb",
@@ -658,12 +739,12 @@
     },
     "zellij-cb": {
       "inputs": {
-        "crane": "crane",
+        "crane": "crane_2",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": "rust-overlay",
-        "treefmt-nix": "treefmt-nix_2"
+        "rust-overlay": "rust-overlay_2",
+        "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
         "lastModified": 1784591407,
