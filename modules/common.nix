@@ -115,7 +115,6 @@ in
       inputs.book-of-profits.packages.${system}.default
       inputs.agevault.packages.${system}.default
 
-      nix-tree
       brave
       dragon-drop
       claude-code

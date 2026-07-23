@@ -48,6 +48,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    nix-tree
     nix-output-monitor
     dix
   ];
