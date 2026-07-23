@@ -7,7 +7,6 @@
 }:
 let
   inherit (config.host) owner name browser;
-  fzfPreview = import ../pkgs/fzf-preview { inherit pkgs; };
 in
 {
   imports = [
@@ -62,7 +61,6 @@ in
     direnv.enable = true;
     gnupg.agent.enable = true;
     bat.enable = true;
-    fzf.fuzzyCompletion = true;
     bash.shellInit = /* bash */ ''
       export HISTFILE="/dev/null"
     '';
@@ -89,16 +87,6 @@ in
     sessionVariables = {
       BROWSER = browser;
       XDG_CONFIG_HOME = toString config.hjem.users.${owner}.xdg.config.directory;
-      FZF_DEFAULT_COMMAND = "fd --unrestricted --full-path --color=always -E '/.*' -E node_modules -E .git -E target";
-      FZF_DEFAULT_OPTS = ''
-        --ansi
-        --info=inline
-        --color=gutter:#000000
-        --no-scrollbar
-        --border=none
-        --preview='${fzfPreview}/bin/fzf-preview {}'
-        --preview-window=right,50%,border-left
-      '';
     };
 
     shellAliases = {
@@ -127,6 +115,7 @@ in
       inputs.book-of-profits.packages.${system}.default
       inputs.agevault.packages.${system}.default
 
+      nix-tree
       brave
       dragon-drop
       claude-code
@@ -138,8 +127,6 @@ in
       ffmpeg
       file
       firefox
-      fzf
-      fd
       ripgrep
       wl-clipboard
       curl
@@ -159,6 +146,21 @@ in
       yt-dlp
       zathura
       pinentry-qt
+
+      (writeShellApplication {
+        name = "list-packages";
+        runtimeInputs = [ gawk ];
+        # `fastfetch` actually also checks if (name ~ /[0-9]+\.[0-9]+/)
+        # which is incorrect since it will ignore valid packages
+        text = /* bash */ ''
+          nix-store --query --requisites /run/current-system | awk -F/ '
+          {
+            name = substr($NF, 34)
+            if (name ~ /^nixos-system-|-(doc|man|info|dev|bin)$/) next
+            print $0, name
+          }' | while read -r p name; do [ -d "$p" ] && echo "$name"; done
+        '';
+      })
     ];
   };
 

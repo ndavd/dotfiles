@@ -29,7 +29,6 @@ in
         "host"
         "kernel"
         "uptime"
-        "packages"
         "shell"
         "display"
         "wm"

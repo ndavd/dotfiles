@@ -8,7 +8,8 @@ let
 in
 {
   users.users.${owner}.shell = pkgs.zsh;
-  system.userActivationScripts.zshrc = "touch .zshrc";
+
+  system.userActivationScripts.zshrc = "touch /home/${owner}/.zshrc";
 
   programs.zsh = {
     enable = true;
@@ -17,7 +18,12 @@ in
     enableBashCompletion = false;
     enableLsColors = true;
 
-    syntaxHighlighting.enable = true;
+    syntaxHighlighting = {
+      enable = true;
+      styles = {
+        "comment" = "fg=red";
+      };
+    };
 
     histSize = 1000;
 
@@ -28,8 +34,6 @@ in
     ];
 
     promptInit = /* zsh */ ''
-      SAVEHIST=0
-
       autoload -U colors && colors
 
       _isConsole() {
@@ -89,14 +93,10 @@ in
     '';
 
     loginShellInit = /* zsh */ ''
-      [[ $TERM == linux ]] && fastfetch
+      fastfetch
     '';
 
     interactiveShellInit = /* zsh */ ''
-      # umask
-      umask 077
-
-      # zsh-vi-mode plugin
       ZVM_CURSOR_STYLE_ENABLED=false
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
@@ -107,22 +107,11 @@ in
       autoload edit-command-line
       zle -N edit-command-line
       bindkey '^X^E' edit-command-line
+    '';
 
-      fzfa() {
-        fd --unrestricted --full-path --color=always | fzf
-      }
-      f() {
-        local dir="$(fd --unrestricted --type d --full-path --color=always -E '/.*' -E node_modules -E .git -E target | fzf)"
-        [[ -n $dir ]] && cd "$dir"
-      }
-      book() {
-        local file="$(fd --unrestricted --color=always . /home/${owner}/data/books | fzf)"
-        [[ -n $file ]] && zathura "$file"
-      }
-      video() {
-        local file="$(fd --no-ignore --color=always --glob '*.{mp4,mkv,mpeg,webm,avi,h264,mov,wmv}' /home/${owner}/data/videos | fzf)"
-        [[ -n $file ]] && mpv "$file"
-      }
+    shellInit = /* zsh */ ''
+      SAVEHIST=0
+      umask 077
     '';
   };
 }
