@@ -97,6 +97,8 @@ in
     '';
 
     interactiveShellInit = /* zsh */ ''
+      unset HISTFILE
+
       ZVM_CURSOR_STYLE_ENABLED=false
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
@@ -110,7 +112,6 @@ in
     '';
 
     shellInit = /* zsh */ ''
-      SAVEHIST=0
       umask 077
     '';
   };
