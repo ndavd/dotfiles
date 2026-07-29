@@ -31,6 +31,25 @@
       device = "/dev/mapper/cryptroot";
       fsType = "btrfs";
       options = [
+        "subvol=@"
+        "noatime"
+        "compress=zstd:1"
+      ];
+    };
+    "/home" = {
+      device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = [
+        "subvol=@home"
+        "noatime"
+        "compress=zstd:1"
+      ];
+    };
+    "/nix" = {
+      device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = [
+        "subvol=@nix"
         "noatime"
         "compress=zstd:1"
       ];
