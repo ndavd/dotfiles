@@ -30,6 +30,10 @@
     "/" = {
       device = "/dev/mapper/cryptroot";
       fsType = "btrfs";
+      options = [
+        "noatime"
+        "compress=zstd:1"
+      ];
     };
     "/boot" = {
       device = "/dev/disk/by-uuid/CA66-A291";
