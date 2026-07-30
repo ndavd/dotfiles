@@ -1,10 +1,9 @@
 # Dotfiles
 
-My NixOS configuration flake ❄️. A minimal, highly-functional, reproducible, declarative system.
+My NixOS configuration flake ❄️. _A minimal, highly-functional, reproducible, declarative system._
 
 > [!NOTE]
-> For my older Arch Linux system configuration (Wayland and X11), refer to the
-> [`legacy/arch`](https://github.com/ndavd/dotfiles/tree/legacy/arch) branch.
+> For my older Arch Linux system configuration (Wayland and X11), refer to the `legacy/arch` branch.
 
 | Main Software          | NixOS (Wayland)                                                                          |
 | ---------------------- | ---------------------------------------------------------------------------------------- |
@@ -19,6 +18,7 @@ My NixOS configuration flake ❄️. A minimal, highly-functional, reproducible,
 - `$HOME` management: Done with [`hjem`](https://github.com/feel-co/hjem) instead of Home Manager as
   it aligns better with the simplicity I strive for.
 - Short term recoverability: Running daily BTRFS subvolume snapshots of `/home`.
+- Automatic weekly updates
 
 ## Architecture
 
