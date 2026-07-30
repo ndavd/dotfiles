@@ -1,0 +1,19 @@
+layout {
+    tab name="nvim" focus=true {
+        pane {
+            command "direnv"
+            args "exec" "." "nvim"
+        }
+    }
+    tab name="shell" {
+        pane
+    }
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="file:@zellij-cb@" {
+                DisplaySessionDirectory false
+            }
+        }
+    }
+}

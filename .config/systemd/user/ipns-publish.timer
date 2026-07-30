@@ -1,9 +1,0 @@
-[Unit]
-Description=IPNS publish timer
-
-[Timer]
-OnBootSec=5min
-OnUnitActiveSec=3h
-
-[Install]
-WantedBy=timers.target

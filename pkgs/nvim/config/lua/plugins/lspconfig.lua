@@ -1,0 +1,230 @@
+local lsp_custom = require('lsp_custom')
+local aug = require('aug')
+
+local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+-- Servers
+local servers = {
+  'bashls',
+  'clangd',
+  'cmake',
+  'cssls',
+  'eslint',
+  'gopls',
+  'graphql',
+  'html',
+  'jsonls',
+  'lua_ls',
+  'rust_analyzer',
+  'solidity_ls',
+  'tailwindcss',
+  'taplo',
+  'texlab',
+  'ts_ls',
+  'vimls',
+  'yamlls',
+  'dockerls',
+  'prismals',
+  'astro',
+  'sqls',
+  'nixd',
+  'biome',
+  'qmlls',
+}
+
+-- Custom servers config
+local custom_conf = {
+  texlab = {
+    settings = {
+      texlab = {
+        build = {
+          onSave = true,
+        },
+      },
+    },
+  },
+  jsonls = {
+    commands = {
+      Format = {
+        function()
+          vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line('$'), 0 })
+        end,
+      },
+    },
+  },
+  lua_ls = {
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'LuaJIT',
+        },
+        diagnostics = {
+          globals = { 'vim', 'hl' },
+        },
+        workspace = {
+          library = {
+            vim.env.VIMRUNTIME,
+            '${3rd}/luv/library',
+            vim.env.XDG_CONFIG_HOME .. '/hypr/stubs',
+            vim.env.XDG_CONFIG_HOME .. '/swayimg/stubs',
+          },
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  },
+  ts_ls = {
+    init_options = {
+      preferences = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+        importModuleSpecifierPreference = 'non-relative',
+      },
+    },
+  },
+  rust_analyzer = {
+    settings = {
+      ['rust_analyzer'] = {
+        checkOnSave = {
+          allFeatures = true,
+          command = 'clippy',
+          extraArgs = { '--no-deps' },
+        },
+        cargo = {
+          allFeatures = true,
+          loadOutDirsFromCheck = true,
+          runBuildScripts = true,
+        },
+        procMacro = {
+          enable = true,
+          ignored = {
+            ['async-trait'] = { 'async_trait' },
+            ['napi-derive'] = { 'napi' },
+            ['async-recursion'] = { 'async_recursion' },
+          },
+        },
+      },
+    },
+  },
+  solidity_ls = {
+    settings = {
+      solidity = {
+        compileUsingRemoteVersion = lsp_custom.get_solc_version(),
+        defaultCompiler = 'remote',
+        enabledAsYouTypeCompilationErrorCheck = true,
+        validationDelay = 1500,
+      },
+    },
+  },
+  nixd = {
+    settings = {
+      nixd = {
+        nixpkgs = {
+          expr = 'import <nixpkgs> { }',
+        },
+        formatting = {
+          command = { 'nixfmt' },
+        },
+        options = {
+          nixos = {
+            expr = ('(builtins.getFlake "%s").nixosConfigurations.%s.options'):format(
+              vim.env.NH_FLAKE or vim.env.FLAKE,
+              vim.fn.hostname()
+            ),
+          },
+        },
+      },
+    },
+  },
+  qmlls = {
+    cmd = { 'qmlls', '-E' },
+  },
+}
+
+local get_conf = function(server)
+  local capabilities_conf = {
+    capabilities = capabilities,
+  }
+  if custom_conf[server] then
+    local c = custom_conf[server]
+    c.capabilities = capabilities_conf.capabilities
+    return c
+  end
+  return capabilities_conf
+end
+
+for _, server in ipairs(servers) do
+  vim.lsp.config(server, get_conf(server))
+  vim.lsp.enable(server)
+end
+
+-- Diagnostic signs
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '',
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+    },
+  },
+})
+
+-- Keymaps
+local keymap_opts = { silent = true }
+
+vim.keymap.del('n', 'grn')
+vim.keymap.del({ 'n', 'v' }, 'gra')
+vim.keymap.del({ 'n' }, 'grr')
+vim.keymap.del({ 'n' }, 'gri')
+
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, keymap_opts)
+vim.keymap.set('n', 'gr', vim.lsp.buf.rename, keymap_opts)
+vim.keymap.set('n', 'g?', vim.lsp.buf.code_action, keymap_opts)
+
+vim.keymap.set('n', '<C-n>', lsp_custom.goto_next_diagnostic, keymap_opts)
+vim.keymap.set('n', '<C-p>', lsp_custom.goto_prev_diagnostic, keymap_opts)
+vim.keymap.set('n', 'gv', lsp_custom.toggle_diagnostic_virt_lines, keymap_opts)
+vim.keymap.set('n', 'gi', lsp_custom.toggle_buf_inlay_hints, keymap_opts)
+vim.keymap.set('n', 'gd', lsp_custom.definition, keymap_opts)
+vim.keymap.set('n', 'gk', lsp_custom.buf_hover, keymap_opts)
+
+-- Commands
+
+vim.api.nvim_create_user_command('Cd', lsp_custom.cd_project_root, {})
+
+vim.api.nvim_create_user_command('Solc', function()
+  vim.cmd('split ' .. lsp_custom.get_solc_version_path())
+end, {})
+
+-- Remove formatexpr default
+aug.add('LspAttach', {
+  callback = function(ev)
+    vim.bo[ev.buf].formatexpr = nil
+  end,
+})
+
+-- Enable textDocument/documentColor if available
+aug.add('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    vim.lsp.document_color.enable(true, { bufnr = args.buf }, { style = 'virtual' })
+  end,
+})

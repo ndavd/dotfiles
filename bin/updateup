@@ -1,8 +1,0 @@
-#!/bin/sh
-rustup update
-foundryup --update
-foundryup
-cyfrinup
-huffup
-noirup
-solanaup

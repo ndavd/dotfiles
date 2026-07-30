@@ -1,0 +1,114 @@
+local out = {}
+
+local filter = function(arr, fn)
+  if type(arr) ~= 'table' then
+    return arr
+  end
+
+  local filtered = {}
+  for k, v in pairs(arr) do
+    if fn(v, k, arr) then
+      table.insert(filtered, v)
+    end
+  end
+
+  return filtered
+end
+
+local filterDTS = function(value)
+  return string.match(value.filename, '%.d.ts') == nil
+end
+
+local on_list = function(options)
+  -- https://github.com/typescript-language-server/typescript-language-server/issues/216
+  local items = options.items
+  if #items > 1 then
+    items = filter(items, filterDTS)
+  end
+
+  vim.fn.setqflist({}, ' ', { title = options.title, items = items, context = options.context })
+  vim.api.nvim_command('cfirst')
+end
+
+out.definition = function()
+  vim.lsp.buf.definition({ on_list = on_list })
+end
+
+out.cd_project_root = function()
+  local ok, workspace_folders_or_err = pcall(vim.lsp.buf.list_workspace_folders)
+  if ok and #workspace_folders_or_err > 0 then
+    vim.cmd('cd ' .. workspace_folders_or_err[1])
+  else
+    print('Can\'t find project\'s root directory')
+  end
+end
+
+out.goto_next_diagnostic = function()
+  vim.diagnostic.jump({
+    count = 1,
+    on_jump = function(diagnostic, bufnr)
+      if diagnostic == nil then
+        return
+      end
+      vim.diagnostic.open_float({
+        bufnr = bufnr,
+        focus = false,
+        scope = 'cursor',
+      })
+    end,
+  })
+end
+
+out.goto_prev_diagnostic = function()
+  vim.diagnostic.jump({
+    count = -1,
+    on_jump = function(diagnostic, bufnr)
+      if diagnostic == nil then
+        return
+      end
+      vim.diagnostic.open_float({
+        bufnr = bufnr,
+        focus = false,
+        scope = 'cursor',
+      })
+    end,
+  })
+end
+
+out.toggle_buf_inlay_hints = function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+end
+
+out.toggle_diagnostic_virt_lines = function()
+  vim.diagnostic.config({
+    virtual_lines = not vim.diagnostic.config().virtual_lines,
+  })
+end
+
+out.get_solc_version_path = function()
+  return vim.env.HOME .. '/.solc-version'
+end
+
+out.get_solc_version = function()
+  local latest = 'latest'
+  local path = out.get_solc_version_path()
+
+  if vim.fn.filereadable(path) ~= 1 then
+    return latest
+  end
+
+  local solc_version = vim.fn.readfile(path, '', 1)[1]
+  if not solc_version or solc_version == '' or vim.startswith(solc_version, '#') then
+    return latest
+  end
+
+  return solc_version
+end
+
+out.buf_hover = function()
+  vim.lsp.buf.hover({
+    border = 'single',
+  })
+end
+
+return out

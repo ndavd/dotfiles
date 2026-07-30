@@ -1,3 +1,0 @@
-#!/bin/sh
-agave-install update
-avm update

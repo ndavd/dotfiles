@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-sudo reflector --country es,pt,de,fr --latest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist

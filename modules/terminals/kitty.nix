@@ -1,0 +1,69 @@
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+let
+  inherit (config.host) owner terminal;
+in
+{
+  environment = {
+    systemPackages = with pkgs; [
+      kitty
+    ];
+
+    sessionVariables = lib.mkIf (terminal == "kitty") {
+      TERMINAL = terminal;
+    };
+  };
+
+  hjem.users.${owner}.xdg.config.files."kitty/kitty.conf" = {
+    generator = lib.generators.toKeyValue {
+      listsAsDuplicateKeys = true;
+      mkKeyValue = lib.generators.mkKeyValueDefault { } " ";
+    };
+    value = {
+      shell_integration = "disabled";
+      update_check_interval = 0;
+
+      font_family = "monospace";
+      symbol_map = "U+e000-U+e00a,U+ea60-U+ebeb,U+e0a0-U+e0c8,U+e0ca,U+e0cc-U+e0d7,U+e200-U+e2a9,U+e300-U+e3e3,U+e5fa-U+e6b7,U+e700-U+e8ef,U+ed00-U+efc1,U+f000-U+f2ff,U+f000-U+f2e0,U+f300-U+f381,U+f400-U+f533,U+f0001-U+f1af0 Symbols Nerd Font Mono";
+
+      font_size = 10;
+      placement_strategy = "top-left";
+      disable_ligatures = "always";
+      font_features = "none";
+      macos_thicken_font = 0.75;
+      cursor_blink_interval = 0;
+
+      enable_audio_bell = "no";
+      window_alert_on_bell = "no";
+      bell_on_tab = "no";
+
+      active_border_color = "none";
+      resize_debounce_time = 0.1;
+      confirm_os_window_close = 0;
+      tab_title_template = ''"{title}"'';
+      active_tab_font_style = "bold";
+
+      dynamic_background_opacity = "yes";
+      dim_opacity = 0.75;
+      selection_background = "#dddddd";
+
+      allow_remote_control = "yes";
+      listen_on = "unix:/tmp/kitty";
+      clipboard_control = "write-clipboard write-primary";
+
+      kitty_mod = "ctrl+shift";
+
+      map = [
+        "kitty_mod+t new_tab_with_cwd"
+        "kitty_mod+plus change_font_size all +0.5"
+        "kitty_mod+minus change_font_size all -0.5"
+        "kitty_mod+m set_background_opacity +0.05"
+        "kitty_mod+l set_background_opacity -0.05"
+      ];
+    };
+  };
+}
