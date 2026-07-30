@@ -24,5 +24,6 @@
     ./zathura.nix
     ./xdg.nix
     ./systemd.nix
+    ./snapper.nix
   ];
 }
