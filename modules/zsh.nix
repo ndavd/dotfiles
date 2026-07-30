@@ -54,7 +54,7 @@ in
       _isConsole && dirty="*" staged="+" || dirty="‼" staged="✔"
 
       _p() {
-        if [[ $PATH == /nix/store* ]]; then
+        if [[ -n $IN_NIX_SHELL ]]; then
           nix_prefix="%F{cyan}<nix>%f"
         else
           nix_prefix=""

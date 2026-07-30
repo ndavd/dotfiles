@@ -139,7 +139,7 @@ in
       telegram-desktop
       p7zip
       poppler
-      texliveBasic
+      texliveMedium
       tree
       unrar
       yt-dlp
