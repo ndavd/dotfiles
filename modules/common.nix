@@ -98,6 +98,7 @@ in
       drop = "dragon-drop";
       bat = "bat -p";
       hinit = "start-hyprland";
+      nd = "nix develop -c $SHELL";
 
       # force usage of flake equivalents
       nix-build = "echo 'use nix build instead'";
