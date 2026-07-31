@@ -1,7 +1,5 @@
 name: Update
 on:
-  schedule:
-    - cron: "0 12 * * 5" # Every Friday, 12 PM UTC
   workflow_dispatch:
 permissions:
   contents: write
