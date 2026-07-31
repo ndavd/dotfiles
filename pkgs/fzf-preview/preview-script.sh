@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # WARN: This script is meant to be run from within `fzf --preview`
 
 entry="$1"
