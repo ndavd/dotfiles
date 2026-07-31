@@ -21,7 +21,7 @@ in
       name = "is-hdr";
       runtimeInputs = [ mediainfo ];
       text = ''
-        hdr_format="$(mediainfo "$1" | grep --color=always "HDR format")"
+        hdr_format="$(mediainfo "$1" | grep --color=always "HDR format" || true)"
         if [ "$hdr_format" = "" ]; then echo "Not HDR"; else echo -e "$hdr_format"; fi
       '';
     })
