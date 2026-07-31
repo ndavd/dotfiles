@@ -18,7 +18,7 @@ My NixOS configuration flake ❄️. _A minimal, highly-functional, reproducible
 - `$HOME` management: Done with [`hjem`](https://github.com/feel-co/hjem) instead of Home Manager as
   it aligns better with the simplicity I strive for.
 - Short term recoverability: Running daily BTRFS subvolume snapshots of `/home`.
-- Automatic weekly updates
+- Automatic weekly updates.
 
 ## Architecture
 
@@ -56,4 +56,5 @@ command:
 nix fmt
 ```
 
-[^1]: Includes: Status Bar, App Launcher, Notifications, OSD, Wallpaper, Idle Manager, Lockscreen.
+[^1]: Includes status bar, application launcher, notifications, OSD, wallpaper, idle manager,
+    lockscreen.

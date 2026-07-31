@@ -17,7 +17,7 @@ PanelWindow {
     color: "black"
     Image {
         anchors.fill: parent
-        source: Qt.resolvedUrl("./bifurcation.png")
+        source: Qt.resolvedUrl("./bg.png")
         asynchronous: true
     }
 }
