@@ -17,6 +17,8 @@ Singleton {
 
     onCurrentTextChanged: showFailure = false
 
+    property var now: new Date()
+
     function lock() {
         root.locked = true;
         root.loaded = true;
@@ -35,6 +37,16 @@ Singleton {
         }
         unlockInProgress = true;
         pam.start();
+    }
+
+    Timer {
+        running: root.locked
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            root.now = new Date();
+            interval = 60000 - (root.now.getSeconds() * 1000 + root.now.getMilliseconds());
+        }
     }
 
     PamContext {

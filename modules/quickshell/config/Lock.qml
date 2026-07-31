@@ -20,18 +20,6 @@ WlSessionLock {
     readonly property int borderWidth: 3
     readonly property int borderRadius: 15
 
-    property var now: new Date()
-
-    Timer {
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: {
-            root.now = new Date();
-            interval = 60000 - (root.now.getSeconds() * 1000 + root.now.getMilliseconds());
-        }
-    }
-
     WlSessionLockSurface {
         id: surface
         color: "transparent"
@@ -77,7 +65,7 @@ WlSessionLock {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: 10
-            text: Qt.formatTime(root.now, "hh:mm")
+            text: Qt.formatTime(LockManager.now, "hh:mm")
             font.pixelSize: root.clockFontSize
             renderType: Text.NativeRendering
         }
@@ -86,7 +74,7 @@ WlSessionLock {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: 150
-            text: Qt.formatDate(root.now, "dddd, dd MMMM yyyy")
+            text: Qt.formatDate(LockManager.now, "dddd, dd MMMM yyyy")
             font.pixelSize: root.dateFontSize
             renderType: Text.NativeRendering
         }
