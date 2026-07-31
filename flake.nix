@@ -59,6 +59,12 @@
       ...
     }@inputs:
     let
+      listNixFilesRecursive =
+        module:
+        nixpkgs.lib.filter (n: nixpkgs.lib.strings.hasSuffix ".nix" n) (
+          nixpkgs.lib.filesystem.listFilesRecursive module
+        );
+
       systems = [
         "x86_64-linux"
         "x86_64-darwin"
@@ -99,10 +105,7 @@
         name: system:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs system; };
-          modules = [
-            ./modules
-            ./hosts/${name}
-          ];
+          modules = [ ./hosts/${name} ] ++ (listNixFilesRecursive ./modules);
         }
       ) hosts;
 
