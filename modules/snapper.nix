@@ -1,11 +1,12 @@
 { config, lib, ... }:
 let
   inherit (config.host) owner;
-  isBtrfs = config.fileSystems."/".fsType == "btrfs";
+  isBtrfs = config.fileSystems."/home".fsType == "btrfs";
 in
 {
   services.snapper = {
     snapshotInterval = "daily";
+    persistentTimer = true;
     configs = lib.mkIf isBtrfs {
       home = {
         SUBVOLUME = "/home";
