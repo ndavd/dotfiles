@@ -20,18 +20,25 @@ Singleton {
 
     Process {
         id: diskProc
-        command: ["df", "/"]
+        command: ["btrfs", "filesystem", "usage", "-g", "/"]
         stdout: SplitParser {
             onRead: data => {
-                if (!data || !data.startsWith("/")) {
+                if (!data) {
                     return;
                 }
-                const parts = data.trim().split(/\s+/);
-                const total = parseInt(parts[1]) || 1;
-                const used = parseInt(parts[2]) || 0;
-                root.diskTotal = (total / Config.kibPerGib).toFixed(2);
-                root.diskUsage = (used / Config.kibPerGib).toFixed(2);
-                root.diskUsagePercentage = Math.round(100 * used / total);
+                const line = data.trim();
+
+                if (line.startsWith("Device size")) {
+                    const lineParts = line.split(/\s+/);
+                    root.diskTotal = parseFloat(lineParts[lineParts.length - 1].slice(0, -3)).toFixed(2);
+                } else if (line.startsWith("Used")) {
+                    const lineParts = line.split(/\s+/);
+                    root.diskUsage = parseFloat(lineParts[lineParts.length - 1].slice(0, -3)).toFixed(2);
+                }
+
+                if (root.diskTotal && root.diskUsage) {
+                    root.diskUsagePercentage = Math.round(100 * root.diskUsage / root.diskTotal);
+                }
             }
         }
     }
