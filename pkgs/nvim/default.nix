@@ -66,7 +66,7 @@ let
 
       # Formatters
       foundry
-      go
+      gofumpt
       nixfmt
       prettier
       prettierd

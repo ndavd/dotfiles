@@ -49,7 +49,7 @@ local eslintd_prettier = { 'biome', 'eslint_d', 'prettierd', 'prettier', stop_af
 local prettier = { 'prettierd', 'prettier' }
 local rumdl = { 'rumdl' }
 local stylua = { 'stylua' }
-local gofmt = { 'gofmt' }
+local gofumpt = { 'gofumpt' }
 local rustfmt = { 'rustfmt' }
 local clangformat = { 'clang_format' }
 local shellharden_shfmt = { 'shellharden', 'shfmt' }
@@ -89,7 +89,7 @@ conform.setup({
     json = prettier,
     markdown = rumdl,
     lua = stylua,
-    go = gofmt,
+    go = gofumpt,
     rust = rustfmt,
     c = clangformat,
     cpp = clangformat,
