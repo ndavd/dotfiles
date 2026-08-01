@@ -1,13 +1,11 @@
 {
   pkgs,
   config,
-  inputs,
-  system,
   ...
 }:
 let
   inherit (config.host) owner;
-  zellij-cb = "${inputs.zellij-cb.packages.${system}.default}/bin/zellij-cb.wasm";
+  zellij-cb = pkgs.zellijPlugins.cb;
 in
 {
   environment.systemPackages = with pkgs; [

@@ -35,11 +35,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zellij-cb = {
-      url = "github:ndavd/zellij-cb";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     agevault = {
       url = "github:ndavd/agevault";
       inputs.nixpkgs.follows = "nixpkgs";
