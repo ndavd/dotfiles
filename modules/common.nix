@@ -87,6 +87,7 @@ in
     sessionVariables = {
       BROWSER = browser;
       XDG_CONFIG_HOME = toString config.hjem.users.${owner}.xdg.config.directory;
+      GOPATH = "/home/${owner}/.local/share/go";
     };
 
     shellAliases = {
