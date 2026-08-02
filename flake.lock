@@ -8,11 +8,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1784644860,
-        "narHash": "sha256-oH5I2iHr4b0sPuqSaFr0teJfQK/PQqvxkkdf/N/KpJE=",
+        "lastModified": 1785709070,
+        "narHash": "sha256-Uc4g1dBGIIXciTbZRi7ADfQGiGNe0447kZ+unY1L+w8=",
         "owner": "ndavd",
         "repo": "agevault",
-        "rev": "94f32db22063f3dd19e49074b2b955a4f776bc1b",
+        "rev": "c3a40b2d66d206a4faf96d83b222a9f52295af04",
         "type": "github"
       },
       "original": {
