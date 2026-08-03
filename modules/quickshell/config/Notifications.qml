@@ -103,7 +103,6 @@ PanelWindow {
 
                         ThemedText {
                             text: notif.modelData.appName
-                            font.pixelSize: 11
                             opacity: 0.8
                         }
                     }

@@ -17,6 +17,9 @@ let
       refreshRate = lib.mkOption {
         type = lib.types.int;
       };
+      scale = lib.mkOption {
+        type = lib.types.float;
+      };
     };
   };
 in

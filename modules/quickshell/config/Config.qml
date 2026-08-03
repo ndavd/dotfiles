@@ -13,7 +13,7 @@ Singleton {
     readonly property color fgDim: Qt.rgba(fg.r, fg.g, fg.b, 0.15)
 
     readonly property string fontFamily: "monospace"
-    readonly property int fontSize: 12
+    readonly property int fontSize: 13
 
     readonly property int leftSideSpacing: 3
     readonly property int rightSideSpacing: 12

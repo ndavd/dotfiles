@@ -17,6 +17,7 @@
       width = 2560;
       height = 1440;
       refreshRate = 240;
+      scale = 1.0;
     };
     primaryMonitorHdrCompatibleRefreshRate = 144;
     secondaryMonitor = {
@@ -24,6 +25,7 @@
       width = 1920;
       height = 1080;
       refreshRate = 120;
+      scale = 1.25;
     };
 
     nvidiaGpu.enable = true;

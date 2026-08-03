@@ -26,6 +26,7 @@ let
       width = ${toString width},
       height = ${toString height},
       refresh_rate = ${toString refreshRate},
+      scale = ${toString scale},
     },
   '';
   secondaryMonitorBlock = lib.optionalString (secondaryMonitor != null) (
@@ -36,6 +37,7 @@ let
         width = ${toString width},
         height = ${toString height},
         refresh_rate = ${toString refreshRate},
+        scale = ${toString scale},
       },
     ''
   );

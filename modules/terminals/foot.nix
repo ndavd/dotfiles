@@ -18,7 +18,7 @@ in
     theme = "kitty";
     settings = {
       main = {
-        font = "monospace:size=10,Symbols Nerd Font Mono:size=10";
+        font = "monospace:size=12,Symbols Nerd Font Mono:size=12";
         pad = "0x0";
         gamma-correct-blending = "yes";
       };

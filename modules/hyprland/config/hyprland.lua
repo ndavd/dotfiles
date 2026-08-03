@@ -12,6 +12,7 @@ end
 ---@field width number
 ---@field height number
 ---@field refresh_rate number
+---@field scale number
 
 ---@cast vars {
 ---  terminal: string,
@@ -53,7 +54,7 @@ hl.monitor({
     vars.primary_monitor.refresh_rate
   ),
   position = monitor_position(0, 0),
-  scale = 1,
+  scale = vars.primary_monitor.scale,
 })
 
 if vars.secondary_monitor then
@@ -65,7 +66,7 @@ if vars.secondary_monitor then
       vars.secondary_monitor.refresh_rate
     ),
     position = monitor_position(vars.primary_monitor.width, 0),
-    scale = 1,
+    scale = vars.secondary_monitor.scale,
   })
 end
 
