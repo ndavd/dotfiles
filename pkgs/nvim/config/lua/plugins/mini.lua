@@ -102,11 +102,6 @@ local custom_conf = {
     local actions = function()
       local section = sections.actions
       return {
-        {
-          name = 'plugins sync',
-          action = 'lua vim.pack.update()',
-          section = section,
-        },
         { name = 'edit new buffer', action = 'enew', section = section },
         { name = 'quit', action = 'qall', section = section },
       }
