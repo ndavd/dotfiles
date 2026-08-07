@@ -35,11 +35,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agevault = {
-      url = "github:ndavd/agevault";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     book-of-profits = {
       url = "github:ndavd/book-of-profits";
       inputs.nixpkgs.follows = "nixpkgs";

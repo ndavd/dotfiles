@@ -115,7 +115,6 @@ in
 
     systemPackages = with pkgs; [
       inputs.book-of-profits.packages.${system}.default
-      inputs.agevault.packages.${system}.default
 
       brave
       dragon-drop
@@ -147,6 +146,7 @@ in
       yt-dlp
       zathura
       pinentry-qt
+      agevault
 
       (writeShellApplication {
         name = "list-packages";
