@@ -115,7 +115,6 @@ in
 
     systemPackages = with pkgs; [
       inputs.book-of-profits.packages.${system}.default
-
       brave
       dragon-drop
       claude-code
@@ -147,21 +146,6 @@ in
       zathura
       pinentry-qt
       agevault
-
-      (writeShellApplication {
-        name = "list-packages";
-        runtimeInputs = [ gawk ];
-        # `fastfetch` actually also checks if (name ~ /[0-9]+\.[0-9]+/)
-        # which is incorrect since it will ignore valid packages
-        text = /* bash */ ''
-          nix-store --query --requisites /run/current-system | awk -F/ '
-          {
-            name = substr($NF, 34)
-            if (name ~ /^nixos-system-|-(doc|man|info|dev|bin)$/) next
-            print $0, name
-          }' | while read -r p name; do [ -d "$p" ] && echo "$name"; done
-        '';
-      })
     ];
   };
 
