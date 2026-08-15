@@ -89,10 +89,8 @@ in
     };
 
     systemPackages = with pkgs; [
-      hyprshot
-
-      wlr-randr
-      wf-recorder
+      grim
+      slurp
       networkmanagerapplet
       libnotify
       qalculate-gtk

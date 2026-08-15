@@ -246,11 +246,11 @@ for direction, data in pairs({
   )
 end
 
-hl.bind('PRINT', hl.dsp.exec_cmd('hyprshot -s -m region --clipboard-only'))
+hl.bind('PRINT', hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
 hl.bind(
   keys('SHIFT', 'PRINT'),
   hl.dsp.exec_cmd(
-    'hyprshot -m region --filename "$(date +%s).png" --output-folder "$HOME/data/pictures"'
+    'grim -g "$(slurp)" "$HOME/data/pictures/$(date +%s).png" && notify-send "Screenshot saved"'
   )
 )
 
