@@ -81,12 +81,17 @@ for i = 1, 10 do
   hl.bind(keys(mainMod, 'SHIFT', key), hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
--- AUTOSTART
+-- ON START AND SHUTDOWN
 
 hl.on('hyprland.start', function()
+  hl.exec_cmd('systemctl --user start hyprland-session.target')
   hl.exec_cmd('qs')
   hl.exec_cmd('nm-applet')
   hl.exec_cmd(vars.hyprpolkitagent)
+end)
+
+hl.on('hyprland.shutdown', function()
+  os.execute('systemctl --user stop hyprland-session.target && sleep 0.1')
 end)
 
 -- STYLE
