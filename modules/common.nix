@@ -64,6 +64,15 @@ in
     bash.shellInit = /* bash */ ''
       export HISTFILE="/dev/null"
     '';
+    obs-studio = {
+      enable = true;
+      package = pkgs.obs-studio.override {
+        cudaSupport = true;
+      };
+      plugins = with pkgs.obs-studio-plugins; [
+        obs-pipewire-audio-capture
+      ];
+    };
   };
 
   services = {
@@ -134,7 +143,6 @@ in
       htop
       jq
       man-pages
-      obs-studio
       obsidian
       telegram-desktop
       p7zip
