@@ -124,6 +124,7 @@ in
 
     systemPackages = with pkgs; [
       inputs.book-of-profits.packages.${system}.default
+      linux-firmware
       brave
       dragon-drop
       claude-code
