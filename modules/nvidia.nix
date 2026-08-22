@@ -14,5 +14,6 @@ in
       modesetting.enable = true;
       powerManagement.enable = true;
     };
+    nixpkgs.config.cudaSupport = true;
   };
 }
