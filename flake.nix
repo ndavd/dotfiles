@@ -76,6 +76,7 @@
         in
         {
           nvim = pkgs.callPackage ./pkgs/nvim { inherit inputs system; };
+          zellij = pkgs.callPackage ./pkgs/zellij { };
           fmt = treefmtEval.config.build.check self;
           formatter = treefmtEval.config.build.wrapper;
         }
@@ -100,11 +101,11 @@
       ) hosts;
 
       packages = forEachSystem (system: {
-        inherit (perSystem.${system}) nvim;
+        inherit (perSystem.${system}) nvim zellij;
       });
 
       checks = nixpkgs.lib.recursiveUpdate (forEachSystem (system: {
-        inherit (perSystem.${system}) nvim fmt;
+        inherit (perSystem.${system}) nvim zellij fmt;
       })) hostChecks;
 
       formatter = forEachSystem (system: perSystem.${system}.formatter);

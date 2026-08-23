@@ -28,18 +28,15 @@ My NixOS configuration flake ❄️. _A minimal, highly-functional, reproducible
 | [`./modules`](./modules/) | Shared feature modules    |
 | [`./pkgs`](./pkgs/)       | Custom packages           |
 
-## Run my self-contained editor
+## Run my self-contained packages
 
-You can try the custom `nvim` setup that I use every day without having to be on NixOS.
+Parts of my everyday setup are packaged to run anywhere. All you need is the
+[`nix`](https://nixos.org/download/) package manager, no NixOS required.
 
-It is completely self-contained (bundled with all runtime dependencies, Neovim plugins, LSPs,
-linters, formatters, Tree-sitter grammars, and of course, my own configuration).
-
-Install the [`nix`](https://nixos.org/download/) package manager and just run:
-
-```shell
-nix run github:ndavd/dotfiles#nvim
-```
+| Package                     | Description                                                                                                                                             | Command                                                                                               |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| [`#nvim`](./pkgs/nvim/)     | **My editor `nvim`** comes bundled with all runtime dependencies, Neovim plugins, LSPs, linters, formatters, Tree-sitter grammars, and my configuration | `nix run github:ndavd/dotfiles#nvim`                                                                  |
+| [`#zellij`](./pkgs/zellij/) | **My terminal workspace `zellij`** comes bundled with all runtime dependencies, `z` script, Zellij plugins, and my configuration                        | `nix run github:ndavd/dotfiles#zellij` (`nix shell github:ndavd/dotfiles#zellij --command z` for `z`) |
 
 ## Run checks
 
