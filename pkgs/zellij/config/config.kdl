@@ -66,6 +66,5 @@ keybinds clear-defaults=true {
 simplified_ui true
 pane_frames false
 default_mode "locked"
-copy_command "wl-copy"
-copy_clipboard "primary"
+copy_command "@copy-command@"
 copy_on_select true
