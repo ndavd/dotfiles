@@ -106,6 +106,7 @@ in
       brightnessctl
       qt6.qtwayland
       qt5.qtwayland
+      xrandr
     ];
   };
 }
