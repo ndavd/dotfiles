@@ -54,13 +54,6 @@ in
     portalPackage = xdg-desktop-portal-hyprland-git;
   };
 
-  systemd.user.targets.hyprland-session = {
-    description = "Hyprland session";
-    bindsTo = [ "graphical-session.target" ];
-    wants = [ "graphical-session-pre.target" ];
-    after = [ "graphical-session-pre.target" ];
-  };
-
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
   security.polkit.enable = true;
