@@ -309,6 +309,8 @@ local custom_conf = {
     }
   end,
   diff = function()
+    local diff = require('mini.diff')
+
     local format_summary_string = function(data)
       local summary = vim.b[data.buf].minidiff_summary
       if summary == nil then
@@ -332,8 +334,9 @@ local custom_conf = {
       vim.b[data.buf].minidiff_summary_string = ('[%s]'):format(table.concat(stats, ','))
     end
     aug.add('User', { pattern = 'MiniDiffUpdated', callback = format_summary_string })
-
     local diff_sign = '▌'
+
+    vim.keymap.set('n', ',d', diff.toggle_overlay)
 
     return {
       view = {
