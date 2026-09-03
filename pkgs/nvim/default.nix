@@ -68,8 +68,6 @@ let
       foundry
       gofumpt
       nixfmt
-      prettier
-      prettierd
       qt6.qtdeclarative
       rumdl
       rustfmt
