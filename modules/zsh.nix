@@ -92,10 +92,6 @@ in
       }
     '';
 
-    loginShellInit = /* zsh */ ''
-      fastfetch
-    '';
-
     interactiveShellInit = /* zsh */ ''
       unset HISTFILE
 
