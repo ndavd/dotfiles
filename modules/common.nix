@@ -50,11 +50,31 @@ in
     };
 
     nameservers = [
-      "1.1.1.1"
-      "1.0.0.1"
-      "2606:4700:4700::1111"
-      "2606:4700:4700::1001"
+      "9.9.9.9#dns.quad9.net"
+      "149.112.112.112#dns.quad9.net"
+      "2620:fe::fe#dns.quad9.net"
+      "2620:fe::9#dns.quad9.net"
     ];
+  };
+
+  services = {
+    power-profiles-daemon.enable = true;
+    upower.enable = true;
+    udisks2.enable = true;
+    resolved = {
+      enable = true;
+      settings.Resolve = {
+        Domains = [ "~." ];
+        DNSSEC = "allow-downgrade";
+        DNSOverTLS = true;
+        FallbackDNS = [
+          "1.1.1.1#one.one.one.one"
+          "1.0.0.1#one.one.one.one"
+          "2606:4700:4700::1111#one.one.one.one"
+          "2606:4700:4700::1001#one.one.one.one"
+        ];
+      };
+    };
   };
 
   programs = {
@@ -70,13 +90,6 @@ in
         obs-pipewire-audio-capture
       ];
     };
-  };
-
-  services = {
-    power-profiles-daemon.enable = true;
-    upower.enable = true;
-    udisks2.enable = true;
-    resolved.enable = true;
   };
 
   virtualisation.docker.enable = true;
