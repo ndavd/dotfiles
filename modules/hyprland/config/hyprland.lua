@@ -21,7 +21,6 @@ end
 ---  primary_monitor: NixMonitor,
 ---  secondary_monitor?: NixMonitor,
 ---  primary_monitor_hdr_compatible_refresh_rate?: number,
----  hyprpolkitagent: string,
 ---}
 
 local mainMod = 'SUPER'
@@ -87,7 +86,6 @@ hl.on('hyprland.start', function()
   hl.exec_cmd(('xrandr --output %s --primary'):format(vars.primary_monitor.output))
   hl.exec_cmd('qs')
   hl.exec_cmd('nm-applet')
-  hl.exec_cmd(vars.hyprpolkitagent)
 end)
 
 -- STYLE

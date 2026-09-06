@@ -71,10 +71,14 @@ in
         ${primaryMonitorBlock}
         ${secondaryMonitorBlock}
         ${primaryMonitorHdrCompatibleRefreshRateBlock}
-        hyprpolkitagent = '${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent',
       }
     '';
     "hypr/stubs".source = "${hyprland-git}/share/hypr/stubs";
+  };
+
+  systemd = {
+    packages = with pkgs; [ hyprpolkitagent ];
+    user.services.hyprpolkitagent.wantedBy = [ "graphical-session.target" ];
   };
 
   environment = {
