@@ -35,9 +35,9 @@ in
 
   hardware = {
     enableAllFirmware = true;
-    bluetooth = {
+    keyboard.qmk = {
       enable = true;
-      powerOnBoot = false;
+      keychronSupport = true;
     };
   };
 
