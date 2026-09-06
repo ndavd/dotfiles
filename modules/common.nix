@@ -41,6 +41,19 @@ in
     };
   };
 
+  security = {
+    sudo.enable = false;
+    run0 = {
+      enable = true;
+      enableSudoAlias = true;
+      wheelNeedsPassword = true;
+      persistentAuth = {
+        enable = true;
+        enableRemote = true;
+      };
+    };
+  };
+
   networking = {
     hostName = name;
 
@@ -133,7 +146,10 @@ in
     };
 
     systemPackages = with pkgs; [
+      # my stuff
       inputs.book-of-profits.packages.${system}.default
+      agevault
+
       linux-firmware
       brave
       dragon-drop
@@ -164,7 +180,7 @@ in
       yt-dlp
       zathura
       pinentry-qt
-      agevault
+      steam-run
     ];
   };
 
