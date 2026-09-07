@@ -75,6 +75,16 @@ in
       }
     '';
     "hypr/stubs".source = "${hyprland-git}/share/hypr/stubs";
+    "hypr/hyprtoolkit.conf" = {
+      generator = lib.generators.toKeyValue { };
+      value = {
+        accent = "rgb(cf0704)";
+        accent_secondary = "rgb(af5704)";
+        background = "rgb(111111)";
+        font_family = "monospace";
+        font_family_monospace = "monospace";
+      };
+    };
   };
 
   systemd = {
