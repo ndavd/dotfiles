@@ -17,6 +17,7 @@ let
     ;
 
   hyprland-git = inputs.hyprland-git.packages.${system}.hyprland;
+  hyprpolkitagent-git = inputs.hyprpolkitagent-git.packages.${system}.hyprpolkitagent;
   xdg-desktop-portal-hyprland-git =
     inputs.hyprland-git.packages.${system}.xdg-desktop-portal-hyprland;
 
@@ -77,11 +78,13 @@ in
   };
 
   systemd = {
-    packages = with pkgs; [ hyprpolkitagent ];
+    packages = [ hyprpolkitagent-git ];
     user.services.hyprpolkitagent.wantedBy = [ "graphical-session.target" ];
   };
 
   environment = {
+    shellAliases.hinit = "start-hyprland";
+
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";

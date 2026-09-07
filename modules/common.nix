@@ -130,7 +130,6 @@ in
       ffprobe = "ffprobe -hide_banner";
       drop = "dragon-drop";
       bat = "bat -p";
-      hinit = "start-hyprland";
       nd = "nix develop -c $SHELL";
 
       # force usage of flake equivalents

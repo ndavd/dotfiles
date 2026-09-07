@@ -30,6 +30,11 @@
       inputs.pre-commit-hooks.follows = "";
     };
 
+    hyprpolkitagent-git = {
+      url = "github:hyprwm/hyprpolkitagent";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
