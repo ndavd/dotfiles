@@ -171,7 +171,7 @@ local custom_conf = {
     local pick = require('mini.pick')
     local extra = require('mini.extra')
 
-    local win_config = function()
+    local window_config = function()
       local height = math.floor(0.8 * vim.o.lines)
       local width = math.floor(0.8 * vim.o.columns)
       return {
@@ -183,45 +183,31 @@ local custom_conf = {
       }
     end
 
-    local get_branch = function(item)
-      return item:match('^%*?%s*(%S+)')
-    end
-
-    local get_repo_dir = function()
-      return pick.get_picker_opts().source.cwd
-    end
-
-    local checkout_branch = function(branch)
-      vim.system({
-        'git',
-        '-C',
-        get_repo_dir(),
-        'checkout',
-        branch,
-      })
-    end
-
-    local choose_checkout = function(item)
-      local branch = get_branch(item)
-      local remote = branch:match('^remotes/(.-)/')
-      if remote == nil then
-        checkout_branch(branch)
-        return
+    local git_status_items = function()
+      local git_status_res = vim
+        .system({ 'git', 'status', '--porcelain=v1', '--untracked-files=all' }, { text = true })
+        :wait()
+      if git_status_res.code ~= 0 then
+        return vim.notify(
+          'git status failed: ' .. (git_status_res.stderr or ''),
+          vim.log.levels.ERROR
+        )
       end
-      local local_branch = branch:match('^remotes/' .. remote .. '/(.*)')
-      checkout_branch(local_branch)
-    end
+      local lines = vim.split(git_status_res.stdout, '\n', { trimempty = true })
+      local items = {}
+      for _, line in ipairs(lines) do
+        local code, rest = line:sub(1, 2), line:sub(4)
+        if not code:find('D') then
+          -- handle renames "old -> new"
+          local path = rest:match('%->%s*(.+)$') or rest
+          table.insert(items, {
+            path = path,
+            text = string.format('[%s] %s', code, path),
+          })
+        end
+      end
 
-    local show_branch_history = function(buf_id, item)
-      local cmd = { 'git', '-C', get_repo_dir(), 'l', get_branch(item) }
-      local lines = vim.fn.systemlist(cmd)
-      vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, lines)
-    end
-
-    pick.registry.git_branches = function(local_opts)
-      extra.pickers.git_branches(local_opts, {
-        source = { choose = choose_checkout, preview = show_branch_history },
-      })
+      return items
     end
 
     pick.registry.spell_suggest = function(local_opts)
@@ -255,12 +241,16 @@ local custom_conf = {
       pick.builtin.grep({ pattern = vim.fn.expand('<cword>'), tool = 'rg' })
     end
 
+    pick.registry.git_changed_files = function()
+      pick.start({ source = { items = git_status_items(), name = 'Git changed files' } })
+    end
+
     vim.keymap.set('n', ',,', pick.registry.f)
     vim.keymap.set('n', ',g', pick.registry.gl)
     vim.keymap.set('n', ',s', pick.registry.gs)
     vim.keymap.set('n', ',r', pick.registry.lsp_references)
     vim.keymap.set('n', ',a', pick.registry.lsp_symbols)
-    vim.keymap.set('n', ',b', pick.registry.git_branches)
+    vim.keymap.set('n', ',c', pick.registry.git_changed_files)
     vim.keymap.set('n', 'z=', pick.registry.spell_suggest)
     vim.keymap.set('n', ',h', pick.builtin.help)
 
@@ -289,7 +279,7 @@ local custom_conf = {
         end,
       },
       window = {
-        config = win_config,
+        config = window_config,
         prompt_caret = '▁',
       },
     }
