@@ -28,6 +28,9 @@ in
       text-bindings = {
         "\\x1b\\x0d" = "Shift+Return";
       };
+      bell = {
+        system = "no";
+      };
     };
   };
 }
