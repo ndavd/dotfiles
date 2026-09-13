@@ -191,6 +191,8 @@ vim.keymap.del('n', 'grn')
 vim.keymap.del({ 'n', 'v' }, 'gra')
 vim.keymap.del({ 'n' }, 'grr')
 vim.keymap.del({ 'n' }, 'gri')
+vim.keymap.del({ 'n' }, 'grt')
+vim.keymap.del({ 'n' }, 'grx')
 
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, keymap_opts)
 vim.keymap.set('n', 'gr', vim.lsp.buf.rename, keymap_opts)

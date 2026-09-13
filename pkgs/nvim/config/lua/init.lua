@@ -1,5 +1,5 @@
 -- Settings
-vim.g.mapleader = ' '
+vim.g.mapleader = ','
 vim.o.termguicolors = true
 vim.o.background = 'dark'
 vim.o.wrap = false
@@ -16,6 +16,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.hlsearch = false
 vim.o.list = true
+vim.o.listchars = 'tab:_ ,conceal:┊,nbsp:⍽,extends:>,precedes:<,trail:·,eol:⮠'
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.swapfile = false

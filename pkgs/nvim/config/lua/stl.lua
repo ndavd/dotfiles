@@ -1,5 +1,4 @@
 local nbsc = ' '
-local show_ln = false
 
 local hl_groups = {
   stl = 'StatusLine',
@@ -82,18 +81,6 @@ local filepath = function()
   return parse_hl_group(hl) .. icon .. '%* ' .. vim.fn.expand('%f')
 end
 
-local line_stats = function()
-  if not show_ln then
-    return ''
-  end
-
-  local curr_line = vim.fn.line('.')
-  local total_lines = vim.fn.line('$')
-  local percentage = (curr_line / total_lines) * 100
-  local curr_col = vim.fn.col('.')
-  return ('%%= %s(%s%%%%):%s'):format(curr_line, math.floor(percentage), curr_col)
-end
-
 Stl = function()
   local ft = vim.o.ft
   local bt = vim.o.bt
@@ -112,19 +99,9 @@ Stl = function()
   if bt == 'terminal' then
     return '%=  terminal %='
   end
-  return mode()
-    .. filepath()
-    .. file_modified()
-    .. git_branch()
-    .. git_status()
-    .. nbsc
-    .. line_stats()
+  return mode() .. filepath() .. file_modified() .. git_branch() .. git_status() .. nbsc
 end
 
 vim.o.fillchars = 'stl:-,stlnc:-'
 vim.o.laststatus = 3
 vim.o.stl = '%!v:lua.Stl()'
-vim.keymap.set('n', '<leader>sl', function()
-  show_ln = not show_ln
-  vim.cmd('redrawstatus')
-end, { silent = true })

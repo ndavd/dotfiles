@@ -245,14 +245,14 @@ local custom_conf = {
       pick.start({ source = { items = git_status_items(), name = 'Git changed files' } })
     end
 
-    vim.keymap.set('n', ',,', pick.registry.f)
-    vim.keymap.set('n', ',g', pick.registry.gl)
-    vim.keymap.set('n', ',s', pick.registry.gs)
-    vim.keymap.set('n', ',r', pick.registry.lsp_references)
-    vim.keymap.set('n', ',a', pick.registry.lsp_symbols)
-    vim.keymap.set('n', ',c', pick.registry.git_changed_files)
+    vim.keymap.set('n', '<leader><leader>', pick.registry.f)
+    vim.keymap.set('n', '<leader>g', pick.registry.gl)
+    vim.keymap.set('n', '<leader>s', pick.registry.gs)
+    vim.keymap.set('n', '<leader>r', pick.registry.lsp_references)
+    vim.keymap.set('n', '<leader>a', pick.registry.lsp_symbols)
+    vim.keymap.set('n', '<leader>c', pick.registry.git_changed_files)
     vim.keymap.set('n', 'z=', pick.registry.spell_suggest)
-    vim.keymap.set('n', ',h', pick.builtin.help)
+    vim.keymap.set('n', '<leader>h', pick.builtin.help)
 
     vim.ui.select = pick.ui_select
 
@@ -340,7 +340,7 @@ local custom_conf = {
     aug.add('User', { pattern = 'MiniDiffUpdated', callback = format_summary_string })
     local diff_sign = '▌'
 
-    vim.keymap.set('n', ',d', diff.toggle_overlay)
+    vim.keymap.set('n', '<leader>d', diff.toggle_overlay)
 
     return {
       view = {
