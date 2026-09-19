@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   config,
   inputs,
   system,
@@ -11,6 +12,7 @@ let
     name
     browser
     laptop
+    gpu
     ;
 in
 {
@@ -105,9 +107,17 @@ in
     '';
     obs-studio = {
       enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-        obs-pipewire-audio-capture
-      ];
+      plugins =
+        with pkgs.obs-studio-plugins;
+        [
+          obs-pipewire-audio-capture
+        ]
+        ++ lib.optionals (gpu == "amd") (
+          with pkgs.obs-studio-plugins;
+          [
+            obs-vaapi
+          ]
+        );
     };
     coolercontrol.enable = true;
   };
