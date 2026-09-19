@@ -34,6 +34,8 @@ in
       type = lib.types.nonEmptyStr;
     };
 
+    laptop.enable = lib.mkEnableOption "laptop capabilities";
+
     gaming.enable = lib.mkEnableOption "gaming capabilities";
 
     gpu = lib.mkOption {

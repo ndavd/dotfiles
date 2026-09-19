@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -57,8 +58,12 @@ PanelWindow {
                 rootWindow: root
             }
 
-            Battery {
-                rootWindow: root
+            Loader {
+                active: Config.hasStatusBarBattery
+                visible: active
+                sourceComponent: Battery {
+                    rootWindow: root
+                }
             }
 
             Clock {

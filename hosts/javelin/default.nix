@@ -26,7 +26,6 @@
     };
 
     gpu = "amd";
-
     gaming.enable = true;
   };
 }

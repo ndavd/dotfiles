@@ -29,7 +29,7 @@
     };
 
     gpu = "nvidia";
-
     gaming.enable = true;
+    laptop.enable = true;
   };
 }
