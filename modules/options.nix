@@ -34,18 +34,15 @@ in
       type = lib.types.nonEmptyStr;
     };
 
+    laptop.enable = lib.mkEnableOption "laptop capabilities";
+
     gaming.enable = lib.mkEnableOption "gaming capabilities";
 
-    nvidiaGpu.enable = lib.mkEnableOption "NVIDIA GPU";
-
-    cpu = lib.mkOption {
-      type = lib.types.nullOr (
-        lib.types.enum [
-          "amd"
-          "intel"
-        ]
-      );
-      default = null;
+    gpu = lib.mkOption {
+      type = lib.types.enum [
+        "nvidia"
+        "amd"
+      ];
     };
 
     primaryMonitor = lib.mkOption {

@@ -6,7 +6,12 @@
   ...
 }:
 let
-  inherit (config.host) owner name browser;
+  inherit (config.host)
+    owner
+    name
+    browser
+    laptop
+    ;
 in
 {
   imports = [
@@ -71,9 +76,10 @@ in
   };
 
   services = {
-    power-profiles-daemon.enable = true;
-    upower.enable = true;
+    power-profiles-daemon.enable = laptop.enable;
+    upower.enable = laptop.enable;
     udisks2.enable = true;
+    hardware.openrgb.enable = true;
     resolved = {
       enable = true;
       settings.Resolve = {
@@ -103,6 +109,7 @@ in
         obs-pipewire-audio-capture
       ];
     };
+    coolercontrol.enable = true;
   };
 
   virtualisation.docker.enable = true;

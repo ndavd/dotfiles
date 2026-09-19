@@ -68,6 +68,7 @@
 
       hosts = {
         wopr = "x86_64-linux";
+        javelin = "x86_64-linux";
       };
 
       forEachSystem = nixpkgs.lib.genAttrs systems;

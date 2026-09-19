@@ -9,7 +9,7 @@
 let
   inherit (config.host)
     owner
-    nvidiaGpu
+    gpu
     launcher
     primaryMonitor
     secondaryMonitor
@@ -100,7 +100,7 @@ in
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
       QT_QPA_PLATFORM = "wayland";
     }
-    // lib.optionalAttrs nvidiaGpu.enable {
+    // lib.optionalAttrs (gpu == "nvidia") {
       LIBVA_DRIVER_NAME = "nvidia";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       NVD_BACKEND = "direct";

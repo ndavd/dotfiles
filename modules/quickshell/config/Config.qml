@@ -19,4 +19,6 @@ Singleton {
     readonly property int rightSideSpacing: 12
 
     readonly property int kibPerGib: 1048576
+
+    readonly property bool hasStatusBarBattery: Quickshell.env("QS_STATUSBAR_BATTERY") !== "0"
 }
