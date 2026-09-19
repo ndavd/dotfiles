@@ -1,34 +1,31 @@
 {
-  inputs,
   ...
 }:
 {
   imports = [
     ./hardware.nix
-    inputs.nixos-hardware.nixosModules.lenovo-legion-15ach6h-nvidia
   ];
 
   host = {
     owner = "ndavd";
-    name = "wopr";
+    name = "javelin";
 
     primaryMonitor = {
-      output = "HDMI-A-1";
+      output = "DP-1";
       width = 2560;
       height = 1440;
       refreshRate = 240;
       scale = 1.0;
     };
-    primaryMonitorHdrCompatibleRefreshRate = 144;
     secondaryMonitor = {
-      output = "eDP-1";
+      output = "HDMI-A-1";
       width = 1920;
       height = 1080;
-      refreshRate = 120;
-      scale = 1.25;
+      refreshRate = 60;
+      scale = 1.0;
     };
 
-    gpu = "nvidia";
+    gpu = "amd";
 
     gaming.enable = true;
   };

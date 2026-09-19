@@ -26,6 +26,7 @@ in
         protonup-ng
         winetricks
         heroic
+        mangohud
       ];
     };
   };

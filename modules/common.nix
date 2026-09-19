@@ -74,6 +74,7 @@ in
     power-profiles-daemon.enable = true;
     upower.enable = true;
     udisks2.enable = true;
+    hardware.openrgb.enable = true;
     resolved = {
       enable = true;
       settings.Resolve = {
@@ -103,6 +104,7 @@ in
         obs-pipewire-audio-capture
       ];
     };
+    coolercontrol.enable = true;
   };
 
   virtualisation.docker.enable = true;
