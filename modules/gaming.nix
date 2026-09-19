@@ -23,7 +23,7 @@ in
       };
 
       systemPackages = with pkgs; [
-        protonup-ng
+        protonup-qt
         winetricks
         heroic
         mangohud
