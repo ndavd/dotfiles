@@ -13,7 +13,6 @@ let
     launcher
     primaryMonitor
     secondaryMonitor
-    primaryMonitorHdrCompatibleRefreshRate
     ;
 
   hyprland-git = inputs.hyprland-git.packages.${system}.hyprland;
@@ -42,11 +41,6 @@ let
       },
     ''
   );
-  primaryMonitorHdrCompatibleRefreshRateBlock =
-    lib.optionalString (primaryMonitorHdrCompatibleRefreshRate != null)
-      /* lua */ ''
-        primary_monitor_hdr_compatible_refresh_rate = ${toString primaryMonitorHdrCompatibleRefreshRate},
-      '';
 in
 {
   programs.hyprland = {
@@ -71,7 +65,6 @@ in
         menu = '${launcher}',
         ${primaryMonitorBlock}
         ${secondaryMonitorBlock}
-        ${primaryMonitorHdrCompatibleRefreshRateBlock}
       }
     '';
     "hypr/stubs".source = "${hyprland-git}/share/hypr/stubs";

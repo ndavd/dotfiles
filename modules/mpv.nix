@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (config.host) owner primaryMonitorHdrCompatibleRefreshRate;
+  inherit (config.host) owner;
 in
 {
   environment.systemPackages = with pkgs; [
@@ -26,18 +26,9 @@ in
       '';
     })
 
-    # safety net needed since high hz + hdr crashes the display
     (writeShellApplication {
       name = "mpv-hdr";
-      text = ''
-        MAX_HZ=${toString primaryMonitorHdrCompatibleRefreshRate}
-        over_limit=$(hyprctl monitors -j | jq -r --argjson max "$MAX_HZ" '.[] | select(.focused==true) | (.refreshRate > $max)')
-        if [[ "$over_limit" == "true" ]]; then
-          echo "mpv-hdr: focused monitor is above safe max hz. Exiting..." >&2
-        else
-          mpv --target-colorspace-hint=yes "$@"
-        fi
-      '';
+      text = "mpv --target-colorspace-hint=yes \"$@\"";
     })
   ];
 

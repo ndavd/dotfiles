@@ -48,10 +48,6 @@ in
     primaryMonitor = lib.mkOption {
       type = monitorType;
     };
-    primaryMonitorHdrCompatibleRefreshRate = lib.mkOption {
-      type = lib.types.nullOr lib.types.int;
-      default = null;
-    };
 
     secondaryMonitor = lib.mkOption {
       type = lib.types.nullOr monitorType;

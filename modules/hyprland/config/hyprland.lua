@@ -20,7 +20,6 @@ end
 ---  menu: string,
 ---  primary_monitor: NixMonitor,
 ---  secondary_monitor?: NixMonitor,
----  primary_monitor_hdr_compatible_refresh_rate?: number,
 ---}
 
 local mainMod = 'SUPER'
@@ -311,42 +310,6 @@ hl.bind(
   hl.dsp.exec_cmd('wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle'),
   { repeating = true }
 )
-
-hl.bind(keys(mainMod, 'e'), hl.dsp.submap('extra'))
-hl.define_submap('extra', function()
-  hl.bind('escape', hl.dsp.submap('reset'))
-
-  --- toggle high refresh rate for HDR compatibility
-  if vars.primary_monitor_hdr_compatible_refresh_rate then
-    hl.bind('h', function()
-      local refresh_rate = math.ceil(hl.get_monitor(vars.primary_monitor.output).refresh_rate)
-
-      local next_refresh_rate = refresh_rate == vars.primary_monitor.refresh_rate
-          and vars.primary_monitor_hdr_compatible_refresh_rate
-        or refresh_rate == vars.primary_monitor_hdr_compatible_refresh_rate and vars.primary_monitor.refresh_rate
-        or nil
-
-      if next_refresh_rate == nil then
-        return
-      end
-
-      hl.monitor({
-        output = vars.primary_monitor.output,
-        mode = monitor_mode(
-          vars.primary_monitor.width,
-          vars.primary_monitor.height,
-          next_refresh_rate
-        ),
-      })
-      hl.dispatch(
-        hl.dsp.exec_cmd(
-          ('notify-send "%s set to %dHz"'):format(vars.primary_monitor.output, next_refresh_rate)
-        )
-      )
-      hl.dispatch(hl.dsp.submap('reset'))
-    end)
-  end
-end)
 
 -- WINDOWS
 

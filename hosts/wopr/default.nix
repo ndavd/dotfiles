@@ -16,10 +16,9 @@
       output = "HDMI-A-1";
       width = 2560;
       height = 1440;
-      refreshRate = 240;
+      refreshRate = 144;
       scale = 1.0;
     };
-    primaryMonitorHdrCompatibleRefreshRate = 144;
     secondaryMonitor = {
       output = "eDP-1";
       width = 1920;
