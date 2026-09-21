@@ -203,6 +203,7 @@ vim.keymap.set('n', '<C-p>', lsp_custom.goto_prev_diagnostic, keymap_opts)
 vim.keymap.set('n', 'gv', lsp_custom.toggle_diagnostic_virt_lines, keymap_opts)
 vim.keymap.set('n', 'gi', lsp_custom.toggle_buf_inlay_hints, keymap_opts)
 vim.keymap.set('n', 'gd', lsp_custom.definition, keymap_opts)
+vim.keymap.set('n', 'gt', lsp_custom.type_definition, keymap_opts)
 vim.keymap.set('n', 'gk', lsp_custom.buf_hover, keymap_opts)
 
 -- Commands
