@@ -81,7 +81,6 @@ in
     power-profiles-daemon.enable = laptop.enable;
     upower.enable = laptop.enable;
     udisks2.enable = true;
-    hardware.openrgb.enable = true;
     resolved = {
       enable = true;
       settings.Resolve = {
