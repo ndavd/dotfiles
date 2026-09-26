@@ -25,6 +25,7 @@ in
     fps
     fps_color_change
     gpu_name
+    resolution
     frame_timing
     background_alpha=0.6
     fps_color=ff0000,ffff00,00ff00
