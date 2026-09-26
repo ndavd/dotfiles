@@ -21,6 +21,7 @@ in
     cpu_stats
     cpu_temp
     ram
+    ram_temp
     fps
     fps_color_change
     gpu_name
