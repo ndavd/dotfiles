@@ -13,7 +13,10 @@ in
         enable = true;
         enable32Bit = true;
       };
-      amdgpu.opencl.enable = true;
+      amdgpu = {
+        opencl.enable = true;
+        initrd.enable = true;
+      };
     };
     nixpkgs.config.rocmSupport = true;
   };
