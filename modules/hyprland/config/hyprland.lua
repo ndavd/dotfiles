@@ -213,7 +213,7 @@ hl.bind(keys(mainMod, 'o'), hl.dsp.window.float({ action = 'toggle' }))
 hl.bind(keys(mainMod, 'f'), hl.dsp.window.fullscreen({ mode = 'fullscreen' }))
 hl.bind(
   keys(mainMod, 'SHIFT', 'f'),
-  hl.dsp.window.fullscreen_state({ internal = 0, client = 2, action = 'toggle' })
+  hl.dsp.window.fullscreen_state({ internal = -1, client = 2, action = 'toggle' })
 )
 
 hl.bind(keys(mainMod, 'r'), hl.dsp.exec_cmd(vars.menu))
