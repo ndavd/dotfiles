@@ -25,11 +25,6 @@ in
         if [ "$hdr_format" = "" ]; then echo "Not HDR"; else echo -e "$hdr_format"; fi
       '';
     })
-
-    (writeShellApplication {
-      name = "mpv-hdr";
-      text = "mpv --target-colorspace-hint=yes \"$@\"";
-    })
   ];
 
   hjem.users.${owner}.xdg.config.files = {
@@ -47,7 +42,6 @@ in
         gpu-api = "vulkan";
         gpu-context = "waylandvk";
         # hdr
-        target-colorspace-hint = "no"; # use mpv-hdr
         target-colorspace-hint-mode = "source";
       };
     };
