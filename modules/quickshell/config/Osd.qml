@@ -60,7 +60,7 @@ PanelWindow {
             visible: root.showValue
         }
         ThemedText {
-            text: `${String(OsdManager.currentType == OsdManager.OsdType.Volume ? OsdManager.volume : OsdManager.brightness).padStart(3, ' ')}%`
+            text: `${String(OsdManager.currentType == OsdManager.OsdType.Brightness ? OsdManager.brightness : OsdManager.volume).padStart(3, ' ')}%`
             font.pixelSize: osdFontSize
             font.bold: true
             visible: root.showValue
