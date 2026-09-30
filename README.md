@@ -1,6 +1,7 @@
 # Dotfiles
 
-My NixOS configuration flake ❄️. _A minimal, highly-functional, reproducible, declarative system._
+My NixOS configuration flake ❄️. _A minimal, highly-functional, reproducible, declarative system._\
+[`wopr`](./hosts/wopr/) [`javelin`](./hosts/javelin/)
 
 > [!NOTE]
 > For my older Arch Linux system configuration (Wayland and X11), refer to the `legacy/arch` branch.
