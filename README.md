@@ -1,7 +1,6 @@
 # Dotfiles
 
-My NixOS configuration flake ❄️. _A minimal, highly-functional, reproducible, declarative system._\
-[`wopr`](./hosts/wopr/) [`javelin`](./hosts/javelin/)
+My NixOS configuration flake ❄️. *A minimal, highly-functional, reproducible, declarative system.*
 
 > [!NOTE]
 > For my older Arch Linux system configuration (Wayland and X11), refer to the `legacy/arch` branch.
@@ -28,6 +27,13 @@ My NixOS configuration flake ❄️. _A minimal, highly-functional, reproducible
 | [`./hosts`](./hosts/)     | Per machine configuration |
 | [`./modules`](./modules/) | Shared feature modules    |
 | [`./pkgs`](./pkgs/)       | Custom packages           |
+
+## Machines
+
+| Host        |
+| ----------- |
+| *`wopr`*    |
+| *`javelin`* |
 
 ## Run my self-contained packages
 
