@@ -82,7 +82,19 @@ in
 
   systemd = {
     packages = [ hyprpolkitagent-git ];
-    user.services.hyprpolkitagent.wantedBy = [ "graphical-session.target" ];
+    user.services = {
+      hyprpolkitagent.wantedBy = [ "graphical-session.target" ];
+      quickshell = {
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        path = lib.mkForce [ ];
+        serviceConfig = {
+          ExecStart = lib.getExe' pkgs.quickshell "qs";
+          Restart = "on-failure";
+        };
+      };
+    };
   };
 
   environment = {
@@ -102,7 +114,6 @@ in
     systemPackages = with pkgs; [
       grim
       slurp
-      networkmanagerapplet
       libnotify
       qalculate-gtk
       wireplumber

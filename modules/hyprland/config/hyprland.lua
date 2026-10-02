@@ -79,12 +79,13 @@ for i = 1, 10 do
   hl.bind(keys(mainMod, 'SHIFT', key), hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
--- ON START AND SHUTDOWN
+-- EVENTS
 
-hl.on('hyprland.start', function()
-  hl.exec_cmd(('xrandr --output %s --primary'):format(vars.primary_monitor.output))
-  hl.exec_cmd('qs')
-  hl.exec_cmd('nm-applet')
+---@param m HL.Monitor
+hl.on('monitor.added', function(m)
+  if m.name == vars.primary_monitor.output then
+    hl.exec_cmd(('xrandr --output %s --primary'):format(vars.primary_monitor.output))
+  end
 end)
 
 -- STYLE
@@ -226,7 +227,6 @@ hl.bind(
     )
   )
 )
-hl.bind(keys(mainMod, 'c'), hl.dsp.exec_cmd('obs --startvirtualcam --minimize-to-tray'))
 hl.bind(keys(mainMod, 'q'), hl.dsp.exec_cmd('qalculate-gtk'))
 
 for direction, data in pairs({

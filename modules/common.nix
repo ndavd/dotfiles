@@ -98,6 +98,7 @@ in
   };
 
   programs = {
+    nm-applet.enable = true;
     direnv.enable = true;
     gnupg.agent.enable = true;
     bat.enable = true;
