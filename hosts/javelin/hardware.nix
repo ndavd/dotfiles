@@ -22,7 +22,11 @@
       kernelModules = [ ];
       luks.devices."cryptroot".device = "/dev/disk/by-uuid/16331fde-6c45-417c-8a8b-efaf2c195a88";
     };
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [
+      "kvm-amd"
+      "nct6775"
+      "drivetemp"
+    ];
     extraModulePackages = [ ];
   };
 
