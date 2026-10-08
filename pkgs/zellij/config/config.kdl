@@ -62,6 +62,12 @@ keybinds clear-defaults=true {
             SwitchToMode "locked"
         }
     }
+    scroll {
+        bind "Ctrl c" "Esc" {
+            ScrollToBottom
+            SwitchToMode "locked"
+        }
+    }
 }
 simplified_ui true
 pane_frames false
