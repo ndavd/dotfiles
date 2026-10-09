@@ -336,7 +336,7 @@ hl.window_rule({ match = { class = 'imv' }, float = true })
 hl.window_rule({ match = { class = 'qalculate-gtk' }, opacity = 0.9, float = true })
 hl.window_rule({ match = { class = 'discord' }, workspace = '2' })
 hl.window_rule({ match = { class = 'slack' }, workspace = '2' })
-hl.window_rule({ match = { class = 'element' }, workspace = '4' })
+hl.window_rule({ match = { class = 'element-desktop' }, workspace = '4' })
 hl.window_rule({ match = { class = 'steam' }, workspace = '5' })
 hl.window_rule({ match = { class = 'SDL Application' }, workspace = '5' }) -- Also steam
 hl.window_rule({ match = { class = 'Spotify' }, workspace = '6' })
