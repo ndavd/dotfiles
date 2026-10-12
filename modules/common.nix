@@ -165,7 +165,7 @@ in
     systemPackages = with pkgs; [
       # my stuff
       inputs.book-of-profits.packages.${system}.default
-      agevault
+      inputs.agevault.packages.${system}.default
 
       linux-firmware
       brave
