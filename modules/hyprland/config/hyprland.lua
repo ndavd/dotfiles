@@ -79,6 +79,8 @@ for i = 1, 10 do
   hl.bind(keys(mainMod, 'SHIFT', key), hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
+hl.config({ render = { cm_auto_hdr = 2 } })
+
 -- EVENTS
 
 ---@param m HL.Monitor
@@ -206,6 +208,43 @@ hl.device({
   sensitivity = -0.5,
 })
 
+-- WINDOWS
+
+hl.window_rule({
+  name = 'suppress-maximize-events',
+  match = { class = '.*' },
+  suppress_event = 'maximize',
+})
+
+hl.window_rule({
+  name = 'fix-xwayland-drags',
+  match = {
+    class = '^$',
+    title = '^$',
+    xwayland = true,
+    float = true,
+    fullscreen = false,
+    pin = false,
+  },
+  no_focus = true,
+})
+
+hl.window_rule({ match = { class = 'imv' }, float = true })
+hl.window_rule({ match = { class = 'qalculate-gtk' }, opacity = 0.9, float = true })
+hl.window_rule({ match = { class = 'discord' }, workspace = '2' })
+hl.window_rule({ match = { class = 'slack' }, workspace = '2' })
+hl.window_rule({ match = { class = 'element-desktop' }, workspace = '4' })
+hl.window_rule({ match = { class = 'steam' }, workspace = '5' })
+hl.window_rule({ match = { class = 'SDL Application' }, workspace = '5' }) -- Also steam
+hl.window_rule({ match = { class = 'Spotify' }, workspace = '6' })
+hl.window_rule({ match = { class = 'foot' }, no_auto_hdr = true })
+
+local disableBraveHdr = hl.window_rule({ match = { class = 'brave-browser' }, no_auto_hdr = true })
+local toggleBraveHdr = function()
+  disableBraveHdr:set_enabled(not disableBraveHdr:is_enabled())
+  hl.dispatch(hl.dsp.submap('reset'))
+end
+
 -- KEYBINDINGS
 
 hl.bind(keys(mainMod, 'return'), hl.dsp.exec_cmd(vars.terminal))
@@ -311,33 +350,7 @@ hl.bind(
   { repeating = true }
 )
 
--- WINDOWS
-
-hl.window_rule({
-  name = 'suppress-maximize-events',
-  match = { class = '.*' },
-  suppress_event = 'maximize',
-})
-
-hl.window_rule({
-  name = 'fix-xwayland-drags',
-  match = {
-    class = '^$',
-    title = '^$',
-    xwayland = true,
-    float = true,
-    fullscreen = false,
-    pin = false,
-  },
-  no_focus = true,
-})
-
-hl.window_rule({ match = { class = 'imv' }, float = true })
-hl.window_rule({ match = { class = 'qalculate-gtk' }, opacity = 0.9, float = true })
-hl.window_rule({ match = { class = 'discord' }, workspace = '2' })
-hl.window_rule({ match = { class = 'slack' }, workspace = '2' })
-hl.window_rule({ match = { class = 'element-desktop' }, workspace = '4' })
-hl.window_rule({ match = { class = 'steam' }, workspace = '5' })
-hl.window_rule({ match = { class = 'SDL Application' }, workspace = '5' }) -- Also steam
-hl.window_rule({ match = { class = 'Spotify' }, workspace = '6' })
-hl.window_rule({ match = { class = 'foot' }, no_auto_hdr = true })
+hl.bind(keys(mainMod, 'e'), hl.dsp.submap('extra'))
+hl.define_submap('extra', function()
+  hl.bind(keys('b'), toggleBraveHdr)
+end)
